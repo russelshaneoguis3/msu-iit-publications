@@ -1,0 +1,179 @@
+use publications;
+
+CREATE TABLE roles (
+  role_id INT PRIMARY KEY AUTO_INCREMENT,
+  role_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE users (
+  uid INT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  token TEXT,
+  email_status ENUM('no', 'yes') NOT NULL DEFAULT 'no';
+);
+
+CREATE TABLE user_roles (
+  u_role_id INT,
+  user_id INT,
+  PRIMARY KEY (u_role_id, user_id),
+  FOREIGN KEY (u_role_id) REFERENCES roles(role_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE studies (
+  study_id INT PRIMARY KEY AUTO_INCREMENT,
+  s_user_id INT,
+  title TEXT NOT NULL,
+  status VARCHAR(30),
+  description TEXT,
+  s_pdf_path VARCHAR(255),
+  FOREIGN KEY (s_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE certifications (
+  cert_id INT PRIMARY KEY AUTO_INCREMENT,
+  c_user_id INT,
+  title TEXT NOT NULL,
+  status VARCHAR(30),
+  description TEXT,
+  c_file_path VARCHAR(255),
+  FOREIGN KEY (c_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE user_logs (
+  log_id INT PRIMARY KEY AUTO_INCREMENT,
+  l_user_id INT,
+  activity TEXT NOT NULL,
+  performed_by VARCHAR(50) NOT NULL, -- 'admin' or 'self'
+  table_name VARCHAR(50) NOT NULL, -- The name of the affected table
+  log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (l_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+DELIMITER //
+
+-- Trigger for INSERT operations
+CREATE TRIGGER after_user_insert
+AFTER INSERT ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.uid, CONCAT('User created with email: ', NEW.email), 
+          IF(NEW.uid = @current_user_id, 'self', 'admin'), 
+          'users');
+          
+   INSERT INTO user_roles (u_role_id, user_id) VALUES (2, NEW.uid);       
+END;
+//
+
+-- Trigger for UPDATE operations
+CREATE TRIGGER after_user_update
+AFTER UPDATE ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.uid, CONCAT('User updated with email: ', NEW.email), 
+          IF(NEW.uid = @current_user_id, 'self', 'admin'), 
+          'users');
+END;
+//
+
+-- Trigger for DELETE operations
+CREATE TRIGGER after_user_delete
+AFTER DELETE ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (OLD.uid, CONCAT('User deleted with email: ', OLD.email), 
+          IF(OLD.uid = @current_user_id, 'self', 'admin'), 
+          'users');
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+-- Trigger for INSERT operations on certifications
+CREATE TRIGGER after_certifications_insert
+AFTER INSERT ON certifications
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.c_user_id, CONCAT('Certification created with title: ', NEW.title),
+          IF(NEW.c_user_id = @current_user_id, 'self', 'admin'), 
+          'certifications');
+END;
+//
+
+-- Trigger for UPDATE operations on certifications
+CREATE TRIGGER after_certifications_update
+AFTER UPDATE ON certifications
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.c_user_id, CONCAT('Certification updated with title: ', NEW.title),
+          IF(NEW.c_user_id = @current_user_id, 'self', 'admin'), 
+          'certifications');
+END;
+//
+
+-- Trigger for DELETE operations on certifications
+CREATE TRIGGER after_certifications_delete
+AFTER DELETE ON certifications
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (OLD.c_user_id, CONCAT('Certification deleted with title: ', OLD.title),
+          IF(OLD.c_user_id = @current_user_id, 'self', 'admin'), 
+          'certifications');
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+-- Trigger for INSERT operations on studies
+CREATE TRIGGER after_studies_insert
+AFTER INSERT ON studies
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.s_user_id, CONCAT('Study created with title: ', NEW.title),
+          IF(NEW.s_user_id = @current_user_id, 'self', 'admin'), 
+          'studies');
+END;
+//
+
+-- Trigger for UPDATE operations on studies
+CREATE TRIGGER after_studies_update
+AFTER UPDATE ON studies
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (NEW.s_user_id, CONCAT('Study updated with title: ', NEW.title),
+          IF(NEW.s_user_id = @current_user_id, 'self', 'admin'), 
+          'studies');
+END;
+//
+
+-- Trigger for DELETE operations on studies
+CREATE TRIGGER after_studies_delete
+AFTER DELETE ON studies
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, activity, performed_by, table_name)
+  VALUES (OLD.s_user_id, CONCAT('Study deleted with title: ', OLD.title),
+          IF(OLD.s_user_id = @current_user_id, 'self', 'admin'), 
+          'studies');
+END;
+//
+
+DELIMITER ;
+
+

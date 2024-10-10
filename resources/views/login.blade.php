@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Register | Researchers' Repo</title>
+  <title>Login | Researchers' Repo</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -25,7 +25,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/register.css" rel="stylesheet">
+  <link href="assets/css/login.css" rel="stylesheet">
 
 </head>
 
@@ -46,7 +46,7 @@
       <ul>
         <li><a href="{{ url('/') }}">Home</a></li>
         <li><a href="https://myiit.msuiit.edu.ph/accounts/getmyiit.php" target="_blank">My.IIT</a></li>
-        <li><a href="{{ url('/login') }}">Login</a></li>
+        <li><a href="{{ url('/login') }}" class="active">Login</a></li>
             </li>
         </li>
       </ul>
@@ -60,60 +60,46 @@
 </header>
 
 
-  <main class="main">
-
-  <div class="card-register mt-5 col-lg-6">
-       <div class="main-login main-center">
-
-        <br>
-
-        <img src="assets/img/web-logo.png" alt="logo" class="logo"/></img>
-        <h5>Activate MSU-IIT Researchers' Repo account</h5>
-        <p class="registration-description">This registration feature is exclusively available to MSU-IIT researchers. Please use your My.IIT Gmail account to register.</p>
-
-        <div class="form-group ">
-        
-        <form action="" method="post" autocomplete="on"> 
-            <div class="txt_field">
-            <input type="text" name="first_name" id="first_name" required >
-            <label for="f_name"> <i class="fa fa-user fa"></i> Input First Name</label>
-           </div>
-   
-            <div class="txt_field">
-             <input type="text" name="last_name" id="last_name" required >
-             <label><i class="fa fa-user fa"></i> Input Last Name</label>
+  <div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 side-image">
+                       
+                <!-------------      image     ------------->
+                
+                <img src="assets/img/pic1.jpg" alt="" style="">
+                <div class="text">
+                    <p>My IIT Researchers; Repo</i></p>
+                </div>
+                
             </div>
-
-          <div class="txt_field">
-            <input type="text" name="email" id="email" required >
-            <label><i class="fa fa-envelope fa"></i> Your Email</label>
-           </div>
-     
-          <div class="txt_field">
-            <input type="password" name="password" id="password" required >
-            <label><i class="fa fa-lock fa-lg"></i> Password</label>
-          </div>
-
-          <div class="txt_field">
-            <input type="re_password" name="re_password" id="re_password" required >
-            <label><i class="fa fa-lock fa-lg"></i>Re-type Password</label>
-          </div>
-           
-
-          <input type="submit" value="Register" class="form-control btn btn-primary">
- 
-
-           
-        </form>
-
-        <p>Already have an Account? <a class="login" href="{{ url('/login') }}">Login</a></p>
-
-      <br>
-
-      </div>
+            <div class="col-md-6 right">
+                
+                <div class="input-box">
+                   
+                   <header>Login Here</header>
+                   <div class="input-field">
+                        <input type="text" class="input" id="email" required="" autocomplete="off">
+                        <label for="email">Email</label> 
+                    </div> 
+                   <div class="input-field">
+                        <input type="password" class="input" id="pass" required="">
+                        <label for="pass">Password</label>
+                    </div> 
+                   <div class="input-field">
+                        
+                        <input type="submit" class="submit btn-primary" value="Login">
+                   </div> 
+                   <div class="signin">
+                   <p>No account? <a class="register" href="{{ url('/register') }}">Register here</a></p>
+                   </div>
+                </div>  
+            </div>
+        </div>
     </div>
+</div>
+              
 
-  </main>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

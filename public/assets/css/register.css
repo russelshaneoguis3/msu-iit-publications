@@ -1,0 +1,131 @@
+body {
+    background: #EEF2F8;
+  }
+  
+.login {
+    text-decoration: underline;
+    color: #a41d21;
+}
+
+.login:hover {
+    color: #ffc107;
+}
+  .card-register {
+    margin: 0 auto;
+    width: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+  }
+  
+  .card-register .logo {
+    max-width: 20%; /* Adjusted to take full width within its container */
+    display: block;
+    margin: 0 auto 0; /* Centered horizontally with bottom margin for spacing */
+  }
+  
+  /* Adjusted media queries for smaller screens */
+  @media only screen and (max-width: 768px) {
+    .card-register {
+      padding: 5px; /* Reduced padding for smaller screens */
+    }
+  
+    .card-register .logo {
+      max-width: 20%; /* Reduced image size for smaller screens */
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .card-register .logo {
+      max-width: 20%; /* Further reduced image size for mobile phones */
+      margin-bottom: 5px; /* Smaller bottom margin for better spacing */
+    }
+  }
+  
+  .card-register h5 {
+    font-size: 20px;
+    text-align: center;
+    padding: 5px 0;
+    border-bottom: 1px solid silver;
+  }
+  
+  .card-register form {
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  .card-register .main-login p {
+    margin-left: 40px;
+    margin-top: 10px;
+  }
+  
+  .registration-description {
+    font-size: 12px;
+    color: #a41d21;
+    margin-right: 5px;
+    padding-right: 40px;
+    text-align: center;
+}
+  
+  form .txt_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+  }
+  
+  .txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  
+  .txt_field label {
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .txt_field span::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d9;
+    transition: 0.5s;
+  }
+  .txt_field input:focus ~ label,
+  .txt_field input:valid ~ label {
+    top: -5px;
+    color: #a41d21;
+  }
+  .txt_field input:focus ~ span::before,
+  .txt_field input:valid ~ span::before {
+    width: 100%;
+  }
+  a:hover {
+    color: #a41d21;
+    transition: 0.5s;
+  }
+  
+.btn-primary{
+    max-width: 230px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover{
+   background-color: #ffc107;
+   border: #ffc107;
+   text-decoration: none;
+}

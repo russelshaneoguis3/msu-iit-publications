@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>MSU-IIT - Researchers Repo</title>
+  <title>MSU-IIT - Researchers' Repo</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -36,14 +36,14 @@
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
 
           <img src="assets/img/web-logo.png" alt=""> 
-          <h1 class="sitename">MSU-IIT Researchers Repo</h1>
+          <h1 class="sitename">MSU-IIT Researchers' Repo</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="{{ url('/') }}" class="active">Home</a></li>
             <li><a href="https://myiit.msuiit.edu.ph/accounts/getmyiit.php" target="_blank">My.IIT</a></li>
-            <li><a href="#services">Login</a></li>
+            <li><a href="{{ url('/login') }}">Login</a></li>
                 </li>
             </li>
           </ul>
@@ -109,7 +109,7 @@
             <img src="assets/img/about-iit.png" class="img-fluid" alt="iit">
           </div>
           <div class="col-lg-6 content">
-            <h3>What is MSU-IIT Researchers Repo?</h3>
+            <h3>What is MSU-IIT Researchers' Repo?</h3>
             <br>
             <p class="fst-italic">
               The repository is designed for contributions from the MSU-IIT community, including faculty and researchers.
@@ -135,8 +135,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Research Clusters</h2>
+        <p>Currently, for the advancement of the university, the researchers provide vast knowledge, insights and solutions in the 9 research clusters.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -145,50 +145,80 @@
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-briefcase icon flex-shrink-0"></i>
+              <i class="bi bi-people icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a class="stretched-link">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                <h4 class="title"><a class="stretched-link">Culture, Technology, and Society</a></h4>
+                <p class="description">This involves the integration of multiple disciplinary perspectives and methods to examine the complex interactions between culture, technology, and society. Such as Understanding the impacts of digital technologies on culture and society, Examining the social and cultural dimensions of artificial intelligence (AI), Analyzing the role of social media in shaping cultural identities and practices, Exploring the intersections of technology, culture, and environment, and Investigating the cultural and social dimensions of emerging technologies</p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-card-checklist icon flex-shrink-0"></i>
+              <i class="bi bi-peace icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a class="stretched-link">Dolor Sitema</a></h4>
-                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                <h4 class="title"><a class="stretched-link">Peace and Governance</a></h4>
+                <p class="description">Studies in this cluster promote cross-disciplinary and collaborative research that can generate new knowledge, insights, and solutions to complex societal problems. Such as Conflict resolution and Peacebuilding, Human rights and social justice, Governance and public policy, Peace Education and conflict transformation, Gender, peace, and security, Youth, peace, and security, and Transitional Justice</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-recycle icon flex-shrink-0"></i>
+              <div>
+                <h4 class="title"><a class="stretched-link">Integrative Resiliency and Sustainable Solutions</a></h4>
+                <p class="description">Research studies under this cluster develop a holistic and multidisciplinary approach to enhancing the resilience and sustainability of social, economic, and environmental systems. Such as Biodiversity and Conservation Management, Sustainable development and management, Climate change adaptation and mitigation, Food Security, Disaster risk reduction and management, Urban and rural sustainability, and Sustainable business and industry</p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-bar-chart icon flex-shrink-0"></i>
+              <i class="bi bi-lightbulb icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a class="stretched-link">Sed ut perspiciatis</a></h4>
-                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                <h4 class="title"><a class="stretched-link">Disruptive Innovation and Smart Nation</a></h4>
+                <p class="description">Research here requires integrative efforts to support the development of smart, sustainable, and resilient communities. Such as Disruptive Technologies include artificial intelligence, blockchain, the Internet of Things (IoT), and robotics, Digital Governance, Smart Urbanization, Disruptive Business Models, and Digital Transformation.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-binoculars icon flex-shrink-0"></i>
+              <i class="bi bi-bar-chart-line icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a  class="stretched-link">Magni Dolores</a></h4>
-                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                <h4 class="title"><a  class="stretched-link">Applied and Theoretical Science</a></h4>
+                <p class="description">This involves understanding natural phenomena and improving the ability to solve practical problems using science and mathematics. Such as Computational science, Environmental science and sustainability, Biomedical science and engineering, and Mathematical modeling and analysis.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-brightness-high icon flex-shrink-0"></i>
+              <i class="bi bi-pen icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a  class="stretched-link">Nemo Enim</a></h4>
-                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                <h4 class="title"><a  class="stretched-link">Teaching and Learning</a></h4>
+                <p class="description">Research studies under this cluster aim to explore the complex interplay between the human brain and learning processes. Such as Learning Theories and Cognitive Processes, Instructional Design and Technology, Cognitive Psychology and Emotion in Education, Special Education and Rehabilitation, and Pedagogical innovations</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-suit-club icon flex-shrink-0"></i>
+              <div>
+                <h4 class="title"><a class="stretched-link">Natural Products and Biotechnology</a></h4>
+                <p class="description">Research studies under this cluster explore the potential of natural products for developing new biotechnological products and processes. Such as Ethnobotany and integrative health, Discovery and identification of new natural products, Biosynthesis of natural products, Bioprocessing of natural products, Biomedical applications of natural products, and Environmental applications of natural products</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex position-relative h-100">
+              <i class="bi bi-cash-coin icon flex-shrink-0"></i>
+              <div>
+                <h4 class="title"><a class="stretched-link">Financial and Risk Management</a></h4>
+                <p class="description">Research studies that fall under this category develop more effective strategies for managing and generating new insights and strategies for managing financial risks in a rapidly changing global landscape. Such as Quantitative risk modeling, Behavioral finance, Cybersecurity and financial crime, Environmental and social risk management, and Strategic risk management</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -197,8 +227,9 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-calendar4-week icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a class="stretched-link">Eiusmod Tempor</a></h4>
-                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                <h4 class="title"><a class="stretched-link">Materials Science</a></h4>
+                <p class="description">Studies here develop and generate new materials with improved properties and functionalities for various applications. Such as, Nanomaterials, Biomaterials, Smart materials, Energy materials, Functional materials, and Computational materials science. Such as Nanomaterials, Biomaterials, Smart materials, Energy materials, Functional materials, and Computational materials science
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -213,7 +244,7 @@
 
   <footer id="footer" class="footer dark-background">
     <p class="container">
-      <h3 class="sitename">MSU-IIT Researchers Repo</h3>
+      <h3 class="sitename">MSU-IIT Researchers' Repo</h3>
 
       <p>Mindanao State University
       Iligan Institute of Technology
@@ -226,9 +257,9 @@
       
       <div class="container">
         <div class="copyright">
-          <span>&copy;</span> <strong class="px-1 sitename">CCAM, PRISM, MSU-IIT</strong> <span>All Rights Reserved</span>
+          <span style="color:#fff">&copy;</span> <strong style="color:#fff" class="px-1 sitename">CCAM, PRISM, MSU-IIT</strong> <span style="color:#fff">All Rights Reserved</span>
         </div>
-        <div class="credits">
+        <div class="credits" style="color:#fff">
 
           Designed by BootstrapMade, customized by CCAM
         </div>
