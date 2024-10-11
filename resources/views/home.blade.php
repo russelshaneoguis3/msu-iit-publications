@@ -87,6 +87,10 @@
           <img src="assets/img/hero-carousel/hero-carousel-3.png" alt="">
         </div>
 
+        <div class="carousel-item">
+          <img src="assets/img/hero-carousel/hero-carousel-4.jpg" alt="">
+        </div>
+
         <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
           <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
         </a>
