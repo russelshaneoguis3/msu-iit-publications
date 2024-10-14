@@ -72,8 +72,22 @@
         <p class="registration-description">This registration feature is exclusively available to MSU-IIT researchers. Please use your My.IIT Gmail account to register.</p>
 
         <div class="form-group ">
+
+          <!-- Display Validation Errors -->
+          @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         
-        <form action="" method="post" autocomplete="on"> 
+        <form action="{{ route('register') }}" method="POST" autocomplete="on">
+        @csrf 
+        
+
             <div class="txt_field">
             <input type="text" name="first_name" id="first_name" required >
             <label for="f_name"> <i class="fa fa-user fa"></i> Input First Name</label>
@@ -137,3 +151,4 @@
 </body>
 
 </html>
+

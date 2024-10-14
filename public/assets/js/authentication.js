@@ -10,25 +10,34 @@ document.querySelector('form').addEventListener('submit', function(e) {
     }
 });
 
-//Password match function
+//Password functions
+
   // Get references to the password fields and error message element
   const passwordField = document.getElementById('password');
   const passwordConfirmationField = document.getElementById('password_confirmation');
   const passwordError = document.getElementById('password-error');
 
-  // Add an event listener to the password confirmation field
+  // Add event listeners to both fields
+  passwordField.addEventListener('input', checkPasswordMatch);
   passwordConfirmationField.addEventListener('input', checkPasswordMatch);
 
   function checkPasswordMatch() {
-    // Only show the error message if the user has started typing in the confirmation field
+    // Check if the password has at least 6 characters
+    if (passwordField.value.length < 6) {
+      passwordError.textContent = 'Password must be at least 6 characters long';
+      passwordError.style.display = 'block'; // Show the length error message
+      return;
+    }
+
+    // Only show the mismatch error if the user has started typing in the confirmation field
     if (passwordConfirmationField.value.length > 0) {
-      // Check if the passwords don't match
       if (passwordField.value !== passwordConfirmationField.value) {
+        passwordError.textContent = 'Passwords do not match'; // Mismatch error
         passwordError.style.display = 'block'; // Show the error message
       } else {
-        passwordError.style.display = 'none'; // Hide the error message if they match
+        passwordError.style.display = 'none'; // Hide the error if passwords match
       }
     } else {
-      passwordError.style.display = 'none'; // Hide the error message if confirmation field is empty
+      passwordError.style.display = 'none'; // Hide the error if the confirmation field is empty
     }
-  };
+  }

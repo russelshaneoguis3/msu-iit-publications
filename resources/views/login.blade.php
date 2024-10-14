@@ -70,6 +70,13 @@
         <h5>Login Here</h5>
 
         <div class="form-group ">
+          
+              @if(session('status'))
+          <div class="alert alert-success">
+              {{ session('status') }}
+          </div>
+            @endif
+
         
         <form action="" method="post" autocomplete="on"> 
 
