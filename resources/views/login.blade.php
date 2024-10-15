@@ -7,6 +7,10 @@
   <title>Login | Researchers' Repo</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
 
   <!-- Favicons -->
   <link href="{{ asset('assets/img/web-logo.png') }}" rel="icon">
@@ -71,15 +75,35 @@
 
         <div class="form-group ">
           
-              @if(session('status'))
-          <div class="alert alert-success">
-              {{ session('status') }}
-          </div>
-            @endif
+    <!-- Alerts for success messages (e.g., registration success or email verified) -->
+    @if(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
+    <!-- Alerts for login errors or other general errors -->
+    @if(session('error'))
+        <div class="alert alert-danger">
+            <li> {{ session('error') }} </li>
+        </div>
+    @endif
+
+    <!-- Alerts for validation errors (e.g., email, password, etc.) -->
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+        <form action="{{ route('login') }}" method="POST" autocomplete="on">
+        @csrf  <!-- Add this line to include CSRF token -->
         
-        <form action="" method="post" autocomplete="on"> 
-
         <div class="txt_field">
             <input type="text" name="email" id="email" required >
             <label><i class="fa fa-envelope fa"></i> My.IIT Email</label>

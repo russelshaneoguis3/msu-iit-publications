@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-use App\Mail\VerifyEmail; 
+use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
         // Validation rules
@@ -22,19 +23,19 @@ class AuthController extends Controller
             'email' => 'required|email|regex:/@g.msuiit.edu.ph$/|unique:users,email|max:100',
             'password' => 'required|string|min:6|confirmed',
         ], [
-            'email.unique' => 'This email address is already registered. Please use another My.IIT email.', // Custom message
+            'email.unique' => 'This email address is already registered. Please use another My.IIT email.',
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-    
+
         // Hash the password
         $hashedPassword = Hash::make($request->password);
-    
+
         // Generate a token for email verification
         $token = Str::random(60);
-    
+
         // Insert user data into the database
         DB::table('users')->insert([
             'email' => $request->email,
@@ -45,31 +46,80 @@ class AuthController extends Controller
             'email_status' => 'no', // Set default email_status to 'no'
             'created_at' => now(),
         ]);
-    
+
         // Send the verification email
         Mail::to($request->email)->send(new VerifyEmail($token));
-    
+
         // Return with a success message
         return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account. If you do not see it in your inbox, please check your spam folder.');
     }
-    
 
     public function verifyEmail($token)
-{
-    // Find the user by token
-    $user = DB::table('users')->where('token', $token)->first();
+    {
+        // Find the user by token
+        $user = DB::table('users')->where('token', $token)->first();
 
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'Invalid verification token.');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Invalid verification token.');
+        }
+
+        // Update email status to 'yes'
+        DB::table('users')
+            ->where('uid', $user->uid)
+            ->update(['email_status' => 'yes', 'token' => null]); // Remove the token
+
+        return redirect()->route('login')->with('status', 'Email verified! You can now log in.');
     }
 
-    // Update email status to 'yes'
-    DB::table('users')
-        ->where('uid', $user->uid)
-        ->update(['email_status' => 'yes', 'token' => null]); // Remove the token
+    public function login(Request $request)
+    {
+        // Validate the login input
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+        ]);
 
-    return redirect()->route('login')->with('status', 'Email verified! You can now log in.');
-}
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
+        // Retrieve the user by email
+        $user = DB::table('users')->where('email', $request->email)->first();
 
+        // Check if the user exists
+        if (!$user) {
+            return redirect()->back()->with('error', 'These credentials do not match our records.');
+        }
+
+        // Check if the email is verified
+        if ($user->email_status === 'no') {
+            return redirect()->back()->with('error', 'Please verify your email address before logging in.');
+        }
+
+        // Use Laravel's built-in Auth::attempt to verify credentials and log the user in
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Successful login, now check user role
+            $user_role = DB::table('user_roles')
+                ->where('user_id', Auth::id())  // Get the authenticated user's ID
+                ->first();
+
+            if (!$user_role) {
+                return redirect()->back()->with('error', 'User role not found.');
+            }
+
+            // Redirect based on the user role
+            if ($user_role->u_role_id == 1) {  // Admin role
+                return redirect()->route('admin.dashboard')->with('status', 'Login successful! Welcome Admin.');
+            } elseif ($user_role->u_role_id == 2) {  // User role
+                return redirect()->route('users.dashboard')->with('status', 'Login successful! Welcome User.');
+            }
+
+            // Default case (just in case)
+            return redirect()->route('login')->with('error', 'Unable to determine user role.');
+        }
+
+        // Authentication failed
+        return redirect()->back()->with('error', 'Invalid credentials.');
+    }
+    
 }
