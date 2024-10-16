@@ -13,6 +13,7 @@ Route::get('/', function () {
 
 //----------------------------------------------------------------------------------------------------------------------------
 
+
 //Authentication -------------------------------------------------------------------------------------------------------------
 
 // Registration Routes
@@ -33,15 +34,24 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('verifyEmail');
 
 
-// Admin route
-Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin.dashboard');
-
-// User route
-Route::get('/users/dashboard', [AuthController::class, 'userDashboard'])->name('users.dashboard');
-
 // Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+// Admin Routes ---------------------------------------------------------------------------------------------------------------
+
+// Admin Dashboard
+Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin.dashboard');
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+
+// User Routes ----------------------------------------------------------------------------------------------------------------
+
+// User Dashboard
+Route::get('/users/dashboard', [AuthController::class, 'userDashboard'])->name('users.dashboard');
+
+
+//-----------------------------------------------------------------------------------------------------------------------------
