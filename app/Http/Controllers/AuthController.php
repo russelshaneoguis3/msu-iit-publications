@@ -71,7 +71,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('status', 'Email verified! You can now log in.');
     }
 
-    public function login(Request $request)
+        public function login(Request $request)
     {
         // Validate the login input
         $validator = Validator::make($request->all(), [
@@ -88,7 +88,7 @@ class AuthController extends Controller
 
         // Check if the user exists
         if (!$user) {
-            return redirect()->back()->with('error', 'These credentials do not match our records.');
+            return redirect()->back()->with('error', 'Email address is not registered');
         }
 
         // Check if the email is verified
@@ -96,30 +96,82 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Please verify your email address before logging in.');
         }
 
-        // Use Laravel's built-in Auth::attempt to verify credentials and log the user in
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            // Successful login, now check user role
-            $user_role = DB::table('user_roles')
-                ->where('user_id', Auth::id())  // Get the authenticated user's ID
-                ->first();
-
-            if (!$user_role) {
-                return redirect()->back()->with('error', 'User role not found.');
-            }
-
-            // Redirect based on the user role
-            if ($user_role->u_role_id == 1) {  // Admin role
-                return redirect()->route('admin.dashboard')->with('status', 'Login successful! Welcome Admin.');
-            } elseif ($user_role->u_role_id == 2) {  // User role
-                return redirect()->route('users.dashboard')->with('status', 'Login successful! Welcome User.');
-            }
-
-            // Default case (just in case)
-            return redirect()->route('login')->with('error', 'Unable to determine user role.');
+        // Check if the password matches
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'Invalid password.');
         }
 
-        // Authentication failed
-        return redirect()->back()->with('error', 'Invalid credentials.');
+        // Retrieve the role from the user_roles table
+        $user_role = DB::table('user_roles')->where('user_id', $user->uid)->first();
+
+        // Check if the role exists
+        if (!$user_role) {
+            return redirect()->back()->with('error', 'User role not found.');
+        }
+
+        // Set session data
+        session(['user_id' => $user->uid, 'role_id' => $user_role->u_role_id]);
+
+        // Redirect based on the user role
+        if ($user_role->u_role_id == 1) {  // Admin role
+            return redirect()->route('admin.dashboard')->with('status', 'Login successful! Welcome Admin.');
+        } else if ($user_role->u_role_id == 2) {  // User role
+            return redirect()->route('users.dashboard')->with('status', 'Login successful! Welcome User.');
+        }
+
+        // Default case (just in case)
+        return redirect()->route('login')->with('error', 'Unable to determine user role.');
     }
     
+    public function adminDashboard()
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+
+        // Optionally, check if the user is an admin
+        if (session('role_id') != 1) {
+            return redirect()->route('login')->with('error', 'Unauthorized access.');
+        }
+
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Pass the user_id to the admin dashboard view
+        return view('admin.dashboard', compact('userId'));
+    }
+
+    public function userDashboard()
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+
+        // Optionally, check if the user is not an admin
+        if (session('role_id') != 2) {
+            return redirect()->route('login')->with('error', 'Unauthorized access.');
+        }
+
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Pass the user_id to the user dashboard view
+        return view('users.dashboard', compact('userId'));
+    }
+
+        public function logout(Request $request)
+    {
+        // Remove user session data
+        $request->session()->flush(); // This clears all session data
+
+        // Optionally, you can use session()->forget() if you want to clear specific session variables:
+        // $request->session()->forget('user_id');
+        // $request->session()->forget('role_id');
+
+        // Redirect to login page
+        return redirect()->route('login')->with('status', 'You have been logged out successfully.');
+    }
+
 }

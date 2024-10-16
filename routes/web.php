@@ -4,10 +4,16 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+//Front end / Landing Page --------------------------------------------------------------------------------------------------
+
 // Public Routes (not requiring authentication)
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+//Authentication -------------------------------------------------------------------------------------------------------------
 
 // Registration Routes
 Route::get('/register', function () {
@@ -26,16 +32,16 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 // Email Verification Route
 Route::get('/verify/{token}', [AuthController::class, 'verifyEmail'])->name('verifyEmail');
 
-// Admin Routes (Require Authentication and Admin Role)
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-});
 
-// User Routes (Require Authentication and User Role)
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/users/dashboard', function () {
-        return view('users.dashboard');
-    })->name('users.dashboard');
-});
+// Admin route
+Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin.dashboard');
+
+// User route
+Route::get('/users/dashboard', [AuthController::class, 'userDashboard'])->name('users.dashboard');
+
+// Logout
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//-----------------------------------------------------------------------------------------------------------------------------
+
+
