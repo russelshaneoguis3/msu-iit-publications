@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Researchers' Repo</title>
+    <title>Presentation | Researchers' Repo</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
@@ -23,43 +23,43 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="{{ route('admin.dashboard') }}" class="brand">
+		<a href="{{ route('users.dashboard') }}" class="brand">
 		<img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
 			<span class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="{{ route('admin.dashboard') }}">
+			<li>
+				<a href="{{ route('users.dashboard') }}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('admin.research') }}">
+				<a href="{{ route('users.research') }}">
 					<i class='bx bx-file-find' ></i>
 					<span class="text">Research</span>
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('admin.publication') }}">
+				<a href="{{ route('users.publication') }}">
 					<i class='bx bx-globe' ></i>
 					<span class="text">Publication</span>
 				</a>
 			</li>
-			<li>
-				<a href="{{ route('admin.presentation') }}">
+			<li class="active">
+				<a href="{{ route('users.presentation') }}">
 					<i class='bx bx-spreadsheet' ></i>
 					<span class="text">Presentation</span>
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('admin.documentation') }}">
+				<a href="{{ route('users.documentation') }}">
 					<i class='bx bx-library' ></i>
 					<span class="text">Documentation</span>
 				</a>
 			</li>
 			<li>
-				<a href="{{ route('admin.team') }}">
+				<a href="{{ route('users.team') }}">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Team</span>
 				</a>
@@ -90,7 +90,7 @@
 		<main>
 
 		<br><br><br><br>
-		<h1>Admin Dashboard</h1>
+		<h1>users Presentation</h1>
 
 		@if(session()->has('user_id'))
 			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>

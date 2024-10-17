@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Researchers' Repo</title>
+    <title>Publication | Researchers' Repo</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
@@ -28,7 +28,7 @@
 			<span class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a href="{{ route('admin.dashboard') }}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -40,7 +40,7 @@
 					<span class="text">Research</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="{{ route('admin.publication') }}">
 					<i class='bx bx-globe' ></i>
 					<span class="text">Publication</span>
@@ -90,7 +90,7 @@
 		<main>
 
 		<br><br><br><br>
-		<h1>Admin Dashboard</h1>
+		<h1>Admin Publication</h1>
 
 		@if(session()->has('user_id'))
 			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>

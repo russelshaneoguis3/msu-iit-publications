@@ -123,43 +123,6 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Unable to determine user role.');
     }
     
-    public function adminDashboard()
-    {
-        // Check if the user is logged in
-        if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
-        }
-
-        // Optionally, check if the user is an admin
-        if (session('role_id') != 1) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
-        }
-
-        // Retrieve the user_id from the session
-        $userId = session()->get('user_id');
-
-        // Pass the user_id to the admin dashboard view
-        return view('admin.dashboard', compact('userId'));
-    }
-
-    public function userDashboard()
-    {
-        // Check if the user is logged in
-        if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
-        }
-
-        // Optionally, check if the user is not an admin
-        if (session('role_id') != 2) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
-        }
-
-        // Retrieve the user_id from the session
-        $userId = session()->get('user_id');
-
-        // Pass the user_id to the user dashboard view
-        return view('users.dashboard', compact('userId'));
-    }
 
         public function logout(Request $request)
     {
