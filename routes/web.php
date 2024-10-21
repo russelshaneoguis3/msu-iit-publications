@@ -67,6 +67,8 @@ Route::get('/admin/documentation', [DocumentationController::class, 'adminDocume
 //Admin Team
 Route::get('/admin/team', [TeamController::class, 'adminTeam'])->name('admin.team');
 
+Route::get('admin/team/edit/{uid}', [TeamController::class, 'editUser'])->name('admin.team.edit');
+
 //-----------------------------------------------------------------------------------------------------------------------------
 
 

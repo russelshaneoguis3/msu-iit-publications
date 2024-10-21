@@ -31,8 +31,11 @@ class DashboardController extends Controller
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
 
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.dashboard', compact('userId'));
+        return view('admin.dashboard', compact('user'));
     }
     
 
@@ -53,8 +56,11 @@ class DashboardController extends Controller
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
 
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
         // Pass the user_id to the user dashboard view
-        return view('users.dashboard', compact('userId'));
+        return view('users.dashboard', compact('user'));
     }
 
 }

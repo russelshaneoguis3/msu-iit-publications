@@ -13,9 +13,25 @@
 
     <!-- Boxicons -->
 	<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	
+		 <!-- bootstrap css -->
+		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+		<!-- Include jQuery -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+		<!-- Include the DataTables library -->
+		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+		<!-- Include the DataTables Bootstrap 4 integration library -->
+		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+		<!-- Include the DataTables Bootstrap 4 stylesheet -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+		
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../side-nav/side-nav.css">
+	<link rel="stylesheet" href="../general/style.css">
 
 </head>
 <body>
@@ -87,9 +103,7 @@
 		<!-- NAVBAR -->
 
 
-		<main>
-
-		<br><br><br><br>
+		<main id ="main">
 		<h1>users Documentation</h1>
 
 		@if(session()->has('user_id'))

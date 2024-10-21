@@ -14,11 +14,28 @@
     <!-- Boxicons -->
 	<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 
+		 <!-- bootstrap css -->
+		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+		<!-- Include jQuery -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+		<!-- Include the DataTables library -->
+		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+		<!-- Include the DataTables Bootstrap 4 integration library -->
+		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+		<!-- Include the DataTables Bootstrap 4 stylesheet -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../side-nav/side-nav.css">
+	<link rel="stylesheet" href="../general/style.css">
 
 </head>
 <body>
+
 @csrf  <!-- CSRF token -->
 
 	<!-- SIDEBAR -->
@@ -77,92 +94,42 @@
 	<!-- SIDEBAR -->
 
 
+	@if(isset($user))
+
 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu' ></i>	
 		</nav>
+
+		
 		<!-- NAVBAR -->
 
 
-		<main>
 
-		<br><br><br><br>
+		<main id="main">
+
 		<h1>Admin Dashboard</h1>
 
-		@if(session()->has('user_id'))
-			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>
-		@else
-			<p>No user is logged in.</p>
-		@endif
+        <p><strong>Logged in User ID:</strong> {{ $user->uid }}</p>
+        <p><strong>First Name:</strong> {{ $user->first_name }}</p>
+        <p><strong>Last Name:</strong> {{ $user->last_name }}</p>
+        <p><strong>Email:</strong> {{ $user->email }}</p>
+        <p><strong>Email Status:</strong> {{ $user->email_status }}</p>
+        <p><strong>Created At:</strong> {{ $user->created_at }}</p>
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
 
-		<br>
-		<br>
-		<br>
-		<br><br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    @else
+        <p>No user is logged in.</p>
+    @endif
 
 
 
 
-
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-
-
-
-
-		<br>
-		<br>
-
-
-
-
-		<br>
-		<br>
-
-
-
-		ad
 		</main>
- 
+</section>
 </body>
 
 <script src="../side-nav/script.js"></script>

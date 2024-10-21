@@ -31,10 +31,43 @@ class TeamController extends Controller
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
 
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch all users from the database, ordered by 'uid' in descending order
+        $users_data = DB::table('users')->orderBy('created_at', 'desc')->get();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.team', compact('userId'));
+        return view('admin.team', compact('users_data','user'));
     }
     
+
+ //Verify email users   
+    public function editUser($uid)
+{
+    // Check if the user is an admin
+    if (session('role_id') != 1) {
+        return redirect()->route('login')->with('error', 'Unauthorized access.');
+    }
+
+    // Find the user by their UID
+    $user = DB::table('users')->where('uid', $uid)->first();
+
+    if (!$user) {
+        return redirect()->route('admin.team')->with('error', 'User not found.');
+    }
+
+    // Update email_status to 'yes' and set token to null
+    DB::table('users')
+        ->where('uid', $uid)
+        ->update([
+            'email_status' => 'yes',
+            'token' => null,
+        ]);
+
+    // Return JSON response with a success message
+    return response()->json(['message' => 'User Email Address was successfully verified.']);
+}
 
 
 //User
