@@ -66,7 +66,7 @@
             <!-- DataTable -->
 			<div class="card">
             <div class="card-body">
-            <h4 class="card-title">The Team </h4> <br>
+            <h4 class="card-title">The Researchers </h4> <br>
 			<div class="table-responsive-md">
             <table class="table table-team">
                 <thead>

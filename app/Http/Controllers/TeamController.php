@@ -35,7 +35,7 @@ class TeamController extends Controller
         $user = DB::table('users')->where('uid', $userId)->first();
 
         // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data = DB::table('users')->orderBy('created_at', 'desc')->get();
+        $users_data = DB::table('users')->orderBy('uid', 'desc')->get();
 
         // Pass the user_id to the admin dashboard view
         return view('admin.team', compact('users_data','user'));
@@ -86,7 +86,13 @@ class TeamController extends Controller
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
 
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch all users from the database, ordered by 'uid' in descending order
+        $users_data = DB::table('users')->orderBy('created_at', 'desc')->get();
+        
         // Pass the user_id to the user dashboard view
-        return view('users.team', compact('userId'));
+        return view('users.team', compact('user', 'users_data'));
     }
 }
