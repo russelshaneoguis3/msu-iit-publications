@@ -91,7 +91,7 @@
                 <td>{{ $user->email_status }}</td>
 				<td>
                 <!-- Edit Button to trigger SweetAlert -->
-                <a href="javascript:void(0);" class="btn btn-outline-danger btn-sm"
+                <a id="verify-btn" href="javascript:void(0);" class="btn btn-outline btn-sm"
                    onclick="verifyUser({{ $user->uid }})">Verify</a>
            		 </td>
                 </tr>

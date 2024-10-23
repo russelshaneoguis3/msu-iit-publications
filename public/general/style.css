@@ -52,3 +52,26 @@
     padding: 20px 30px;
 }
 
+#verify-btn {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-color: var(--focus-color);
+  color: var(--focus-color);
+}
+
+#verify-btn:hover {
+  background: var(--focus-color);
+  border-color: var(--focus-color);
+  color: var(--default-color);
+}
+
+#publication-btn {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  border-color: var(--focus-color);
+  color: var(--focus-color);
+}
+
+#publication-btn:hover {
+  background: var(--focus-color);
+  border-color: var(--focus-color);
+  color: var(--default-color);
+}

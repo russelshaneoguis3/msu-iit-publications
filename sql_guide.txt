@@ -45,8 +45,10 @@ CREATE TABLE publications (
   description TEXT,
   p_file_path TEXT,
   p_link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (p_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE research (
   r_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -55,6 +57,7 @@ CREATE TABLE research (
   description TEXT,
   r_file_path TEXT,
   r_link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (r_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -65,6 +68,7 @@ CREATE TABLE presentation (
   description TEXT,
   pr_file_path TEXT,
   pr_link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (pr_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -75,6 +79,7 @@ CREATE TABLE documentation (
   description TEXT,
   d_file_path TEXT,
   d_link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (d_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 

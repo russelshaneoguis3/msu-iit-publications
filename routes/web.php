@@ -82,6 +82,7 @@ Route::get('/users/research', [ResearchController::class, 'usersResearch'])->nam
 
 //user publication
 Route::get('/users/publication', [PublicationController::class, 'usersPublication'])->name('users.publication');
+Route::post('/users/publication/add', [PublicationController::class, 'addPublication'])->name('users.addPublication');
 
 //user presentation
 Route::get('/users/presentation', [PresentationController::class, 'usersPresentation'])->name('users.presentation');

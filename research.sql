@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2024 at 08:39 AM
+-- Generation Time: Oct 23, 2024 at 09:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,33 +33,9 @@ CREATE TABLE `documentation` (
   `title` text NOT NULL,
   `description` text DEFAULT NULL,
   `d_file_path` text DEFAULT NULL,
-  `d_link` text DEFAULT NULL
+  `d_link` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `documentation`
---
-DELIMITER $$
-CREATE TRIGGER `log_documentation_delete` AFTER DELETE ON `documentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.d_user_id, 'DELETE', 'documentation');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_documentation_insert` AFTER INSERT ON `documentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.d_user_id, 'INSERT', 'documentation');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_documentation_update` AFTER UPDATE ON `documentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity,table_name)
-  VALUES (NEW.d_user_id, 'UPDATE', 'documentation');
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -73,33 +49,9 @@ CREATE TABLE `presentation` (
   `title` text NOT NULL,
   `description` text DEFAULT NULL,
   `pr_file_path` text DEFAULT NULL,
-  `pr_link` text DEFAULT NULL
+  `pr_link` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `presentation`
---
-DELIMITER $$
-CREATE TRIGGER `log_presentation_delete` AFTER DELETE ON `presentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.pr_user_id, 'DELETE', 'presentation');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_presentation_insert` AFTER INSERT ON `presentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.pr_user_id, 'INSERT', 'presentation');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_presentation_update` AFTER UPDATE ON `presentation` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.pr_user_id, 'UPDATE', 'presentation');
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -113,33 +65,9 @@ CREATE TABLE `publications` (
   `title` text NOT NULL,
   `description` text DEFAULT NULL,
   `p_file_path` text DEFAULT NULL,
-  `p_link` text DEFAULT NULL
+  `p_link` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `publications`
---
-DELIMITER $$
-CREATE TRIGGER `log_publications_delete` AFTER DELETE ON `publications` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.p_user_id, 'DELETE', 'publications');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_publications_insert` AFTER INSERT ON `publications` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.p_user_id, 'INSERT', 'publications');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_publications_update` AFTER UPDATE ON `publications` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.p_user_id, 'UPDATE', 'publications');
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -153,33 +81,9 @@ CREATE TABLE `research` (
   `title` text NOT NULL,
   `description` text DEFAULT NULL,
   `r_file_path` text DEFAULT NULL,
-  `r_link` text DEFAULT NULL
+  `r_link` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `research`
---
-DELIMITER $$
-CREATE TRIGGER `log_research_delete` AFTER DELETE ON `research` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.r_user_id, 'DELETE', 'research');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_research_insert` AFTER INSERT ON `research` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.r_user_id, 'INSERT', 'research');
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_research_update` AFTER UPDATE ON `research` FOR EACH ROW BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.r_user_id, 'UPDATE', 'research');
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -280,6 +184,13 @@ CREATE TABLE `user_logs` (
   `table_name` varchar(50) NOT NULL,
   `log_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_logs`
+--
+
+INSERT INTO `user_logs` (`log_id`, `l_user_id`, `activity`, `table_name`, `log_time`) VALUES
+(1, 21, 'UPDATE', 'users', '2024-10-22 07:07:36');
 
 -- --------------------------------------------------------
 
@@ -412,7 +323,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_logs`
 --
 ALTER TABLE `user_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
