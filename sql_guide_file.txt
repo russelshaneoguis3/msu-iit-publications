@@ -28,15 +28,6 @@ CREATE TABLE user_roles (
   FOREIGN KEY (user_id) REFERENCES users(uid)
 ) ENGINE=InnoDB;
 
-DELIMITER //
-CREATE TRIGGER `after_user_insert` AFTER INSERT ON `users` FOR EACH ROW BEGIN
-    -- Insert the new user into the user_roles table with role_id 2 (users role)
-    INSERT INTO user_roles (u_role_id, user_id) 
-    VALUES (2, NEW.uid);
-END
-//
-DELIMITER ;
-
 
 CREATE TABLE publications (
   p_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -45,7 +36,8 @@ CREATE TABLE publications (
   description TEXT,
   p_file_path TEXT,
   p_link TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at datetime,
+  updated_at datetime,
   FOREIGN KEY (p_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -57,9 +49,11 @@ CREATE TABLE research (
   description TEXT,
   r_file_path TEXT,
   r_link TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at datetime,
+  updated_at datetime,
   FOREIGN KEY (r_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE presentation (
   pr_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -68,7 +62,8 @@ CREATE TABLE presentation (
   description TEXT,
   pr_file_path TEXT,
   pr_link TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at datetime,
+  updated_at datetime,
   FOREIGN KEY (pr_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -79,20 +74,32 @@ CREATE TABLE documentation (
   description TEXT,
   d_file_path TEXT,
   d_link TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at datetime,
+  updated_at datetime,
   FOREIGN KEY (d_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
 CREATE TABLE user_logs (
   log_id INT PRIMARY KEY AUTO_INCREMENT,
-  l_user_id INT UNSIGNED,  
+  l_user_id INT UNSIGNED,  -- The user who performed the activity
+  affected_user_id INT UNSIGNED,  -- The user who was affected by the activity
   activity TEXT NOT NULL,
   table_name VARCHAR(50) NOT NULL, -- The name of the affected table
   log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  
-  -- Foreign key constraint that references the users table with CASCADE rules
+  FOREIGN KEY (l_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (affected_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE doc_logs (
+  log_id INT PRIMARY KEY AUTO_INCREMENT,
+  l_user_id INT UNSIGNED,  -- The user who performed the activity
+  affected_doc INT UNSIGNED, -- the document affected by changes
+  activity TEXT NOT NULL,
+  table_name VARCHAR(50) NOT NULL, -- The name of the affected table
+  log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (l_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 DELIMITER //
 -- Trigger for INSERT on `users`
@@ -100,32 +107,33 @@ CREATE TRIGGER log_user_insert
 AFTER INSERT ON users
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.uid, 'INSERT', 'users');
+  INSERT INTO user_logs (l_user_id, affected_user_id, activity, table_name)
+  VALUES (NEW.uid, NEW.uid, 'INSERT', 'users');
 END;
 //
 
--- Trigger for UPDATE on `users`
+DELIMITER //
 CREATE TRIGGER log_user_update
 AFTER UPDATE ON users
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.uid, 'UPDATE', 'users');
+  INSERT INTO user_logs (l_user_id, affected_user_id, activity, table_name)
+  VALUES (1, NEW.uid, 'UPDATE', 'users');  -- Assuming admin (uid = 1) makes the update
 END;
 //
 
+
+
+DELIMITER //
 -- Trigger for DELETE on `users`
 CREATE TRIGGER log_user_delete
 AFTER DELETE ON users
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.uid, 'DELETE', 'users');
+  INSERT INTO user_logs (l_user_id, affected_user_id, activity, table_name)
+  VALUES (1, OLD.uid, 'DELETE', 'users');
 END;
 //
-DELIMITER ;
-
 
 DELIMITER //
 -- Trigger for INSERT on `publications`
@@ -133,8 +141,8 @@ CREATE TRIGGER log_publications_insert
 AFTER INSERT ON publications
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.p_user_id, 'INSERT', 'publications');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.p_user_id, NEW.p_id, 'INSERT', 'publications');
 END;
 //
 
@@ -143,8 +151,8 @@ CREATE TRIGGER log_publications_update
 AFTER UPDATE ON publications
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.p_user_id, 'UPDATE', 'publications');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.p_user_id, NEW.p_id, 'UPDATE', 'publications');
 END;
 //
 
@@ -153,107 +161,106 @@ CREATE TRIGGER log_publications_delete
 AFTER DELETE ON publications
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.p_user_id, 'DELETE', 'publications');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.p_user_id, OLD.p_id, 'DELETE', 'publications');
 END;
 //
 DELIMITER ;
 
 DELIMITER //
--- Trigger for INSERT on `research`
 CREATE TRIGGER log_research_insert
 AFTER INSERT ON research
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.r_user_id, 'INSERT', 'research');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.r_user_id, NEW.r_id, 'INSERT', 'research');
 END;
 //
 
--- Trigger for UPDATE on `research`
 CREATE TRIGGER log_research_update
 AFTER UPDATE ON research
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.r_user_id, 'UPDATE', 'research');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.r_user_id, NEW.r_id, 'UPDATE', 'research');
 END;
 //
 
--- Trigger for DELETE on `research`
 CREATE TRIGGER log_research_delete
 AFTER DELETE ON research
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.r_user_id, 'DELETE', 'research');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.r_user_id, OLD.r_id, 'DELETE', 'research');
 END;
 //
 DELIMITER ;
 
 DELIMITER //
--- Trigger for INSERT on `presentation`
 CREATE TRIGGER log_presentation_insert
 AFTER INSERT ON presentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.pr_user_id, 'INSERT', 'presentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.pr_user_id, NEW.pr_id, 'INSERT', 'presentation');
 END;
 //
 
--- Trigger for UPDATE on `presentation`
 CREATE TRIGGER log_presentation_update
 AFTER UPDATE ON presentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.pr_user_id, 'UPDATE', 'presentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.pr_user_id, NEW.pr_id, 'UPDATE', 'presentation');
 END;
 //
 
--- Trigger for DELETE on `presentation`
 CREATE TRIGGER log_presentation_delete
 AFTER DELETE ON presentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.pr_user_id, 'DELETE', 'presentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.pr_user_id, OLD.pr_id, 'DELETE', 'presentation');
 END;
 //
 DELIMITER ;
 
 DELIMITER //
--- Trigger for INSERT on `documentation`
 CREATE TRIGGER log_documentation_insert
 AFTER INSERT ON documentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (NEW.d_user_id, 'INSERT', 'documentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.d_user_id, NEW.d_id, 'INSERT', 'documentation');
 END;
 //
 
--- Trigger for UPDATE on `documentation`
 CREATE TRIGGER log_documentation_update
 AFTER UPDATE ON documentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity,table_name)
-  VALUES (NEW.d_user_id, 'UPDATE', 'documentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.d_user_id, NEW.d_id, 'UPDATE', 'documentation');
 END;
 //
 
--- Trigger for DELETE on `documentation`
 CREATE TRIGGER log_documentation_delete
 AFTER DELETE ON documentation
 FOR EACH ROW
 BEGIN
-  INSERT INTO user_logs (l_user_id, activity, table_name)
-  VALUES (OLD.d_user_id, 'DELETE', 'documentation');
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.d_user_id, OLD.d_id, 'DELETE', 'documentation');
 END;
 //
 DELIMITER ;
+
+SELECT users.uid, users.first_name, users.last_name, users.email, COUNT(publications.p_id) AS publication_count
+FROM users
+LEFT JOIN publications ON users.uid = publications.p_user_id
+LEFT JOIN user_roles ON users.uid = user_roles.user_id
+WHERE user_roles.u_role_id != 1  -- Exclude admin role
+GROUP BY users.uid, users.first_name, users.last_name;
+
 
 
 

@@ -98,9 +98,53 @@
 
 		@if(isset($user))
 
-	<main id ="main">
+<main id ="main">
 
-    <!-- DataTable for users -->
+<!-- Modal for Adding Publication -->
+<div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #a41d21;">
+                <h5 class="modal-title" id="addPublicationModalLabel" style="color: #ffffff">Add New Publication</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('users.addPublication') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                @csrf
+                <div class="modal-body">
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="title">Publication Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div><br>
+
+                    <!-- Description Input -->
+                    <div class="form-group">
+                        <label for="description">Publication Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                    </div><br>
+
+                    <!-- File Path Input -->
+                    <div class="form-group">
+                        <label for="file_path">Upload Publication File (optional) .pdf files only</label>
+                        <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
+                    </div><br>
+
+                    <!-- Link Input -->
+                    <div class="form-group">
+                        <label for="link">Publication Link (optional)</label>
+                        <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Publication</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- DataTable for users -->
 	<div class="card">
     <div class="card-body">
         <h4 class="card-title">Users' Publications </h4> <br>
@@ -114,6 +158,7 @@
             <table class="table table-admin-publications">
                 <thead>
                   <tr>
+					<th>No.</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>
@@ -124,12 +169,75 @@
                 <tbody>
 				@foreach($usersPublications as $userpub)
                 <tr>
+				<td>{{ $userpub->p_id }}</td>
                 <td>{{ $userpub->title }}</td>
                 <td>{{ $userpub->description }}</td>
-                <td>{{ $userpub->p_file_path }}</td>
-                <td>{{ $userpub->p_link }}</td>
-				<td>{{ $userpub->p_link }}</td>
+                <td>
+                    @if ($userpub->p_file_path)
+					<a id="file-table" href="{{ asset($userpub->p_file_path) }}" target="_blank">{{ basename($userpub->p_file_path) }}</a>
+                    @else
+                        No file available
+                    @endif
+                </td>
+                <td>
+                    @if ($userpub->p_link)
+                        <a id="link-table" href="{{ $userpub->p_link }}" target="_blank">{{ $userpub->p_link }}</a>
+                    @else
+                        No link available
+                    @endif
+                </td>
+				<td>
+				<!-- Edit Button -->
+					<button id="publication-edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $userpub->p_id }}">
+						Edit
+					</button>
+				</td>
                 </tr>
+				
+<!-- Edit Modal -->
+<div class="modal fade" id="editPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #a41d21">
+                    <h5 class="modal-title" id="editPublicationModalLabel{{ $userpub->p_id }}" style="color: #ffffff">Edit Publication</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('users.updatePublication', $userpub->p_id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEditForm()">
+                    @csrf
+                    @method('PUT') <!-- Specify that this is a PUT request -->
+                    <div class="modal-body">
+                        <!-- Title Input -->
+                        <div class="form-group">
+                            <label for="title">Publication Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $userpub->title }}" required>
+                        </div><br>
+
+                        <!-- Description Input -->
+                        <div class="form-group">
+                            <label for="description">Publication Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userpub->description }}</textarea>
+                        </div><br>
+
+                        <!-- File Path Input -->
+                        <div class="form-group">
+                            <label for="file_path">Upload New Publication File (optional) .pdf files only</label>
+                            <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
+                        </div><br>
+
+                        <!-- Link Input -->
+                        <div class="form-group">
+                            <label for="link">Publication Link (optional)</label>
+                            <input type="url" class="form-control" id="link" name="link" value="{{ $userpub->p_link }}" placeholder="http://example.com">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
                 @endforeach
                 </tbody>
             </table>
@@ -137,49 +245,6 @@
 		</div>
 	</div>
 		
-<!-- Modal for Adding Publication -->
-<div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addPublicationModalLabel">Add New Publication</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('users.addPublication') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-                @csrf
-                <div class="modal-body">
-                    <!-- Title Input -->
-                    <div class="form-group">
-                        <label for="title">Publication Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-
-                    <!-- Description Input -->
-                    <div class="form-group">
-                        <label for="description">Publication Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-                    </div>
-
-                    <!-- File Path Input -->
-                    <div class="form-group">
-                        <label for="file_path">Upload Publication File (optional)</label>
-                        <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
-                    </div>
-
-                    <!-- Link Input -->
-                    <div class="form-group">
-                        <label for="link">Publication Link (optional)</label>
-                        <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Publication</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <script>
     function validateForm() {
@@ -189,11 +254,13 @@
         // At least one of the two fields should be filled
         if (!filePath && !link) {
             alert("Please provide either a PDF file or a link.");
-            return false;
+            return false; // Prevent form submission
         }
         return true; // Proceed with the form submission
     }
 </script>
+
+
 
 @else
 <p>No user is logged in.</p>
@@ -225,16 +292,33 @@
                 "searching": true,
                 "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
 				"columnDefs": [
-				{ "width": "20%", "targets": 0 }, 
-				{ "width": "30%", "targets": 1 }, 
-				{ "width": "20%", "targets": 2 }, 
-				{ "width": "20%", "targets": 3 }, 
-				{ "width": "10%", "targets": 4 }, 
+				{ "width": "3%", "targets": 0, "visible": false}, 
+				{ "width": "20%", "targets": 1 }, 
+				{ "width": "25%", "targets": 2 }, 
+				{ "width": "25%", "targets": 3 }, 
+				{ "width": "20%", "targets": 4 }, 
+				{ "width": "7%", "targets": 5 }, 
 			],
 			"order": [[0, 'desc']]
             });
         });
 </script>
+
+<!-- SweetAlert for success messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Okay',
+        customClass: {
+            confirmButton: 'btn-outline-custom' 
+        },
+        buttonsStyling: false // Disable default button styling
+    });
+</script>
+@endif
 
 </body>
 

@@ -11,7 +11,6 @@ class Publication extends Model
 
     protected $table = 'publications'; // Specify the table name if it's different from the default
     protected $primaryKey = 'p_id'; // Specify the primary key
-    public $timestamps = true; // Enable automatic timestamp management (created_at and updated_at)
 
     // Define the fillable attributes to allow mass assignment
     protected $fillable = [

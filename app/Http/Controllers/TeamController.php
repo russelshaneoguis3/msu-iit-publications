@@ -90,7 +90,7 @@ class TeamController extends Controller
         $user = DB::table('users')->where('uid', $userId)->first();
 
         // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data = DB::table('users')->orderBy('created_at', 'desc')->get();
+        $users_data = DB::table('users')->where('email_status', '=', 'yes')->where('uid', '!=', 1)->orderBy('created_at', 'desc')->get();
         
         // Pass the user_id to the user dashboard view
         return view('users.team', compact('user', 'users_data'));

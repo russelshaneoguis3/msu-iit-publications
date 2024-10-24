@@ -36,12 +36,13 @@ class PublicationController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
-        // Fetch users and their publication count, excluding the admin
+        // Fetch users and their publication count, excluding the admin and where email_status is 'yes'
         $usersPublications = DB::table('users')
         ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
         ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(publications.p_id) as publication_count'))
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
         ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
         ->get();
 
@@ -79,63 +80,111 @@ class PublicationController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
-        // Fetch the user's publications from the database
+        // Fetch the user's publications from the database, ordered by p_id descending
         $usersPublications = DB::table('publications')
         ->where('p_user_id', $userId)
+        ->orderBy('p_id', 'desc') // Order by p_id in descending order
         ->get();
 
         // Pass the user_id to the user dashboard view
         return view('users.publication', compact('user', 'usersPublications'));
     }
 
+//Users Add Function
+    public function addPublication(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
+            'link' => 'nullable|url',
+        ]);
+    
+        // Check if at least one of the fields is provided
+        if (!$request->hasFile('file_path') && !$request->filled('link')) {
+            return redirect()->back()->with('error', 'Please provide either a PDF file or a link.')->withInput();
+        }
+    
+        $publication = new Publication();
+        $publication->title = $request->title;
+        $publication->description = $request->description;
+    
+        // Retrieve user ID from the session and save it in p_user_id
+        if (session()->has('user_id')) {
+            $userId = session()->get('user_id');
+            $publication->p_user_id = $userId;
+        } else {
+            return redirect()->back()->with('error', 'User not found in session.')->withInput();
+        }
+    
+        // Handle file upload
+        if ($request->hasFile('file_path')) {
+            $file = $request->file('file_path');
+            
+            // Get the original file name without the extension
+            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            
+            // Generate a unique name using original file name and a UUID
+            $uniqueFileName = $originalFileName . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+            
+            // Save the file to the public/files directory
+            $filePath = $file->move(public_path('files'), $uniqueFileName);
+            
+            // Save the relative path to the database
+            $publication->p_file_path = 'files/' . $uniqueFileName; 
+        }
+    
+        // Handle link input
+        if ($request->filled('link')) {
+            $publication->p_link = $request->link;
+        }
+    
+        $publication->save();
+    
+        return redirect()->back()->with('success', 'Publication added successfully!');
+    }
+    
 
-// Users add publications
-public function addPublication(Request $request)
+//update publications functions
+public function updatePublication(Request $request, $id)
 {
     $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
+        'file_path' => 'nullable|file|mimes:pdf|max:2048',
         'link' => 'nullable|url',
     ]);
 
-    $publication = new Publication();
+    // Find the publication by ID
+    $publication = Publication::findOrFail($id);
     $publication->title = $request->title;
     $publication->description = $request->description;
 
-    // Retrieve user ID from the session and save it in p_user_id
-    if (session()->has('user_id')) {
-        $userId = session()->get('user_id');
-        $publication->p_user_id = $userId;
-    } else {
-        return redirect()->back()->with('error', 'User not found in session.');
-    }
-
     // Handle file upload
     if ($request->hasFile('file_path')) {
+        // Delete the old file if it exists
+        if ($publication->p_file_path && file_exists(public_path($publication->p_file_path))) {
+            unlink(public_path($publication->p_file_path)); // Delete old file
+        }
+
         $file = $request->file('file_path');
-        
-        // Get the original file name without the extension
         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        
-        // Generate a unique name using original file name and a UUID
         $uniqueFileName = $originalFileName . '' . Str::uuid() . '.' . $file->getClientOriginalExtension();
-        
-        // Save the file to the public/files directory
-        $filePath = $file->move(public_path('files'), $uniqueFileName); // Adjust path to public/files
-        
-        // Save the relative path to the database
-        $publication->p_file_path = 'files/' . $uniqueFileName; 
+        $file->move(public_path('files'), $uniqueFileName);
+        $publication->p_file_path = 'files/' . $uniqueFileName; // Save the relative path to the database
     }
 
     // Handle link input
     if ($request->filled('link')) {
         $publication->p_link = $request->link;
+    } else {
+        // If the link field is empty, set it to null
+        $publication->p_link = null;
     }
 
     $publication->save();
 
-    return redirect()->back()->with('success', 'Publication added successfully!');
+    return redirect()->back()->with('success', 'Publication updated successfully!');
 }
 
 

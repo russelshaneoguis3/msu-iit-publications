@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>MSU-IIT - Researchers' Repo</title>
+  <title>MSU-IIT | Researchers' Repo</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -66,7 +66,7 @@
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
             <div class="col-lg-8 text-center">
               <h3>MSU-IIT <span>Research, Publications, Presentations, and documentations</span> Repository</h3>
-              <p>The MSU-IIT Research, Publications, Presentations, and Documentations Repository is a centralized digital platform that archives and provides access to academic research, scholarly publications, conference presentations, and institutional documentations produced by the MSU-IIT community.</p>
+              <p>The MSU-IIT Research, Publications, Presentations, and Documentations Repository is a centralized digital platform that archives and provides access to academic research, scholarly publications, conference presentations, and institutional documentations produced by the MSU-IIT Researchers community.</p>
               <a href="{{ url('/register') }}" class="btn-get-started">Get Started / Register</a>
             </div>
           </div>
@@ -126,6 +126,7 @@
               <li><i class="bi bi-check2-all"></i> <span>The MSU-IIT Research, Publications, Presentations, and Documentations Repository is a centralized digital platform.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>It archives and provides access to Academic research, Scholarly publications, Conference presentations & Institutional documentations.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>It serves as a valuable resource for facilitating knowledge sharing & promoting academic collaboration within and beyond the university.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>The website allows researchers to efficiently organize and find their documents.</span></li>
             </ul>
             <br>
             <p>
