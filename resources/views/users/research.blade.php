@@ -8,26 +8,20 @@
 	<meta name="keywords" content="">
 
 	 <!-- Favicons -->
-	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
+	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
   	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
+	<!-- bootstrap css -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!-- Boxicons -->
-	<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-		 <!-- bootstrap css -->
-		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Include the DataTables library -->
+    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
 
-		<!-- Include jQuery -->
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-		<!-- Include the DataTables library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 integration library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 stylesheet -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+	<!-- Include SweetAlert -->
+	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../side-nav/side-nav.css">
@@ -41,7 +35,7 @@
 	<section id="sidebar">
 		<a href="{{ route('users.dashboard') }}" class="brand">
 		<img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
-			<span class="text">MSU-IIT Researchers' Repo</span>
+			<span class="text"> MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
 			<li>
@@ -102,84 +96,229 @@
 		</nav>
 		<!-- NAVBAR -->
 
+@if(isset($user))
 
-		<main id ="main">
-
-		<h1>users Research</h1>
-
-		@if(session()->has('user_id'))
-			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>
-		@else
-			<p>No user is logged in.</p>
-		@endif
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-
-		<br>
-		<br>
-		<br>
-		<br><br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<main id ="main">
 
 
+<!-- Modal for Adding research -->
+<div class="modal fade" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #a41d21;">
+                <h5 class="modal-title" id="addResearchModalLabel" style="color: #ffffff">Add New Research</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('users.addResearch') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                @csrf
+                <div class="modal-body">
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="title">Research Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div><br>
+
+                    <!-- Description Input -->
+                    <div class="form-group">
+                        <label for="description">Research Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                    </div><br>
+
+                    <!-- File Path Input -->
+                    <div class="form-group">
+                        <label for="file_path">Upload Research File (optional) .pdf files only</label>
+                        <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
+                    </div><br>
+
+                    <!-- Link Input -->
+                    <div class="form-group">
+                        <label for="link">Research Link (optional)</label>
+                        <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Research</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- DataTable for users -->
+<div class="card">
+<div class="card-body">
+        <h4 class="card-title">Users' Research </h4> <br>
+
+<!-- Add Research Button -->
+<button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addResearchModal">
+Add Research
+</button>
+
+	<br><br>
+
+		<div class="table-responsive-md">
+            <table class="table table-research">
+                <thead>
+                  <tr>
+				  	<th>No.</th>
+					<th>Title</th>
+                    <th>Description</th>
+                    <th>File Path</th>
+                    <th>Link Path</th>
+                    <th>Last Update</th>  
+					<th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+				@foreach($usersResearch as $userres)
+                <tr>
+				<td>{{ $userres->r_id }}</td>
+                <td>{{ $userres->title }}</td>
+                <td>{{ $userres->description }}</td>
+                <td>
+                    @if ($userres->r_file_path)
+					<a id="file-table" href="{{ asset($userres->r_file_path) }}" target="_blank">{{ basename($userres->r_file_path) }}</a>
+                    @else
+                        No file available
+                    @endif
+                </td>
+                <td>
+                    @if ($userres->r_link)
+                        <a id="link-table" href="{{ $userres->r_link }}" target="_blank">{{ $userres->r_link }}</a>
+                    @else
+                        No link available
+                    @endif
+                </td>
+                <td>{{ date('Y-m-d', strtotime($userres->updated_at)) }}</td>
+				<td>
+				<!-- Edit Button -->
+					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editResearchModal{{ $userres->r_id }}">
+						Edit
+					</button>
+				</td>
+                </tr>
+		<!-- Edit Modal -->
+<div class="modal fade" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #a41d21">
+                    <h5 class="modal-title" id="editResearchModalLabel{{ $userres->r_id }}" style="color: #ffffff">Edit Research</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('users.updateResearch', $userres->r_id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEditForm()">
+                    @csrf
+                    @method('PUT') <!-- Specify that this is a PUT request -->
+                    <div class="modal-body">
+                        <!-- Title Input -->
+                        <div class="form-group">
+                            <label for="title">Research Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $userres->title }}" required>
+                        </div><br>
+
+                        <!-- Description Input -->
+                        <div class="form-group">
+                            <label for="description">Research Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userres->description }}</textarea>
+                        </div><br>
+
+                        <!-- File Path Input -->
+                        <div class="form-group">
+                            <label for="file_path">Upload New Research File (optional), if no update you can skip this (.pdf files only)</label>
+                            <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
+                        </div><br>
+
+                        <!-- Link Input -->
+                        <div class="form-group">
+                            <label for="link">Research Link (optional)</label>
+                            <input type="url" class="form-control" id="link" name="link" value="{{ $userres->r_link }}" placeholder="http://example.com">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+                @endforeach
+                </tbody>
+            </table>
+		</div>
+		</div>
+	</div>
 
 
+</div>
+</div>
 
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+<script>
+    function validateForm() {
+        const filePath = document.getElementById('file_path').value;
+        const link = document.getElementById('link').value;
 
+        // At least one of the two fields should be filled
+        if (!filePath && !link) {
+            alert("Please provide either a PDF file or a link.");
+            return false; // Prevent form submission
+        }
+        return true; // Proceed with the form submission
+    }
+</script>
+		
 
-
-
-		<br>
-		<br>
-
-
-
-
-		<br>
-		<br>
-
-
-
-		ad
+@else
+<p>No user is logged in.</p>
+@endif
 		</main>
- 
-</body>
+</section>
 
+<!-- side-nav JS -->
 <script src="../side-nav/script.js"></script>
+
+<!-- Include jQuery -->
+<script src="../assets/vendor/jquery/jquery.js"></script>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="../assets/vendor/popperjs/popperjs.js"></script>
+<script src="../assets/vendor/popperjs/popperjsbootstrap.js"></script>
+
+<!-- data tables js -->
+<script src="../assets/vendor/datatables/jquery.datatables.js"></script>
+<script src="../assets/vendor/datatables/datatables.bootstrap4.js"></script>
+
+<!-- sweet alert JS -->
+<script src="../assets/vendor/sweetalert/sweetalert.js"></script>
+
+<script>
+        $(document).ready(function() {
+            $('.table-research').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
+			"order": [[0, 'desc']]
+            });
+        });
+</script>
+
+<!-- SweetAlert for success messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Okay',
+        customClass: {
+            confirmButton: 'btn-outline-custom' 
+        },
+        buttonsStyling: false // Disable default button styling
+    });
+</script>
+@endif
+
+</body>
 
 </html>

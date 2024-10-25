@@ -149,20 +149,23 @@
     <div class="card-body">
         <h4 class="card-title">Users' Publications </h4> <br>
 
-		<!-- Add Publication Button -->
-	<button id="publication-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addPublicationModal">
-		Add Publication
-	</button>
+<!-- Add Publication Button -->
+<button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addPublicationModal">
+Add Publication
+</button>
+
 	<br><br>
+
 		<div class="table-responsive-md">
-            <table class="table table-admin-publications">
+            <table class="table table-publications">
                 <thead>
                   <tr>
 					<th>No.</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>
-                    <th>Link Path</th> 
+                    <th>Link Path</th>
+                    <th>Last Update</th>  
 					<th>Action</th>
                   </tr>
                 </thead>
@@ -186,9 +189,10 @@
                         No link available
                     @endif
                 </td>
+                <td>{{ date('Y-m-d', strtotime($userpub->updated_at)) }}</td>
 				<td>
 				<!-- Edit Button -->
-					<button id="publication-edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $userpub->p_id }}">
+					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $userpub->p_id }}">
 						Edit
 					</button>
 				</td>
@@ -220,7 +224,7 @@
 
                         <!-- File Path Input -->
                         <div class="form-group">
-                            <label for="file_path">Upload New Publication File (optional) .pdf files only</label>
+                            <label for="file_path">Upload New Publication File (optional), if no update you can skip this (.pdf files only)</label>
                             <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf">
                         </div><br>
 
@@ -261,7 +265,6 @@
 </script>
 
 
-
 @else
 <p>No user is logged in.</p>
 @endif
@@ -287,18 +290,10 @@
 
 <script>
         $(document).ready(function() {
-            $('.table-admin-publications').DataTable({
+            $('.table-publications').DataTable({
                 "paging": true,
                 "searching": true,
                 "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
-				"columnDefs": [
-				{ "width": "3%", "targets": 0, "visible": false}, 
-				{ "width": "20%", "targets": 1 }, 
-				{ "width": "25%", "targets": 2 }, 
-				{ "width": "25%", "targets": 3 }, 
-				{ "width": "20%", "targets": 4 }, 
-				{ "width": "7%", "targets": 5 }, 
-			],
 			"order": [[0, 'desc']]
             });
         });

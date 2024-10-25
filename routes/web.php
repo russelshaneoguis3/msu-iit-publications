@@ -79,6 +79,8 @@ Route::get('/users/dashboard', [DashboardController::class, 'usersDashboard'])->
 
 //user research
 Route::get('/users/research', [ResearchController::class, 'usersResearch'])->name('users.research');
+Route::post('/users/research/add', [ResearchController::class, 'addResearch'])->name('users.addResearch');
+Route::put('/users/research/{id}', [ResearchController::class, 'updateResearch'])->name('users.updateResearch');
 
 //user publication
 Route::get('/users/publication', [PublicationController::class, 'usersPublication'])->name('users.publication');

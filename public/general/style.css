@@ -83,14 +83,14 @@
 /* end team */
 
 
-/* publication */
-#publication-btn {
+/* users */
+#add-btn {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--focus-color);
   color: var(--focus-color);
 }
 
-#publication-btn:hover {
+#add-btn:hover {
   background: var(--focus-color);
   border-color: var(--focus-color);
   color: var(--default-color);
@@ -127,13 +127,13 @@
   color: var(--default-color); /* Text color on hover */
 }
 
-#publication-edit-btn {
+#edit-btn {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--hover-color);
   color: var(--hover-color);
 }
 
-#publication-edit-btn:hover {
+#edit-btn:hover {
   background: var(--hover-color);
   border-color: var(--hover-color);
   color: var(--black-color);
@@ -170,4 +170,5 @@
 #link-table:hover {
   color: var(--hover-color);
 }
-/* end publication */
+
+/* end users */

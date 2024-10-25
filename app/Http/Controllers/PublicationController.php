@@ -60,8 +60,9 @@ class PublicationController extends Controller
     }
     
 
+//---------------------------------------------------------------------------------------------------------------------
 
-//User
+//Users
     public function usersPublication()
     {
         // Check if the user is logged in
@@ -125,7 +126,7 @@ class PublicationController extends Controller
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             
             // Generate a unique name using original file name and a UUID
-            $uniqueFileName = $originalFileName . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $uniqueFileName = $originalFileName . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
             
             // Save the file to the public/files directory
             $filePath = $file->move(public_path('files'), $uniqueFileName);
@@ -169,7 +170,7 @@ public function updatePublication(Request $request, $id)
 
         $file = $request->file('file_path');
         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $uniqueFileName = $originalFileName . '' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+        $uniqueFileName = $originalFileName . '' .Str::random(10) . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('files'), $uniqueFileName);
         $publication->p_file_path = 'files/' . $uniqueFileName; // Save the relative path to the database
     }
