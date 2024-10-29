@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 09:31 AM
+-- Generation Time: Oct 29, 2024 at 09:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,9 +34,17 @@ CREATE TABLE `documentation` (
   `description` text DEFAULT NULL,
   `d_file_path` text DEFAULT NULL,
   `d_link` text DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `documentation`
+--
+
+INSERT INTO `documentation` (`d_id`, `d_user_id`, `title`, `description`, `d_file_path`, `d_link`, `created_at`, `updated_at`) VALUES
+(1, 16, 'Test Docus', 'Test Docus', 'files/Print Grade Form_KelhZVa5vt.pdf', 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-29 07:18:48', '2024-10-29 07:19:49'),
+(2, 16, 'Test Docu2', 'Test Docu2', 'files/variables_3KyMgKZx4s.xlsx', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-10-29 07:32:57', '2024-10-29 07:34:17');
 
 --
 -- Triggers `documentation`
@@ -83,34 +91,17 @@ CREATE TABLE `doc_logs` (
 --
 
 INSERT INTO `doc_logs` (`log_id`, `l_user_id`, `affected_doc`, `activity`, `table_name`, `log_time`) VALUES
-(1, 16, 1, 'INSERT', 'publications', '2024-10-24 03:33:27'),
-(2, 19, 2, 'INSERT', 'publications', '2024-10-24 03:34:22'),
-(3, 19, 3, 'INSERT', 'publications', '2024-10-24 05:44:35'),
-(4, 19, 4, 'INSERT', 'publications', '2024-10-24 05:48:06'),
-(5, 16, 5, 'INSERT', 'publications', '2024-10-24 05:50:07'),
-(6, 16, 6, 'INSERT', 'publications', '2024-10-24 05:52:05'),
-(7, 16, 7, 'INSERT', 'publications', '2024-10-24 05:53:08'),
-(8, 16, 7, 'UPDATE', 'publications', '2024-10-24 06:05:00'),
-(9, 16, 7, 'UPDATE', 'publications', '2024-10-24 06:06:46'),
-(10, 16, 5, 'UPDATE', 'publications', '2024-10-24 06:08:07'),
-(11, 16, 7, 'UPDATE', 'publications', '2024-10-24 06:09:27'),
-(12, 16, 8, 'INSERT', 'publications', '2024-10-24 06:11:20'),
-(13, 16, 8, 'UPDATE', 'publications', '2024-10-24 06:16:05'),
-(14, 16, 1, 'UPDATE', 'publications', '2024-10-24 06:20:47'),
-(15, 16, 1, 'UPDATE', 'publications', '2024-10-24 06:25:20'),
-(16, 16, 9, 'INSERT', 'publications', '2024-10-24 06:32:58'),
-(17, 16, 8, 'UPDATE', 'publications', '2024-10-24 06:34:41'),
-(18, 16, 8, 'UPDATE', 'publications', '2024-10-24 06:41:45'),
-(19, 16, 8, 'UPDATE', 'publications', '2024-10-24 06:44:15'),
-(20, 16, 8, 'UPDATE', 'publications', '2024-10-24 06:44:32'),
-(21, 16, 1, 'UPDATE', 'publications', '2024-10-24 06:46:47'),
-(22, 16, 1, 'UPDATE', 'publications', '2024-10-24 06:46:56'),
-(23, 16, 10, 'INSERT', 'publications', '2024-10-24 07:15:51'),
-(24, 16, 7, 'UPDATE', 'publications', '2024-10-24 07:18:58'),
-(25, 16, 7, 'UPDATE', 'publications', '2024-10-24 07:19:06'),
-(26, 16, 11, 'INSERT', 'publications', '2024-10-24 07:19:14'),
-(27, 16, 1, 'UPDATE', 'publications', '2024-10-24 07:29:45'),
-(28, 16, 1, 'UPDATE', 'publications', '2024-10-24 07:29:49');
+(72, 16, 1, 'INSERT', 'publications', '2024-10-29 06:31:15'),
+(73, 16, 2, 'INSERT', 'publications', '2024-10-29 06:38:00'),
+(74, 16, 3, 'INSERT', 'publications', '2024-10-29 06:39:52'),
+(75, 16, 3, 'UPDATE', 'publications', '2024-10-29 06:40:57'),
+(76, 16, 2, 'UPDATE', 'publications', '2024-10-29 06:41:12'),
+(77, 16, 1, 'INSERT', 'research', '2024-10-29 06:46:01'),
+(78, 16, 1, 'INSERT', 'presentation', '2024-10-29 06:50:10'),
+(79, 16, 1, 'INSERT', 'documentation', '2024-10-29 07:18:48'),
+(80, 16, 1, 'UPDATE', 'documentation', '2024-10-29 07:19:49'),
+(81, 16, 2, 'INSERT', 'documentation', '2024-10-29 07:32:57'),
+(82, 16, 2, 'UPDATE', 'documentation', '2024-10-29 07:34:17');
 
 -- --------------------------------------------------------
 
@@ -125,9 +116,16 @@ CREATE TABLE `presentation` (
   `description` text DEFAULT NULL,
   `pr_file_path` text DEFAULT NULL,
   `pr_link` text DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `presentation`
+--
+
+INSERT INTO `presentation` (`pr_id`, `pr_user_id`, `title`, `description`, `pr_file_path`, `pr_link`, `created_at`, `updated_at`) VALUES
+(1, 16, 'Test Presentation', 'Test Presentation', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-29 06:50:10', '2024-10-29 06:50:10');
 
 --
 -- Triggers `presentation`
@@ -167,8 +165,8 @@ CREATE TABLE `publications` (
   `description` text DEFAULT NULL,
   `p_file_path` text DEFAULT NULL,
   `p_link` text DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -176,17 +174,9 @@ CREATE TABLE `publications` (
 --
 
 INSERT INTO `publications` (`p_id`, `p_user_id`, `title`, `description`, `p_file_path`, `p_link`, `created_at`, `updated_at`) VALUES
-(1, 16, 'test', 'test', 'files/Annex-B-Data-Privacy-Consent-Form-Updated965f7cf1-4a7b-4025-81f1-5f39fa03149b.pdf', NULL, '2024-10-24 03:33:27', '2024-10-24 07:29:49'),
-(2, 19, 'test2', 'test2', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-10-24 03:34:22', '2024-10-24 03:34:22'),
-(3, 19, 'test4', 'test4', 'files/MEMO-TO-ALL-OVCRE-CLUSTERSb5c8beea-3dd9-4282-8660-bdbd35fb7673.pdf', NULL, '2024-10-24 05:44:35', '2024-10-24 05:44:35'),
-(4, 19, 'test5', 'test5', 'files/Revised-TAS-Justification-1-2.docxf88c35e9-6b66-4e24-ba9c-847ecd3c4295.pdf', NULL, '2024-10-24 05:48:06', '2024-10-24 05:48:06'),
-(5, 16, 'test7', 'test7', 'files/Revised-TAS-Justification-1-2.docx (1)9617a456-af06-4970-8e56-fe5e455c6726.pdf', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-10-24 05:50:07', '2024-10-24 06:08:07'),
-(6, 16, 'test8', 'test8', 'files/Revised-TAS-Justification-1-2.docx (2)fffb58c7-b4ae-4707-90c1-8d391d035667.pdf', NULL, '2024-10-24 05:52:05', '2024-10-24 05:52:05'),
-(7, 16, 'test9', 'test9', 'files/Annex-B-Data-Privacy-Consent-Form-Updatedd7e52c83-6630-49c6-8e53-f595662044c9.pdf', NULL, '2024-10-24 05:53:08', '2024-10-24 07:19:06'),
-(8, 16, 'test10', 'test10', 'files/login-logout-codes1d6cea5b-d999-41cb-8bab-bd6f3980bc83.pdf', NULL, '2024-10-24 06:11:20', '2024-10-24 06:44:32'),
-(9, 16, 'test11', 'test11', 'files/Annex-B-Data-Privacy-Consent-Form-Updatedfcf09710-73cb-46e5-85cb-68d11537809d.pdf', NULL, '2024-10-24 06:32:58', '2024-10-24 06:32:58'),
-(10, 16, 'Test12', 'Test', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-24 07:15:51', '2024-10-24 07:15:51'),
-(11, 16, 'Test13', 'Test13', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-24 07:19:14', '2024-10-24 07:19:14');
+(1, 16, 'Test Pub', 'Test Pub', 'files/Print Grade Form_hVMiVd5TlO.pdf', 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-28 22:31:15', '2024-10-28 22:31:15'),
+(2, 16, 'Test pub 2', 'Test pub 2s', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-29 06:38:00', '2024-10-29 06:41:12'),
+(3, 16, 'Test pub 3', 'Test Pub 3s', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-29 06:39:52', '2024-10-29 06:40:57');
 
 --
 -- Triggers `publications`
@@ -226,9 +216,16 @@ CREATE TABLE `research` (
   `description` text DEFAULT NULL,
   `r_file_path` text DEFAULT NULL,
   `r_link` text DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `research`
+--
+
+INSERT INTO `research` (`r_id`, `r_user_id`, `title`, `description`, `r_file_path`, `r_link`, `created_at`, `updated_at`) VALUES
+(1, 16, 'Test Res', 'Test res', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-10-29 06:46:01', '2024-10-29 06:46:01');
 
 --
 -- Triggers `research`
@@ -306,7 +303,8 @@ INSERT INTO `users` (`uid`, `email`, `password`, `first_name`, `last_name`, `cre
 (19, 'sad@g.msuiit.edu.ph', '$2y$12$QLUQl0/QN9pqdhAjp/CCaOHfAU7QVCVaAJHbGvdXsgBueIfuuFQJO', 'sad', 'sad', '2024-10-15 21:16:08', NULL, 'yes'),
 (20, 'dam@g.msuiit.edu.ph', '$2y$12$RL4JAGf0EHGDXH7ByVvroeRfvFW0lUlfK8WpWJdDTYpPse19bkeRi', 'dam', 'dam', '2024-10-15 21:16:41', NULL, 'yes'),
 (21, 'sadsad@g.msuiit.edu.ph', '$2y$12$AKJlGE5e/eGt0WTdtYWUL.IHV5L.YrLMX1W5k2X6J9y9VYjIYbjGm', 'Adam', 'asdasd', '2024-10-16 21:16:07', NULL, 'yes'),
-(22, 'ss@g.msuiit.edu.ph', '$2y$12$aBJVhq3hQzfT1/hnPjX5yuUBKOw4HtDR47zWvPVpng9SeYpPPFJ8O', 'ss', 'ss', '2024-10-20 23:16:50', 'wcyLPDRPuiif2fLcElqmlRT4ohF059IxXwVHtDItljngYOF3vtpsCf2AQwzo', 'no');
+(22, 'ss@g.msuiit.edu.ph', '$2y$12$aBJVhq3hQzfT1/hnPjX5yuUBKOw4HtDR47zWvPVpng9SeYpPPFJ8O', 'ss', 'ss', '2024-10-20 23:16:50', 'wcyLPDRPuiif2fLcElqmlRT4ohF059IxXwVHtDItljngYOF3vtpsCf2AQwzo', 'no'),
+(23, 'aa@g.msuiit.edu.ph', '$2y$12$FG6EwiRjvrrs3ljoy4nSmulon.V5Dm.R9P5ijdlyJMC/1IAnoVham', 'aaa', 'AAA', '2024-10-27 22:41:28', 'FNmM9OVhJ7tKFfq08fWLZCcpAaioFMFeq26LgxrPLTak1H9tr7MDoEUgiWvI', 'no');
 
 --
 -- Triggers `users`
@@ -353,7 +351,8 @@ CREATE TABLE `user_logs` (
 --
 
 INSERT INTO `user_logs` (`log_id`, `l_user_id`, `affected_user_id`, `activity`, `table_name`, `log_time`) VALUES
-(3, 1, 21, 'UPDATE', 'users', '2024-10-24 03:17:16');
+(3, 1, 21, 'UPDATE', 'users', '2024-10-24 03:17:16'),
+(4, 23, 23, 'INSERT', 'users', '2024-10-28 06:41:28');
 
 -- --------------------------------------------------------
 
@@ -458,31 +457,31 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT for table `documentation`
 --
 ALTER TABLE `documentation`
-  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doc_logs`
 --
 ALTER TABLE `doc_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `publications`
 --
 ALTER TABLE `publications`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `research`
 --
 ALTER TABLE `research`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -494,13 +493,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `user_logs`
 --
 ALTER TABLE `user_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

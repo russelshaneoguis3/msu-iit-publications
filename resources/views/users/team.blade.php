@@ -84,10 +84,10 @@
 				@foreach($users_data as $user)
                 <tr>
                 <td>{{ $user->last_name . ', ' . $user->first_name }}</td>
-				<td>{{ $user->created_at }}</td>
-				<td>{{ $user->created_at }}</td>
-				<td>{{ $user->created_at }}</td>
-				<td>{{ $user->created_at }}</td>
+				<td>{{ $user->publication_count }}</td>
+				<td>{{ $user->research_count}}</td>
+				<td>{{ $user->presentation_count }}</td>
+				<td>{{ $user->documentation_count }}</td>
                 </tr>
                 @endforeach
                 </tbody>

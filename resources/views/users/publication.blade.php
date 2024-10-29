@@ -12,7 +12,7 @@
   	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
 	<!-- bootstrap css -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Boxicons -->
     <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -147,7 +147,7 @@
 <!-- DataTable for users -->
 	<div class="card">
     <div class="card-body">
-        <h4 class="card-title">Users' Publications </h4> <br>
+        <h4 class="card-title">Researchers' Publications </h4> <br>
 
 <!-- Add Publication Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addPublicationModal">
@@ -189,7 +189,9 @@ Add Publication
                         No link available
                     @endif
                 </td>
-                <td>{{ date('Y-m-d', strtotime($userpub->updated_at)) }}</td>
+                <td>{{ date('Y-m-d', strtotime($userpub->updated_at)) }} <br>
+                    {{ date('h:i A', strtotime($userpub->updated_at)) }}
+                </td>
 				<td>
 				<!-- Edit Button -->
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $userpub->p_id }}">

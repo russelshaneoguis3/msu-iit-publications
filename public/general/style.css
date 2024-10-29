@@ -53,7 +53,14 @@
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: 25px;
+}
+table th {
+  font-size: 14px;
+}
+
+table td {
+  font-size: 14px;
 }
 
 .modal-header{
@@ -67,7 +74,12 @@
 .btn {
   border-radius: 15px;
 }
-/* team */
+
+.docu-title {
+  color: var(--focus-color)
+}
+
+/* team -----------------------------------------------------------------------------------------------*/
 #verify-btn {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--focus-color);
@@ -80,10 +92,10 @@
   color: var(--default-color);
 }
 
-/* end team */
+/* end team --------------------------------------------------------------------------------------------*/
 
 
-/* users */
+/* users ----------------------------------------------------------------------------------------------- */
 #add-btn {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--focus-color);
@@ -171,4 +183,44 @@
   color: var(--hover-color);
 }
 
-/* end users */
+
+table.table-documentation thead th {
+  background-color: #e0f8e7; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-documentation tbody td {
+  background-color: #ecfcf1; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-presentation thead th {
+  background-color: #f0e9de; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-presentation tbody td {
+  background-color: #fffbf5; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-publications thead th {
+  background-color: #c1dcdf; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-publications tbody td {
+  background-color: #d5e9eb; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-research thead th {
+  background-color: #cddae4; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-research tbody td {
+  background-color: #e3ebf1; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+/* end users ------------------------------------------------------------------------------------------------------------ */

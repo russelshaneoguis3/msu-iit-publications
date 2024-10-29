@@ -36,9 +36,9 @@ CREATE TABLE publications (
   description TEXT,
   p_file_path TEXT,
   p_link TEXT,
-  created_at datetime,
-  updated_at datetime,
-  FOREIGN KEY (p_user_id) REFERENCES users(uid) ON DELETE CASCADE 
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  FOREIGN KEY (p_user_id) REFERENCES users(uid) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
@@ -49,8 +49,8 @@ CREATE TABLE research (
   description TEXT,
   r_file_path TEXT,
   r_link TEXT,
-  created_at datetime,
-  updated_at datetime,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
   FOREIGN KEY (r_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -62,8 +62,8 @@ CREATE TABLE presentation (
   description TEXT,
   pr_file_path TEXT,
   pr_link TEXT,
-  created_at datetime,
-  updated_at datetime,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
   FOREIGN KEY (pr_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -74,8 +74,8 @@ CREATE TABLE documentation (
   description TEXT,
   d_file_path TEXT,
   d_link TEXT,
-  created_at datetime,
-  updated_at datetime,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
   FOREIGN KEY (d_user_id) REFERENCES users(uid) ON DELETE CASCADE 
 ) ENGINE=InnoDB;
 
@@ -262,5 +262,5 @@ WHERE user_roles.u_role_id != 1  -- Exclude admin role
 GROUP BY users.uid, users.first_name, users.last_name;
 
 
-
+select * from doc_logs;
 

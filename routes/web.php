@@ -90,9 +90,13 @@ Route::put('/users/publication/{id}', [PublicationController::class, 'updatePubl
 
 //user presentation
 Route::get('/users/presentation', [PresentationController::class, 'usersPresentation'])->name('users.presentation');
+Route::post('/users/presentation/add', [PresentationController::class, 'addPresentation'])->name('users.addPresentation');
+Route::put('/users/presentation/{id}', [PresentationController::class, 'updatePresentation'])->name('users.updatePresentation');
 
 //user documentation
 Route::get('/users/documentation', [DocumentationController::class, 'usersDocumentation'])->name('users.documentation');
+Route::post('/users/documentation/add', [DocumentationController::class, 'addDocumentation'])->name('users.addDocumentation');
+Route::put('/users/documentation/{id}', [DocumentationController::class, 'updateDocumentation'])->name('users.updateDocumentation');
 
 //user Team
 Route::get('/users/team', [TeamController::class, 'usersTeam'])->name('users.team');

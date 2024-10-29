@@ -51,7 +51,7 @@ class AuthController extends Controller
         Mail::to($request->email)->send(new VerifyEmail($token));
 
         // Return with a success message
-        return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account. If you do not see it in your inbox, please check your spam folder.');
+        return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account. If you do not see it in your inbox, please check your spam folder. You can also contact the admin for manual verification');
     }
 
     public function verifyEmail($token)

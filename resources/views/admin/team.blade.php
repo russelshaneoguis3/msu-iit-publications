@@ -63,10 +63,10 @@
 
         <main id="main">
 
-            <!-- DataTable -->
-			<div class="card">
-            <div class="card-body">
-            <h4 class="card-title">The Researchers </h4> <br>
+    <!-- DataTable -->
+	<div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Research Team  (Verified) </h4><br>
 			<div class="table-responsive-md">
             <table class="table table-team">
                 <thead>
@@ -75,13 +75,50 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Reg Date</th>
+                    <th>Registration Date</th>
+                    <th>Email Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+				@foreach($users_data_yes as $user_y)
+                <tr>
+
+                <td>{{ $user_y->uid }}</td>
+                <td>{{ $user_y->first_name }}</td>
+                <td>{{ $user_y->last_name }}</td>
+                <td>{{ $user_y->email }}</td>
+                <td>{{ $user_y->created_at }}</td>
+                <td>{{ $user_y->email_status }}</td>
+
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+		</div>
+		</div>
+	</div>
+
+    <br>
+
+    <!-- DataTable -->
+	<div class="card">
+        <div class="card-body">
+         <h4 class="card-title">Research Team Applicants (Email not verified) </h4><br>
+			<div class="table-responsive-md">
+            <table class="table table-team">
+                <thead>
+                  <tr>
+					<th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Registration Date</th>
                     <th>Email Status</th>
 					<th>Action</th> 
                   </tr>
                 </thead>
                 <tbody>
-				@foreach($users_data as $user)
+				@foreach($users_data_no as $user)
                 <tr>
                 <td>{{ $user->uid }}</td>
                 <td>{{ $user->first_name }}</td>

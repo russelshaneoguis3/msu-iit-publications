@@ -15,7 +15,8 @@ class TeamController extends Controller
 {
 
 
-//Admin 
+//Admin  
+
     public function adminTeam()
     {
         // Check if the user is logged in
@@ -35,10 +36,13 @@ class TeamController extends Controller
         $user = DB::table('users')->where('uid', $userId)->first();
 
         // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data = DB::table('users')->orderBy('uid', 'desc')->get();
+        $users_data_no = DB::table('users')->where('email_status', 'no')->orderBy('uid', 'desc')->get();
+
+        // Fetch all users from the database, ordered by 'uid' in descending order
+        $users_data_yes = DB::table('users')->where('email_status', 'yes')->orderBy('uid', 'desc')->get();
 
         // Pass the user_id to the admin dashboard view
-        return view('admin.team', compact('users_data','user'));
+        return view('admin.team', compact('users_data_no','users_data_yes','user'));
     }
     
 
@@ -69,8 +73,10 @@ class TeamController extends Controller
     return response()->json(['message' => 'User Email Address was successfully verified.']);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------
 
-//User
+
+//User 
     public function usersTeam()
     {
         // Check if the user is logged in
@@ -89,8 +95,29 @@ class TeamController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
-        // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data = DB::table('users')->where('email_status', '=', 'yes')->where('uid', '!=', 1)->orderBy('created_at', 'desc')->get();
+
+        $users_data = DB::table('users')
+        ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
+        ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
+        ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
+        ->leftJoin('documentation', 'users.uid', '=', 'documentation.d_user_id')
+        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+        ->select(
+            'users.uid',
+            'users.first_name',
+            'users.last_name',
+            'users.email',
+            DB::raw('COUNT(DISTINCT publications.p_id) as publication_count'),
+            DB::raw('COUNT(DISTINCT research.r_id) as research_count'),
+            DB::raw('COUNT(DISTINCT presentation.pr_id) as presentation_count'),
+            DB::raw('COUNT(DISTINCT documentation.d_id) as documentation_count')
+        )
+        ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->get();
+    
+
         
         // Pass the user_id to the user dashboard view
         return view('users.team', compact('user', 'users_data'));

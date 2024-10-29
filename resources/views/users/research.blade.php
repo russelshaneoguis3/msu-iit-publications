@@ -7,18 +7,18 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
-	 <!-- Favicons -->
-	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
+	<!-- Favicons -->
+	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
   	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
 	<!-- bootstrap css -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Boxicons -->
     <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 
     <!-- Include the DataTables library -->
-    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css" rel="stylesheet">
 
 	<!-- Include SweetAlert -->
 	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
@@ -148,7 +148,7 @@
 <!-- DataTable for users -->
 <div class="card">
 <div class="card-body">
-        <h4 class="card-title">Users' Research </h4> <br>
+        <h4 class="card-title">Researches </h4> <br>
 
 <!-- Add Research Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addResearchModal">
@@ -190,7 +190,9 @@ Add Research
                         No link available
                     @endif
                 </td>
-                <td>{{ date('Y-m-d', strtotime($userres->updated_at)) }}</td>
+                <td>{{ date('Y-m-d', strtotime($userres->updated_at)) }} <br>
+                {{ date('h:i A', strtotime($userres->updated_at)) }}
+               </td>
 				<td>
 				<!-- Edit Button -->
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editResearchModal{{ $userres->r_id }}">
@@ -198,7 +200,8 @@ Add Research
 					</button>
 				</td>
                 </tr>
-		<!-- Edit Modal -->
+                
+<!-- Edit Modal -->
 <div class="modal fade" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
