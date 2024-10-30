@@ -127,7 +127,7 @@
 					<div class="form-group">
 						<label for="file_path">Upload Document File (optional) .pdf, .docx, .jpeg, .jpg, .png, .xlsx, and .xls only</label>
 						<input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf,.docx,.jpeg,.jpg,.png,.xlsx,.xls">
-					</div>
+					</div><br>
 
                     <!-- Link Input -->
                     <div class="form-group">
@@ -148,7 +148,14 @@
 	<div class="card">
     <div class="card-body">
         <h4 class="card-title">Researchers' Documentation </h4>
-		<p><i>Documents can be save here such as certificates, seminars, etc. It accepts pdf, docx, jpeg, jpg, png and excel. </i></p> <br>
+		<p><i>This section allows users to securely upload and store a variety of document types such as certificates, seminar materials, and other relevant files. The system supports the following file formats: 
+            <ul>
+                <li><b>PDF (.pdf):</b> For official documents, reports, and certificates.</li>
+                <li><b>Word Documents (.docx): </b>For text-based documents, such as reports or seminar write-ups.</li>
+                <li><b>Images (.jpeg, .jpg, .png): </b>For certificates, visual content, or scanned documents.</li>
+                <li><b>Excel Files (.xls, .xlsx):</b> For data, spreadsheets, or detailed reports.</li>
+            </ul>
+        </i></p> <br>
 
 <!-- Add Documentation Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addDocumentationModal">
@@ -161,7 +168,7 @@ Add Document
             <table class="table table-documentation">
                 <thead>
                   <tr>
-					<th>No.</th>
+					<th>ID</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>

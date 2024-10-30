@@ -8,26 +8,20 @@
 	<meta name="keywords" content="">
 
 	 <!-- Favicons -->
-	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
+	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
   	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
+	<!-- bootstrap css -->
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Boxicons -->
-	<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-		 <!-- bootstrap css -->
-		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Include the DataTables library -->
+    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
 
-		<!-- Include jQuery -->
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-		<!-- Include the DataTables library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 integration library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 stylesheet -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+	<!-- Include SweetAlert -->
+	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../side-nav/side-nav.css">
@@ -102,83 +96,76 @@
 		</nav>
 		<!-- NAVBAR -->
 
+@if(session()->has('user_id'))
+
 
 		<main id ="main">
-		<h1>Users Dashboard</h1>
 
-		@if(session()->has('user_id'))
-			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>
-		@else
-			<p>No user is logged in.</p>
-		@endif
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-
-		<br>
-		<br>
-		<br>
-		<br><br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div id="dashboard-user" class="dashboard-user">
+		<h1>Welcome to the Dashboard</h1>
+		<p>Your content goes here.</p>
+		<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>
 
 
+		</div>
 
 
+@else
+<p>No user is logged in.</p>
+@endif
 
+</main>
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+<script>
+// Object to hold time ranges and their corresponding background images
+const backgrounds = {
+    morning: 'url(../assets/img/userdashboard/dashboard1.jpg)',   // 6:01 AM - 12:00 PM
+    afternoon: 'url(../assets/img/userdashboard/dashboard2.jpg)', // 12:01 PM - 6:00 PM
+    evening: 'url(../assets/img/userdashboard/dashboard3.jpg)',     // 6:01 PM - 12:00 AM
+    night: 'url(../assets/img/userdashboard/dashboard4.jpg)'          // 12:01 AM - 6:00 AM
+};
 
+// Function to change the background based on the current time
+function changeBackground() {
+    const currentHour = new Date().getHours();
 
+    let backgroundImage;
 
+    // Determine which background image to use based on the current hour
+    if (currentHour >= 6 && currentHour < 12) { // Morning: 6:01 AM - 12:00 PM
+        backgroundImage = backgrounds.morning;
+    } else if (currentHour >= 12 && currentHour < 18) { // Afternoon: 12:01 PM - 6:00 PM
+        backgroundImage = backgrounds.afternoon;
+    } else if (currentHour >= 18 && currentHour < 24) { // Evening: 6:01 PM - 12:00 AM
+        backgroundImage = backgrounds.evening;
+    } else { // Night: 12:01 AM - 6:00 AM
+        backgroundImage = backgrounds.night;
+    }
 
-		<br>
-		<br>
+    document.getElementById('dashboard-user').style.backgroundImage = backgroundImage;
+}
 
+// Change background on page load
+changeBackground();
 
-
-
-		<br>
-		<br>
-
-
-
-		ad
-		</main>
- 
+</script>
 </body>
-
+</section>
+<!-- side-nav JS -->
 <script src="../side-nav/script.js"></script>
+
+<!-- Include jQuery -->
+<script src="../assets/vendor/jquery/jquery.js"></script>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="../assets/vendor/popperjs/popperjs.js"></script>
+<script src="../assets/vendor/popperjs/popperjsbootstrap.js"></script>
+
+<!-- data tables js -->
+<script src="../assets/vendor/datatables/jquery.datatables.js"></script>
+<script src="../assets/vendor/datatables/datatables.bootstrap4.js"></script>
+
+<!-- sweet alert JS -->
+<script src="../assets/vendor/sweetalert/sweetalert.js"></script>
 
 </html>

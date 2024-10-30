@@ -119,7 +119,7 @@
 
                     <!-- Description Input -->
                     <div class="form-group">
-                        <label for="description">Publication Description</label>
+                        <label for="description">Publication Description (Please include the citation, classification, and funding source) </label>
                         <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
                     </div><br>
 
@@ -147,7 +147,10 @@
 <!-- DataTable for users -->
 	<div class="card">
     <div class="card-body">
-        <h4 class="card-title">Researchers' Publications </h4> <br>
+        <h4 class="card-title">Researchers' Publications </h4>
+        <p><i>This section allows researchers to upload their publications in PDF format only.</i></p>
+
+        <br>
 
 <!-- Add Publication Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addPublicationModal">
@@ -160,7 +163,7 @@ Add Publication
             <table class="table table-publications">
                 <thead>
                   <tr>
-					<th>No.</th>
+					<th>ID</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>
@@ -220,7 +223,7 @@ Add Publication
 
                         <!-- Description Input -->
                         <div class="form-group">
-                            <label for="description">Publication Description</label>
+                            <label for="description">Publication Description (Please include the citation, classification, and funding source)</label>
                             <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userpub->description }}</textarea>
                         </div><br>
 

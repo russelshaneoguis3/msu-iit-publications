@@ -120,7 +120,7 @@
 
                     <!-- Description Input -->
                     <div class="form-group">
-                        <label for="description">Research Description</label>
+                        <label for="description">Research Description (Please include the SO No. and funding source)</label>
                         <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
                     </div><br>
 
@@ -148,8 +148,11 @@
 <!-- DataTable for users -->
 <div class="card">
 <div class="card-body">
-        <h4 class="card-title">Researches </h4> <br>
+        <h4 class="card-title">Researchers' Research </h4>
+        <p><i>This section allows researchers to upload their research files in PDF format only.</i></p>
 
+        <br>
+        
 <!-- Add Research Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addResearchModal">
 Add Research
@@ -161,7 +164,7 @@ Add Research
             <table class="table table-research">
                 <thead>
                   <tr>
-				  	<th>No.</th>
+				  	<th>ID</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>
@@ -221,7 +224,7 @@ Add Research
 
                         <!-- Description Input -->
                         <div class="form-group">
-                            <label for="description">Research Description</label>
+                            <label for="description">Research Description (Please include the SO No. and funding source)</label>
                             <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userres->description }}</textarea>
                         </div><br>
 

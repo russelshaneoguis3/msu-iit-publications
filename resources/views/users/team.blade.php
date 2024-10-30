@@ -7,12 +7,12 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- Favicons -->
-    <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
-    <link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
+	 <!-- Favicons -->
+	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
+  	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
 	<!-- bootstrap css -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Boxicons -->
     <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -23,10 +23,9 @@
 	<!-- Include SweetAlert -->
 	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <!-- My CSS -->
-    <link rel="stylesheet" href="../side-nav/side-nav.css">
-    <link rel="stylesheet" href="../general/style.css">
-
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../side-nav/side-nav.css">
+	<link rel="stylesheet" href="../general/style.css">
 
 </head>
 <body>
@@ -62,39 +61,60 @@
         </nav>
         <!-- NAVBAR -->
 
-        <main id="main">
+<main id="main">
 
-            <!-- DataTable -->
-			<div class="card">
-            <div class="card-body">
-            <h4 class="card-title">The Researchers </h4> <br>
-			<div class="table-responsive-md">
-            <table class="table table-team">
-                <thead>
-                  <tr>
+<h4>The Researchers </h4>
+<br>
 
-                    <th> Name </th>
-					<th>Publications </th>
-					<th>Researches </th>
-					<th>Presentation </th>
-					<th>Documents </th>
-                  </tr>
-                </thead>
-                <tbody>
-				@foreach($users_data as $user)
-                <tr>
-                <td>{{ $user->last_name . ', ' . $user->first_name }}</td>
-				<td>{{ $user->publication_count }}</td>
-				<td>{{ $user->research_count}}</td>
-				<td>{{ $user->presentation_count }}</td>
-				<td>{{ $user->documentation_count }}</td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
-		</div>
-		</div>
-	</div>
+<div class="container-fluid">
+    <div class="row">
+        @foreach($users_data as $user)
+            <!-- Responsive Card -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4" id="team-card-ovr"> <!-- Responsive column size -->
+                <div class="card h-100">
+                    <img src="{{ asset('../assets/img/team-card.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</h4>
+                        <br>
+
+                        <!-- Top button row -->
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <button id="team-card-research" type="button" class="btn btn-outline-light w-100">
+                                    Research
+                                    <span class="badge bg-white text-dark">{{ $user->research_count }}</span>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button id="team-card-publication" type="button" class="btn btn-outline-light w-100">
+                                    Publications
+                                    <span class="badge bg-white text-dark">{{ $user->publication_count }}</span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <!-- Bottom button row -->
+                        <div class="row mt-auto">
+                            <div class="col-6">
+                                <button id="team-card-presentation" type="button" class="btn btn-outline-light w-100">
+                                    Presentation
+                                    <span class="badge bg-white text-dark">{{ $user->presentation_count }}</span>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button id="team-card-documentation" type="button" class="btn btn-outline-light w-100">
+                                    Documents
+                                    <span class="badge bg-white text-dark">{{ $user->documentation_count }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 
 </main>

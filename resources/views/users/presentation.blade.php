@@ -119,7 +119,7 @@
 
                     <!-- Description Input -->
                     <div class="form-group">
-                        <label for="description">Presentation Description</label>
+                        <label for="description">Presentation Description (Please include What, When, Where)</label>
                         <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
                     </div><br>
 
@@ -147,7 +147,10 @@
 <!-- DataTable for users Presentation -->
 <div class="card">
 <div class="card-body">
-        <h4 class="card-title">Researchers' Presentations </h4> <br>
+        <h4 class="card-title">Researchers' Presentations </h4> 
+        <p><i>This section allows researchers to upload their presentations in PDF format only.</i></p>
+
+        <br>
 
 <!-- Add Presentation Button -->
 <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addPresentationModal">
@@ -160,7 +163,7 @@ Add Presentation
             <table class="table table-presentation">
                 <thead>
                   <tr>
-				  	<th>No.</th>
+				  	<th>ID</th>
 					<th>Title</th>
                     <th>Description</th>
                     <th>File Path</th>
@@ -220,7 +223,7 @@ Add Presentation
 
                         <!-- Description Input -->
                         <div class="form-group">
-                            <label for="description">Presentation Description</label>
+                            <label for="description">Presentation Description (Please include What, When, Where)</label>
                             <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userpresent->description }}</textarea>
                         </div><br>
 

@@ -20,11 +20,13 @@
   /*--------------------------------------------------------------
   # General Styling & Shared Classes
   --------------------------------------------------------------*/
+
   body {
     color: var(--text-color);
     background-color: var(--background-color);
     font-family: var(--default-font);
   }
+
   
   a {
     color: var(--text-color);
@@ -55,6 +57,7 @@
 .card {
   border-radius: 25px;
 }
+
 table th {
   font-size: 14px;
 }
@@ -71,6 +74,18 @@ table td {
   border-radius: 30px;
 }
 
+@media (max-width: 576px) {
+  .modal-dialog {
+      max-width: 75%; /* Modal width on small screens */
+      margin-left: 20%; /* Margin around modal */
+  }
+
+  .modal-content {
+      font-size: 14px; /* Adjust font size for readability on small screens */
+  }
+}
+
+
 .btn {
   border-radius: 15px;
 }
@@ -79,7 +94,7 @@ table td {
   color: var(--focus-color)
 }
 
-/* team -----------------------------------------------------------------------------------------------*/
+/* admin team -----------------------------------------------------------------------------------------------*/
 #verify-btn {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--focus-color);
@@ -96,6 +111,57 @@ table td {
 
 
 /* users ----------------------------------------------------------------------------------------------- */
+
+
+/* Users Dashboard */
+.dashboard-user {
+  position: relative;
+  height: 94vh;
+  padding: 20px 30px;
+  margin-top: -25px;
+  margin-bottom: -20px;
+  margin-left: -30px;
+  margin-right: -30px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  background-size: cover; /* Ensure the background covers the entire area */
+  transition: background-image 1s ease; /* Smooth transition for background change */
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dashboard-user h1 {
+
+  color: white;
+
+}
+
+
+/* Translucent Overlay */
+
+/* .dashboard-user::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.0); 
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); 
+  z-index: 0;
+}
+
+
+.dashboard-user  {
+  position: relative;
+  z-index: 1;
+}  */
+
+/* ------------------------------------------------------------------------------------------------------ */
+
 #add-btn {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-color: var(--focus-color);
@@ -139,10 +205,11 @@ table td {
   color: var(--default-color); /* Text color on hover */
 }
 
-#edit-btn {
+#edit-btn,
+#updatebtn-save {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  border-color: var(--hover-color);
-  color: var(--hover-color);
+  border-color: var(--focus-color);
+  color: var(--focus-color);
 }
 
 #edit-btn:hover {
@@ -155,72 +222,164 @@ table td {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-#updatebtn-save {
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  border-color: var(--focus-color);
-  color: var(--focus-color);
-}
-
 #updatebtn-save:hover {
-  background: var(--focus-color);
-  border-color: var(--focus-color);
+  background: var(--hover-color);
+  border-color: var(--hover-color);
   color: var(--default-color);
 }
 
-#file-table {
-  color: var(--focus-color);
-}
-
-#file-table:hover {
-  color: var(--hover-color);
-}
-
+#file-table,
 #link-table {
-  color: var(--focus-color);
+  text-decoration: underline;
+  color: var(--focus-color)
 }
 
+#file-table:hover,
 #link-table:hover {
   color: var(--hover-color);
 }
 
+table th,
+table td {
+    border: 0.5px solid #fff;
+}
+
+/* Add rounded corners to the outer table */
+table th:first-child {
+  border-top-left-radius: 20px;
+}
+
+table th:last-child {
+  border-top-right-radius: 20px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+  
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
 
 table.table-documentation thead th {
-  background-color: #e0f8e7; /* Replace with your desired color */
+  background-color: #95bea2; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-documentation tbody td {
-  background-color: #ecfcf1; /* Replace with your desired color */
+  background-color: #c3dfcc; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-presentation thead th {
-  background-color: #f0e9de; /* Replace with your desired color */
+  background-color: #cabca6; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-presentation tbody td {
-  background-color: #fffbf5; /* Replace with your desired color */
+  background-color: #e4ded6; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-publications thead th {
-  background-color: #c1dcdf; /* Replace with your desired color */
+  background-color: #8dbdc4; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-publications tbody td {
-  background-color: #d5e9eb; /* Replace with your desired color */
+  background-color: #bdd5d8; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-research thead th {
-  background-color: #cddae4; /* Replace with your desired color */
+  background-color: #85adce; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-research tbody td {
-  background-color: #e3ebf1; /* Replace with your desired color */
+  background-color: #b8d0e4; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
+
+/* Team Users design--------------------------------------------------------------------------------------------------------*/
+.card-img-overlay {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  border-radius: 25px;
+}
+
+#team-card-research {
+  background-color: #85adce;
+  border-color: #85adce;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  color: var(--black-color)
+}
+
+#team-card-publication {
+  background-color: #8dbdc4;
+  border-color: #8dbdc4;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  color: var(--black-color)
+}
+
+
+#team-card-presentation {
+  background-color: #cabca6;
+  border-color: #cabca6;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  color: var(--black-color)
+}
+
+#team-card-documentation {
+  background-color: #95bea2;
+  border-color: #95bea2;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  color: var(--black-color)
+}
+
+#team-card-research:hover,
+#team-card-publication:hover,
+#team-card-presentation:hover,
+#team-card-documentation:hover 
+{
+  box-shadow: 1px 2px 2px var(--focus-color);
+}
+
+/* Button responsiveness for smaller screens */
+@media (max-width: 768px) {
+  #team-card-research,
+  #team-card-publication,
+  #team-card-presentation,
+  #team-card-documentation {
+    font-size: 12px; /* Smaller font size for smaller screens */
+    padding: 5px 10px; /* Adjust padding */
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-width: 576px) {
+  #team-card-research,
+  #team-card-publication,
+  #team-card-presentation,
+  #team-card-documentation {
+    font-size: 10px; /* Even smaller size for extra small screens */
+    padding: 4px 8px; /* Further adjust padding */
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+}
+
+
 /* end users ------------------------------------------------------------------------------------------------------------ */
