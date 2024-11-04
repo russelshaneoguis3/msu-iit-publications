@@ -103,7 +103,7 @@
 
 <!-- Modal for Adding research -->
 <div class="modal fade" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background: #a41d21;">
                 <h5 class="modal-title" id="addResearchModalLabel" style="color: #ffffff">Add New Research</h5>
@@ -121,7 +121,7 @@
                     <!-- Description Input -->
                     <div class="form-group">
                         <label for="description">Research Description (Please include the SO No. and funding source)</label>
-                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="10" required></textarea>
                     </div><br>
 
                     <!-- File Path Input -->
@@ -206,7 +206,7 @@ Add Research
                 
 <!-- Edit Modal -->
 <div class="modal fade" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background: #a41d21">
                     <h5 class="modal-title" id="editResearchModalLabel{{ $userres->r_id }}" style="color: #ffffff">Edit Research</h5>
@@ -225,7 +225,7 @@ Add Research
                         <!-- Description Input -->
                         <div class="form-group">
                             <label for="description">Research Description (Please include the SO No. and funding source)</label>
-                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userres->description }}</textarea>
+                            <textarea class="form-control" id="description" name="description" rows="10" required>{{ $userres->description }}</textarea>
                         </div><br>
 
                         <!-- File Path Input -->

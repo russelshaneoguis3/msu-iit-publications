@@ -102,7 +102,7 @@
 
 <!-- Modal for Adding Presentation -->
 <div class="modal fade" id="addPresentationModal" tabindex="-1" aria-labelledby="addPresentationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background: #a41d21;">
                 <h5 class="modal-title" id="addPresentationModalLabel" style="color: #ffffff">Add New Presentation</h5>
@@ -120,7 +120,7 @@
                     <!-- Description Input -->
                     <div class="form-group">
                         <label for="description">Presentation Description (Please include What, When, Where)</label>
-                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="10" required></textarea>
                     </div><br>
 
                     <!-- File Path Input -->
@@ -205,7 +205,7 @@ Add Presentation
                 
 <!-- Edit Modal -->
 <div class="modal fade" id="editPresentationModal{{ $userpresent->pr_id }}" tabindex="-1" aria-labelledby="editPresentationModalLabel{{ $userpresent->pr_id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background: #a41d21">
                     <h5 class="modal-title" id="editPresentationModalLabel{{ $userpresent->pr_id }}" style="color: #ffffff">Edit Presentation</h5>
@@ -224,7 +224,7 @@ Add Presentation
                         <!-- Description Input -->
                         <div class="form-group">
                             <label for="description">Presentation Description (Please include What, When, Where)</label>
-                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userpresent->description }}</textarea>
+                            <textarea class="form-control" id="description" name="description" rows="10" required>{{ $userpresent->description }}</textarea>
                         </div><br>
 
                         <!-- File Path Input -->

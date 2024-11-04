@@ -18,6 +18,7 @@ class AuthController extends Controller
     {
         // Validation rules
         $validator = Validator::make($request->all(), [
+            'centerlab' => 'required|string|max:100',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|regex:/@g.msuiit.edu.ph$/|unique:users,email|max:100',
@@ -38,6 +39,7 @@ class AuthController extends Controller
 
         // Insert user data into the database
         DB::table('users')->insert([
+            'centerlab' => $request->centerlab,
             'email' => $request->email,
             'password' => $hashedPassword,
             'first_name' => $request->first_name,

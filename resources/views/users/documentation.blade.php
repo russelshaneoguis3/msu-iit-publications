@@ -102,7 +102,7 @@
 
 <!-- Modal for Adding Documentation -->
 <div class="modal fade" id="addDocumentationModal" tabindex="-1" aria-labelledby="addDocumentationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background: #a41d21;">
                 <h5 class="modal-title" id="addDocumentationModalLabel" style="color: #ffffff">Add New Document</h5>
@@ -120,7 +120,7 @@
                     <!-- Description Input -->
                     <div class="form-group">
                         <label for="description">Document Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="10" required></textarea>
                     </div><br>
 
                     <!-- File Path Input -->
@@ -210,7 +210,7 @@ Add Document
 
 <!-- Edit Modal -->
 <div class="modal fade" id="editDocumentationModal{{ $userdoc->d_id }}" tabindex="-1" aria-labelledby="editDocumentationModalLabel{{ $userdoc->d_id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background: #a41d21">
                     <h5 class="modal-title" id="editDocumentationModalLabel{{ $userdoc->d_id }}" style="color: #ffffff">Edit Document</h5>
@@ -229,7 +229,7 @@ Add Document
                         <!-- Description Input -->
                         <div class="form-group">
                             <label for="description">Document Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userdoc->description }}</textarea>
+                            <textarea class="form-control" id="description" name="description" rows="10" required>{{ $userdoc->description }}</textarea>
                         </div><br>
 
                         <!-- File Path Input -->

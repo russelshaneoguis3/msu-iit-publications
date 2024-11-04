@@ -102,7 +102,7 @@
 
 <!-- Modal for Adding Publication -->
 <div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background: #a41d21;">
                 <h5 class="modal-title" id="addPublicationModalLabel" style="color: #ffffff">Add New Publication</h5>
@@ -120,7 +120,7 @@
                     <!-- Description Input -->
                     <div class="form-group">
                         <label for="description">Publication Description (Please include the citation, classification, and funding source) </label>
-                        <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="10" required></textarea>
                     </div><br>
 
                     <!-- File Path Input -->
@@ -205,7 +205,7 @@ Add Publication
 				
 <!-- Edit Modal -->
 <div class="modal fade" id="editPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background: #a41d21">
                     <h5 class="modal-title" id="editPublicationModalLabel{{ $userpub->p_id }}" style="color: #ffffff">Edit Publication</h5>
@@ -224,7 +224,7 @@ Add Publication
                         <!-- Description Input -->
                         <div class="form-group">
                             <label for="description">Publication Description (Please include the citation, classification, and funding source)</label>
-                            <textarea class="form-control" id="description" name="description" rows="6" required>{{ $userpub->description }}</textarea>
+                            <textarea class="form-control" id="description" name="description" rows="10" required>{{ $userpub->description }}</textarea>
                         </div><br>
 
                         <!-- File Path Input -->
