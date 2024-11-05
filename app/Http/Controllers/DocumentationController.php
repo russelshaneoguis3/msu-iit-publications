@@ -32,8 +32,11 @@ class DocumentationController extends Controller
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
 
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.documentation', compact('userId'));
+        return view('admin.documentation', compact('user'));
     }
     
 

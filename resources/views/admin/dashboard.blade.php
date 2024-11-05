@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Researchers' Repo</title>
+    <title>MSU-IIT Researchers' Repo</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
@@ -41,8 +41,8 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="{{ route('admin.dashboard') }}" class="brand">
-		<img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
-			<span class="text">MSU-IIT Researchers' Repo</span>
+		<img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+			<span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -82,14 +82,6 @@
 				</a>
 			</li>
 		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="{{ route('logout') }}" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
 	</section>
 	<!-- SIDEBAR -->
 
@@ -102,6 +94,19 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>	
+			
+<!-- Clickable object -->
+	<div class="profile-dropdown" onclick="toggleDropdown()">
+        {{ $user->first_name }} <i class='bx bxs-chevron-down' ></i>
+        <!-- Dropdown options -->
+        <div class="profile-dropdown-content">
+			<a href="{{ route('logout') }}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+			</a>
+        </div>
+    </div>
+
 		</nav>
 
 		

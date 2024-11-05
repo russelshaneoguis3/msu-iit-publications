@@ -34,8 +34,8 @@
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="{{ route('users.dashboard') }}" class="brand">
-            <img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
-            <span class="text">MSU-IIT Researchers' Repo</span>
+            <img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+            <span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
         </a>
         <ul class="side-menu top">
             <li><a href="{{ route('users.dashboard') }}"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
@@ -45,9 +45,7 @@
             <li><a href="{{ route('users.documentation') }}"><i class='bx bx-library'></i><span class="text">Documentation</span></a></li>
             <li class="active"><a href="{{ route('users.team') }}"><i class='bx bxs-group'></i><span class="text">Team</span></a></li>
         </ul>
-        <ul class="side-menu">
-            <li><a href="{{ route('logout') }}" class="logout"><i class='bx bxs-log-out-circle'></i><span class="text">Logout</span></a></li>
-        </ul>
+
     </section>
     <!-- SIDEBAR -->
 
@@ -58,7 +56,20 @@
         <!-- NAVBAR -->
         <nav>
             <i class='bx bx-menu'></i>
-        </nav>
+        
+    <!-- Clickable object -->
+	<div class="profile-dropdown" onclick="toggleDropdown()">
+        {{ $user->first_name }} <i class='bx bxs-chevron-down' ></i>
+        <!-- Dropdown options -->
+        <div class="profile-dropdown-content">
+			<a href="{{ route('logout') }}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+			</a>
+        </div>
+    </div>
+
+    </nav>
         <!-- NAVBAR -->
 
 <main id="main">
@@ -74,8 +85,8 @@
                 <div class="card h-100">
                     <img src="{{ asset('../assets/img/team-card.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</h4>
-                        <br>
+                        <p class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</p>
+                        <p class="center-assigned">{{ $user->centerlab}}</p>
 
                         <!-- Top button row -->
                         <div class="row mb-2">

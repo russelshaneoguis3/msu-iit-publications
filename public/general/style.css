@@ -304,9 +304,18 @@ table.table-research tbody td {
 
 /* Team Users design--------------------------------------------------------------------------------------------------------*/
 .card-img-overlay {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 25px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-overlay .card-title{
+font-size: 20px;
+}
+
+.card-img-overlay .center-assigned{
+  font-size: 14px;
+  text-align: center;
 }
 
 .card-img-top {
@@ -315,6 +324,7 @@ table.table-research tbody td {
 
 #team-card-research {
   background-color: #85adce;
+  max-width: 150px;
   border-color: #85adce;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
@@ -322,6 +332,7 @@ table.table-research tbody td {
 
 #team-card-publication {
   background-color: #8dbdc4;
+  max-width: 150px;
   border-color: #8dbdc4;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
@@ -330,6 +341,7 @@ table.table-research tbody td {
 
 #team-card-presentation {
   background-color: #cabca6;
+  max-width: 150px;
   border-color: #cabca6;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
@@ -337,6 +349,7 @@ table.table-research tbody td {
 
 #team-card-documentation {
   background-color: #95bea2;
+  max-width: 150px;
   border-color: #95bea2;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
@@ -350,36 +363,60 @@ table.table-research tbody td {
   box-shadow: 1px 2px 2px var(--focus-color);
 }
 
+
+/* Button responsiveness for smaller screens */
+@media (max-width: 1600px) {
+  #team-card-research,
+  #team-card-publication,
+  #team-card-presentation,
+  #team-card-documentation {
+    max-width: 100px;
+    font-size: 12px; /* Smaller font size for smaller screens */
+    padding: 2px 5px; /* Adjust padding */
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .card-img-overlay .card-title{
+    font-size: 16px;
+    }
+    
+    .card-img-overlay .center-assigned{
+      font-size: 10px;
+      text-align: center;
+    }
+    
+
+}
+
 /* Button responsiveness for smaller screens */
 @media (max-width: 768px) {
   #team-card-research,
   #team-card-publication,
   #team-card-presentation,
   #team-card-documentation {
-    font-size: 12px; /* Smaller font size for smaller screens */
-    padding: 5px 10px; /* Adjust padding */
+    font-size: 10px; /* Smaller font size for smaller screens */
+    padding: 3px 8px; /* Adjust padding */
   }
 
   .card-title {
     font-size: 18px;
   }
 
-}
-
-@media (max-width: 576px) {
-  #team-card-research,
-  #team-card-publication,
-  #team-card-presentation,
-  #team-card-documentation {
-    font-size: 10px; /* Even smaller size for extra small screens */
-    padding: 4px 8px; /* Further adjust padding */
-  }
-
-  .card-title {
-    font-size: 18px;
-  }
+  .card-img-overlay .card-title{
+    font-size: 14px;
+    }
+    
+    .card-img-overlay .center-assigned{
+      font-size: 10px;
+      text-align: center;
+    }
+    
 
 }
+
 
 
 /* end users ------------------------------------------------------------------------------------------------------------ */

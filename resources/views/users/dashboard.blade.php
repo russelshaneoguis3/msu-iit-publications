@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Researchers' Repo</title>
+    <title>MSU-IIT Researchers' Repo</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
@@ -34,8 +34,8 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="{{ route('users.dashboard') }}" class="brand">
-		<img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
-			<span class="text">MSU-IIT Researchers' Repo</span>
+		<img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+			<span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -75,28 +75,33 @@
 				</a>
 			</li>
 		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="{{ route('logout') }}" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
+
 	</section>
 	<!-- SIDEBAR -->
 
 
+@if(isset($user))
 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
+
+		 <!-- Clickable object -->
+		<div class="profile-dropdown" onclick="toggleDropdown()">
+        {{ $user->first_name }} <i class='bx bxs-chevron-down' ></i>
+        <!-- Dropdown options -->
+        <div class="profile-dropdown-content">
+			<a href="{{ route('logout') }}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+			</a>
+        </div>
+    </div>
 		</nav>
 		<!-- NAVBAR -->
 
-@if(session()->has('user_id'))
 
 
 		<main id ="main">
@@ -117,40 +122,65 @@
 </main>
 
 <script>
-// Object to hold time ranges and their corresponding background images
-const backgrounds = {
-    morning: 'url(../assets/img/userdashboard/dashboard1.jpg)',   // 6:01 AM - 12:00 PM
-    afternoon: 'url(../assets/img/userdashboard/dashboard2.jpg)', // 12:01 PM - 6:00 PM
-    evening: 'url(../assets/img/userdashboard/dashboard3.jpg)',     // 6:01 PM - 12:00 AM
-    night: 'url(../assets/img/userdashboard/dashboard4.jpg)'          // 12:01 AM - 6:00 AM
-};
 
-// Function to change the background based on the current time
+// Array of background images (you should update the image paths to match your actual image filenames)
+const backgrounds = [
+    'url(../assets/img/userdashboard/dashboard1.jpg)',
+    'url(../assets/img/userdashboard/dashboard2.jpg)',
+    'url(../assets/img/userdashboard/dashboard3.jpg)',
+    'url(../assets/img/userdashboard/dashboard4.jpg)',
+    'url(../assets/img/userdashboard/dashboard5.jpg)',
+    'url(../assets/img/userdashboard/dashboard6.jpg)',
+    'url(../assets/img/userdashboard/dashboard7.jpg)',
+    'url(../assets/img/userdashboard/dashboard8.jpg)',
+    'url(../assets/img/userdashboard/dashboard9.jpg)',
+    'url(../assets/img/userdashboard/dashboard10.jpg)',
+    'url(../assets/img/userdashboard/dashboard11.jpg)',
+    'url(../assets/img/userdashboard/dashboard12.jpg)',
+    'url(../assets/img/userdashboard/dashboard13.jpg)',
+    'url(../assets/img/userdashboard/dashboard14.jpg)',
+    'url(../assets/img/userdashboard/dashboard15.jpg)',
+    'url(../assets/img/userdashboard/dashboard16.jpg)',
+    'url(../assets/img/userdashboard/dashboard17.jpg)',
+    'url(../assets/img/userdashboard/dashboard18.jpg)',
+    'url(../assets/img/userdashboard/dashboard19.jpg)',
+    'url(../assets/img/userdashboard/dashboard20.jpg)',
+    'url(../assets/img/userdashboard/dashboard21.jpg)',
+    'url(../assets/img/userdashboard/dashboard22.jpg)',
+    'url(../assets/img/userdashboard/dashboard23.jpg)',
+    'url(../assets/img/userdashboard/dashboard24.jpg)',
+    'url(../assets/img/userdashboard/dashboard25.jpg)',
+	'url(../assets/img/userdashboard/dashboard26.jpg)',
+	'url(../assets/img/userdashboard/dashboard27.jpg)',
+	'url(../assets/img/userdashboard/dashboard28.jpg)',
+	'url(../assets/img/userdashboard/dashboard29.jpg)',
+	'url(../assets/img/userdashboard/dashboard30.jpg)'
+];
+
+// Function to pick a random background image
+function getRandomBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    return backgrounds[randomIndex];
+}
+
+// Function to change the background
 function changeBackground() {
-    const currentHour = new Date().getHours();
-
-    let backgroundImage;
-
-    // Determine which background image to use based on the current hour
-    if (currentHour >= 6 && currentHour < 12) { // Morning: 6:01 AM - 12:00 PM
-        backgroundImage = backgrounds.morning;
-    } else if (currentHour >= 12 && currentHour < 18) { // Afternoon: 12:01 PM - 6:00 PM
-        backgroundImage = backgrounds.afternoon;
-    } else if (currentHour >= 18 && currentHour < 24) { // Evening: 6:01 PM - 12:00 AM
-        backgroundImage = backgrounds.evening;
-    } else { // Night: 12:01 AM - 6:00 AM
-        backgroundImage = backgrounds.night;
-    }
-
-    document.getElementById('dashboard-user').style.backgroundImage = backgroundImage;
+    const newBackgroundImage = getRandomBackground();
+    document.getElementById('dashboard-user').style.backgroundImage = newBackgroundImage;
 }
 
 // Change background on page load
 changeBackground();
 
+// Set an interval to change the background every 5 minutes (300,000 ms)
+setInterval(changeBackground, 300000);
+
 </script>
+
 </body>
+
 </section>
+
 <!-- side-nav JS -->
 <script src="../side-nav/script.js"></script>
 

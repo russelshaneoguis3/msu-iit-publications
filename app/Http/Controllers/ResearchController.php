@@ -29,11 +29,11 @@ class ResearchController extends Controller
             return redirect()->route('login')->with('error', 'Unauthorized access.');
         }
 
-       // Retrieve the user_id from the session
-       $userId = session()->get('user_id');
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
 
-       // Fetch the user information from the database
-       $user = DB::table('users')->where('uid', $userId)->first();
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
 
 
         // Pass the user_id to the admin dashboard view

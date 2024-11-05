@@ -104,6 +104,7 @@ class TeamController extends Controller
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
         ->select(
             'users.uid',
+            'users.centerlab',
             'users.first_name',
             'users.last_name',
             'users.email',
@@ -114,11 +115,18 @@ class TeamController extends Controller
         )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
-        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->groupBy(
+            'users.uid',
+            'users.centerlab',
+            'users.first_name',
+            'users.last_name',
+            'users.email'
+        ) // Group by all non-aggregated columns
+        ->orderBy('users.centerlab', 'ASC')     // First, order by centerlab in descending order
+        ->orderBy('users.uid', 'DESC')            // Then order by user id in ascending order (to break ties within the same centerlab)
         ->get();
     
-
-        
+    
         // Pass the user_id to the user dashboard view
         return view('users.team', compact('user', 'users_data'));
     }

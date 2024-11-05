@@ -39,3 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.classList.add('hide');
     }
 });
+
+// Toggle dropdown visibility
+function toggleDropdown() {
+    const dropdown = document.querySelector('.profile-dropdown');
+    dropdown.classList.toggle('active');
+}

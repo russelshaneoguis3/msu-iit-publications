@@ -40,8 +40,8 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="{{ route('admin.dashboard') }}" class="brand">
-		<img src="../assets/img/web-logo.png" alt="logo" class="nav-logo">
-			<span class="text">MSU-IIT Researchers' Repo</span>
+		<img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+			<span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
 			<li>
@@ -81,24 +81,30 @@
 				</a>
 			</li>
 		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="{{ route('logout') }}" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
+
 	</section>
 	<!-- SIDEBAR -->
 
-
+@if(isset($user))
 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
+			
+<!-- Clickable object -->
+	<div class="profile-dropdown" onclick="toggleDropdown()">
+        {{ $user->first_name }} <i class='bx bxs-chevron-down' ></i>
+        <!-- Dropdown options -->
+        <div class="profile-dropdown-content">
+			<a href="{{ route('logout') }}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+			</a>
+        </div>
+    </div>
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -106,8 +112,6 @@
 		<main id="main">
 		<h1>Admin Research</h1>
 
-		@if(session()->has('user_id'))
-			<p><strong>Logged in User ID:</strong> {{ session('user_id') }}</p>
 		@else
 			<p>No user is logged in.</p>
 		@endif
