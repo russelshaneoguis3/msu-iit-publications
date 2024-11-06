@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Team;
 
 class TeamController extends Controller
 {
@@ -77,34 +78,42 @@ class TeamController extends Controller
 
 
 //User 
-    public function usersTeam()
-    {
-        // Check if the user is logged in
-        if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
-        }
+public function usersTeam()
+{
+    // Check if the user is logged in
+    if (!session()->has('user_id')) {
+        return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+    }
 
-        // Optionally, check if the user is not an admin
-        if (session('role_id') != 2) {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
-        }
+    // Optionally, check if the user is not an admin
+    if (session('role_id') != 2) {
+        return redirect()->route('login')->with('error', 'Unauthorized access.');
+    }
 
-        // Retrieve the user_id from the session
-        $userId = session()->get('user_id');
+    // Retrieve the user_id from the session
+    $userId = session()->get('user_id');
 
-        // Fetch the user information from the database
-        $user = DB::table('users')->where('uid', $userId)->first();
+    // Fetch the user information from the database, including the center name
+    $user = DB::table('users')
+        ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
+        ->select('users.*', 'center.c_name as center_name', 'users.centerlab') // Make sure centerlab is selected
+        ->where('users.uid', $userId)
+        ->first();
 
+    // Fetch all centers
+    $centers = DB::table('center')->select('cid', 'c_name')->get();
 
-        $users_data = DB::table('users')
+    // Fetch team data with joined center name
+    $users_data = DB::table('users')
         ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
         ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
         ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
         ->leftJoin('documentation', 'users.uid', '=', 'documentation.d_user_id')
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+        ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
         ->select(
             'users.uid',
-            'users.centerlab',
+            'center.c_name as center_name', // Fetch center name here
             'users.first_name',
             'users.last_name',
             'users.email',
@@ -115,19 +124,45 @@ class TeamController extends Controller
         )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+        ->where('users.uid', '!=', $userId)
         ->groupBy(
             'users.uid',
-            'users.centerlab',
+            'center.c_name',
             'users.first_name',
             'users.last_name',
             'users.email'
-        ) // Group by all non-aggregated columns
-        ->orderBy('users.centerlab', 'ASC')     // First, order by centerlab in descending order
-        ->orderBy('users.uid', 'DESC')            // Then order by user id in ascending order (to break ties within the same centerlab)
+        )
+        ->orderBy('center.c_name', 'ASC')    // Order by center name
+        ->orderBy('users.uid', 'DESC')       // Then by user ID
         ->get();
-    
-    
-        // Pass the user_id to the user dashboard view
-        return view('users.team', compact('user', 'users_data'));
-    }
+
+    // Return the view with the user data, team data, and centers
+    return view('users.team', compact('user', 'users_data', 'centers'));
+}
+
+
+public function updatePersonal(Request $request, $uid)
+{
+    // Validate the incoming request
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'centerlab' => 'required|exists:center,cid',
+    ]);
+
+    // Find the user by UID
+    $user = Team::findOrFail($uid);
+
+    // Update the user details
+    $user->first_name = $request->input('first_name');
+    $user->last_name = $request->input('last_name');
+    $user->centerlab = $request->input('centerlab');
+
+    // Save the changes
+    $user->save();
+
+    // Redirect back with a success message
+    return redirect()->route('users.team')->with('success', 'Personal details updated successfully.');
+}
+
 }

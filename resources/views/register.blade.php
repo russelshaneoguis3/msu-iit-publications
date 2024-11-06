@@ -86,48 +86,16 @@
         
         <form action="{{ route('register') }}" method="POST" autocomplete="on">
         @csrf 
-
-        <div class="form-floating mb-3">
-                      <select class="form-select form-select-sm" name="centerlab" id="centerlab" aria-label="Floating label select example" required> 
-                        <option value="">- - Click here to select center/laboratory - -</option>
-                        <option value="Marine Biodiversity Laboratory">Marine Biodiversity Laboratory</option>
-                        <option value="Terrestrial and Freshwater Biodiversity Laboratory">Terrestrial and Freshwater Biodiversity Laboratory</option>
-                        <option value="Center for Advanced Functional Materials and Nanotechnology">Center for Advanced Functional Materials and Nanotechnology</option>
-                        <option value="Oceanography Laboratory">Oceanography Laboratory</option>
-                        <option value="Flora Biodiversity Laboratory">Flora Biodiversity Laboratory</option>
-                        <option value="Mindanao Center for High Performance Computing">Mindanao Center for High Performance Computing</option>
-                        <option value="Climate Change Laboratory">Climate Change Laboratory</option>
-                        <option value="Animal Ecology Laboratory">Animal Ecology Laboratory</option>
-                        <option value="Microbial Culture Collection (Room 1)">Microbial Culture Collection (Room 1)</option>
-                        <option value="Microbial Culture Collection (Room 2)">Microbial Culture Collection (Room 2)</option>
-                        <option value="Decontamination Room">Decontamination Room</option>
-                        <option value="Genomics and Proteomics Laboratory">Genomics and Proteomics Laboratory</option>
-                        <option value="Molecular Ecology and Physiology Laboratory">Molecular Ecology and Physiology Laboratory</option>
-                        <option value="Mindanao Radiation Physics Center">Mindanao Radiation Physics Center</option>
-                        <option value="PV Cells Testing Laboratory">PV Cells Testing Laboratory</option>
-                        <option value="Thermal Spray and Condensed Matter Laboratory">Thermal Spray and Condensed Matter Laboratory</option>
-                        <option value="Materials Characterization Laboratory">Materials Characterization Laboratory</option>
-                        <option value="Microscopy Biological Room">Microscopy Biological Room</option>
-                        <option value="Soft Matter Synthesis and Testing Laboratory">Soft Matter Synthesis and Testing Laboratory</option>
-                        <option value="Biological Physics Laboratory">Biological Physics Laboratory</option>
-                        <option value="Product Testing and Instrumentation Laboratory">Product Testing and Instrumentation Laboratory</option>
-                        <option value="Organic Nanomaterials Processing Laboratory">Organic Nanomaterials Processing Laboratory</option>
-                        <option value="Inorganic Nanomaterials Processing Laboratory">Inorganic Nanomaterials Processing Laboratory</option>
-                        <option value="Spectroscopy Laboratory 1">Spectroscopy Laboratory 1</option>
-                        <option value="Spectroscopy Laboratory 2">Spectroscopy Laboratory 2</option>
-                        <option value="Chromatography Laboratory">Chromatography Laboratory</option>
-                        <option value="Cell Culture and Cell-Based Assay Laboratory">Cell Culture and Cell-Based Assay Laboratory</option>
-                        <option value="Natural Products and Related Researches Laboratory">Natural Products and Related Researches Laboratory</option>
-                        <option value="Drug Design and Development Related Researches Laboratory">Drug Design and Development Related Researches Laboratory</option>
-                        <option value="Bio-inorganic and Related Researches Laboratory">Bio-inorganic and Related Researches Laboratory</option>
-                        <option value="Electroanalytical and Thermal Researches Laboratory">Electroanalytical and Thermal Researches Laboratory</option>
-                        <option value="Center for Computational Analytics and Modelling">Center for Computational Analytics and Modelling</option>
-                        <option value="Center for Graph Theory, Algera and Analysis">Center for Graph Theory, Algera and Analysis</option>
-                        <option value="Laboratory of Theoritical and Computational Chemistry">Laboratory of Theoritical and Computational Chemistry</option>
-                        <option value="Others or Not in PRISM">Others or Not in PRISM</option>
-                      </select>
-                      <label for="floatingSelect">Center/Laboratory Assigned</label>
-          </div>
+   
+        <label class="col-form-label">Center/Laboratory/Office/Department Assigned <br> <span style="color:#a41d21; font-size: 11px">(If your center is not in the list, leave it blank you can edit it later after the admin update the centers list)</span></label>
+            <div class="col-sm">
+                <select class="form-select" aria-label="Default select example">
+                <option value="">- - No Center/Lab/Office/Department yet - -</option>
+                @foreach($centers as $center)
+                <option value="{{ $center->cid }}">{{ $center->c_name }}</option>
+                @endforeach
+                </select>
+        </div> 
 
             <div class="txt_field">
             <input type="text" name="first_name" id="first_name" required >

@@ -49,7 +49,7 @@
     </section>
     <!-- SIDEBAR -->
 
-    @if(isset($user))
+ @if(isset($user))
 
     <!-- CONTENT -->
     <section id="content">
@@ -77,6 +77,107 @@
 <h4>The Researchers </h4>
 <br>
 
+<div class="col-lg-5">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Personal Information</h5>
+    <hr>
+    <!-- Edit Button -->
+    <button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPersonalModal{{ $user->uid }}">
+		Edit Information
+    </button>
+    <br><br>
+
+      <div class="row mb-2">
+        <label class="col-sm-2 col-form-label"><b>Email:</b></label>
+        <div class="col-sm-10">
+          <p class="form-control-plaintext">{{ $user->email }}</p>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-sm-2 col-form-label"><b>First Name:</b></label>
+        <div class="col-sm-10">
+          <p class="form-control-plaintext">{{ $user->first_name }}</p>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-sm-2 col-form-label"><b>Last Name:</b></label>
+        <div class="col-sm-10">
+          <p class="form-control-plaintext">{{ $user->last_name }}</p>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-sm-2 col-form-label"><b>Center Assigned:</b></label>
+        <div class="col-sm-10">
+          <p class="form-control-plaintext">{{ $user->center_name }}</p>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <label class="col-sm-2 col-form-label"><b>Date Created:</b></label>
+        <div class="col-sm-10">
+          <p class="form-control-plaintext">{{ $user->created_at }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Personal Details Modal -->
+<div class="modal fade" id="editPersonalModal{{ $user->uid }}" tabindex="-1" aria-labelledby="editPersonalModalLabel{{ $user->uid }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #a41d21">
+                <h5 class="modal-title" id="editPersonalModalLabel{{ $user->uid }}" style="color: #ffffff">Edit Personal Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('users.updatePersonal', $user->uid) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <!-- First Name Input -->
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user->first_name }}" required>
+                    </div><br>
+
+                    <!-- Last Name Input -->
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user->last_name }}" required>
+                    </div><br>
+
+                    <!-- Center Assigned Dropdown -->
+                    <div class="form-group">
+                        <label for="centerlab">Center Assigned</label>
+                        <select class="form-select" id="centerlab" name="centerlab" required>
+                        <option value="">- - No Center/Lab/Office/Department yet - -</option>
+                            @foreach($centers as $center)
+                                <option value="{{ $center->cid }}" 
+                                    @if($center->cid == $user->centerlab) selected @endif>
+                                    {{ $center->c_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="updatebtn-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<hr>
+<br>
+
 <div class="container-fluid">
     <div class="row">
         @foreach($users_data as $user)
@@ -86,7 +187,7 @@
                     <img src="{{ asset('../assets/img/team-card.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-img-overlay">
                         <p class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</p>
-                        <p class="center-assigned">{{ $user->centerlab}}</p>
+                        <p class="center-assigned">{{ $user->center_name }}</p>
 
                         <!-- Top button row -->
                         <div class="row mb-2">
@@ -135,10 +236,14 @@
 @endif
 
 <!-- side-nav JS -->
- <script src="../side-nav/script.js"></script>
+<script src="../side-nav/script.js"></script>
 
 <!-- Include jQuery -->
 <script src="../assets/vendor/jquery/jquery.js"></script>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="../assets/vendor/popperjs/popperjs.js"></script>
+<script src="../assets/vendor/popperjs/popperjsbootstrap.js"></script>
 
 <!-- data tables js -->
 <script src="../assets/vendor/datatables/jquery.datatables.js"></script>
@@ -147,17 +252,21 @@
 <!-- sweet alert JS -->
 <script src="../assets/vendor/sweetalert/sweetalert.js"></script>
 
-<!-- DataTable Initialization -->
-    <script>
-        $(document).ready(function() {
-            $('.table-team').DataTable({
-                "paging": true,
-                "searching": true,
-                "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
-				"order": [[0, 'desc']]
-            });
-        });
-    </script>
+<!-- SweetAlert for success messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Okay',
+        customClass: {
+            confirmButton: 'btn-outline-custom' 
+        },
+        buttonsStyling: false // Disable default button styling
+    });
+</script>
+@endif
 
 </body>
 </html>

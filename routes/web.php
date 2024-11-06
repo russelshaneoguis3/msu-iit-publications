@@ -26,9 +26,12 @@ Route::get('/', function () {
 // Registration Routes
 Route::get('/register', function () {
     return view('register');
-})->name('register'); // This will show the registration form
+})->name('register'); 
 
+// This will show the registration form
+Route::get('/register', [AuthController::class, 'showCenters'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store'); // Post route for registration
+
 
 // Login Routes
 Route::get('/login', function () {
@@ -100,6 +103,7 @@ Route::put('/users/documentation/{id}', [DocumentationController::class, 'update
 
 //user Team
 Route::get('/users/team', [TeamController::class, 'usersTeam'])->name('users.team');
+Route::put('/users/{uid}/update-personal', [TeamController::class, 'updatePersonal'])->name('users.updatePersonal');
 
 
 //-----------------------------------------------------------------------------------------------------------------------------

@@ -56,20 +56,19 @@
 
 .card {
   border-radius: 25px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-table th {
-  font-size: 14px;
-}
-
+table th,
 table td {
   font-size: 14px;
+  border: 0.5px solid #fff;
 }
 
 .modal-header{
-
   border-radius: 28px 28px 0 0;
 }
+
 .modal-content {
   border-radius: 30px;
 }
@@ -237,11 +236,6 @@ table td {
 #file-table:hover,
 #link-table:hover {
   color: var(--hover-color);
-}
-
-table th,
-table td {
-    border: 0.5px solid #fff;
 }
 
 /* Add rounded corners to the outer table */

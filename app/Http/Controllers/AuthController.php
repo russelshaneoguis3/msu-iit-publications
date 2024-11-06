@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
+    public function showCenters()
+    {
+        // Fetch all centers
+        $centers = DB::table('center')->select('cid', 'c_name')->get();
+    
+        // Pass the centers data to the view
+        return view('register', compact('centers'));
+    }
+    
     public function register(Request $request)
     {
         // Validation rules
         $validator = Validator::make($request->all(), [
-            'centerlab' => 'required|string|max:100',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|regex:/@g.msuiit.edu.ph$/|unique:users,email|max:100',
@@ -26,34 +34,34 @@ class AuthController extends Controller
         ], [
             'email.unique' => 'This email address is already registered. Please use another My.IIT email.',
         ]);
-
+    
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+    
         // Hash the password
         $hashedPassword = Hash::make($request->password);
-
+    
         // Generate a token for email verification
         $token = Str::random(60);
-
+    
         // Insert user data into the database
         DB::table('users')->insert([
-            'centerlab' => $request->centerlab,
+            'centerlab' => $request->centerlab,  // Save `cid` here
             'email' => $request->email,
             'password' => $hashedPassword,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'token' => $token, // Store the token for email verification
-            'email_status' => 'no', // Set default email_status to 'no'
+            'token' => $token,  // Store the token for email verification
+            'email_status' => 'no',  // Set default email_status to 'no'
             'created_at' => now(),
         ]);
-
+    
         // Send the verification email
         Mail::to($request->email)->send(new VerifyEmail($token));
-
+    
         // Return with a success message
-        return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account. If you do not see it in your inbox, please check your spam folder. You can also contact the admin for manual verification');
+        return redirect()->route('login')->with('status', 'Registration successful! Please check your email to verify your account. If you do not see it in your inbox, please check your spam folder. You can also contact the admin for manual verification.');
     }
 
     public function verifyEmail($token)
