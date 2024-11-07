@@ -110,7 +110,7 @@
 <div class="modal fade" id="addDocumentationModal" tabindex="-1" aria-labelledby="addDocumentationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21;">
+            <div class="modal-header">
                 <h5 class="modal-title" id="addDocumentationModalLabel" style="color: #ffffff">Add New Document</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -218,7 +218,7 @@ Add Document
 <div class="modal fade" id="editDocumentationModal{{ $userdoc->d_id }}" tabindex="-1" aria-labelledby="editDocumentationModalLabel{{ $userdoc->d_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header" style="background: #a41d21">
+                <div class="modal-header">
                     <h5 class="modal-title" id="editDocumentationModalLabel{{ $userdoc->d_id }}" style="color: #ffffff">Edit Document</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

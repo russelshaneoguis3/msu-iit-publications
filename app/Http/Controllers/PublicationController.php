@@ -95,8 +95,27 @@ class PublicationController extends Controller
     public function addPublication(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'research_title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+
+            'research_type' => 'nullable|string|max:100',
+            'authors' => 'nullable|string',
+            'coauthors' => 'nullable|string',
+            'adviser' => 'nullable|string',
+            'date_duration' => 'nullable|string|max:50',
+            'date_started' => 'nullable|date',
+            'date_completed' => 'nullable|date',
+            'cost' => 'nullable|string|max:100',
+            'funding_source' => 'nullable|string|max:100',
+            'publication_date' => 'nullable|date',
+            'publication_title' => 'nullable|string',
+            'editors' => 'nullable|string',
+            'publisher' => 'nullable|string|max:150',
+            'vol_issue_no' => 'nullable|string|max:250',
+            'no_pages' => 'nullable|integer',
+            'publication_type' => 'nullable|string|max:100',
+            'issn_isbn' => 'nullable|string|max:150',
+
             'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
             'link' => 'nullable|url',
         ]);
@@ -107,8 +126,25 @@ class PublicationController extends Controller
         }
     
         $publication = new Publication();
-        $publication->title = $request->title;
+        $publication->research_title = $request->research_title;
         $publication->description = $request->description;
+        $publication->research_type = $request->research_type;
+        $publication->authors = $request->authors;
+        $publication->coauthors = $request->coauthors;
+        $publication->date_duration = $request->date_duration;
+        $publication->date_started = $request->date_started;
+        $publication->date_completed = $request->date_completed;
+        $publication->cost = $request->cost;
+        $publication->funding_source = $request->funding_source;
+        $publication->publication_date = $request->publication_date;
+        $publication->publication_title = $request->publication_title;
+        $publication->editors = $request->editors;
+        $publication->publisher = $request->publisher;
+        $publication->vol_issue_no = $request->vol_issue_no;
+        $publication->no_pages = $request->no_pages;
+        $publication->publication_type = $request->publication_type;
+        $publication->issn_isbn = $request->issn_isbn;
+
     
         // Retrieve user ID from the session and save it in p_user_id
         if (session()->has('user_id')) {
@@ -150,16 +186,51 @@ class PublicationController extends Controller
 public function updatePublication(Request $request, $id)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
+        'research_title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+
+        'research_type' => 'nullable|string|max:100',
+        'authors' => 'nullable|string',
+        'coauthors' => 'nullable|string',
+        'adviser' => 'nullable|string',
+        'date_duration' => 'nullable|string|max:50',
+        'date_started' => 'nullable|date',
+        'date_completed' => 'nullable|date',
+        'cost' => 'nullable|string|max:100',
+        'funding_source' => 'nullable|string|max:100',
+        'publication_date' => 'nullable|date',
+        'publication_title' => 'nullable|string',
+        'editors' => 'nullable|string',
+        'publisher' => 'nullable|string|max:150',
+        'vol_issue_no' => 'nullable|string|max:250',
+        'no_pages' => 'nullable|integer',
+        'publication_type' => 'nullable|string|max:100',
+        'issn_isbn' => 'nullable|string|max:150',
+
         'file_path' => 'nullable|file|mimes:pdf|max:2048',
         'link' => 'nullable|url',
     ]);
 
     // Find the publication by ID
     $publication = Publication::findOrFail($id);
-    $publication->title = $request->title;
+    $publication->research_title = $request->research_title;
     $publication->description = $request->description;
+    $publication->research_type = $request->research_type;
+    $publication->authors = $request->authors;
+    $publication->coauthors = $request->coauthors;
+    $publication->date_duration = $request->date_duration;
+    $publication->date_started = $request->date_started;
+    $publication->date_completed = $request->date_completed;
+    $publication->cost = $request->cost;
+    $publication->funding_source = $request->funding_source;
+    $publication->publication_date = $request->publication_date;
+    $publication->publication_title = $request->publication_title;
+    $publication->editors = $request->editors;
+    $publication->publisher = $request->publisher;
+    $publication->vol_issue_no = $request->vol_issue_no;
+    $publication->no_pages = $request->no_pages;
+    $publication->publication_type = $request->publication_type;
+    $publication->issn_isbn = $request->issn_isbn;
 
     // Handle file upload
     if ($request->hasFile('file_path')) {

@@ -15,8 +15,26 @@ class Publication extends Model
     // Define the fillable attributes to allow mass assignment
     protected $fillable = [
         'p_user_id', 
-        'title',
+        'research_title',
         'description',
+
+        'research_type',
+        'authors',
+        'coauthors',
+        'date_duration',
+        'date_started',
+        'date_completed',
+        'cost',
+        'funding_source',
+        'publication_date',
+        'publication_title',
+        'editors',
+        'publisher',
+        'vol_issue_no',
+        'no_pages',
+        'publication_type',
+        'issn_isbn',
+        
         'p_file_path',
         'p_link',
     ];

@@ -111,7 +111,7 @@
 <div class="modal fade" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21;">
+            <div class="modal-header">
                 <h5 class="modal-title" id="addResearchModalLabel" style="color: #ffffff">Add New Research</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -214,7 +214,7 @@ Add Research
 <div class="modal fade" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header" style="background: #a41d21">
+                <div class="modal-header">
                     <h5 class="modal-title" id="editResearchModalLabel{{ $userres->r_id }}" style="color: #ffffff">Edit Research</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

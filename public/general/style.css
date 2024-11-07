@@ -67,10 +67,39 @@ table td {
 
 .modal-header{
   border-radius: 28px 28px 0 0;
+  background: var(--focus-color);
 }
 
 .modal-content {
   border-radius: 30px;
+  overflow: hidden; 
+}
+
+/* Set a maximum height for the modal body and enable scrolling */
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex: 1 1 auto;
+  padding: 1rem;
+  max-height: 70vh; /* Adjust as needed to fit content within the modal */
+}
+
+/* Optional: Style the scrollbar for better appearance */
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: var(--focus-color);
+  border-radius: 4px;
+}
+
+.form-group span {
+  color: var(--focus-color);
 }
 
 @media (max-width: 576px) {
@@ -225,6 +254,10 @@ table td {
   background: var(--hover-color);
   border-color: var(--hover-color);
   color: var(--default-color);
+}
+
+#view-btn {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 #file-table,

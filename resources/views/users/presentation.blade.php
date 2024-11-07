@@ -110,7 +110,7 @@
 <div class="modal fade" id="addPresentationModal" tabindex="-1" aria-labelledby="addPresentationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21;">
+            <div class="modal-header">
                 <h5 class="modal-title" id="addPresentationModalLabel" style="color: #ffffff">Add New Presentation</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -213,7 +213,7 @@ Add Presentation
 <div class="modal fade" id="editPresentationModal{{ $userpresent->pr_id }}" tabindex="-1" aria-labelledby="editPresentationModalLabel{{ $userpresent->pr_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header" style="background: #a41d21">
+                <div class="modal-header">
                     <h5 class="modal-title" id="editPresentationModalLabel{{ $userpresent->pr_id }}" style="color: #ffffff">Edit Presentation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
