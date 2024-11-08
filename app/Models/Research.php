@@ -15,8 +15,17 @@ class Research extends Model
     // Define the fillable attributes to allow mass assignment
     protected $fillable = [
         'r_user_id', 
-        'title',
+        'research_title',
         'description',
+        'leaders',
+        'members',
+        'research_type',
+        'so_no',
+        'date_duration',
+        'date_started',
+        'date_completed',
+        'cost',
+        'funding_source',
         'r_file_path',
         'r_link',
     ];

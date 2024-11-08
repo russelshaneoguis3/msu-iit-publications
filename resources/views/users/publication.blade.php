@@ -135,6 +135,8 @@
                         <input type="text" class="form-control" id="research_type" name="research_type">
                     </div><br>
 
+                    <p><span style="color: #a41d21">Include your name if you are one of the Author or Co-author</span></p>
+
                     <!-- Authors Input -->
                     <div class="form-group">
                         <label for="authors">Author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
@@ -143,7 +145,7 @@
 
                     <!-- Coauthors Input -->
                     <div class="form-group">
-                        <label for="coauthors">Coauthor/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
+                        <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors">
                     </div><br>
 
@@ -295,6 +297,7 @@
                         No link available
                     @endif
                 </td>
+
                 <td>{{ date('Y-m-d', strtotime($userpub->created_at)) }} <br>
                     {{ date('h:i A', strtotime($userpub->created_at)) }}
                 </td>
@@ -302,6 +305,7 @@
                 <td>{{ date('Y-m-d', strtotime($userpub->updated_at)) }} <br>
                     {{ date('h:i A', strtotime($userpub->updated_at)) }}
                 </td>
+                
 				<td>
                 <!-- View Button -->
 					<button id="view-btn"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#viewPublicationModal{{ $userpub->p_id }}">
@@ -345,6 +349,8 @@
                         <input type="text" class="form-control" id="research_type" name="research_type" value="{{ $userpub->research_type }}">
                     </div><br>
 
+                    <p><span style="color: #a41d21">Include your name if you are one of the Author or Co-author</span></p>
+                    
                     <!-- Authors Input -->
                     <div class="form-group">
                         <label for="authors">Author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
@@ -353,7 +359,7 @@
 
                     <!-- Coauthors Input -->
                     <div class="form-group">
-                        <label for="coauthors">Coauthor/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
+                        <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors" value="{{ $userpub->coauthors }}">
                     </div><br>
 
@@ -462,7 +468,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background: #a41d21">
-                <h5 class="modal-title" id="viewPublicationModalLabel{{ $userpub->p_id }}" style="color: #ffffff">View Publication Details</h5>
+                <h5 class="modal-title" id="viewPublicationModalLabel{{ $userpub->p_id }}" style="color: #ffffff">Publication Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             @csrf

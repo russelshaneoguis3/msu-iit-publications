@@ -77,9 +77,19 @@ class ResearchController extends Controller
 public function addResearch(Request $request)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
+        'research_title' => 'required|string|max:255',
         'description' => 'required|string',
-        'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
+        'leaders' => 'nullable|string',
+        'members' => 'nullable|string',
+        'research_type' => 'nullable|string',
+        'so_no' => 'nullable|string|max:50',
+        'so_link' => 'nullable|url',
+        'date_duration' => 'nullable|string|max:50',
+        'date_started' => 'nullable|date',
+        'date_completed' => 'nullable|date',
+        'cost' => 'nullable|string|max:255',
+        'funding_source' => 'nullable|string|max:100',
+        'file_path' => 'nullable|file|mimes:pdf|max:2048',
         'link' => 'nullable|url',
     ]);
 
@@ -89,8 +99,24 @@ public function addResearch(Request $request)
     }
 
     $research = new Research();
-    $research->title = $request->title;
+    $research->research_title = $request->research_title;
     $research->description = $request->description;
+
+    $research->leaders = $request->leaders;
+    $research->members = $request->members;
+    $research->research_type  = $request->research_type;
+    $research->so_no = $request->so_no;
+
+    // Handle link input
+    if ($request->filled('so_link')) {
+            $research->so_link = $request->so_link;
+    }
+
+    $research->date_duration = $request->date_duration;
+    $research->date_started = $request->date_started;
+    $research->date_completed = $request->date_completed;
+    $research->cost = $request->cost;
+    $research->funding_source = $request->funding_source;
 
     // Retrieve user ID from the session and save it in r_user_id
     if (session()->has('user_id')) {
@@ -132,16 +158,36 @@ public function addResearch(Request $request)
 public function updateResearch(Request $request, $id)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
+        'research_title' => 'required|string|max:255',
         'description' => 'required|string',
+        'leaders' => 'nullable|string',
+        'members' => 'nullable|string',
+        'research_type' => 'nullable|string',
+        'so_no' => 'nullable|string|max:50',
+        'so_link' => 'nullable|url',
+        'date_duration' => 'nullable|string|max:50',
+        'date_started' => 'nullable|date',
+        'date_completed' => 'nullable|date',
+        'cost' => 'nullable|string|max:255',
+        'funding_source' => 'nullable|string|max:100',
         'file_path' => 'nullable|file|mimes:pdf|max:2048',
         'link' => 'nullable|url',
     ]);
 
     // Find the research by ID
     $research = Research::findOrFail($id);
-    $research->title = $request->title;
+    $research->research_title = $request->research_title;
     $research->description = $request->description;
+
+    $research->leaders = $request->leaders;
+    $research->members = $request->members;
+    $research->research_type  = $request->research_type;
+    $research->so_no = $request->so_no;
+    $research->date_duration = $request->date_duration;
+    $research->date_started = $request->date_started;
+    $research->date_completed = $request->date_completed;
+    $research->cost = $request->cost;
+    $research->funding_source = $request->funding_source;
 
     // Handle file upload
     if ($request->hasFile('file_path')) {
