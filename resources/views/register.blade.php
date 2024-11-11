@@ -89,7 +89,7 @@
    
         <label class="col-form-label">Center/Laboratory/Office/Department Assigned <br> <span style="color:#a41d21; font-size: 11px">(If your center is not in the list, leave it blank you can edit it later after the admin update the centers list)</span></label>
             <div class="col-sm">
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" id="centerlab" name="centerlab">
                 <option value="">- - No Center/Lab/Office/Department yet - -</option>
                 @foreach($centers as $center)
                 <option value="{{ $center->cid }}">{{ $center->c_name }}</option>

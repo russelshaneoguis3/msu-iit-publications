@@ -584,7 +584,7 @@ section,
 }
 
 .hero .info p {
-  color: color-mix(in srgb, var(--text-color), transparent 10%);
+  color: color-mix(in srgb, var(--black-color), transparent 10%);
   font-size: 18px;
 }
 

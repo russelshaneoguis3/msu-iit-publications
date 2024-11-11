@@ -199,8 +199,8 @@
                     </div><br>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer" style="background-color: #c3dbee;">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Research</button>
                 </div>
             </form>
@@ -212,7 +212,7 @@
 <div class="card">
 <div class="card-body">
         <h4 class="card-title">Researchers' Research </h4>
-        <p><i>This section allows researchers to upload their research files in PDF format only.</i></p>
+        <p><i>This section allows researchers to upload their research details and research proposal file in PDF format only.</i></p>
 
         <br>
         
@@ -369,8 +369,8 @@ Add Research
                     </div><br>
 
                     </div>
-                    <div class="modal-footer">
-                        <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer" style="background-color: #c3dbee;">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
                 </form>
@@ -387,36 +387,39 @@ Add Research
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             @csrf
-            <div class="modal-body">
+            <div class="modal-body" style="background-color: #e1eef8;">
                 <!-- Start of Publication Details -->
                 <div class="container">
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Title</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->research_title }}</div>
+
+                    <div class="row" style="border-bottom: 2px solid #fff;"></div>
+
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Title</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->research_title }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Description</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->description }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Description</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->description }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Project Leaders</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->leaders }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Project Leaders</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->leaders }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Project Members</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->members }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Project Members</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->members }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Project Type </div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->research_type  }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Project Type </div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->research_type  }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Special Order No.</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->so_no }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Special Order No.</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->so_no }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Special Order Link from IIT Docs</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Special Order Link from IIT Docs</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userres->r_link)
                                 <a href="{{ asset($userres->r_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userres->r_link) }}</a>
                             @else
@@ -424,29 +427,29 @@ Add Research
                             @endif
                         </div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Duration</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->date_duration }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Duration</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_duration }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Started</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->date_started }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Started</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_started }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Completed</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->date_completed }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Completed</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_completed }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Approved Cost-Direct Cost</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->cost }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Approved Cost-Direct Cost</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->cost }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Funding Source</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->funding_source }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Funding Source</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->funding_source }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Project Proposal File</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Project Proposal File</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">
                             @if ($userres->r_file_path)
                                 <a href="{{ asset($userres->r_file_path) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userres->r_file_path) }}</a>
                             @else
@@ -454,19 +457,19 @@ Add Research
                             @endif
                         </div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Upload</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->created_at }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Upload</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->created_at }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Last Update</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userres->updated_at }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Last Update</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->updated_at }}</div>
                     </div>
                 </div>
                 <!-- End of Publication Details -->
             </div>
-            <div class="modal-footer">
-                <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer" style="background-color: #c3dbee;">
+                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

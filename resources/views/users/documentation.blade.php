@@ -119,14 +119,14 @@
                 <div class="modal-body">
                     <!-- Title Input -->
                     <div class="form-group">
-                        <label for="title">Document Title</label>
+                        <label for="title">Document Title/Type</label>
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div><br>
 
                     <!-- Description Input -->
                     <div class="form-group">
                         <label for="description">Document Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="10" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="10"></textarea>
                     </div><br>
 
                     <!-- File Path Input -->
@@ -175,7 +175,7 @@ Add Document
                 <thead>
                   <tr>
 					<th>ID</th>
-					<th>Title</th>
+					<th>Title/Type</th>
                     <th>Description</th>
                     <th>File Path</th>
                     <th>Link Path</th>
@@ -228,14 +228,14 @@ Add Document
                     <div class="modal-body">
                         <!-- Title Input -->
                         <div class="form-group">
-                            <label for="title">Document Title</label>
+                            <label for="title">Document Title/Type</label>
                             <input type="text" class="form-control" id="title" name="title" value="{{ $userdoc->title }}" required>
                         </div><br>
 
                         <!-- Description Input -->
                         <div class="form-group">
                             <label for="description">Document Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="10" required>{{ $userdoc->description }}</textarea>
+                            <textarea class="form-control" id="description" name="description" rows="10">{{ $userdoc->description }}</textarea>
                         </div><br>
 
                         <!-- File Path Input -->

@@ -131,8 +131,13 @@
 
                     <!-- Research Type Input -->
                     <div class="form-group">
-                        <label for="research_type">Research Type <span>(Study/Project/Article, e.g Article)</span></label>
-                        <input type="text" class="form-control" id="research_type" name="research_type">
+                        <label for="research_type">Research Type <span>(Study/Project/Article)</span></label>
+                        <select class="form-control" id="research_type" name="research_type">
+                            <option value="">-- Select Here --</option>
+                            <option value="study">Study</option>
+                            <option value="project">Project</option>
+                            <option value="article">Article</option>
+                        </select>
                     </div><br>
 
                     <p><span style="color: #a41d21">Include your name if you are one of the Author or Co-author</span></p>
@@ -239,8 +244,8 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer" style="background: #bdd5d8;">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Publication</button>
                 </div>
             </form>
@@ -453,8 +458,8 @@
                             <input type="url" class="form-control" id="link" name="link" value="{{ $userpub->p_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer" style="background: #bdd5d8;">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
                 </form>
@@ -472,84 +477,87 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             @csrf
-            <div class="modal-body">
+            <div class="modal-body" style="background: #daeef1;">
                 <!-- Start of Publication Details -->
-                <div class="container">
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Title</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->research_title }}</div>
+                <div class="container container-publication">
+
+                    <div class="row" style="border-bottom: 2px solid #fff;"></div>
+                    
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Title</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->research_title }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Description</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->description }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Description</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->description }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Research Type</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->research_type }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Research Type</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->research_type }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Author/s</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->authors }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Author/s</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->authors }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Coauthor/s</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->coauthors }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Co-Author/s</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->coauthors }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Duration</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->date_duration }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Duration</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->date_duration }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Started</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->date_started }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Started</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->date_started }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Completed</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->date_completed }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Completed</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->date_completed }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Approved Cost</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->cost }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Approved Cost</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->cost }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Funding Source</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->funding_source }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Funding Source</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->funding_source }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date of Publication</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->publication_date }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date of Publication</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->publication_date }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Publication Title</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->publication_title }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Publication Title</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->publication_title }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Editor/s</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->editors }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Editor/s</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->editors }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Publisher</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->publisher }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Publisher</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->publisher }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Volume/Issue No.</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->vol_issue_no }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Volume/Issue No.</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->vol_issue_no }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Number of Pages</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->no_pages }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Number of Pages</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->no_pages }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Publication Type</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->publication_type }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Publication Type</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->publication_type }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">ISSN/ISBN</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->issn_isbn }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">ISSN/ISBN</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->issn_isbn }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Publication File</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Publication File</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">
                             @if ($userpub->p_file_path)
                                 <a href="{{ asset($userpub->p_file_path) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userpub->p_file_path) }}</a>
                             @else
@@ -557,9 +565,9 @@
                             @endif
                         </div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">DOI link/Website Link</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userpub->p_link)
                                 <a href="{{ asset($userpub->p_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userpub->p_link) }}</a>
                             @else
@@ -567,19 +575,19 @@
                             @endif
                         </div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Date Upload</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->created_at }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Date Upload</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->created_at }}</div>
                     </div>
-                    <div class="row" style="border-bottom: 2px solid #ddd;">
-                        <div class="col-3" style="font-size: 20px">Last Update</div>
-                        <div class="col-9" style="border-left: 2px solid #ddd;">{{ $userpub->updated_at }}</div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3" style="font-size: 20px">Last Update</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->updated_at }}</div>
                     </div>
                 </div>
                 <!-- End of Publication Details -->
             </div>
-            <div class="modal-footer">
-                <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer" style="background: #bdd5d8;">
+                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

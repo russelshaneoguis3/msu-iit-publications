@@ -77,8 +77,33 @@ class PresentationController extends Controller
 public function addPresentation(Request $request)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
+        'research_title' => 'required|string',
+        'research_project_title' => 'nullable|string',
+        'fund' => 'nullable|string',
+        'research_type' => 'nullable|string',
+        'so_no' => 'nullable|string',
+        'researcher_name' => 'nullable|string',
+        'presenter_name' => 'nullable|string',
+        'date_duration' => 'nullable|string',
+        'date_started' => 'nullable|date',
+        'date_completed' => 'nullable|date',
+        'cost' => 'nullable|string',
+        'funding_source' => 'nullable|string',
+        'presentation_type' => 'nullable|string',
+        'conference_type' => 'nullable|string',
+        'conference_title' => 'nullable|string',
+        'venue' => 'nullable|string',
+        'conference_date' => 'nullable|string',
+        'organizer' => 'nullable|string',
+        'article_title' => 'nullable|string',
+        'publication_date' => 'nullable|string',
+        'journal_title' => 'nullable|string',
+        'editor' => 'nullable|string',
+        'publisher' => 'nullable|string',
+        'vol_issue_no' => 'nullable|string',
+        'page_no' => 'nullable|string',
+        'publication_type' => 'nullable|string',
+        'indexing' => 'nullable|string',
         'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
         'link' => 'nullable|url',
     ]);
@@ -89,8 +114,34 @@ public function addPresentation(Request $request)
     }
 
     $presentation = new Presentation();
-    $presentation->title = $request->title;
-    $presentation->description = $request->description;
+    $presentation->research_title = $request->research_title;
+    $presentation->research_project_title = $request->research_project_title;
+
+    $presentation->fund = $request->fund;
+    $presentation->research_type = $request->research_type;
+    $presentation->so_no = $request->so_no;
+    $presentation->researcher_name = $request->researcher_name;
+    $presentation->presenter_name = $request->presenter_name;
+    $presentation->date_duration = $request->date_duration;
+    $presentation->date_started = $request->date_started;
+    $presentation->date_completed = $request->date_completed;
+    $presentation->cost = $request->cost;
+    $presentation->funding_source = $request->funding_source;
+    $presentation->presentation_type = $request->presentation_type;
+    $presentation->conference_type = $request->conference_type;
+    $presentation->conference_title = $request->conference_title;
+    $presentation->venue = $request->venue;
+    $presentation->conference_date = $request->conference_date;
+    $presentation->organizer = $request->organizer;
+    $presentation->article_title = $request->article_title;
+    $presentation->publication_date = $request->publication_date;
+    $presentation->journal_title = $request->journal_title;
+    $presentation->editor = $request->editor;
+    $presentation->publisher = $request->publisher;
+    $presentation->vol_issue_no = $request->vol_issue_no;
+    $presentation->page_no = $request->page_no;
+    $presentation->publication_type = $request->publication_type;
+    $presentation->indexing = $request->indexing;
 
     // Retrieve user ID from the session and save it in pr_user_id
     if (session()->has('user_id')) {
@@ -132,16 +183,67 @@ public function addPresentation(Request $request)
 public function updatePresentation(Request $request, $id)
 {
     $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'file_path' => 'nullable|file|mimes:pdf|max:2048',
+        'research_title' => 'required|string',
+        'research_project_title' => 'nullable|string',
+        'fund' => 'nullable|string',
+        'research_type' => 'nullable|string',
+        'so_no' => 'nullable|string',
+        'researcher_name' => 'nullable|string',
+        'presenter_name' => 'nullable|string',
+        'date_duration' => 'nullable|string',
+        'date_started' => 'nullable|date',
+        'date_completed' => 'nullable|date',
+        'cost' => 'nullable|string',
+        'funding_source' => 'nullable|string',
+        'presentation_type' => 'nullable|string',
+        'conference_type' => 'nullable|string',
+        'conference_title' => 'nullable|string',
+        'venue' => 'nullable|string',
+        'conference_date' => 'nullable|string',
+        'organizer' => 'nullable|string',
+        'article_title' => 'nullable|string',
+        'publication_date' => 'nullable|string',
+        'journal_title' => 'nullable|string',
+        'editor' => 'nullable|string',
+        'publisher' => 'nullable|string',
+        'vol_issue_no' => 'nullable|string',
+        'page_no' => 'nullable|string',
+        'publication_type' => 'nullable|string',
+        'indexing' => 'nullable|string',
+        'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
         'link' => 'nullable|url',
     ]);
 
     // Find the research by ID
     $presentation = Presentation::findOrFail($id);
-    $presentation->title = $request->title;
-    $presentation->description = $request->description;
+    $presentation->research_title = $request->research_title;
+    $presentation->research_project_title = $request->research_project_title;
+
+    $presentation->fund = $request->fund;
+    $presentation->research_type = $request->research_type;
+    $presentation->so_no = $request->so_no;
+    $presentation->researcher_name = $request->researcher_name;
+    $presentation->presenter_name = $request->presenter_name;
+    $presentation->date_duration = $request->date_duration;
+    $presentation->date_started = $request->date_started;
+    $presentation->date_completed = $request->date_completed;
+    $presentation->cost = $request->cost;
+    $presentation->funding_source = $request->funding_source;
+    $presentation->presentation_type = $request->presentation_type;
+    $presentation->conference_type = $request->conference_type;
+    $presentation->conference_title = $request->conference_title;
+    $presentation->venue = $request->venue;
+    $presentation->conference_date = $request->conference_date;
+    $presentation->organizer = $request->organizer;
+    $presentation->article_title = $request->article_title;
+    $presentation->publication_date = $request->publication_date;
+    $presentation->journal_title = $request->journal_title;
+    $presentation->editor = $request->editor;
+    $presentation->publisher = $request->publisher;
+    $presentation->vol_issue_no = $request->vol_issue_no;
+    $presentation->page_no = $request->page_no;
+    $presentation->publication_type = $request->publication_type;
+    $presentation->indexing = $request->indexing;
 
     // Handle file upload
     if ($request->hasFile('file_path')) {
