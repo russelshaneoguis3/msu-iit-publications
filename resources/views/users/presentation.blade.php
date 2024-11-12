@@ -573,12 +573,12 @@ Add Presentation
 <div class="modal fade" id="viewPresentationModal{{ $userpresent->pr_id }}" tabindex="-1" aria-labelledby="viewPresentationModalLabel{{ $userpresent->pr_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21">
-                <h5 class="modal-title" id="viewPresentationModalLabel{{ $userpresent->pr_id }}" style="color: #ffffff">Presentation Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             @csrf
             <div class="modal-body" style="background: #f8f7f6;">
+            <h4>Presentation Details
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
+            </h4>
+            <br>
                 <!-- Start of Presentation Details -->
                 <div class="container container-publication">
                     <div class="row" style="border-bottom: 2px solid #fff;"></div>
@@ -750,12 +750,13 @@ Add Presentation
                     </div>
 
                 </div>
+
+                <br>
+                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="float:right">Close</button>
+                <br><br>
+
             </div>
             <!-- End of Presentation Details -->
-
-            <div class="modal-footer" style="background: #e4ded6;">
-                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            </div>
             
         </div>
     </div>

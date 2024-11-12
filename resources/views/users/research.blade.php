@@ -382,12 +382,12 @@ Add Research
 <div class="modal fade" id="viewResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="viewResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21">
-                <h5 class="modal-title" id="viewResearchModalLabel{{ $userres->r_id }}" style="color: #ffffff">Research Project Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             @csrf
             <div class="modal-body" style="background-color: #e1eef8;">
+            <h4>Research Details
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
+            </h4>
+            <br>
                 <!-- Start of Publication Details -->
                 <div class="container">
 
@@ -466,10 +466,10 @@ Add Research
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->updated_at }}</div>
                     </div>
                 </div>
+                <br>
                 <!-- End of Publication Details -->
-            </div>
-            <div class="modal-footer" style="background-color: #c3dbee;">
-                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="float:right">Close</button>
+                <br><br>
             </div>
         </div>
     </div>

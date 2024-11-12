@@ -472,12 +472,12 @@
 <div class="modal fade" id="viewPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header" style="background: #a41d21">
-                <h5 class="modal-title" id="viewPublicationModalLabel{{ $userpub->p_id }}" style="color: #ffffff">Publication Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             @csrf
             <div class="modal-body" style="background: #daeef1;">
+            <h4>Publication Details
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
+            </h4>
+            <br>
                 <!-- Start of Publication Details -->
                 <div class="container container-publication">
 
@@ -585,9 +585,9 @@
                     </div>
                 </div>
                 <!-- End of Publication Details -->
-            </div>
-            <div class="modal-footer" style="background: #bdd5d8;">
-                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                 <br>
+                <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="float:right">Close</button>
+                <br><br>
             </div>
         </div>
     </div>

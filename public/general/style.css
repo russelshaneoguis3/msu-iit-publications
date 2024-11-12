@@ -153,7 +153,6 @@ table td {
   justify-content: center;
   align-items: center;
   color: white;
-  text-shadow: 1px 1px 2px black;
   background-size: cover; /* Ensure the background covers the entire area */
   transition: background-image 1s ease; /* Smooth transition for background change */
   background-position: center;
@@ -161,11 +160,14 @@ table td {
   position: relative;
 }
 
-.dashboard-user h1 {
+/* Button responsiveness for smaller screens */
+@media (max-width: 768px) {
 
-  color: white;
-
+  .dashboard-user {
+    height: 150vh;
+  }
 }
+
 
 
 /* Translucent Overlay */
@@ -187,6 +189,90 @@ table td {
   position: relative;
   z-index: 1;
 }  */
+
+/* This is the container that holds both elements side by side */
+.greeting-container {
+      display: flex; /* Makes the child elements line up horizontally */
+      align-items: center; /* Vertically center the elements */
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-top: -20px;  /* Extend background upwards */
+      margin-left: -30px; /* Extend background to the left */
+      margin-right: -30px; /* Extend background to the right */
+      padding: 10px 20px; /* Optional, adds padding inside the container */
+      text-shadow: 1px 1px 1px black;
+}
+
+.greeting-container  h4{
+  margin-top: 12px;
+  color:var(--default-color);
+}
+
+/* Styling for the greeting */
+.greeting {
+      font-size: 1.5em;
+      margin-right: 10px; /* Space between the greeting and the name */
+}
+
+#quote,
+#author {
+  margin-left: -10px;
+  text-shadow: 2px 1px 1px black;
+}
+
+#dashboard-cards {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: #3170AB;
+  text-decoration: none;
+}
+
+
+/* Button responsiveness for smaller screens */
+@media (max-width: 768px) {
+
+.greeting-container h4 {
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+
+/* Styling for the greeting */
+.greeting {
+    font-size: 1em;
+    margin-right: 10px; /* Space between the greeting and the name */
+}
+
+/* Increase tooltip width for smaller screens */
+.tooltip-inner {
+      white-space: pre-line;  /* Allow content to wrap into multiple lines */
+      word-wrap: break-word;
+      margin-left: 60px;  /* Allow long words to break and wrap */
+  }
+
+#dashboard-cards .card-title{
+    font-size: 14px;
+}
+
+.announcements strong,
+.announcements .activity-label,
+.announcements p{
+    font-size: 14px
+  }
+
+.actlogs .activity-label,
+.actlogs p {
+  font-size: 14px
+}
+
+}
+
+/* Increase tooltip width */
+.tooltip-inner {
+      max-width: 500px;  /* Adjust this value as needed */
+      white-space: pre-line;  /* Allow content to wrap into multiple lines */
+      word-wrap: break-word;  /* Allow long words to break and wrap */
+  }
 
 /* ------------------------------------------------------------------------------------------------------ */
 

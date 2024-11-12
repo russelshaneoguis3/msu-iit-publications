@@ -141,8 +141,8 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer" style="background: #c3dfcc">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Document</button>
                 </div>
             </form>
@@ -179,6 +179,7 @@ Add Document
                     <th>Description</th>
                     <th>File Path</th>
                     <th>Link Path</th>
+                    <th>Date Upload</th>
                     <th>Last Update</th>  
 					<th>Action</th>
                   </tr>
@@ -203,6 +204,10 @@ Add Document
                         No link available
                     @endif
                 </td>
+                <td>{{ date('Y-m-d', strtotime($userdoc->created_at)) }} <br>
+                    {{ date('h:i A', strtotime($userdoc->created_at)) }}
+                </td>
+
                 <td>{{ date('Y-m-d', strtotime($userdoc->updated_at)) }} <br>
                     {{ date('h:i A', strtotime($userdoc->updated_at)) }}
                 </td>
@@ -250,8 +255,8 @@ Add Document
                             <input type="url" class="form-control" id="link" name="link" value="{{ $userdoc->d_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="updatebtn-close" type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer" style="background: #c3dfcc">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
                 </form>
