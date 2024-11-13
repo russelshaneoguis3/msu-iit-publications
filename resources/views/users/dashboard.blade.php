@@ -192,6 +192,8 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
+<hr id="announcements">
+
 		<div class="card announcements" id="dashboard-cards">
 			<div class="card-body">
 				<h5 class="card-title"><i class='bx bxs-bell-ring'></i> Announcements</h5>
@@ -226,7 +228,7 @@
 
 			<!-- End annoucennts  -->
 				
-		  <hr style="color: rgba(255, 255, 255, 0.1);">
+<hr style=" opacity: 0; ">
 		  
 		  <!-- Activity Logs report -->
 		<div class="card actlogs" id="dashboard-cards">
@@ -235,10 +237,22 @@
 						<div class="activity">
 							@foreach ($activityLogs as $log)
 								<div class="activity-item d-flex">
-									<div class="activity-label" style="color: #a41d21">{{ \Carbon\Carbon::parse($log->log_time)->diffForHumans() }} </div>
+									<div class="activity-label" style="color: #a41d21">{{ $log->log_time_calc }} </div>
 									<i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
 									<div class="activity-content">
-									<p style="color: #000000;">&nbsp {{ $log->activity }} | Document No. {{ $log->affected_doc }} | Table: {{ $log->table_name }}</p> 
+									<p style="color: #000000;">&nbsp {{ $log->activity == 'UPDATE' ? 'Updated a document' 
+																	: ($log->activity == 'INSERT' ? 'Inserted a Document' 
+																	: 'Deleted a document') }} 
+
+																	(ID. {{ $log->affected_doc }}) 
+										
+																	{{ $log->activity == 'UPDATE' ? 'from' 
+																	: ($log->activity == 'INSERT' ? 'into the' 
+																	: 'from') }} 
+																	
+																	{{ $log->table_name }}
+									</p> 
+
 								</div>
 							</div>
 						@endforeach
@@ -246,7 +260,7 @@
 				</div>
 			</div>
 
-			<!-- end activity los -->
+			<!-- end activity logs -->
 
 
         </div><!-- End Right side columns -->

@@ -60,6 +60,11 @@ Route::get('/admin/research', [ResearchController::class, 'adminResearch'])->nam
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
+Route::post('/admin/publication/add', [PublicationController::class, 'addPublication'])->name('admin.addPublication');
+Route::put('/admin/publication/{id}', [PublicationController::class, 'updatePublication'])->name('admin.updatePublication');
+// Route to view a user's publications as an admin
+Route::get('/admin/publication/{id}', [PublicationController::class, 'viewUserPublications'])->name('admin.viewPublications');
+
 
 //Admin presentation
 Route::get('/admin/presentation', [PresentationController::class, 'adminPresentation'])->name('admin.presentation');

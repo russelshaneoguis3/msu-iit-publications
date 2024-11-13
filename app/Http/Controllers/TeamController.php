@@ -145,6 +145,7 @@ public function updatePersonal(Request $request, $uid)
 {
     // Validate the incoming request
     $request->validate([
+        'email' => 'required|string|max:255',
         'first_name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
         'centerlab' => 'required|exists:center,cid',
@@ -154,6 +155,7 @@ public function updatePersonal(Request $request, $uid)
     $user = Team::findOrFail($uid);
 
     // Update the user details
+    $user->email = $request->input('email');
     $user->first_name = $request->input('first_name');
     $user->last_name = $request->input('last_name');
     $user->centerlab = $request->input('centerlab');

@@ -78,7 +78,7 @@
 <br>
 
 <div class="col-lg-5">
-  <div class="card">
+  <div class="card" id="personal-info-team">
     <div class="card-body">
       <h5 class="card-title">Personal Information</h5>
     <hr>
@@ -139,6 +139,13 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="first_name">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                    </div><br>
+
                     <!-- First Name Input -->
                     <div class="form-group">
                         <label for="first_name">First Name</label>
@@ -165,8 +172,8 @@
                         </select>
                     </div><br>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="updatebtn-close" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer" style="background-color: #ecdedc">
+                    <button type="button" id="updatebtn-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Changes</button>
                 </div>
             </form>

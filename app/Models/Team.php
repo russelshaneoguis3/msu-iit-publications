@@ -15,6 +15,7 @@ class Team extends Model
     // Define the fillable attributes to allow mass assignment
     protected $fillable = [
         'uid', 
+        'email',
         'first_name',
         'last_name',
         'centerlab',

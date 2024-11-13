@@ -164,7 +164,8 @@ table td {
 @media (max-width: 768px) {
 
   .dashboard-user {
-    height: 150vh;
+    height: 165vh;
+    overflow: hidden; 
   }
 }
 
@@ -254,13 +255,16 @@ table td {
     font-size: 14px;
 }
 
-.announcements strong,
 .announcements .activity-label,
-.announcements p{
+.actlogs .activity-label {
+  font-size: 10px
+}
+
+.announcements strong,
+.announcements p {
     font-size: 14px
   }
 
-.actlogs .activity-label,
 .actlogs p {
   font-size: 14px
 }
@@ -273,6 +277,21 @@ table td {
       white-space: pre-line;  /* Allow content to wrap into multiple lines */
       word-wrap: break-word;  /* Allow long words to break and wrap */
   }
+
+#announcements {
+  display: none;
+}
+
+/* Button responsiveness for smaller screens */
+@media (max-width: 768px) {
+
+  #announcements  {
+    display: block;
+    opacity: 0;  /* Start with no opacity */
+    transition: opacity 0.3s ease;  /* Optional smooth transition */
+  }
+  
+}  
 
 /* ------------------------------------------------------------------------------------------------------ */
 
@@ -374,6 +393,16 @@ table tr:last-child td:last-child {
   border-bottom-right-radius: 20px;
 }
 
+table.table-team thead th {
+  background-color: #eececb; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.table-team tbody td {
+  background-color: #ecdedc; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
 
 table.table-documentation thead th {
   background-color: #95bea2; /* Replace with your desired color */
@@ -416,6 +445,11 @@ table.table-research tbody td {
 }
 
 /* Team Users design--------------------------------------------------------------------------------------------------------*/
+
+#personal-info-team {
+background: #ecdedc;
+}
+
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 25px;
@@ -501,6 +535,9 @@ font-size: 20px;
       text-align: center;
     }
     
+    .team-card-personal {
+      max-height: 800px;
+    }
 
 }
 
@@ -526,8 +563,12 @@ font-size: 20px;
       font-size: 10px;
       text-align: center;
     }
-    
+  
+    .team-card-personal {
+      max-height: 1000px;
+    }
 
+    
 }
 
 

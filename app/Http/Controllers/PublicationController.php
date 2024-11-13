@@ -11,13 +11,15 @@ use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Publication;
+use App\Http\Controllers\Team;
 
 
 class PublicationController extends Controller
 {
 
 
-//Admin 
+//Admin view -----------------------------------------------------------------------------------------------------------------------------
+
     public function adminPublication()
     {
         // Check if the user is logged in
@@ -47,22 +49,46 @@ class PublicationController extends Controller
         ->get();
 
         // Fetch admin and their publication count, excluding the user
-        $adminPublications = DB::table('users')
-        ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
-        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
-        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(publications.p_id) as publication_count'))
-        ->where('user_roles.u_role_id', '!=', 2)  // Exclude users role
-        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        $adminPublications = DB::table('publications')
+        ->where('p_user_id', '=', 1)
+        ->orderBy('p_id', 'desc') // Order by p_id in descending order
         ->get();
 
         // Pass the user_id to the admin dashboard view
         return view('admin.publication', compact('user', 'usersPublications', 'adminPublications'));
     }
+
+
+public function viewUserPublications($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all publications of the selected user
+        $publications = Publication::where('p_user_id', $id)->get();
+    
+        // Return view with user and publications data
+        return view('admin.viewPublication', compact('user', 'userinfo', 'publications'));
+    }
     
 
 //---------------------------------------------------------------------------------------------------------------------
 
-//Users
+
+//Users views ---------------------------------------------------------------------------------------------------------------
     public function usersPublication()
     {
         // Check if the user is logged in
@@ -91,7 +117,9 @@ class PublicationController extends Controller
         return view('users.publication', compact('user', 'usersPublications'));
     }
 
-//Users Add Function
+
+// Functions ---------------------------------------------------------------------------------------------------------------------
+
     public function addPublication(Request $request)
     {
         $request->validate([

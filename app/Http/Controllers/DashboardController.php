@@ -63,7 +63,7 @@ class DashboardController extends Controller
 
         // Fetch the latest 3 announcements
         $announcements = DB::table('announcements')
-        ->orderBy('created_at', 'desc')
+        ->orderBy('a_id', 'desc')
         ->take(3)
         ->get()
         ->map(function ($announcement) {
@@ -79,8 +79,12 @@ class DashboardController extends Controller
         ->select('doc_logs.*', 'users.first_name', 'users.last_name') // Select relevant columns
         ->orderBy('log_time', 'desc') // Optional: sort by log_time
         ->where('doc_logs.l_user_id', '=', $userId)
-        ->take(3) // Optional: limit the results
-        ->get();
+        ->take(5) // Optional: limit the results
+        ->get()
+        ->map(function ($activityLog) {
+            $activityLog->log_time_calc = Carbon::parse($activityLog->log_time)->diffForHumans();
+            return $activityLog;
+        });
 
         // Pass the user and announcements to the view
         return view('users.dashboard', compact('user', 'announcements', 'activityLogs'));
