@@ -60,21 +60,31 @@ Route::get('/admin/research', [ResearchController::class, 'adminResearch'])->nam
 Route::post('/admin/research/add', [ResearchController::class, 'addResearch'])->name('admin.addResearch');
 Route::put('/admin/research/{id}', [ResearchController::class, 'updateResearch'])->name('admin.updateResearch');
 // Route to view a user's research as an admin
-Route::get('/admin/research/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
+Route::get('/admin/viewResearch/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
 Route::post('/admin/publication/add', [PublicationController::class, 'addPublication'])->name('admin.addPublication');
 Route::put('/admin/publication/{id}', [PublicationController::class, 'updatePublication'])->name('admin.updatePublication');
 // Route to view a user's publications as an admin
-Route::get('/admin/publication/{id}', [PublicationController::class, 'viewUserPublications'])->name('admin.viewPublications');
+Route::get('/admin/viewPublication/{id}', [PublicationController::class, 'viewUserPublication'])->name('admin.viewPublication');
 
 
 //Admin presentation
 Route::get('/admin/presentation', [PresentationController::class, 'adminPresentation'])->name('admin.presentation');
+Route::post('/admin/presentation/add', [PresentationController::class, 'addPresentation'])->name('admin.addPresentation');
+Route::put('/admin/presentation/{id}', [PresentationController::class, 'updatePresentation'])->name('admin.updatePresentation');
+// Route to view a user's presentation as an admin
+Route::get('/admin/presentation/{id}', [PresentationController::class, 'viewUserPresentation'])->name('admin.viewPresentation');
+
 
 //Admin documentation
 Route::get('/admin/documentation', [DocumentationController::class, 'adminDocumentation'])->name('admin.documentation');
+Route::post('/admin/documentation/add', [DocumentationController::class, 'addDocumentation'])->name('admin.addDocumentation');
+Route::put('/admin/documentation/{id}', [DocumentationController::class, 'updateDocumentation'])->name('admin.updateDocumentation');
+// Route to view a user's Documentation as an admin
+Route::get('/admin/documentation/{id}', [DocumentationController::class, 'viewUserDocumentation'])->name('admin.viewDocumentation');
+
 
 //Admin Team
 Route::get('/admin/team', [TeamController::class, 'adminTeam'])->name('admin.team');

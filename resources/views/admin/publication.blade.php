@@ -526,7 +526,7 @@
         <div class="modal-content">
             @csrf
             <div class="modal-body" style="background: #daeef1;">
-            <h4>Admin Publication Details
+            <h4>Admin's Publication Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
             <br>
@@ -682,7 +682,7 @@
                 <td>{{ $userpub->email }}</td>
 				<td style="color: #a41d21; font-size: 16px;">Uploads: <b><i>{{ $userpub->publication_count }}</i></b></td>
 				<td>
-				<a id="view-btn" class="btn btn-outline-dark" href="{{ route('admin.viewPublications', ['id' => $userpub->uid]) }}">
+				<a id="view-btn" class="btn btn-outline-dark" href="{{ route('admin.viewPublication', ['id' => $userpub->uid]) }}">
 				View
 				</a>
 				</td>

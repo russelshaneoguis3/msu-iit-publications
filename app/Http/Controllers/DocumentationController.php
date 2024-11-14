@@ -35,8 +35,24 @@ class DocumentationController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
+        // Fetch users and their documentation count, excluding the admin and where email_status is 'yes'
+        $usersDocumentation = DB::table('users')
+        ->leftJoin('documentation', 'users.uid', '=', 'documentation.d_user_id')
+        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(documentation.d_id) as documentation_count'))
+        ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->get();
+
+        // Fetch admin and their publication count, excluding the user
+        $adminDocumentation = DB::table('documentation')
+        ->where('d_user_id', '=', 1)
+        ->orderBy('d_id', 'desc') // Order by p_id in descending order
+        ->get();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.documentation', compact('user'));
+        return view('admin.documentation', compact('user', 'usersDocumentation', 'adminDocumentation'));
     }
     
 

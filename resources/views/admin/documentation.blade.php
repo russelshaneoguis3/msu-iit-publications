@@ -8,26 +8,20 @@
 	<meta name="keywords" content="">
 
 	 <!-- Favicons -->
-	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
+	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
   	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
+	<!-- bootstrap css -->
+	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Boxicons -->
-	<link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 
-		 <!-- bootstrap css -->
-		 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Include the DataTables library -->
+    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
 
-		<!-- Include jQuery -->
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-		<!-- Include the DataTables library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 integration library -->
-		<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
-		<!-- Include the DataTables Bootstrap 4 stylesheet -->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+	<!-- Include SweetAlert -->
+	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../side-nav/side-nav.css">
@@ -81,10 +75,11 @@
 				</a>
 			</li>
 		</ul>
+
 	</section>
 	<!-- SIDEBAR -->
 
-@if(isset($user))
+
 
 	<!-- CONTENT -->
 	<section id="content">
@@ -92,8 +87,8 @@
 		<nav>
 			<i class='bx bx-menu' ></i>
 
-	<!-- Clickable object -->
-	<div class="profile-dropdown" onclick="toggleDropdown()">
+     <!-- Clickable object -->
+		<div class="profile-dropdown" onclick="toggleDropdown()">
         {{ $user->first_name }} <i class='bx bxs-chevron-down' ></i>
         <!-- Dropdown options -->
         <div class="profile-dropdown-content">
@@ -107,84 +102,240 @@
 		</nav>
 		<!-- NAVBAR -->
 
+@if(isset($user))
 
-		<main id="main">
+<main id ="main">
 
-		<h1>Admin Documentation</h1>
+<!-- Modal for Adding Documentation -->
+<div class="modal fade" id="addDocumentationModal" tabindex="-1" aria-labelledby="addDocumentationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDocumentationModalLabel" style="color: #ffffff">Add New Document</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('users.addDocumentation') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                @csrf
+                <div class="modal-body">
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="title">Document Title/Type</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div><br>
 
-		@else
-			<p>No user is logged in.</p>
-		@endif
+                    <!-- Description Input -->
+                    <div class="form-group">
+                        <label for="description">Document Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                    </div><br>
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
-		br>
-		<br>
-		<br>
-		<br>
+                    <!-- File Path Input -->
+					<div class="form-group">
+						<label for="file_path">Upload Document File (optional) .pdf, .docx, .jpeg, .jpg, .png, .xlsx, and .xls only</label>
+						<input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf,.docx,.jpeg,.jpg,.png,.xlsx,.xls">
+					</div><br>
 
-		<br>
-		<br>
-		<br>
-		<br><br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <!-- Link Input -->
+                    <div class="form-group">
+                        <label for="link">Document Link (optional)</label>
+                        <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
+                    </div>
+                </div>
+                <div class="modal-footer" style="background: #c3dfcc">
+                    <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Document</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+		<!-- DataTable for users -->
+	<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Admin's Documentation </h4>
+		<p><i>This section allows users to securely upload and store a variety of document types such as certificates, seminar materials, and other relevant files. The system supports the following file formats: 
+            <ul>
+                <li><b>PDF (.pdf):</b> For official documents, reports, and certificates.</li>
+                <li><b>Word Documents (.docx): </b>For text-based documents, such as reports or seminar write-ups.</li>
+                <li><b>Images (.jpeg, .jpg, .png): </b>For certificates, visual content, or scanned documents.</li>
+                <li><b>Excel Files (.xls, .xlsx):</b> For data, spreadsheets, or detailed reports.</li>
+            </ul>
+        </i></p> <br>
+
+<!-- Add Documentation Button -->
+<button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addDocumentationModal">
+Add Document
+</button>
+
+	<br><br>
+
+		<div class="table-responsive-md">
+            <table class="table table-documentation">
+                <thead>
+                  <tr>
+					<th>ID</th>
+					<th>Title/Type</th>
+                    <th>Description</th>
+                    <th>File Path</th>
+                    <th>Link Path</th>
+                    <th>Date Upload</th>
+                    <th>Last Update</th>  
+					<th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+				@foreach($adminDocumentation as $admindoc)
+                <tr>
+				<td>{{ $admindoc->d_id }}</td>
+                <td>{{ $admindoc->title }}</td>
+                <td>{{ $admindoc->description }}</td>
+                <td>
+                    @if ($admindoc->d_file_path)
+					<a id="file-table" href="{{ asset($admindoc->d_file_path) }}" target="_blank">{{ basename($admindoc->d_file_path) }}</a>
+                    @else
+                        No file available
+                    @endif
+                </td>
+                <td>
+                    @if ($admindoc->d_link)
+                        <a id="link-table" href="{{ $admindoc->d_link }}" target="_blank">{{ $admindoc->d_link }}</a>
+                    @else
+                        No link available
+                    @endif
+                </td>
+                <td>{{ date('Y-m-d', strtotime($admindoc->created_at)) }} <br>
+                    {{ date('h:i A', strtotime($admindoc->created_at)) }}
+                </td>
+
+                <td>{{ date('Y-m-d', strtotime($admindoc->updated_at)) }} <br>
+                    {{ date('h:i A', strtotime($admindoc->updated_at)) }}
+                </td>
+				<td>
+				<!-- Edit Button -->
+					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editDocumentationModal{{ $admindoc->d_id }}">
+						Edit
+					</button>
+				</td>
+                </tr>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editDocumentationModal{{ $admindoc->d_id }}" tabindex="-1" aria-labelledby="editDocumentationModalLabel{{ $admindoc->d_id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editDocumentationModalLabel{{ $admindoc->d_id }}" style="color: #ffffff">Edit Document</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('users.updateDocumentation', $admindoc->d_id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEditForm()">
+                    @csrf
+                    @method('PUT') <!-- Specify that this is a PUT request -->
+                    <div class="modal-body">
+                        <!-- Title Input -->
+                        <div class="form-group">
+                            <label for="title">Document Title/Type</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $admindoc->title }}" required>
+                        </div><br>
+
+                        <!-- Description Input -->
+                        <div class="form-group">
+                            <label for="description">Document Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="10">{{ $admindoc->description }}</textarea>
+                        </div><br>
+
+                        <!-- File Path Input -->
+                        <div class="form-group">
+                            <label for="file_path">Upload New Document File (optional), if no update you can skip this ( .pdf, .docx, .jpeg, .jpg, .png, .xlsx, and .xls only)</label>
+                            <input type="file" class="form-control" id="file_path" name="file_path" accept=".pdf,.docx,.jpeg,.jpg,.png,.xlsx,.xls">
+                        </div><br>
+
+                        <!-- Link Input -->
+                        <div class="form-group">
+                            <label for="link">Document Link (optional)</label>
+                            <input type="url" class="form-control" id="link" name="link" value="{{ $admindoc->d_link }}" placeholder="http://example.com">
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #c3dfcc">
+                        <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+                @endforeach
+                </tbody>
+            </table>
+		</div>
+		</div>
+	</div>
+	
+<script>
+    function validateForm() {
+        const filePath = document.getElementById('file_path').value;
+        const link = document.getElementById('link').value;
+
+        // At least one of the two fields should be filled
+        if (!filePath && !link) {
+            alert("Please provide either a PDF file or a link.");
+            return false; // Prevent form submission
+        }
+        return true; // Proceed with the form submission
+    }
+</script>
 
 
+@else
+<p>No user is logged in.</p>
+@endif
 
-
-
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-
-
-
-
-		<br>
-		<br>
-
-
-
-
-		<br>
-		<br>
-
-
-
-		ad
-		</main>
-
-		</section>
+</main>
  
-</body>
+</section>
 
+<!-- side-nav JS -->
 <script src="../side-nav/script.js"></script>
 
+<!-- Include jQuery -->
+<script src="../assets/vendor/jquery/jquery.js"></script>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="../assets/vendor/popperjs/popperjs.js"></script>
+<script src="../assets/vendor/popperjs/popperjsbootstrap.js"></script>
+
+<!-- data tables js -->
+<script src="../assets/vendor/datatables/jquery.datatables.js"></script>
+<script src="../assets/vendor/datatables/datatables.bootstrap4.js"></script>
+
+<!-- sweet alert JS -->
+<script src="../assets/vendor/sweetalert/sweetalert.js"></script>
+
+<script>
+        $(document).ready(function() {
+            $('.table-documentation').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
+			"order": [[0, 'desc']]
+            });
+        });
+</script>
+
+<!-- SweetAlert for success messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Okay',
+        customClass: {
+            confirmButton: 'btn-outline-custom' 
+        },
+        buttonsStyling: false // Disable default button styling
+    });
+</script>
+@endif
+
+</body>
 </html>

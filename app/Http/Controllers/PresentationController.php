@@ -16,7 +16,7 @@ class PresentationController extends Controller
 {
 
 
-//Admin 
+//Admin view -------------------------------------------------------------------------------------------------------------------------------------------
     public function adminPresentation()
     {
         // Check if the user is logged in
@@ -35,14 +35,56 @@ class PresentationController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
+        // Fetch users and their presentation count, excluding the admin and where email_status is 'yes'
+        $usersPresentation = DB::table('users')
+        ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
+        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(presentation.pr_id) as presentation_count'))
+        ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->get();
+
+        // Fetch admin and their presentation count, excluding the user
+        $adminPresentation = DB::table('presentation')
+        ->where('pr_user_id', '=', 1)
+        ->orderBy('pr_id', 'desc') // Order by pr_id in descending order
+        ->get();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.presentation', compact('user'));
+        return view('admin.presentation', compact('user', 'usersPresentation', 'adminPresentation'));
+    }
+
+    public function viewUserPresentation($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all publications of the selected user
+        $presentations = Presentation::where('pr_user_id', $id)->get();
+    
+        // Return view with user and publications data
+        return view('admin.viewPresentation', compact('user', 'userinfo', 'presentations'));
     }
     
-//------------------------------------------------------------------------------------------------------------
+    
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 
-//User
+//User -------------------------------------------------------------------------------------------------------------------------------
     public function usersPresentation()
     {
         // Check if the user is logged in
@@ -73,7 +115,7 @@ class PresentationController extends Controller
     }
 
     
-//Users Add Function
+// Functions ----------------------------------------------------------------------------------------------------------------------------
 public function addPresentation(Request $request)
 {
     $request->validate([

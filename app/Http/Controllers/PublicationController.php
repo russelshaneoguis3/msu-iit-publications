@@ -59,7 +59,7 @@ class PublicationController extends Controller
     }
 
 
-public function viewUserPublications($id)
+public function viewUserPublication($id)
 
     {
         // Check if the user is logged in
