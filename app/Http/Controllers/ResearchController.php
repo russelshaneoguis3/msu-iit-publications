@@ -35,15 +35,58 @@ class ResearchController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
+        
+        // Fetch users and their publication count, excluding the admin and where email_status is 'yes'
+        $usersResearch = DB::table('users')
+        ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
+        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(research.r_id) as research_count'))
+        ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->get();
+
+        // Fetch admin and their publication count, excluding the user
+        $adminResearch = DB::table('research')
+        ->where('r_user_id', '=', 1)
+        ->orderBy('r_id', 'desc') // Order by p_id in descending order
+        ->get();
+
 
         // Pass the user_id to the admin dashboard view
-        return view('admin.research', compact('user'));
+        return view('admin.research', compact('user', 'usersResearch', 'adminResearch'));
+    }
+    
+
+    public function viewUserResearch($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all publications of the selected user
+        $researches = Research::where('r_user_id', $id)->get();
+    
+        // Return view with user and publications data
+        return view('admin.viewResearch', compact('user', 'userinfo', 'researches'));
     }
     
 
 //----------------------------------------------------------------------------------------------------------
 
-//Users
+// Users View -----------------------------------------------------------------------------------------------
     public function usersResearch()
     {
         // Check if the user is logged in
@@ -73,12 +116,16 @@ class ResearchController extends Controller
         return view('users.research', compact('user', 'usersResearch'));
     }
 
-//Users Add Function
+//----------------------------------------------------------------------------------------------------------
+
+
+// Function ------------------------------------------------------------------------------------------------
+
 public function addResearch(Request $request)
 {
     $request->validate([
         'research_title' => 'required|string|max:255',
-        'description' => 'required|string',
+        'description' => 'nullable|string',
         'leaders' => 'nullable|string',
         'members' => 'nullable|string',
         'research_type' => 'nullable|string',
@@ -159,7 +206,7 @@ public function updateResearch(Request $request, $id)
 {
     $request->validate([
         'research_title' => 'required|string|max:255',
-        'description' => 'required|string',
+        'description' => 'nullable|string',
         'leaders' => 'nullable|string',
         'members' => 'nullable|string',
         'research_type' => 'nullable|string',

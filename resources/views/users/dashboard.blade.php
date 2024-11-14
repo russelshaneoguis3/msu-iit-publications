@@ -246,10 +246,8 @@
 
 																	(ID. {{ $log->affected_doc }}) 
 										
-																	{{ $log->activity == 'UPDATE' ? 'from' 
-																	: ($log->activity == 'INSERT' ? 'into the' 
-																	: 'from') }} 
-																	
+																	→
+
 																	{{ $log->table_name }}
 									</p> 
 

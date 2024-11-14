@@ -132,7 +132,7 @@
                     <!-- Research Type Input -->
                     <div class="form-group">
                         <label for="research_type">Research Type <span>(Study/Project/Article)</span></label>
-                        <select class="form-control" id="research_type" name="research_type">
+                        <select class="form-select" id="research_type" name="research_type">
                             <option value="">-- Select Here --</option>
                             <option value="study">Study</option>
                             <option value="project">Project</option>
@@ -157,7 +157,34 @@
                     <!-- Time Duration Input -->
                     <div class="form-group">
                         <label for="time_duration">Date Duration  <span>(in terms of months, e.g. 10 months)</span></label>
-                        <input type="text" class="form-control" id="date_duration" name="date_duration">
+                        <select class="form-select" id="date_duration" name="date_duration">
+                            <option value="">-- Select Here --</option>
+                            <option value="1 month">1 month</option>
+                            <option value="2 months">2 months</option>
+                            <option value="3 months">3 months</option>
+                            <option value="4 months">4 months</option>
+                            <option value="5 months">5 months</option>
+                            <option value="6 months">6 months</option>
+                            <option value="7 months">7 months</option>
+                            <option value="8 months">8 months</option>
+                            <option value="9 months">9 months</option>
+                            <option value="10 months">10 months</option>
+                            <option value="11 months">11 months</option>
+                            <option value="12 months">12 months</option>
+                            <option value="13 months">13 months</option>
+                            <option value="14 months">14 months</option>
+                            <option value="15 months">15 months</option>
+                            <option value="16 months">16 months</option>
+                            <option value="17 months">17 months</option>
+                            <option value="18 months">18 months</option>
+                            <option value="19 months">19 months</option>
+                            <option value="20 months">20 months</option>
+                            <option value="21 months">21 months</option>
+                            <option value="22 months">22 months</option>
+                            <option value="23 months">23 months</option>
+                            <option value="24 months">24 months</option>
+                            <option value="24+ months">24+ months</option>
+                        </select>
                     </div><br>
 
                     <!-- Date Started Input -->
@@ -351,7 +378,12 @@
                     <!-- Research Type Input -->
                     <div class="form-group">
                         <label for="research_type">Research Type <span>(Study/Project/Article, e.g Article)</span></label>
-                        <input type="text" class="form-control" id="research_type" name="research_type" value="{{ $userpub->research_type }}">
+                        <select class="form-select" id="research_type" name="research_type">
+                            <option value="">-- Select Here --</option>
+                            <option value="study" {{ $userpub->research_type == 'study' ? 'selected' : '' }}>Study</option>
+                            <option value="project" {{ $userpub->research_type == 'project' ? 'selected' : '' }}>Project</option>
+                            <option value="article" {{ $userpub->research_type == 'article' ? 'selected' : '' }}>Article</option>
+                        </select>
                     </div><br>
 
                     <p><span style="color: #a41d21">Include your name if you are one of the Author or Co-author</span></p>
@@ -371,7 +403,34 @@
                     <!-- Time Duration Input -->
                     <div class="form-group">
                         <label for="time_duration">Date Duration <span>(in terms of months, e.g. 10 months)</span></label>
-                        <input type="text" class="form-control" id="date_duration" name="date_duration" value="{{ $userpub->date_duration }}">
+                        <select class="form-select" id="date_duration" name="date_duration">
+                            <option value="">-- Select Here --</option>
+                            <option value="1 month" {{ $userpub->date_duration == '1 month' ? 'selected' : '' }}>1 month</option>
+                            <option value="2 months" {{ $userpub->date_duration == '2 months' ? 'selected' : '' }}>2 months</option>
+                            <option value="3 months" {{ $userpub->date_duration == '3 months' ? 'selected' : '' }}>3 months</option>
+                            <option value="4 months" {{ $userpub->date_duration == '4 months' ? 'selected' : '' }}>4 months</option>
+                            <option value="5 months" {{ $userpub->date_duration == '5 months' ? 'selected' : '' }}>5 months</option>
+                            <option value="6 months" {{ $userpub->date_duration == '6 months' ? 'selected' : '' }}>6 months</option>
+                            <option value="7 months" {{ $userpub->date_duration == '7 months' ? 'selected' : '' }}>7 months</option>
+                            <option value="8 months" {{ $userpub->date_duration == '8 months' ? 'selected' : '' }}>8 months</option>
+                            <option value="9 months" {{ $userpub->date_duration == '9 months' ? 'selected' : '' }}>9 months</option>
+                            <option value="10 months" {{ $userpub->date_duration == '10 months' ? 'selected' : '' }}>10 months</option>
+                            <option value="11 months" {{ $userpub->date_duration == '11 months' ? 'selected' : '' }}>11 months</option>
+                            <option value="12 months" {{ $userpub->date_duration == '12 months' ? 'selected' : '' }}>12 months</option>
+                            <option value="13 months" {{ $userpub->date_duration == '13 months' ? 'selected' : '' }}>13 months</option>
+                            <option value="14 months" {{ $userpub->date_duration == '14 months' ? 'selected' : '' }}>14 months</option>
+                            <option value="15 months" {{ $userpub->date_duration == '15 months' ? 'selected' : '' }}>15 months</option>
+                            <option value="16 months" {{ $userpub->date_duration == '16 months' ? 'selected' : '' }}>16 months</option>
+                            <option value="17 months" {{ $userpub->date_duration == '17 months' ? 'selected' : '' }}>17 months</option>
+                            <option value="18 months" {{ $userpub->date_duration == '18 months' ? 'selected' : '' }}>18 months</option>
+                            <option value="19 months" {{ $userpub->date_duration == '19 months' ? 'selected' : '' }}>19 months</option>
+                            <option value="20 months" {{ $userpub->date_duration == '20 months' ? 'selected' : '' }}>20 months</option>
+                            <option value="21 months" {{ $userpub->date_duration == '21 months' ? 'selected' : '' }}>21 months</option>
+                            <option value="22 months" {{ $userpub->date_duration == '22 months' ? 'selected' : '' }}>22 months</option>
+                            <option value="23 months" {{ $userpub->date_duration == '23 months' ? 'selected' : '' }}>23 months</option>
+                            <option value="24 months" {{ $userpub->date_duration == '24 months' ? 'selected' : '' }}>24 months</option>
+                            <option value="24+ months" {{ $userpub->date_duration == '24+ months' ? 'selected' : '' }}>24+ months</option>
+                        </select>
                     </div><br>
 
                     <!-- Date Started Input -->

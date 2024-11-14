@@ -57,6 +57,10 @@ Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->
 
 //Admin research
 Route::get('/admin/research', [ResearchController::class, 'adminResearch'])->name('admin.research');
+Route::post('/admin/research/add', [ResearchController::class, 'addResearch'])->name('admin.addResearch');
+Route::put('/admin/research/{id}', [ResearchController::class, 'updateResearch'])->name('admin.updateResearch');
+// Route to view a user's research as an admin
+Route::get('/admin/research/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
