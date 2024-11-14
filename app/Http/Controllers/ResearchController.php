@@ -76,10 +76,10 @@ class ResearchController extends Controller
         // Fetch the selected user's information
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
-        // Fetch all publications of the selected user
+        // Fetch all research of the selected user
         $researches = Research::where('r_user_id', $id)->get();
     
-        // Return view with user and publications data
+        // Return view with user and research data
         return view('admin.viewResearch', compact('user', 'userinfo', 'researches'));
     }
     
