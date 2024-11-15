@@ -11,6 +11,11 @@ use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\Publication;
+use App\Models\Research;
+use App\Models\Presentation;
+use App\Models\Announcement;
+
 
 class DashboardController extends Controller
 {
@@ -35,9 +40,76 @@ class DashboardController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
+        // Count all publications in the system
+        $totalPublicationCount = Publication::count();
+
+        // Count all publications where p_user_id = 1
+        $adminPublicationCount = Publication::where('p_user_id', 1)->count();
+
+        // Count all research in the system
+        $totalResearchCount = Research::count();
+
+        // Count all publications where r_user_id = 1
+        $adminResearchCount = Research::where('r_user_id', 1)->count();
+
+        // Count all publications in the system
+        $totalPresentationCount = Presentation::count();
+
+        // Count all publications where pr_user_id = 1
+        $adminPresentationCount = Presentation::where('pr_user_id', 1)->count();
+
+        // Fetch the latest activity logs from the doc_logs table
+        $activityLogs = DB::table('doc_logs')
+            ->join('users', 'doc_logs.l_user_id', '=', 'users.uid') // Join with users to get user data
+            ->select('doc_logs.*', 'users.first_name', 'users.last_name') // Select relevant columns
+            ->orderBy('log_id', 'desc') // Sort by log_time
+            ->get()
+            ->map(function ($activityLog) {
+                $activityLog->log_time_calc = Carbon::parse($activityLog->log_time)->diffForHumans();
+                return $activityLog;
+            });
+
+            // Fetch all records from the announcements table ordered by a_id in descending order
+            $announcements = Announcement::orderBy('a_id', 'desc')->get();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.dashboard', compact('user'));
+        return view('admin.dashboard', compact('user', 'totalPublicationCount', 'adminPublicationCount', 'totalResearchCount', 'adminResearchCount', 'totalPresentationCount', 'adminPresentationCount', 'activityLogs', 'announcements'));
     }
+
+public function addAnnouncement(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+
+        ]);
+    
+        $announcement = new Announcement();
+        $announcement->title = $request->title;
+        $announcement->description = $request->description;
+    
+        $announcement->save();
+    
+        return redirect()->back()->with('success', 'Announcement added successfully!');
+    }
+
+
+// Update Announcement functions
+public function updateAnnouncement(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
+    ]);
+
+    // Find the documentation by ID
+    $announcement = Announcement::findOrFail($id);
+    $announcement->title = $request->title;
+    $announcement->description = $request->description;
+    $announcement->save();
+
+    return redirect()->back()->with('success', 'Announcement updated successfully!');
+}
     
 
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -90,10 +162,11 @@ class DashboardController extends Controller
         return view('users.dashboard', compact('user', 'announcements', 'activityLogs'));
     }
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
     
 public function getYearlyReportData()
 {
-    // Define the last 10 years
+    // Define the last 5 years
     $lastFiveYears = range(date('Y') - 4, date('Y'));
 
     // Query to get counts for publications, research, and presentations by year

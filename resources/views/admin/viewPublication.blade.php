@@ -150,7 +150,7 @@
                 </td>
                 <td>
                     @if ($publication->p_link)
-                        <a id="link-table" href="{{ $publication->p_link }}" target="_blank">{{ $publication->p_link }}</a>
+                        <a id="link-table" href="{{ $publication->p_link }}" target="_blank">{{ Str::limit($publication->p_link, 20) }}{{ strlen($publication->p_link) > 20 ? : '' }}</a>
                     @else
                         No link available
                     @endif
@@ -178,7 +178,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #daeef1;">
+            <div class="modal-body" style="background: #fdf3f3;">
             <h4>Publication Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -274,7 +274,7 @@
                         <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($publication->p_link)
-                                <a href="{{ asset($publication->p_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($publication->p_link) }}</a>
+                                <a href="{{ asset($publication->p_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($publication->p_link, 20) }}{{ strlen($publication->p_link) > 20 ? : '' }}</a>
                             @else
                                 No link available
                             @endif

@@ -157,7 +157,7 @@
 						toolbar: { show: false },
 					},
 					markers: { size: 4 },
-					colors: ['#a41d21', '#ffc107', '#333'],
+					colors: ['#bb8082', '#ceb66f', '#608BC1'],
 					fill: {
 						type: "gradient",
 						gradient: {
@@ -231,7 +231,7 @@
 <hr style=" opacity: 0; ">
 		  
 		  <!-- Activity Logs report -->
-		<div class="card actlogs" id="dashboard-cards">
+		<div class="card actlogs dashboard-cards">
 					<div class="card-body">
 						<h5 class="card-title"><i class='bx bxs-calendar-edit'></i> Activity Logs</h5>
 						<div class="activity">

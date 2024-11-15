@@ -138,10 +138,96 @@ table td {
 /* end team --------------------------------------------------------------------------------------------*/
 
 
-/* users ----------------------------------------------------------------------------------------------- */
+
+/* General Dashboard Design ----------------------------------------------------------------------------------------------- */
+
+/* Admin --------------------------------------------------------------------------------------------------------------------*/
+.greeting-containerAdmin {
+  display: flex; /* Makes the child elements line up horizontally */
+  align-items: center; /* Vertically center the elements */
+
+  margin-top: -20px;  /* Extend background upwards */
+  margin-left: -30px; /* Extend background to the left */
+  margin-right: -30px; /* Extend background to the right */
+  padding: 10px 20px; /* Optional, adds padding inside the container */
+}
+
+.greeting-containerAdmin  h4{
+  margin-top: 12px;
+  color:var(--black-color);
+}
+
+/* Styling for the greeting */
+.greetingAdmin {
+  font-size: 1.5em;
+  margin-right: 10px; /* Space between the greeting and the name */
+  color: var(--black-color);
+}
+
+#quoteAdmin,
+#authorAdmin {
+color: var(--black-color)
+}
+
+#dashboard-cards-admin {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  color: #3170AB;
+  text-decoration: none;
+}
+
+.research-card .bx-file-find {
+  color: #ceb66f;
+  font-size: 30px;
+}
+
+.publications-card .bx-globe {
+  color: #bb8082;
+  font-size: 30px;
+}
+
+.presentations-card .bx-spreadsheet {
+  color: #608BC1;
+  font-size: 30px;
+}
+
+.research-card .card-title,
+.publications-card .card-title,
+.presentations-card .card-title,
+.activity-logs .card-title,
+.announcement .card-title{
+  color: #3170AB;
+}
+
+#linechart-report {
+  opacity: 0;
+}
+
+#publication-card-spacing,
+#research-report-spacing,
+#activity-logs-report-spacing {
+  display: none;
+}
+
+#announcement-report-spacing {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+
+  #publication-card-spacing,
+  #research-report-spacing,
+  #activity-logs-report-spacing  {
+    display: block;
+    opacity: 0;
+  }
+}
 
 
-/* Users Dashboard */
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+
+
+/* Users Dashboard ------------------------------------------------------------------------------------------------------------ */
 .dashboard-user {
   position: relative;
   height: 94vh;
@@ -168,28 +254,6 @@ table td {
     overflow: hidden; 
   }
 }
-
-
-
-/* Translucent Overlay */
-
-/* .dashboard-user::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.0); 
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); 
-  z-index: 0;
-}
-
-
-.dashboard-user  {
-  position: relative;
-  z-index: 1;
-}  */
 
 /* This is the container that holds both elements side by side */
 .greeting-container {
@@ -223,7 +287,7 @@ table td {
 #dashboard-cards {
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 25px;
   color: #3170AB;
   text-decoration: none;
 }
@@ -293,7 +357,7 @@ table td {
   
 }  
 
-/* ------------------------------------------------------------------------------------------------------ */
+/* General Buttons and tables design ------------------------------------------------------------------------------------------------------ */
 
 #add-btn {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
@@ -393,13 +457,29 @@ table tr:last-child td:last-child {
   border-bottom-right-radius: 20px;
 }
 
+table.table-announcement thead th {
+  background-color: #cebfc2; /* Replace with your desired color */
+}
+
+table.table-announcement tbody td {
+  background-color: #f5f1f2; /* Replace with your desired color */
+}
+
+table.table-activity-logs thead th {
+  background-color: #b1c5b1; /* Replace with your desired color */
+}
+
+table.table-activity-logs tbody td {
+  background-color: #ecfaea; /* Replace with your desired color */
+}
+
 table.table-team thead th {
-  background-color: #eececb; /* Replace with your desired color */
+  background-color: #aa99b6; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-team tbody td {
-  background-color: #ecdedc; /* Replace with your desired color */
+  background-color: #f6eefc; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
@@ -410,44 +490,46 @@ table.table-documentation thead th {
 }
 
 table.table-documentation tbody td {
-  background-color: #c3dfcc; /* Replace with your desired color */
+  background-color: #e7fcee; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-presentation thead th {
-  background-color: #cabca6; /* Replace with your desired color */
+  background-color: #608BC1; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-presentation tbody td {
-  background-color: #e4ded6; /* Replace with your desired color */
+  background-color: #ebf4ff; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-publications thead th {
-  background-color: #8dbdc4; /* Replace with your desired color */
+  background-color: #bb8082; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-publications tbody td {
-  background-color: #bdd5d8; /* Replace with your desired color */
+  background-color: #fdf3f3; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-research thead th {
-  background-color: #85adce; /* Replace with your desired color */
+  background-color: #ceb66f; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
 table.table-research tbody td {
-  background-color: #c3dbee; /* Replace with your desired color */
+  background-color: #fffbee; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
-/* Team Users design--------------------------------------------------------------------------------------------------------*/
+
+
+/* Team Users design --------------------------------------------------------------------------------------------------------*/
 
 #personal-info-team {
-background: #ecdedc;
+background: #f6eefc ;
 }
 
 .card-img-overlay {
@@ -470,34 +552,34 @@ font-size: 20px;
 }
 
 #team-card-research {
-  background-color: #85adce;
+  background-color: #ceb66f ;
   max-width: 150px;
-  border-color: #85adce;
+  border-color: #ceb66f ;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
 }
 
 #team-card-publication {
-  background-color: #8dbdc4;
+  background-color: #bb8082  ;
   max-width: 150px;
-  border-color: #8dbdc4;
+  border-color: #bb8082  ;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
 }
 
 
 #team-card-presentation {
-  background-color: #cabca6;
+  background-color: #608BC1 ;
   max-width: 150px;
-  border-color: #cabca6;
+  border-color: #608BC1 ;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
 }
 
 #team-card-documentation {
-  background-color: #95bea2;
+  background-color: #95bea2 ;
   max-width: 150px;
-  border-color: #95bea2;
+  border-color: #95bea2 ;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: var(--black-color)
 }
@@ -570,6 +652,3 @@ font-size: 20px;
 
     
 }
-
-
-/* end users ------------------------------------------------------------------------------------------------------------ */

@@ -145,7 +145,7 @@
                 </td>
                 <td>
                     @if ($userpresent->pr_link)
-                        <a id="link-table" href="{{ $userpresent->pr_link }}" target="_blank">{{ $userpresent->pr_link }}</a>
+                        <a id="link-table" href="{{ $userpresent->pr_link }}" target="_blank">{{ Str::limit($userpresent->pr_link, 20) }}{{ strlen($userpresent->pr_link) > 20 ? : '' }}</a>
                     @else
                         No link available
                     @endif
@@ -172,7 +172,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #f8f7f6;">
+            <div class="modal-body" style="background: #ebf4ff;">
             <h4>Presentation Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -330,7 +330,7 @@
                         <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userpresent->pr_link)
-                                <a href="{{ asset($userpresent->pr_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userpresent->pr_link) }}</a>
+                                <a href="{{ asset($userpresent->pr_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($userpresent->pr_link, 20) }}{{ strlen($userpresent->pr_link) > 20 ? : '' }}</a>
                             @else
                                 No link available
                             @endif

@@ -294,7 +294,7 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer" style="background-color: #e4ded6;">
+                <div class="modal-footer" style="background-color: #ebf4ff;">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Presentation</button>
                 </div>
@@ -344,7 +344,7 @@ Add Presentation
                 </td>
                 <td>
                     @if ($adminpresent->pr_link)
-                        <a id="link-table" href="{{ $adminpresent->pr_link }}" target="_blank">{{ $adminpresent->pr_link }}</a>
+                        <a id="link-table" href="{{ $adminpresent->pr_link }}" target="_blank">{{ Str::limit($adminpresent->pr_link, 20) }}{{ strlen($adminpresent->pr_link) > 20 ? : '' }}</a>
                     @else
                         No link available
                     @endif
@@ -559,7 +559,7 @@ Add Presentation
                     <br>
                 </div>
 
-                    <div class="modal-footer" style="background-color: #e4ded6;">
+                    <div class="modal-footer" style="background-color: #ebf4ff;">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
@@ -573,7 +573,7 @@ Add Presentation
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #f8f7f6;">
+            <div class="modal-body" style="background: #ebf4ff;">
             <h4>Admin's Presentation Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -731,7 +731,7 @@ Add Presentation
                         <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($adminpresent->pr_link)
-                                <a href="{{ asset($adminpresent->pr_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($adminpresent->pr_link) }}</a>
+                                <a href="{{ asset($adminpresent->pr_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($adminpresent->pr_link, 20) }}{{ strlen($adminpresent->pr_link) > 20 ? : '' }}</a>
                             @else
                                 No link available
                             @endif

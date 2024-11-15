@@ -134,9 +134,9 @@
                         <label for="research_type">Research Type <span>(Study/Project/Article)</span></label>
                         <select class="form-select" id="research_type" name="research_type">
                             <option value="">-- Select Here --</option>
-                            <option value="study">Study</option>
-                            <option value="project">Project</option>
-                            <option value="article">Article</option>
+                            <option value="Study">Study</option>
+                            <option value="Project">Project</option>
+                            <option value="Article">Article</option>
                         </select>
                     </div><br>
 
@@ -271,7 +271,7 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer" style="background: #bdd5d8;">
+                <div class="modal-footer" style="background: #fdf3f3;">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Publication</button>
                 </div>
@@ -324,7 +324,7 @@
                 </td>
                 <td>
                     @if ($userpub->p_link)
-                        <a id="link-table" href="{{ $userpub->p_link }}" target="_blank">{{ $userpub->p_link }}</a>
+                        <a id="link-table" href="{{ $userpub->p_link }}" target="_blank">{{ Str::limit($userpub->p_link, 20) }}{{ strlen($userpub->p_link) > 20 ? : '' }}</a>
                     @else
                         No link available
                     @endif
@@ -380,9 +380,9 @@
                         <label for="research_type">Research Type <span>(Study/Project/Article, e.g Article)</span></label>
                         <select class="form-select" id="research_type" name="research_type">
                             <option value="">-- Select Here --</option>
-                            <option value="study" {{ $userpub->research_type == 'study' ? 'selected' : '' }}>Study</option>
-                            <option value="project" {{ $userpub->research_type == 'project' ? 'selected' : '' }}>Project</option>
-                            <option value="article" {{ $userpub->research_type == 'article' ? 'selected' : '' }}>Article</option>
+                            <option value="Study" {{ $userpub->research_type == 'Study' ? 'selected' : '' }}>Study</option>
+                            <option value="Project" {{ $userpub->research_type == 'Project' ? 'selected' : '' }}>Project</option>
+                            <option value="Article" {{ $userpub->research_type == 'Article' ? 'selected' : '' }}>Article</option>
                         </select>
                     </div><br>
 
@@ -517,7 +517,7 @@
                             <input type="url" class="form-control" id="link" name="link" value="{{ $userpub->p_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer" style="background: #bdd5d8;">
+                    <div class="modal-footer" style="background: #fdf3f3;">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
@@ -532,7 +532,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #daeef1;">
+            <div class="modal-body" style="background: #fdf3f3;">
             <h4>Publication Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -628,7 +628,7 @@
                         <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userpub->p_link)
-                                <a href="{{ asset($userpub->p_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userpub->p_link) }}</a>
+                                <a href="{{ asset($userpub->p_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($userpub->p_link, 20) }}{{ strlen($userpub->p_link) > 20 ? : '' }}</a>
                             @else
                                 No link available
                             @endif

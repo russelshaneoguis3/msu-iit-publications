@@ -54,20 +54,22 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Dashboard
 Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::put('/admin/dashboard/{id}', [DashboardController::class, 'updateAnnouncement'])->name('admin.updateAnnouncement');
+Route::post('/admin/dashboard/add', [DashboardController::class, 'addAnnouncement'])->name('admin.addAnnouncement');
 
 //Admin research
 Route::get('/admin/research', [ResearchController::class, 'adminResearch'])->name('admin.research');
 Route::post('/admin/research/add', [ResearchController::class, 'addResearch'])->name('admin.addResearch');
 Route::put('/admin/research/{id}', [ResearchController::class, 'updateResearch'])->name('admin.updateResearch');
 // Route to view a user's research as an admin
-Route::get('/admin/viewResearch/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
+Route::get('/admin/research/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
 Route::post('/admin/publication/add', [PublicationController::class, 'addPublication'])->name('admin.addPublication');
 Route::put('/admin/publication/{id}', [PublicationController::class, 'updatePublication'])->name('admin.updatePublication');
 // Route to view a user's publications as an admin
-Route::get('/admin/viewPublication/{id}', [PublicationController::class, 'viewUserPublication'])->name('admin.viewPublication');
+Route::get('/admin/publication/{id}', [PublicationController::class, 'viewUserPublication'])->name('admin.viewPublication');
 
 
 //Admin presentation
@@ -90,6 +92,7 @@ Route::get('/admin/documentation/{id}', [DocumentationController::class, 'viewUs
 Route::get('/admin/team', [TeamController::class, 'adminTeam'])->name('admin.team');
 
 Route::get('admin/team/edit/{uid}', [TeamController::class, 'editUser'])->name('admin.team.edit');
+
 
 //-----------------------------------------------------------------------------------------------------------------------------
 

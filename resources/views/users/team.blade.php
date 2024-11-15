@@ -172,7 +172,7 @@
                         </select>
                     </div><br>
                 </div>
-                <div class="modal-footer" style="background-color: #ecdedc">
+                <div class="modal-footer" style="background-color: #f6eefc">
                     <button type="button" id="updatebtn-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Changes</button>
                 </div>

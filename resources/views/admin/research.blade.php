@@ -229,7 +229,7 @@
                     </div><br>
 
                 </div>
-                <div class="modal-footer" style="background-color: #c3dbee;">
+                <div class="modal-footer" style="background-color: #fffbee;">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Research</button>
                 </div>
@@ -278,7 +278,7 @@
                 </td>
                 <td>
                     @if ($adminres->r_link)
-                        <a id="link-table" href="{{ $adminres->r_link }}" target="_blank">{{ $adminres->r_link }}</a>
+                        <a id="link-table" href="{{ $adminres->r_link }}" target="_blank">{{ Str::limit($adminres->r_link, 20) }}{{ strlen($adminres->r_link) > 20 ? : '' }}</a>
                     @else
                         No link available
                     @endif
@@ -430,7 +430,7 @@
                     </div><br>
 
                     </div>
-                    <div class="modal-footer" style="background-color: #c3dbee;">
+                    <div class="modal-footer" style="background-color: #fffbee;">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
@@ -444,7 +444,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background-color: #e1eef8;">
+            <div class="modal-body" style="background-color: #fffbee;">
             <h4>Admin's Research Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -482,7 +482,7 @@
                         <div class="col-3" style="font-size: 20px">Special Order Link from IIT Docs</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($adminres->r_link)
-                                <a href="{{ asset($adminres->r_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($adminres->r_link) }}</a>
+                                <a href="{{ asset($adminres->r_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($adminres->r_link, 20) }}{{ strlen($adminres->r_link) > 20 ? : '' }}</a>
                             @else
                                 No link available
                             @endif
