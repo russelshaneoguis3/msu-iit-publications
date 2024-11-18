@@ -11,6 +11,7 @@ use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Research;
+use Carbon\Carbon;
 
 class ResearchController extends Controller
 {
@@ -38,13 +39,32 @@ class ResearchController extends Controller
         
         // Fetch users and their publication count, excluding the admin and where email_status is 'yes'
         $usersResearch = DB::table('users')
-        ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
-        ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
-        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(research.r_id) as research_count'))
-        ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
-        ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
-        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
-        ->get();
+            ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
+            ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
+            ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
+            ->select(
+                'users.uid', 
+                'users.first_name', 
+                'users.last_name', 
+                'users.email',
+                'center.c_name as center_name',
+                DB::raw('COUNT(research.r_id) as research_count'),
+                DB::raw('MAX(research.created_at) as last_upload') // Get the most recent upload time
+            )
+            ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
+            ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
+            ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center_name')
+            ->get();
+
+        // Process 'last_upload' to display the time difference
+        $usersResearch = $usersResearch->map(function ($user) {
+            if ($user->last_upload) {
+                $user->last_upload_diff = Carbon::parse($user->last_upload)->diffForHumans();
+            } else {
+                $user->last_upload_diff = 'No uploads';
+            }
+            return $user;
+        });
 
         // Fetch admin and their publication count, excluding the user
         $adminResearch = DB::table('research')
@@ -83,6 +103,30 @@ class ResearchController extends Controller
         return view('admin.viewResearch', compact('user', 'userinfo', 'researches'));
     }
     
+    public function viewCenterResearch($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all research of the selected user
+        $researches = Research::where('r_user_id', $id)->get();
+    
+        // Return view with user and research data
+        return view('admin.viewCenterResearch', compact('user', 'userinfo', 'researches'));
+    }
 
 //----------------------------------------------------------------------------------------------------------
 

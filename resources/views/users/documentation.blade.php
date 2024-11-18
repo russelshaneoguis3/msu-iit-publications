@@ -141,7 +141,7 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer" style="background: #e7fcee">
+                <div class="modal-footer" style="background: #f0fff5">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Document</button>
                 </div>
@@ -255,7 +255,7 @@ Add Document
                             <input type="url" class="form-control" id="link" name="link" value="{{ $userdoc->d_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer" style="background: #e7fcee">
+                    <div class="modal-footer" style="background: #f0fff5">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>

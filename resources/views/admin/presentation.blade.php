@@ -74,6 +74,11 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
+            <li><a href="{{ route('admin.center') }}">
+                <i class='bx bx-home'></i>
+                <span class="text">Center</span>
+            </a>
+        </li>
 		</ul>
 
 	</section>
@@ -790,7 +795,9 @@ Add Presentation
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th> 
-					<th>Publications</th>
+                    <th>Center Assigned</th>
+					<th>Presentations</th>
+                    <th>Last Upload</th>
 					<th>Action</th>
                   </tr>
                 </thead>
@@ -802,7 +809,9 @@ Add Presentation
                 <td>{{ $userpres->first_name }}</td>
                 <td>{{ $userpres->last_name }}</td>
                 <td>{{ $userpres->email }}</td>
-				<td style="color: #a41d21; font-size: 16px;">Uploads: <b><i>{{ $userpres->presentation_count }}</i></b></td>
+                <td>{{ $userpres->center_name ?? 'Not Assigned' }}</td>
+				<td style="color: #a41d21;">Uploads: <b><i>{{ $userpres->presentation_count }}</i></b></td>
+                <td><span style="color: #a41d21;">{{ $userpres->last_upload_diff }}</span></td>
 				<td>
 				<a id="view-btn" class="btn btn-outline-dark" href="{{ route('admin.viewPresentation', ['id' => $userpres->uid]) }}">
 				View

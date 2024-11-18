@@ -36,11 +36,21 @@ class TeamController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
-        // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data_no = DB::table('users')->where('email_status', 'no')->orderBy('uid', 'desc')->get();
+        // Fetch all users with 'email_status' = 'no' and their assigned center, ordered by 'uid' in descending order
+        $users_data_no = DB::table('users')
+            ->leftjoin('center', 'users.centerlab', '=', 'center.cid')  // Perform join with the center table
+            ->where('users.email_status', 'no')
+            ->orderBy('users.uid', 'desc')
+            ->select('users.*', 'center.c_name as center_name')  // Select user columns and the center name
+            ->get();
 
-        // Fetch all users from the database, ordered by 'uid' in descending order
-        $users_data_yes = DB::table('users')->where('email_status', 'yes')->orderBy('uid', 'desc')->get();
+        // Fetch all users with 'email_status' = 'yes' and their assigned center, ordered by 'uid' in descending order
+        $users_data_yes = DB::table('users')
+            ->leftjoin('center', 'users.centerlab', '=', 'center.cid')  // Perform join with the center table
+            ->where('users.email_status', 'yes')
+            ->orderBy('users.uid', 'desc')
+            ->select('users.*', 'center.c_name as center_name')  // Select user columns and the center name
+            ->get();
 
         // Pass the user_id to the admin dashboard view
         return view('admin.team', compact('users_data_no','users_data_yes','user'));

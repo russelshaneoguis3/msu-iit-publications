@@ -50,7 +50,7 @@
 					<span class="text">Research</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="{{ route('admin.publication') }}">
 					<i class='bx bx-globe' ></i>
 					<span class="text">Publication</span>
@@ -74,7 +74,8 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
-            <li><a href="{{ route('admin.center') }}">
+            <li class="active">
+                <a href="{{ route('admin.center') }}">
                 <i class='bx bx-home'></i>
                 <span class="text">Center</span>
             </a>
@@ -116,7 +117,7 @@
 	<div class="card">
     <div class="card-body">
 
-    <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.publication') }}">
+    <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.center') }}">
 				Back
 	</a>
     <br><br>

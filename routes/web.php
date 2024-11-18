@@ -7,6 +7,7 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\CenterController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,9 @@ Route::post('/admin/research/add', [ResearchController::class, 'addResearch'])->
 Route::put('/admin/research/{id}', [ResearchController::class, 'updateResearch'])->name('admin.updateResearch');
 // Route to view a user's research as an admin
 Route::get('/admin/research/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
+//view from center
+Route::get('/admin/viewResearch/{id}', [ResearchController::class, 'viewCenterResearch'])->name('admin.viewCenterResearch');
+
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
@@ -70,6 +74,8 @@ Route::post('/admin/publication/add', [PublicationController::class, 'addPublica
 Route::put('/admin/publication/{id}', [PublicationController::class, 'updatePublication'])->name('admin.updatePublication');
 // Route to view a user's publications as an admin
 Route::get('/admin/publication/{id}', [PublicationController::class, 'viewUserPublication'])->name('admin.viewPublication');
+//View from center 
+Route::get('/admin/viewPublication/{id}', [PublicationController::class, 'viewCenterPublication'])->name('admin.viewCenterPublication');
 
 
 //Admin presentation
@@ -78,6 +84,8 @@ Route::post('/admin/presentation/add', [PresentationController::class, 'addPrese
 Route::put('/admin/presentation/{id}', [PresentationController::class, 'updatePresentation'])->name('admin.updatePresentation');
 // Route to view a user's presentation as an admin
 Route::get('/admin/presentation/{id}', [PresentationController::class, 'viewUserPresentation'])->name('admin.viewPresentation');
+//view fron center 
+Route::get('/admin/viewPresentation/{id}', [PresentationController::class, 'viewCenterPresentation'])->name('admin.viewCenterPresentation');
 
 
 //Admin documentation
@@ -90,9 +98,12 @@ Route::get('/admin/documentation/{id}', [DocumentationController::class, 'viewUs
 
 //Admin Team
 Route::get('/admin/team', [TeamController::class, 'adminTeam'])->name('admin.team');
+Route::put('admin/team/edit/{uid}', [TeamController::class, 'editUser'])->name('admin.team.edit');
 
-Route::get('admin/team/edit/{uid}', [TeamController::class, 'editUser'])->name('admin.team.edit');
 
+//Admin Center
+Route::get('/admin/center', [CenterController::class, 'adminCenter'])->name('admin.center');
+Route::post('/admin/center/add', [CenterController::class, 'addCenter'])->name('admin.addCenter');
 
 //-----------------------------------------------------------------------------------------------------------------------------
 

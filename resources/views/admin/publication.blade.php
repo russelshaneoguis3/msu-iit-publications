@@ -74,6 +74,11 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
+            <li><a href="{{ route('admin.center') }}">
+                <i class='bx bx-home'></i>
+                <span class="text">Center</span>
+            </a>
+        </li>
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -269,7 +274,7 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer" style="background: #fdf3f3;">
+                <div class="modal-footer" style="background: #fff7f7;">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Publication</button>
                 </div>
@@ -510,7 +515,7 @@
                             <input type="url" class="form-control" id="link" name="link" value="{{ $adminpub->p_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer" style="background: #fdf3f3;">
+                    <div class="modal-footer" style="background: #fff7f7;">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
@@ -525,7 +530,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #fdf3f3;">
+            <div class="modal-body" style="background: #fff7f7;">
             <h4>Admin's Publication Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -667,7 +672,9 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th> 
+                    <th>Center Assigned</th>
 					<th>Publications</th>
+                    <th>Last Upload</th>
 					<th>Action</th>
 
                   </tr>
@@ -680,7 +687,9 @@
                 <td>{{ $userpub->first_name }}</td>
                 <td>{{ $userpub->last_name }}</td>
                 <td>{{ $userpub->email }}</td>
-				<td style="color: #a41d21; font-size: 16px;">Uploads: <b><i>{{ $userpub->publication_count }}</i></b></td>
+                <td>{{ $userpub->center_name ?? 'Not Assigned' }}</td>
+				<td style="color: #a41d21;">Uploads: <b><i>{{ $userpub->publication_count }}</i></b></td>
+                <td> <span style="color: #a41d21;">{{ $userpub->last_upload_diff }}</span></td>
 				<td>
 				<a id="view-btn" class="btn btn-outline-dark" href="{{ route('admin.viewPublication', ['id' => $userpub->uid]) }}">
 				View

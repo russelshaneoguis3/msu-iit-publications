@@ -221,6 +221,20 @@ color: var(--black-color)
     display: block;
     opacity: 0;
   }
+
+.research-card .card-title,
+.publications-card .card-title,
+.presentations-card .card-title,
+.reports .card-title,
+.activity-logs .card-title,
+.announcement .card-title,
+.research-card h6,
+.publications-card h6,
+.presentations-card h6
+{
+  font-size: 15px;
+}
+  
 }
 
 
@@ -284,7 +298,8 @@ color: var(--black-color)
   text-shadow: 2px 1px 1px black;
 }
 
-#dashboard-cards {
+#dashboard-cards,
+#user-actlogs {
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
@@ -479,7 +494,7 @@ table.table-team thead th {
 }
 
 table.table-team tbody td {
-  background-color: #f6eefc; /* Replace with your desired color */
+  background-color: #f9f5fc; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
@@ -490,7 +505,7 @@ table.table-documentation thead th {
 }
 
 table.table-documentation tbody td {
-  background-color: #e7fcee; /* Replace with your desired color */
+  background-color: #f0fff5; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
@@ -510,7 +525,7 @@ table.table-publications thead th {
 }
 
 table.table-publications tbody td {
-  background-color: #fdf3f3; /* Replace with your desired color */
+  background-color: #fff7f7; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
@@ -520,16 +535,29 @@ table.table-research thead th {
 }
 
 table.table-research tbody td {
-  background-color: #fffbee; /* Replace with your desired color */
+  background-color: #faf8f0; /* Replace with your desired color */
   color: #000; /* Change text color if needed */
 }
 
+#centers-card {
+  background: #f8f0e8;
+}
+
+table.centers-table thead th {
+  background-color: #f7dec5; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
+
+table.centers-table tbody td {
+  background-color: #f8f0e8; /* Replace with your desired color */
+  color: #000; /* Change text color if needed */
+}
 
 
 /* Team Users design --------------------------------------------------------------------------------------------------------*/
 
 #personal-info-team {
-background: #f6eefc ;
+background: #f9f5fc ;
 }
 
 .card-img-overlay {

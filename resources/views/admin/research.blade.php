@@ -75,6 +75,11 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
+            <li><a href="{{ route('admin.center') }}">
+                <i class='bx bx-home'></i>
+                <span class="text">Center</span>
+            </a>
+        </li>
 		</ul>
 
 	</section>
@@ -558,8 +563,10 @@
 					<th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Email</th> 
+                    <th>Email</th>
+                    <th>Center Assigned</th>
 					<th>Research</th>
+                    <th>Last Upload</th>
 					<th>Action</th>
 
                   </tr>
@@ -572,7 +579,11 @@
                 <td>{{ $userres->first_name }}</td>
                 <td>{{ $userres->last_name }}</td>
                 <td>{{ $userres->email }}</td>
-				<td style="color: #a41d21; font-size: 16px;">Uploads: <b><i>{{ $userres->research_count }}</i></b></td>
+                <td>{{ $userres->center_name ?? 'Not Assigned' }}</td>
+				<td style="color: #a41d21;">Uploads: <b><i>{{ $userres->research_count }}</i></b></td>
+                <td>
+                <span style="color: #a41d21;">{{ $userres->last_upload_diff }}</span>
+                </td>
 				<td>
 				<a id="view-btn" class="btn btn-outline-dark" href="{{ route('admin.viewResearch', ['id' => $userres->uid]) }}">
 				View

@@ -45,6 +45,7 @@
             <li><a href="{{ route('admin.presentation') }}"><i class='bx bx-spreadsheet'></i><span class="text">Presentation</span></a></li>
             <li><a href="{{ route('admin.documentation') }}"><i class='bx bx-library'></i><span class="text">Documentation</span></a></li>
             <li class="active"><a href="{{ route('admin.team') }}"><i class='bx bxs-group'></i><span class="text">Team</span></a></li>
+            <li><a href="{{ route('admin.center') }}"><i class='bx bx-home'></i><span class="text">Center</span></a></li>
         </ul>
 
     </section>
@@ -87,6 +88,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
+                    <th>Center Assigned</th>
                     <th>Registration Date</th>
                     <th>Email Status</th>
                   </tr>
@@ -99,6 +101,7 @@
                 <td>{{ $user_y->first_name }}</td>
                 <td>{{ $user_y->last_name }}</td>
                 <td>{{ $user_y->email }}</td>
+                <td>{{ $user_y->center_name ?? 'Not Assigned' }}</td>
                 <td>{{ $user_y->created_at }}</td>
                 <td>{{ $user_y->email_status }}</td>
 
@@ -124,6 +127,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
+                    <th>Center Assigned</th>
                     <th>Registration Date</th>
                     <th>Email Status</th>
 					<th>Action</th> 
@@ -136,6 +140,8 @@
                 <td>{{ $user->first_name }}</td>
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->center_name ?? 'Not Assigned' }}</td>
+
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->email_status }}</td>
 				<td>

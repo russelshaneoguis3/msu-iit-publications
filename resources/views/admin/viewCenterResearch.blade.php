@@ -44,7 +44,7 @@
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="{{ route('admin.research') }}">
 					<i class='bx bx-file-find' ></i>
 					<span class="text">Research</span>
@@ -74,7 +74,8 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
-            <li><a href="{{ route('admin.center') }}">
+            <li  class="active">
+                <a href="{{ route('admin.center') }}">
                 <i class='bx bx-home'></i>
                 <span class="text">Center</span>
             </a>
@@ -113,7 +114,7 @@
 <div class="card">
 <div class="card-body">
 
-        <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.research') }}">
+        <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.center') }}">
                         Back
         </a>
         <br><br>

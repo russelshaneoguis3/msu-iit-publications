@@ -271,7 +271,7 @@
                         <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
                     </div>
                 </div>
-                <div class="modal-footer" style="background: #fdf3f3;">
+                <div class="modal-footer" style="background: #fff7f7;">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Publication</button>
                 </div>
@@ -517,7 +517,7 @@
                             <input type="url" class="form-control" id="link" name="link" value="{{ $userpub->p_link }}" placeholder="http://example.com">
                         </div>
                     </div>
-                    <div class="modal-footer" style="background: #fdf3f3;">
+                    <div class="modal-footer" style="background: #fff7f7;">
                         <button id="updatebtn-close" type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button  id="updatebtn-save" type="submit" class="btn btn-outline">Save Changes</button>
                     </div>
@@ -532,7 +532,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #fdf3f3;">
+            <div class="modal-body" style="background: #fff7f7;">
             <h4>Publication Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>

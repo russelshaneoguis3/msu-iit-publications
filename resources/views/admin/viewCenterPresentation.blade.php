@@ -56,7 +56,7 @@
 					<span class="text">Publication</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="{{ route('admin.presentation') }}">
 					<i class='bx bx-spreadsheet' ></i>
 					<span class="text">Presentation</span>
@@ -74,7 +74,8 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
-            <li><a href="{{ route('admin.center') }}">
+            <li class="active">
+                <a href="{{ route('admin.center') }}">
                 <i class='bx bx-home'></i>
                 <span class="text">Center</span>
             </a>
@@ -113,7 +114,7 @@
 <div class="card">
 <div class="card-body">
 
-    <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.presentation') }}">
+    <a id="view-btn" class="btn btn-outline-secondary" href="{{ route('admin.center') }}">
 				Back
 	</a>
     <br><br>

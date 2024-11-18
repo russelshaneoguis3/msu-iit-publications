@@ -11,6 +11,7 @@ use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Presentation;
+use Carbon\Carbon;
 
 class PresentationController extends Controller
 {
@@ -39,11 +40,26 @@ class PresentationController extends Controller
         $usersPresentation = DB::table('users')
         ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
-        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(presentation.pr_id) as presentation_count'))
+        ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
+        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center.c_name as center_name',
+
+        DB::raw('COUNT(presentation.pr_id) as presentation_count'),
+        DB::raw('MAX(presentation.created_at) as last_upload')  
+        )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
-        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center_name')
         ->get();
+
+        // Process 'last_upload' to display the time difference
+        $usersPresentation = $usersPresentation->map(function ($user) {
+            if ($user->last_upload) {
+                $user->last_upload_diff = Carbon::parse($user->last_upload)->diffForHumans();
+            } else {
+                $user->last_upload_diff = 'No uploads';
+            }
+            return $user;
+        });
 
         // Fetch admin and their presentation count, excluding the user
         $adminPresentation = DB::table('presentation')
@@ -80,6 +96,31 @@ class PresentationController extends Controller
         return view('admin.viewPresentation', compact('user', 'userinfo', 'presentations'));
     }
     
+    public function viewCenterPresentation($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all presetation of the selected user
+        $presentations = Presentation::where('pr_user_id', $id)->get();
+    
+        // Return view with user and presetation data
+        return view('admin.viewCenterPresentation', compact('user', 'userinfo', 'presentations'));
+    }
+
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 

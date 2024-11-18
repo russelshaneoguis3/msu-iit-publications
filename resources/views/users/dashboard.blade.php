@@ -207,7 +207,7 @@
 								<span data-bs-toggle="tooltip" 
 									title="{{ $announcement->description }}">
 									<strong style="color: #000000">&nbsp {{ $announcement->title }}</strong> 
-									<p>- {{ $announcement->short_description }} </p>
+									<p style="color: #3170AB">- {{ $announcement->short_description }} </p>
 								</span>
 							</div>
 						</div>
@@ -231,7 +231,7 @@
 <hr style=" opacity: 0; ">
 		  
 		  <!-- Activity Logs report -->
-		<div class="card actlogs dashboard-cards">
+		<div class="card actlogs dashboard-cards" id="user-actlogs">
 					<div class="card-body">
 						<h5 class="card-title"><i class='bx bxs-calendar-edit'></i> Activity Logs</h5>
 						<div class="activity">

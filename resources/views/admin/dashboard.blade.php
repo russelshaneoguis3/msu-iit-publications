@@ -75,6 +75,11 @@
 					<span class="text">Team</span>
 				</a>
 			</li>
+      <li><a href="{{ route('admin.center') }}">
+                <i class='bx bx-home'></i>
+                <span class="text">Center</span>
+            </a>
+        </li>
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -196,7 +201,7 @@
 
 <!-- Reports -->
     <div class="col-12">
-        <div class="card" id="dashboard-cards-admin">
+        <div class="card reports" id="dashboard-cards-admin">
 
                 <div class="card-body">
 				<h5 class="card-title"><i class='bx bxs-report'></i> Reports | Total Publications/Research/Presentations</h5>
@@ -293,7 +298,7 @@
                             View
                           </button>
                           <!-- Edit Button -->
-                          <button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal{{ $announcement->a_id }}">
+                          <button id="edit-btn" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal{{ $announcement->a_id }}">
                             Edit
                           </button>
                         </td>

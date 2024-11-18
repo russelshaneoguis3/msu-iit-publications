@@ -172,7 +172,7 @@
                         </select>
                     </div><br>
                 </div>
-                <div class="modal-footer" style="background-color: #f6eefc">
+                <div class="modal-footer" style="background-color: #f9f5fc">
                     <button type="button" id="updatebtn-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                     <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Changes</button>
                 </div>
@@ -194,7 +194,7 @@
                     <img src="{{ asset('../assets/img/team-card.jpg') }}" class="card-img-top" alt="...">
                     <div class="card-img-overlay">
                         <p class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</p>
-                        <p class="center-assigned">{{ $user->center_name }}</p>
+                        <p class="center-assigned">{{ $user->center_name ?? 'Not yet Assigned' }}</p>
 
                         <!-- Top button row -->
                         <div class="row mb-2">

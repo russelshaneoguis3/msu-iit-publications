@@ -1,0 +1,351 @@
+use research;
+
+CREATE TABLE roles (
+  role_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- Add UNSIGNED for foreign key compatibility
+  role_name VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+INSERT INTO roles
+VALUES (1, 'admin'), (2, 'users');
+
+CREATE TABLE users (
+  uid INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,  -- Mark `uid` as UNSIGNED to match `role_id`
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  centerlab INT UNSIGNED,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  token TEXT,
+  email_status enum('yes', 'no'),
+  FOREIGN KEY (centerlab) REFERENCES center(cid) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE center (
+cid INT UNSIGNED primary key auto_increment,
+c_name VARCHAR(255),
+created_at timestamp default current_timestamp
+)ENGINE=InnoDB;
+
+INSERT INTO center (cid, c_name)
+VALUES (100, 'Marine Biodiversity Laboratory');
+
+INSERT INTO center (c_name)
+values ('Terrestrial and Freshwater Biodiversity Laboratory'), ('Center for Advanced Functional Materials and Nanotechnology'), ('Oceanography Laboratory'), 
+('Flora Biodiversity laboratory'), ('Mindanao Center for High Performance Computing'), ('Climate Change Laboratory'),
+('Animal Ecology Laboratory'), ('Microbial Culture Collection (Room 1)'), ('Microbial Culture Collection (Room 2)'), ('Decontamination Room'),
+('Genomics and Proteomics Laboratory'), ('Molecular Ecology and Physiology Laboratory'), ('Mindanao Radiation Physics Center'), ('PV Cells Testing Laboratory'),
+('Thermal Spray and Condensed Matter Laboratory'), ('Materials Characterization Laboratory'), ('Microscopy Biological Room'), ('Soft Matter Synthesis and Testing Laboratory'),
+('Biological Physics Laboratory'), ('Product Testing and Instrumentation Laboratory'), ('Organic Nanomaterials Processing Laboratory'), ('Inorganic Nanomaterials Processing Laboratory'),
+('Spectroscopy Laboratory 1'), ('Spectroscopy Laboratory 2'), ('Chromatography Laboratory'), ('Cell Culture and Cell-Based Assay Laboratory'), ('Natural Products and Related Researches Laboratory'),
+('Drug Design and Development Related Researches Laboratory'), ('Bio-inorganic and Related Researches Laboratory'), ('Electroanalytical and Thermal Researches Laboratory'),
+('Center for Computational Analytics and Modelling'), ('Center for Graph Theory, Algera and Analysis'), ('Laboratory of Theoritical and Computational Chemistry');
+
+
+CREATE TABLE user_roles (
+  u_role_id INT UNSIGNED,  -- Use UNSIGNED to match the role_id in the roles table
+  user_id INT UNSIGNED,    -- Use UNSIGNED to match the uid in the users table
+  PRIMARY KEY (u_role_id, user_id),
+  FOREIGN KEY (u_role_id) REFERENCES roles(role_id) On DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+DELIMITER //
+
+CREATE TRIGGER assign_user_role
+AFTER INSERT ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_roles (u_role_id, user_id)
+  VALUES (2, NEW.uid);  -- Assuming `2` is the role_id for regular users
+END;
+//
+
+DELIMITER ;
+
+
+CREATE TABLE user_logs (
+  log_id INT PRIMARY KEY AUTO_INCREMENT,
+  l_user_id INT UNSIGNED,  -- The user who performed the activity
+  affected_user_id INT UNSIGNED,  -- The user who was affected by the activity
+  activity TEXT NOT NULL,
+  table_name VARCHAR(50) NOT NULL, -- The name of the affected table
+  log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (l_user_id) REFERENCES users(uid) ON DELETE CASCADE,
+  FOREIGN KEY (affected_user_id) REFERENCES users(uid) ON DELETE CASCADE 
+);
+
+CREATE TABLE doc_logs (
+  log_id INT PRIMARY KEY AUTO_INCREMENT,
+  l_user_id INT UNSIGNED,  -- The user who performed the activity
+  affected_doc INT UNSIGNED, -- the document affected by changes
+  activity TEXT NOT NULL,
+  table_name VARCHAR(50) NOT NULL, -- The name of the affected table
+  log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (l_user_id) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+DELIMITER //
+-- Trigger for INSERT on `users`
+CREATE TRIGGER log_user_insert
+AFTER INSERT ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, affected_user_id, activity, table_name)
+  VALUES (NEW.uid, NEW.uid, 'INSERT', 'users');
+END;
+//
+
+-- Trigger for UPDATE on `users`
+DELIMITER //
+CREATE TRIGGER log_user_update
+AFTER UPDATE ON users
+FOR EACH ROW
+BEGIN
+  INSERT INTO user_logs (l_user_id, affected_user_id, activity, table_name)
+  VALUES (NEW.uid, NEW.uid, 'UPDATE', 'users');  
+END;
+//
+
+
+CREATE TABLE publications (
+  p_id INT PRIMARY KEY AUTO_INCREMENT,
+  p_user_id INT UNSIGNED, 
+  research_title TEXT NOT NULL,
+  description TEXT,
+  research_type varchar(100), 
+  authors TEXT,
+  coauthors TEXT,
+  date_duration varchar(50),
+  date_started date,
+  date_completed date,
+  cost varchar(255),
+  funding_source varchar(100),
+  publication_date date,
+  publication_title text,
+  editors text,
+  publisher varchar(150),
+  vol_issue_no varchar(250),
+  no_pages int,
+  publication_type varchar(100),
+  issn_isbn varchar(150),
+  p_file_path TEXT,
+  p_link TEXT,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  FOREIGN KEY (p_user_id) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+DELIMITER //
+-- Trigger for INSERT on `publications`
+CREATE TRIGGER log_publications_insert
+AFTER INSERT ON publications
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.p_user_id, NEW.p_id, 'INSERT', 'publications');
+END;
+//
+
+-- Trigger for UPDATE on `publications`
+CREATE TRIGGER log_publications_update
+AFTER UPDATE ON publications
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.p_user_id, NEW.p_id, 'UPDATE', 'publications');
+END;
+//
+
+-- Trigger for DELETE on `publications`
+CREATE TRIGGER log_publications_delete
+AFTER DELETE ON publications
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.p_user_id, OLD.p_id, 'DELETE', 'publications');
+END;
+//
+DELIMITER ;
+
+
+CREATE TABLE research (
+  r_id INT PRIMARY KEY AUTO_INCREMENT,
+  r_user_id INT UNSIGNED, 
+  research_title TEXT NOT NULL,
+  description TEXT,
+  leaders TEXT,
+  members TEXT,
+  research_type varchar(20),
+  so_no varchar (50),
+  r_link TEXT,
+  date_duration varchar(50),
+  date_started date,
+  date_completed date,
+  cost varchar(255),
+  funding_source varchar(100),
+  r_file_path TEXT,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  FOREIGN KEY (r_user_id) REFERENCES users(uid) ON DELETE CASCADE 
+) ENGINE=InnoDB;
+
+-- Trigger for INSERT on `research`
+DELIMITER //
+CREATE TRIGGER log_research_insert
+AFTER INSERT ON research
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.r_user_id, NEW.r_id, 'INSERT', 'research');
+END;
+//
+
+-- Trigger for UPDATE on `research`
+CREATE TRIGGER log_research_update
+AFTER UPDATE ON research
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.r_user_id, NEW.r_id, 'UPDATE', 'research');
+END;
+//
+
+-- Trigger for DELETE on `research`
+CREATE TRIGGER log_research_delete
+AFTER DELETE ON research
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.r_user_id, OLD.r_id, 'DELETE', 'research');
+END;
+//
+DELIMITER ;
+
+CREATE TABLE presentation (
+  pr_id INT PRIMARY KEY AUTO_INCREMENT,
+  pr_user_id INT UNSIGNED, 
+  research_title TEXT NOT NULL,
+  research_project_title TEXT,
+  fund varchar(50),
+  research_type varchar(20),
+  so_no varchar(50),
+  researcher_name text,
+  presenter_name text,
+  date_duration varchar(50),
+  date_started date,
+  date_completed date,
+  cost varchar(255),
+  funding_source varchar(100),
+  presentation_type varchar(10),
+  conference_type varchar(100),
+  conference_title text,
+  venue text,
+  conference_date date,
+  organizer text,
+  article_title text,
+  publication_date date,
+  journal_title text,
+  editor text,
+  publisher varchar(255),
+  vol_issue_no varchar(100),
+  page_no varchar(100),
+  publication_type varchar(50),
+  indexing varchar(50),
+  pr_file_path TEXT,
+  pr_link TEXT,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  FOREIGN KEY (pr_user_id) REFERENCES users(uid) ON DELETE CASCADE 
+) ENGINE=InnoDB;
+
+
+DELIMITER //
+CREATE TRIGGER log_presentation_insert
+AFTER INSERT ON presentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.pr_user_id, NEW.pr_id, 'INSERT', 'presentation');
+END;
+//
+
+CREATE TRIGGER log_presentation_update
+AFTER UPDATE ON presentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.pr_user_id, NEW.pr_id, 'UPDATE', 'presentation');
+END;
+//
+
+CREATE TRIGGER log_presentation_delete
+AFTER DELETE ON presentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.pr_user_id, OLD.pr_id, 'DELETE', 'presentation');
+END;
+//
+DELIMITER ;
+
+
+CREATE TABLE documentation (
+  d_id INT PRIMARY KEY AUTO_INCREMENT,
+  d_user_id INT UNSIGNED, 
+  title TEXT NOT NULL,
+  description TEXT,
+  d_file_path TEXT,
+  d_link TEXT,
+  created_at TIMESTAMP NULL,
+  updated_at TIMESTAMP NULL,
+  FOREIGN KEY (d_user_id) REFERENCES users(uid) ON DELETE CASCADE 
+) ENGINE=InnoDB;
+
+
+DELIMITER //
+CREATE TRIGGER log_documentation_insert
+AFTER INSERT ON documentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.d_user_id, NEW.d_id, 'INSERT', 'documentation');
+END;
+//
+
+CREATE TRIGGER log_documentation_update
+AFTER UPDATE ON documentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (NEW.d_user_id, NEW.d_id, 'UPDATE', 'documentation');
+END;
+//
+
+CREATE TRIGGER log_documentation_delete
+AFTER DELETE ON documentation
+FOR EACH ROW
+BEGIN
+  INSERT INTO doc_logs (l_user_id, affected_doc, activity, table_name)
+  VALUES (OLD.d_user_id, OLD.d_id, 'DELETE', 'documentation');
+END;
+//
+DELIMITER ;
+
+CREATE TABLE announcements (
+ a_id INT PRIMARY KEY AUTO_INCREMENT,
+ title TEXT NOT NULL,
+ description TEXT,
+ created_at timestamp null,
+ updated_at timestamp null
+) ENGINE=InnoDB;
+
+-- need to create an account for the admin then update the role as admin(1).
+UPDATE user_roles
+SET u_role_id = 1
+WHERE user_id = 1;
+
+

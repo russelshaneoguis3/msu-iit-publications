@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Publication;
 use App\Http\Controllers\Team;
-
+use Carbon\Carbon;
 
 class PublicationController extends Controller
 {
@@ -42,11 +42,26 @@ class PublicationController extends Controller
         $usersPublications = DB::table('users')
         ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
-        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', DB::raw('COUNT(publications.p_id) as publication_count'))
+        ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
+        ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center.c_name as center_name',
+        
+            DB::raw('COUNT(publications.p_id) as publication_count'),
+            DB::raw('MAX(publications.created_at) as last_upload')  
+            )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
-        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email')
+        ->groupBy('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center_name')
         ->get();
+
+        // Process 'last_upload' to display the time difference
+        $usersPublications = $usersPublications->map(function ($user) {
+            if ($user->last_upload) {
+                $user->last_upload_diff = Carbon::parse($user->last_upload)->diffForHumans();
+            } else {
+                $user->last_upload_diff = 'No uploads';
+            }
+            return $user;
+        });
 
         // Fetch admin and their publication count, excluding the user
         $adminPublications = DB::table('publications')
@@ -84,6 +99,33 @@ public function viewUserPublication($id)
         return view('admin.viewPublication', compact('user', 'userinfo', 'publications'));
     }
     
+
+    public function viewCenterPublication($id)
+
+    {
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+    
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+        // Fetch the selected user's information
+        $userinfo = DB::table('users')->where('uid', $id)->first();
+    
+        // Fetch all publications of the selected user
+        $publications = Publication::where('p_user_id', $id)->get();
+    
+        // Return view with user and publications data
+        return view('admin.viewCenterPublication', compact('user', 'userinfo', 'publications'));
+    }
+    
+
 
 //---------------------------------------------------------------------------------------------------------------------
 
