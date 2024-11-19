@@ -56,7 +56,35 @@ public function adminCenter()
         ->get()
         ->keyBy('uid'); // Key the results by user ID for easy access
 
-    return view('admin.center', compact('user', 'centers', 'userStats'));
+        // Retrieve latest upload times per center
+        $latestUploads = DB::table('center')
+        ->leftJoin('users', 'center.cid', '=', 'users.centerlab')
+        ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
+        ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
+        ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
+        ->select(
+            'center.cid',
+            DB::raw('
+                CASE 
+                    WHEN GREATEST(
+                        IFNULL(MAX(publications.created_at), "0000-00-00 00:00:00"),
+                        IFNULL(MAX(research.created_at), "0000-00-00 00:00:00"),
+                        IFNULL(MAX(presentation.created_at), "0000-00-00 00:00:00")
+                    ) = "0000-00-00 00:00:00" THEN NULL
+                    ELSE GREATEST(
+                        IFNULL(MAX(publications.created_at), "0000-00-00 00:00:00"),
+                        IFNULL(MAX(research.created_at), "0000-00-00 00:00:00"),
+                        IFNULL(MAX(presentation.created_at), "0000-00-00 00:00:00")
+                    )
+                END as latest_upload
+            ')
+        )
+        ->groupBy('center.cid')
+        ->get()
+        ->keyBy('cid');
+
+
+    return view('admin.center', compact('user', 'centers', 'userStats', 'latestUploads'));
 }
 
     
