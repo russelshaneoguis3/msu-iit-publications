@@ -30,7 +30,7 @@
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
 
-          <img src="assets/img/web-logo.png" alt=""> 
+          <img src="assets/img/msuiit-logo.png" alt=""> 
           <h1 class="sitename">MSU-IIT Researchers' Repo</h1>
         </a>
 
