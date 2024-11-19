@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.msuiit.edu.ph/" target="_blank"><img src="public/assets/img/web-logo.png" width="400" alt="MSU-IIT Logo"></a></p>
+<p align="center"><a href="https://www.msuiit.edu.ph/" target="_blank"><img src="public/assets/img/web-logo.png" width="300" alt="MSU-IIT Logo"></a></p>
 
 
 ## About Laravel
