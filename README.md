@@ -1,60 +1,40 @@
 <p align="center"><a href="https://www.msuiit.edu.ph/" target="_blank"><img src="public/assets/img/web-logo.png" width="200" alt="MSU-IIT Logo"></a></p>
 
 
-## About Laravel
+## About MSU-IIT Researchers Repository
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This web application, developed using the Laravel Framework and MySQL DBMS, is designed to assist researchers in efficiently storing and managing publications, research papers, presentations, and other documents. The project team is listed below:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Prof. Daisy Lou Polestico, Ph.D (Project Leader)](https://www.researchgate.net/lab/Daisy-Lou-Lim-Polestico-Lab).
+- [Assoc. Prof. Johniel Babiera (Project Member)](https://ph.linkedin.com/in/johniel-babiera).
+- [Adam Russel Shane Oguis (Web Developer)](https://www.linkedin.com/in/ars-oguis/).
+- [Andrei Gabrielle Adlawan (Team)](https://www.linkedin.com/in/andrei-gabrielle-adlawan-237b55299/).
+- [Dinah Dumaguing (Team)](https://www.youtube.com/watch?v=e_04ZrNroTo).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## How to setup the web application
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    1. Download and setup your MySQL DBMS.
+    2. Import the sql file **research.sql** (see project folder) and name the database as `research`.
+    3. You can also manually setup the database by creating a database and name it `research`, then using console you can manually code the tables, triggers, etc. Just follow the **SQL guide.txt** file. 
+    4. Download Php, just follow tutorials in [Youtube](https://www.youtube.com/).
+    5. Download Composer, just follow tutorials in [Youtube](https://www.youtube.com/).
+    6. Create a Folder inside C:\xampp\htdocs and after you create a folder, create another folder inside of it.
+    7. You can also follow tutorials on [Youtube](https://www.youtube.com/) on how to setup Laravel Framework.
+    8. After successfully installed dependencies, you can now import the laravel web application from this github repository.
+    9. If you encounter errors especially in the app_key inside the .env file. You can generate new app_key by doing this commands in the CMD or terminal of the project ( php artisan key:generate ).
+    10. Inside in the .env, you can also setup the database host, password, ports, and etc.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Debug, Errors, Problems,
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- If you encounter error from downloading composer **composer global require laravel/install** 
+    solution:
+    1. Open your **php.ini** file located at C:\Program Files\php-8.3.something\php.ini
+    2. Look for a line **;extension=zip** and then remove the semicolon (;) then hit save (ctrl + s).
+    3. Restart the terminal and retry **composer global require laravel/install**.
 
-## Laravel Sponsors
+- Extensions needed (remove the semicolon of this lines)
+    1. ;extension=fileinfo
+    2. ;extension=pdo_mysql
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
