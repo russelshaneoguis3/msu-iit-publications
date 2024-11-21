@@ -45,8 +45,8 @@ class PublicationController extends Controller
         ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
         ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center.c_name as center_name',
         
-            DB::raw('COUNT(publications.p_id) as publication_count'),
-            DB::raw('MAX(publications.created_at) as last_upload')  
+            DB::raw('COUNT(publications.publication_date) as publication_count'),
+            DB::raw('MAX(CASE WHEN publications.publication_date IS NOT NULL THEN publications.created_at ELSE NULL END) as last_upload')
             )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
@@ -93,7 +93,9 @@ public function viewUserPublication($id)
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all publications of the selected user
-        $publications = Publication::where('p_user_id', $id)->get();
+        $publications = Publication::where('p_user_id', $id)
+        ->whereNotNull('publications.publication_date')
+        ->get();
     
         // Return view with user and publications data
         return view('admin.viewPublication', compact('user', 'userinfo', 'publications'));
@@ -119,7 +121,9 @@ public function viewUserPublication($id)
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all publications of the selected user
-        $publications = Publication::where('p_user_id', $id)->get();
+        $publications = Publication::where('p_user_id', $id)
+        ->whereNotNull('publications.publication_date')
+        ->get();
     
         // Return view with user and publications data
         return view('admin.viewCenterPublication', compact('user', 'userinfo', 'publications'));

@@ -43,8 +43,8 @@ class PresentationController extends Controller
         ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
         ->select('users.uid', 'users.first_name', 'users.last_name', 'users.email', 'center.c_name as center_name',
 
-        DB::raw('COUNT(presentation.pr_id) as presentation_count'),
-        DB::raw('MAX(presentation.created_at) as last_upload')  
+        DB::raw('COUNT(presentation.conference_date) as presentation_count'),
+        DB::raw('MAX(CASE WHEN presentation.conference_date IS NOT NULL THEN presentation.created_at ELSE NULL END) as last_upload') 
         )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
@@ -90,7 +90,9 @@ class PresentationController extends Controller
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all publications of the selected user
-        $presentations = Presentation::where('pr_user_id', $id)->get();
+        $presentations = Presentation::where('pr_user_id', $id)
+        ->whereNotNull('presentation.conference_date')
+        ->get();
     
         // Return view with user and publications data
         return view('admin.viewPresentation', compact('user', 'userinfo', 'presentations'));
@@ -115,7 +117,9 @@ class PresentationController extends Controller
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all presetation of the selected user
-        $presentations = Presentation::where('pr_user_id', $id)->get();
+        $presentations = Presentation::where('pr_user_id', $id)
+        ->whereNotNull('presentation.conference_date')
+        ->get();
     
         // Return view with user and presetation data
         return view('admin.viewCenterPresentation', compact('user', 'userinfo', 'presentations'));

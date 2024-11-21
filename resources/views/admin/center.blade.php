@@ -87,85 +87,88 @@
      </button>
      <br><br>
      
-     <div class="accordion accordion-flush" id="accordionFlushExample"> 
+<div class="accordion accordion-flush" id="accordionFlushExample">
     @foreach($centers as $cid => $centerGroup)
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-heading-{{ $cid }}">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ $cid }}" aria-expanded="false" aria-controls="flush-collapse-{{ $cid }}" style="background: #f8f0e8">
-                <p>
-                <b style="font-size: 18px">{{ substr($centerGroup->first()->c_name, 0, 1) }}</b>{{ substr($centerGroup->first()->c_name, 1) }} 
-                <span style="font-size: 12px; color: #a41d21; font-family: 'Times New Roman', Times, serif;">@if($latestUploads[$cid]->latest_upload) (Last Upload {{ \Carbon\Carbon::parse($latestUploads[$cid]->latest_upload)->diffForHumans() }})
-                        @else
-                          (No uploads)
-                        @endif
+                    <p>
+                        <b style="font-size: 18px">{{ substr($centerGroup->first()->c_name, 0, 1) }}</b>{{ substr($centerGroup->first()->c_name, 1) }} 
+                        <span style="font-size: 12px; color: #a41d21; font-family: 'Times New Roman', Times, serif;">
+                            @if($latestUploads[$cid]->latest_upload) 
+                                (Last Upload {{ \Carbon\Carbon::parse($latestUploads[$cid]->latest_upload)->diffForHumans() }})
+                            @else 
+                                (No uploads)
+                            @endif
                         </span>
-                </p>
+                    </p>
                 </button>
             </h2>
             <div id="flush-collapse-{{ $cid }}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{{ $cid }}" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     <h6 style="color: #a41d21">Researchers Assigned</h6>
                     @if($centerGroup->count() > 0)
-                    <div class="table-responsive-md">
-                        <table class="table centers-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Publications → Last Upload</th>
-                                    <th>Publication's Action</th>
-                                    <th>Research → Last Upload</th>
-                                    <th>Research's Action</th>
-                                    <th>Presentation → Last Upload</th>
-                                    <th>Presentation's Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($centerGroup as $user)
-                                    @if($user->uid)
-                                        @php
-                                            $stats = $userStats[$user->uid] ?? null;
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $user->uid }}</td>
-                                            <td>{{ $user->first_name }}</td>
-                                            <td>{{ $user->last_name }}</td>
-                                            <td>
-                                                <span style="color: #006BFF"><b>{{ $stats->publications_count ?? 0 }}</b></span>  &nbsp → &nbsp
-                                                <span style="color: #a41d21">{{ $stats->last_publication_upload ? \Carbon\Carbon::parse($stats->last_publication_upload)->diffForHumans() : 'N/A' }}</span>
-                                            </td>
-                                            <td>                           
-                                                <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterPublication', ['id' => $user->uid]) }}">View</a></span>
-                                            </td>
-                                            <td>
-                                                <span style="color: #006BFF"><b>{{ $stats->research_count ?? 0 }}</b></span>  &nbsp → &nbsp
-                                                <span style="color: #a41d21">{{ $stats->last_research_upload ? \Carbon\Carbon::parse($stats->last_research_upload)->diffForHumans() : 'N/A' }} </span>
-                                            </td>
-                                            <td>
-                                            <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterResearch', ['id' => $user->uid]) }}">View</a></span>
-                                            </td>
-                                            <td>
-                                                <span style="color: #006BFF"><b>{{ $stats->presentation_count ?? 0 }}</b></span>  &nbsp → &nbsp
-                                                <span style="color: #a41d21">{{ $stats->last_presentation_upload ? \Carbon\Carbon::parse($stats->last_presentation_upload)->diffForHumans() : 'N/A' }}</span>
-                                            </td>
-                                            <td>
-                                            <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterPresentation', ['id' => $user->uid]) }}">View</a></span>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="table-responsive-md">
+                            <table class="table centers-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Publications → Last Upload</th>
+                                        <th>Publication's Action</th>
+                                        <th>Research → Last Upload</th>
+                                        <th>Research's Action</th>
+                                        <th>Presentation → Last Upload</th>
+                                        <th>Presentation's Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($centerGroup as $user)
+                                        @if($user->email_status == 'yes') <!-- Only show users with email_status 'yes' -->
+                                            @php
+                                                $stats = $userStats[$user->uid] ?? null;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $user->uid }}</td>
+                                                <td>{{ $user->first_name }}</td>
+                                                <td>{{ $user->last_name }}</td>
+                                                <td>
+                                                    <span style="color: #006BFF"><b>{{ $stats->publications_count ?? 0 }}</b></span>  &nbsp → &nbsp
+                                                    <span style="color: #a41d21">{{ $stats->last_publication_upload ? \Carbon\Carbon::parse($stats->last_publication_upload)->diffForHumans() : 'N/A' }}</span>
+                                                </td>
+                                                <td>
+                                                    <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterPublication', ['id' => $user->uid]) }}">View</a></span>
+                                                </td>
+                                                <td>
+                                                    <span style="color: #006BFF"><b>{{ $stats->research_count ?? 0 }}</b></span>  &nbsp → &nbsp
+                                                    <span style="color: #a41d21">{{ $stats->last_research_upload ? \Carbon\Carbon::parse($stats->last_research_upload)->diffForHumans() : 'N/A' }} </span>
+                                                </td>
+                                                <td>
+                                                    <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterResearch', ['id' => $user->uid]) }}">View</a></span>
+                                                </td>
+                                                <td>
+                                                    <span style="color: #006BFF"><b>{{ $stats->presentation_count ?? 0 }}</b></span>  &nbsp → &nbsp
+                                                    <span style="color: #a41d21">{{ $stats->last_presentation_upload ? \Carbon\Carbon::parse($stats->last_presentation_upload)->diffForHumans() : 'N/A' }}</span>
+                                                </td>
+                                                <td>
+                                                    <span><a id="view-btn" class="btn btn-outline-dark btn-sm" href="{{ route('admin.viewCenterPresentation', ['id' => $user->uid]) }}">View</a></span>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @else
-                        <p>No researchers assigned to this center.</p>
+                        <p>No users assigned</p>
                     @endif
                 </div>
             </div>
         </div>
     @endforeach
 </div>
+
 
     </div>
 </div>
@@ -190,7 +193,7 @@
                 </div>
                 <div class="modal-footer" style="background: #f8f0e8">
                     <button type="button" id ="public-modal-botton-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Document</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save</button>
                 </div>
             </form>
         </div>

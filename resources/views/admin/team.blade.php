@@ -213,32 +213,37 @@
             if (result.isConfirmed) {
                 // Proceed with the action if the user clicks "Yes, verify it!"
                 $.ajax({
-                    url: "{{ url('admin/team/edit') }}/" + uid,
-                    method: "GET",
-                    success: function(response) {
-                        // Show success alert with SweetAlert
-                        Swal.fire({
-                            title: 'Verified!',
-                            text: response.message,
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#ffc107', 
-                        }).then(() => {
-                            // Reload the page after successful verification
-                            window.location.href = "{{ route('admin.team') }}"; // Reload the current page
-                        });
-                    },
-                    error: function() {
-                        // In case of error, show an error alert
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Something went wrong.',
-                            icon: 'error',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#a41d21', 
-                        });
-                    }
-                });
+                        url: "{{ url('admin/team/edit') }}/" + uid,
+                        method: "PUT",
+                        data: {
+                            _token: "{{ csrf_token() }}",  // Add the CSRF token
+                        },
+                        success: function(response) {
+                            // Show success alert with SweetAlert
+                            Swal.fire({
+                                title: 'Verified!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#ffc107', 
+                            }).then(() => {
+                                // Reload the page after successful verification
+                                window.location.href = "{{ route('admin.team') }}"; // Reload the current page
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            // In case of error, show an error alert
+                            console.log(xhr.responseText); // Check the response text in the console
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Something went wrong.',
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: '#a41d21', 
+                            });
+                        }
+                    });
+
             } else {
                 // If canceled, show a cancellation alert
                 Swal.fire({

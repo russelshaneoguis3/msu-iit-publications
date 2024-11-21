@@ -40,23 +40,38 @@ class DashboardController extends Controller
         // Fetch the user information from the database
         $user = DB::table('users')->where('uid', $userId)->first();
 
-        // Count all publications in the system
-        $totalPublicationCount = Publication::count();
+        // Count all publications in the system with a valid publication_date
+        $totalPublicationCount = DB::table('publications')
+            ->whereNotNull('publication_date')
+            ->count();
 
-        // Count all publications where p_user_id = 1
-        $adminPublicationCount = Publication::where('p_user_id', 1)->count();
+        // Count all publications where p_user_id = 1 with a valid publication_date
+        $adminPublicationCount = DB::table('publications')
+            ->where('p_user_id', 1)
+            ->whereNotNull('publication_date')
+            ->count();
 
-        // Count all research in the system
-        $totalResearchCount = Research::count();
+        // Count all research in the system with a valid date_started
+        $totalResearchCount = DB::table('research')
+            ->whereNotNull('date_started')
+            ->count();
 
-        // Count all publications where r_user_id = 1
-        $adminResearchCount = Research::where('r_user_id', 1)->count();
+        // Count all research where r_user_id = 1 with a valid date_started
+        $adminResearchCount = DB::table('research')
+            ->where('r_user_id', 1)
+            ->whereNotNull('date_started')
+            ->count();
 
-        // Count all publications in the system
-        $totalPresentationCount = Presentation::count();
+        // Count all presentations in the system with a valid conference_date
+        $totalPresentationCount = DB::table('presentation')
+            ->whereNotNull('conference_date')
+            ->count();
 
-        // Count all publications where pr_user_id = 1
-        $adminPresentationCount = Presentation::where('pr_user_id', 1)->count();
+        // Count all presentations where pr_user_id = 1 with a valid conference_date
+        $adminPresentationCount = DB::table('presentation')
+            ->where('pr_user_id', 1)
+            ->whereNotNull('conference_date')
+            ->count();
 
         // Fetch the latest activity logs from the doc_logs table
         $activityLogs = DB::table('doc_logs')

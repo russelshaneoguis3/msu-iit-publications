@@ -19,6 +19,8 @@ class Team extends Model
         'first_name',
         'last_name',
         'centerlab',
+        'token',
+        'email_status',
     ];
 
 }

@@ -48,8 +48,8 @@ class ResearchController extends Controller
                 'users.last_name', 
                 'users.email',
                 'center.c_name as center_name',
-                DB::raw('COUNT(research.r_id) as research_count'),
-                DB::raw('MAX(research.created_at) as last_upload') // Get the most recent upload time
+                DB::raw('COUNT(research.date_started) as research_count'),
+                DB::raw('MAX(CASE WHEN research.date_started IS NOT NULL THEN research.created_at ELSE NULL END) as last_upload')
             )
             ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
             ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
@@ -97,7 +97,9 @@ class ResearchController extends Controller
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all research of the selected user
-        $researches = Research::where('r_user_id', $id)->get();
+        $researches = Research::where('r_user_id', $id)
+        ->whereNotNull('research.date_started')
+        ->get();
     
         // Return view with user and research data
         return view('admin.viewResearch', compact('user', 'userinfo', 'researches'));
@@ -122,7 +124,9 @@ class ResearchController extends Controller
         $userinfo = DB::table('users')->where('uid', $id)->first();
     
         // Fetch all research of the selected user
-        $researches = Research::where('r_user_id', $id)->get();
+        $researches = Research::where('r_user_id', $id)
+        ->whereNotNull('research.date_started')
+        ->get();
     
         // Return view with user and research data
         return view('admin.viewCenterResearch', compact('user', 'userinfo', 'researches'));

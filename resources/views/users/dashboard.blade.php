@@ -162,8 +162,8 @@
 						type: "gradient",
 						gradient: {
 						shadeIntensity: 1,
-						opacityFrom: 0.3,
-						opacityTo: 0.4,
+						opacityFrom: 0.7,
+						opacityTo: 0.9,
 						stops: [0, 90, 100],
 						}
 					},

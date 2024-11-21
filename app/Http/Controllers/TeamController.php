@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Models\Team;
 
 class TeamController extends Controller
@@ -58,31 +59,32 @@ class TeamController extends Controller
     
 
  //Verify email users   
-    public function editUser($uid)
-{
-    // Check if the user is an admin
-    if (session('role_id') != 1) {
-        return redirect()->route('login')->with('error', 'Unauthorized access.');
-    }
-
-    // Find the user by their UID
-    $user = DB::table('users')->where('uid', $uid)->first();
-
-    if (!$user) {
-        return redirect()->route('admin.team')->with('error', 'User not found.');
-    }
-
-    // Update email_status to 'yes' and set token to null
-    DB::table('users')
-        ->where('uid', $uid)
-        ->update([
-            'email_status' => 'yes',
-            'token' => null,
-        ]);
-
-    // Return JSON response with a success message
-    return response()->json(['message' => 'User Email Address was successfully verified.']);
-}
+ public function editUser($uid)
+ {
+     try {
+         if (session('role_id') != 1) {
+             return response()->json(['message' => 'Unauthorized access.'], 403);
+         }
+ 
+         $user = DB::table('users')->where('uid', $uid)->first();
+ 
+         if (!$user) {
+             return response()->json(['message' => 'User not found.'], 404);
+         }
+ 
+         DB::table('users')
+             ->where('uid', $uid)
+             ->update([
+                 'email_status' => 'yes',
+                 'token' => null,
+             ]);
+ 
+         return response()->json(['message' => 'User Email Address was successfully verified.']);
+     } catch (\Exception $e) {
+         return response()->json(['message' => 'Something went wrong.'], 500);
+     }
+ }
+ 
 
 //-------------------------------------------------------------------------------------------------------------------------------
 
@@ -115,9 +117,18 @@ public function usersTeam()
 
     // Fetch team data with joined center name
     $users_data = DB::table('users')
-        ->leftJoin('publications', 'users.uid', '=', 'publications.p_user_id')
-        ->leftJoin('research', 'users.uid', '=', 'research.r_user_id')
-        ->leftJoin('presentation', 'users.uid', '=', 'presentation.pr_user_id')
+        ->leftJoin('publications', function ($join) {
+            $join->on('users.uid', '=', 'publications.p_user_id')
+                ->whereNotNull('publications.publication_date'); // Only count if publication_date is valid
+        })
+        ->leftJoin('research', function ($join) {
+            $join->on('users.uid', '=', 'research.r_user_id')
+                ->whereNotNull('research.date_started'); // Only count if date_started is valid
+        })
+        ->leftJoin('presentation', function ($join) {
+            $join->on('users.uid', '=', 'presentation.pr_user_id')
+                ->whereNotNull('presentation.conference_date'); // Only count if conference_date is valid
+        })
         ->leftJoin('documentation', 'users.uid', '=', 'documentation.d_user_id')
         ->leftJoin('user_roles', 'users.uid', '=', 'user_roles.user_id')
         ->leftJoin('center', 'users.centerlab', '=', 'center.cid')
@@ -134,7 +145,7 @@ public function usersTeam()
         )
         ->where('user_roles.u_role_id', '!=', 1)  // Exclude admin role
         ->where('users.email_status', '=', 'yes') // Only include users with email_status = 'yes'
-        ->where('users.uid', '!=', $userId)
+        ->where('users.uid', '!=', $userId)       // Exclude the current user
         ->groupBy(
             'users.uid',
             'center.c_name',

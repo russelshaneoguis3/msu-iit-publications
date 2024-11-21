@@ -90,7 +90,7 @@ class DocumentationController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'file_path' => 'nullable|file|mimes:pdf,docx,jpeg,jpg,png,xlsx,xls|max:2048', // Allow PDF, DOCX, JPEG, JPG, PNG, Excel files
             'link' => 'nullable|url',
         ]);
@@ -145,7 +145,7 @@ public function updateDocumentation(Request $request, $id)
 {
     $request->validate([
         'title' => 'required|string|max:255',
-        'description' => 'required|string',
+        'description' => 'nullable|string',
         'file_path' => 'nullable|file|mimes:pdf,docx,jpeg,jpg,png,xlsx,xls|max:2048', // Allow PDF, DOCX, JPEG, JPG, PNG, Excel files
         'link' => 'nullable|url',
     ]);

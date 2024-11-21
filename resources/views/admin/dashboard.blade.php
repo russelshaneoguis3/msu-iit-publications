@@ -142,7 +142,7 @@
                       <i class="bx bx-globe"></i>
                     <div class="ps-3">
 					<h6><b style="color: #bb8082">{{ $totalPublicationCount }}</b> <span>Overall Count</span></h6>
-					<h6><b style="color: #bb8082">{{ $adminPublicationCount }} </b><span>Admin's Presentation</span></h6> 
+					<h6><b style="color: #bb8082">{{ $adminPublicationCount }} </b><span>Admin's Publication</span></h6> 
 
                     </div>
                   </div>
@@ -164,7 +164,7 @@
                       <i class="bx bx-file-find"></i>
                     <div class="ps-3">
 					<h6><b style="color: #ceb66f">{{ $totalResearchCount }}</b> <span>Overall Count</span></h6>
-					<h6><b style="color: #ceb66f">{{ $adminResearchCount }} </b><span>Admin's Presentation</span></h6> 
+					<h6><b style="color: #ceb66f">{{ $adminResearchCount }} </b><span>Admin's Research</span></h6> 
 
                     </div>
                   </div>
@@ -236,8 +236,8 @@
 						type: "gradient",
 						gradient: {
 						shadeIntensity: 1,
-						opacityFrom: 0.3,
-						opacityTo: 0.4,
+						opacityFrom: 0.7,
+						opacityTo: 0.9,
 						stops: [0, 90, 100],
 						}
 					},
