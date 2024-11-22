@@ -236,8 +236,8 @@
 						type: "gradient",
 						gradient: {
 						shadeIntensity: 1,
-						opacityFrom: 0.7,
-						opacityTo: 0.9,
+						opacityFrom: 0.9,
+						opacityTo: 0.1,
 						stops: [0, 90, 100],
 						}
 					},
@@ -438,6 +438,7 @@
 			  <table class="table table-activity-logs">
 						<thead>
 							<tr>
+                <th scope="col" style="display: none;">Log ID</th>
 								<th scope="col">Time</th>
 								<th scope="col">User/Admin</th>
 								<th scope="col">Activity</th>
@@ -448,6 +449,7 @@
 						<tbody>
 							@foreach ($activityLogs as $log)
 								<tr>
+                  <td style="display: none;">{{ $log->log_id }}</td>
 									<td style="color: #a41d21">{{ $log->log_time_calc }}</td>
 									<td>{{ $log->first_name }} {{ $log->last_name }}</td>
 									<td>
