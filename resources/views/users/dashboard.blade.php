@@ -396,23 +396,40 @@ const backgrounds = [
 	'url(../assets/img/userdashboard/dashboard30.jpg)'
 ];
 
+const FIVE_MINUTES = 300000; // 5 minutes in milliseconds
+
 // Function to pick a random background image
 function getRandomBackground() {
-    const randomIndex = Math.floor(Math.random() * backgrounds.length);
-    return backgrounds[randomIndex];
+	const randomIndex = Math.floor(Math.random() * backgrounds.length);
+	return backgrounds[randomIndex];
 }
 
 // Function to change the background
 function changeBackground() {
-    const newBackgroundImage = getRandomBackground();
-    document.getElementById('dashboard-user').style.backgroundImage = newBackgroundImage;
+	const newBackgroundImage = getRandomBackground();
+	document.getElementById('dashboard-user').style.backgroundImage = newBackgroundImage;
+
+	// Save the current timestamp and background in localStorage
+	localStorage.setItem('lastChangeTime', Date.now());
+	localStorage.setItem('lastBackground', newBackgroundImage);
 }
 
-// Change background on page load
-changeBackground();
+// Initialize background on page load
+function initializeBackground() {
+	const lastChangeTime = localStorage.getItem('lastChangeTime');
+	const lastBackground = localStorage.getItem('lastBackground');
 
-// Set an interval to change the background every 5 minutes (300,000 ms)
-setInterval(changeBackground, 300000);
+	// If there's a saved background and it hasn't been 5 minutes, use it
+	if (lastChangeTime && Date.now() - lastChangeTime < FIVE_MINUTES && lastBackground) {
+		document.getElementById('dashboard-user').style.backgroundImage = lastBackground;
+	} else {
+		// Otherwise, change the background
+		changeBackground();
+	}
+}
+
+// Call initializeBackground on page load
+initializeBackground();
 
 </script>
 
