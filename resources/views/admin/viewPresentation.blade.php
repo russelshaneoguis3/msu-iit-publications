@@ -177,7 +177,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background: #ebf4ff;">
+            <div class="modal-body" style="background: #ebf4ff; max-height: 1000px; overflow-y: auto;">
             <h4>Presentation Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -187,142 +187,142 @@
                     <div class="row" style="border-bottom: 2px solid #fff;"></div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;"><br><br>
-                        <div class="col-3" style="font-size: 20px">Research Title</div>
+                        <div class="col-3" style="">Research Title</div>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->research_title }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;"><br><br>
-                        <div class="col-3" style="font-size: 20px">Research Project Title</div>
+                        <div class="col-3">Research Project Title</div>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->research_project_title }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Fund</div><br><br>
+                        <div class="col-3">Fund</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->fund }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Type</div><br><br>
+                        <div class="col-3">Research Type</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->research_type }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">SO Number</div><br><br>
+                        <div class="col-3">SO Number</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->so_no }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Researcher Name</div><br><br>
+                        <div class="col-3">Researcher Name</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->researcher_name }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Presenter Name</div><br><br>
+                        <div class="col-3">Presenter Name</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->presenter_name }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Duration</div><br><br>
+                        <div class="col-3">Date Duration</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->date_duration }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Started</div><br><br>
+                        <div class="col-3">Date Started</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->date_started }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Completed</div><br><br>
+                        <div class="col-3">Date Completed</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->date_completed }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Approved Cost</div><br><br>
+                        <div class="col-3">Approved Cost</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->cost }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Funding Source</div><br><br>
+                        <div class="col-3">Funding Source</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->funding_source }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Presentation Type</div><br><br>
+                        <div class="col-3">Presentation Type</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->presentation_type }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Conference Type</div><br><br>
+                        <div class="col-3">Conference Type</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->conference_type }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Conference Title</div><br><br>
+                        <div class="col-3">Conference Title</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->conference_title }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Venue</div><br><br>
+                        <div class="col-3">Venue</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->venue }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Conference Date</div><br><br>
+                        <div class="col-3">Conference Date</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->conference_date }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Organizer</div><br><br>
+                        <div class="col-3">Organizer</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->organizer }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Article Title</div><br><br>
+                        <div class="col-3">Article Title</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->article_title }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Publication Date</div><br><br>
+                        <div class="col-3">Publication Date</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->publication_date }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Journal Title</div><br><br>
+                        <div class="col-3">Journal Title</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->journal_title }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Editor</div><br><br>
+                        <div class="col-3">Editor</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->editor }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Publisher</div><br><br>
+                        <div class="col-3">Publisher</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->publisher }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Volume/Issue No.</div><br><br>
+                        <div class="col-3">Volume/Issue No.</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->vol_issue_no }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Page No.</div><br><br>
+                        <div class="col-3">Page No.</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->page_no }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Publication Type</div><br><br>
+                        <div class="col-3">Publication Type</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->publication_type }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Indexing</div><br><br>
+                        <div class="col-3">Indexing</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->indexing }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Presentation File</div><br><br>
+                        <div class="col-3">Presentation File</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                             @if ($userpresent->pr_file_path)
                                 <a href="{{ asset($userpresent->pr_file_path) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userpresent->pr_file_path) }}</a>
@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">DOI link/Website Link</div><br><br>
+                        <div class="col-3">DOI link/Website Link</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userpresent->pr_link)
                                 <a href="{{ asset($userpresent->pr_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($userpresent->pr_link, 20) }}{{ strlen($userpresent->pr_link) > 20 ? : '' }}</a>
@@ -343,12 +343,12 @@
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Upload</div><br><br>
+                        <div class="col-3">Date Upload</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->created_at }}</div>
                     </div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Last Update</div><br><br>
+                        <div class="col-3">Last Update</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpresent->updated_at }}</div>
                     </div>
 

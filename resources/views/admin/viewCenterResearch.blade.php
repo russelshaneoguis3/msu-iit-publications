@@ -178,7 +178,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
-            <div class="modal-body" style="background-color: #fffbee;">
+            <div class="modal-body" style="background-color: #fffbee; max-height: 1000px; overflow-y: auto;">
             <h4>Research Details
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right"></button>
             </h4>
@@ -189,31 +189,31 @@
                     <div class="row" style="border-bottom: 2px solid #fff;"></div>
 
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Title</div><br><br>
+                        <div class="col-3">Research Title</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->research_title }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Description</div><br><br>
+                        <div class="col-3">Research Description</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->description }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Project Leaders</div><br><br>
+                        <div class="col-3">Research Project Leaders</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->leaders }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Project Members</div><br><br>
+                        <div class="col-3">Research Project Members</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->members }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Project Type </div><br><br>
+                        <div class="col-3">Research Project Type </div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->research_type  }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Special Order No.</div><br><br>
+                        <div class="col-3">Special Order No.</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->so_no }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Special Order Link from IIT Docs</div><br><br>
+                        <div class="col-3">Special Order Link from IIT Docs</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                         @if ($userres->r_link)
                                 <a href="{{ asset($userres->r_link) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ Str::limit($userres->r_link, 20) }}{{ strlen($userres->r_link) > 20 ? : '' }}</a>
@@ -223,27 +223,27 @@
                         </div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Duration</div><br><br>
+                        <div class="col-3">Date Duration</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_duration }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Started</div><br><br>
+                        <div class="col-3">Date Started</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_started }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Completed</div><br><br>
+                        <div class="col-3">Date Completed</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->date_completed }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Approved Cost-Direct Cost</div><br><br>
+                        <div class="col-3">Approved Cost-Direct Cost</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->cost }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Funding Source</div><br><br>
+                        <div class="col-3">Funding Source</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->funding_source }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Research Project Proposal File</div><br><br>
+                        <div class="col-3">Research Project Proposal File</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">
                             @if ($userres->r_file_path)
                                 <a href="{{ asset($userres->r_file_path) }}" target="_blank" style="color: #a41d21; text-decoration: underline;">{{ basename($userres->r_file_path) }}</a>
@@ -253,11 +253,11 @@
                         </div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Date Upload</div><br><br>
+                        <div class="col-3">Date Upload</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->created_at }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Last Update</div><br><br>
+                        <div class="col-3">Last Update</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userres->updated_at }}</div>
                     </div>
                 </div>
