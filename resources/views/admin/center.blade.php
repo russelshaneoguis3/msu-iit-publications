@@ -108,7 +108,7 @@
                 <div class="accordion-body">
                     <h6 style="color: #a41d21">Researchers Assigned</h6>
                     @if($centerGroup->count() > 0)
-                        <div class="table-responsive-md">
+                        <div class="table-responsive">
                             <table class="table centers-table">
                                 <thead>
                                     <tr>
@@ -174,7 +174,7 @@
 </div>
 
 <!-- Modal for Adding Center -->
-<div class="modal fade" id="addCenterModal" tabindex="-1" aria-labelledby="addCenterModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addCenterModal" tabindex="-1" aria-labelledby="addCenterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

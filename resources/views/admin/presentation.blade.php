@@ -112,7 +112,7 @@
 
 
 <!-- Modal for Adding Presentation -->
-<div class="modal fade" id="addPresentationModal" tabindex="-1" aria-labelledby="addPresentationModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addPresentationModal" tabindex="-1" aria-labelledby="addPresentationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -349,7 +349,7 @@ Add Presentation
 
 	<br><br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-presentation">
                 <thead>
                   <tr>
@@ -403,7 +403,7 @@ Add Presentation
                 </tr>
                 
 <!-- Edit Modal -->
-<div class="modal fade" id="editPresentationModal{{ $adminpresent->pr_id }}" tabindex="-1" aria-labelledby="editPresentationModalLabel{{ $adminpresent->pr_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editPresentationModal{{ $adminpresent->pr_id }}" tabindex="-1" aria-labelledby="editPresentationModalLabel{{ $adminpresent->pr_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -628,7 +628,7 @@ Add Presentation
 	</div>
 
 <!-- View Presentation Modal -->
-<div class="modal fade" id="viewPresentationModal{{ $adminpresent->pr_id }}" tabindex="-1" aria-labelledby="viewPresentationModalLabel{{ $adminpresent->pr_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewPresentationModal{{ $adminpresent->pr_id }}" tabindex="-1" aria-labelledby="viewPresentationModalLabel{{ $adminpresent->pr_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
@@ -841,7 +841,7 @@ Add Presentation
 
         <br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-presentation">
                 <thead>
                   <tr>

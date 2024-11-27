@@ -123,7 +123,7 @@
 
     <br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-presentation">
                 <thead>
                   <tr>
@@ -173,7 +173,7 @@
                 
 
 <!-- View Presentation Modal -->
-<div class="modal fade" id="viewPresentationModal{{ $userpresent->pr_id }}" tabindex="-1" aria-labelledby="viewPresentationModalLabel{{ $userpresent->pr_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewPresentationModal{{ $userpresent->pr_id }}" tabindex="-1" aria-labelledby="viewPresentationModalLabel{{ $userpresent->pr_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf

@@ -123,7 +123,7 @@
 
 	<br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-research">
                 <thead>
                   <tr>
@@ -174,7 +174,7 @@
             
 
 <!-- View Research Modal -->
-<div class="modal fade" id="viewResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="viewResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="viewResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf

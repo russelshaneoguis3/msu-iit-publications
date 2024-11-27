@@ -107,7 +107,7 @@
 <main id ="main">
 
 <!-- Modal for Adding Documentation -->
-<div class="modal fade" id="addDocumentationModal" tabindex="-1" aria-labelledby="addDocumentationModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addDocumentationModal" tabindex="-1" aria-labelledby="addDocumentationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -170,7 +170,7 @@ Add Document
 
 	<br><br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-documentation">
                 <thead>
                   <tr>
@@ -220,7 +220,7 @@ Add Document
                 </tr>
 
 <!-- Edit Modal -->
-<div class="modal fade" id="editDocumentationModal{{ $userdoc->d_id }}" tabindex="-1" aria-labelledby="editDocumentationModalLabel{{ $userdoc->d_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editDocumentationModal{{ $userdoc->d_id }}" tabindex="-1" aria-labelledby="editDocumentationModalLabel{{ $userdoc->d_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

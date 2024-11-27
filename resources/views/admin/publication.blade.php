@@ -110,7 +110,7 @@
 <main id="main">
 
 <!-- Modal for Adding Publication -->
-<div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -294,7 +294,7 @@
         </button>
 		<br><br>
 
-			<div class="table-responsive-md">
+			<div class="table-responsive">
             <table class="table table-publications">
                 <thead>
                   <tr>
@@ -350,7 +350,7 @@
                 </tr>
 
 <!-- Edit Modal -->
-<div class="modal fade" id="editPublicationModal{{ $adminpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $adminpub->p_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editPublicationModal{{ $adminpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $adminpub->p_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -526,7 +526,7 @@
 
     
 <!-- View Publication Modal -->
-<div class="modal fade" id="viewPublicationModal{{ $adminpub->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $adminpub->p_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewPublicationModal{{ $adminpub->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $adminpub->p_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
@@ -663,7 +663,7 @@
 	<div class="card">
     <div class="card-body">
         <h4 class="card-title">Users' Publications </h4> <br>
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-publications">
                 <thead>
                   <tr>

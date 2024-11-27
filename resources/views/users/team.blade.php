@@ -52,7 +52,7 @@
  @if(isset($user))
 
     <!-- CONTENT -->
-    <section id="content">
+    <section id="content" style="overflow: hidden;">
         <!-- NAVBAR -->
         <nav>
             <i class='bx bx-menu'></i>
@@ -77,7 +77,8 @@
 <h4>The Researchers </h4>
 <br>
 
-<div class="col-lg-5">
+<div class="container-fluid">
+<div class="col-lg-7">
   <div class="card" id="personal-info-team">
     <div class="card-body">
       <h5 class="card-title">Personal Information</h5>
@@ -110,14 +111,14 @@
       </div>
 
       <div class="row mb-2">
-        <label class="col-sm-2 col-form-label"><b>Center Assigned:</b></label>
+        <label class="col-sm-2 col-form-label"><b>Center:</b></label>
         <div class="col-sm-10">
           <p class="form-control-plaintext">{{ $user->center_name }}</p>
         </div>
       </div>
 
       <div class="row mb-2">
-        <label class="col-sm-2 col-form-label"><b>Date Created:</b></label>
+        <label class="col-sm-2 col-form-label"><b>Created:</b></label>
         <div class="col-sm-10">
           <p class="form-control-plaintext">{{ $user->created_at }}</p>
         </div>
@@ -128,7 +129,7 @@
 
 
 <!-- Edit Personal Details Modal -->
-<div class="modal fade" id="editPersonalModal{{ $user->uid }}" tabindex="-1" aria-labelledby="editPersonalModalLabel{{ $user->uid }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editPersonalModal{{ $user->uid }}" tabindex="-1" aria-labelledby="editPersonalModalLabel{{ $user->uid }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -180,59 +181,58 @@
         </div>
     </div>
 </div>
+</div>
 
 <br>
 <hr>
 <br>
 
 <div class="container-fluid">
-    <div class="row">
-        @foreach($users_data as $user)
-            <!-- Responsive Card -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4" id="team-card-ovr"> <!-- Responsive column size -->
-                <div class="card h-100">
-                    <img src="{{ asset('../assets/img/team-card.jpg') }}" class="card-img-top" alt="...">
-                    <div class="card-img-overlay">
-                        <p class="card-title text-center">{{ $user->first_name . ' ' . $user->last_name }}</p>
-                        <p class="center-assigned">{{ $user->center_name ?? 'Not yet Assigned' }}</p>
+    <!-- DataTable -->
+	<div class="card">
+        <div class="card-body">
+         <h4 class="card-title">Researchers List & Uploads</h4><br>
+			<div class="table-responsive">
+            <table class="table table-team" id="user-team-table">
+                <thead>
+                <tr>
+                <th>Name</th>
+                <th>Center</th>
+                <th>Research</th>
+                <th>Publication</th>
+                <th>Presentation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($users_data as $user)
+                <tr>
 
-                        <!-- Top button row -->
-                        <div class="row mb-2">
-                            <div class="col-6">
-                                <button id="team-card-research" type="button" class="btn btn-outline-light w-100">
-                                    Research
-                                    <span class="badge bg-white text-dark">{{ $user->research_count }}</span>
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button id="team-card-publication" type="button" class="btn btn-outline-light w-100">
-                                    Publications
-                                    <span class="badge bg-white text-dark">{{ $user->publication_count }}</span>
-                                </button>
-                            </div>
-                        </div>
+                    <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
+                    <td>{{ $user->center_name ?? 'Not yet Assigned' }}</td>
+                    <td style="color: #a41d21; font-weight:500">
+                        
+                        {{ $user->research_count }} <i> uploads</i>
 
+                    </td>
+                    <td style="color: #a41d21; font-weight:500">
+                        
+                        {{ $user->publication_count }} <i> uploads</i>
 
-                        <!-- Bottom button row -->
-                        <div class="row mt-auto">
-                            <div class="col-6">
-                                <button id="team-card-presentation" type="button" class="btn btn-outline-light w-100">
-                                    Presentation
-                                    <span class="badge bg-white text-dark">{{ $user->presentation_count }}</span>
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button id="team-card-documentation" type="button" class="btn btn-outline-light w-100">
-                                    Documents
-                                    <span class="badge bg-white text-dark">{{ $user->documentation_count }}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+                    </td>
+                    <td style="color: #a41d21; font-weight:500">
+
+                       {{ $user->presentation_count }} <i> uploads</i>
+
+                    </td>
+
+                </tr>
+            @endforeach
+
+                </tbody>
+            </table>
+		    </div>
+		</div>
+	</div>
 </div>
 
 
@@ -274,6 +274,18 @@
     });
 </script>
 @endif
+
+<!-- DataTable Initialization -->
+<script>
+        $(document).ready(function() {
+            $('.table-team').DataTable({
+                "paging": true,
+                "searching": true,
+                "lengthMenu": [10, 25, 50, 75, 100],  // Set the options for the number of rows per page
+			"order": [[0, 'desc']]
+            });
+        });
+</script>
 
 </body>
 </html>

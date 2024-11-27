@@ -107,7 +107,7 @@
 <main id ="main">
 
 <!-- Modal for Adding Publication -->
-<div class="modal fade" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addPublicationModal" tabindex="-1" aria-labelledby="addPublicationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -295,7 +295,7 @@
 
 	<br><br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-publications">
                 <thead>
                   <tr>
@@ -352,7 +352,7 @@
                 </tr>
 				
 <!-- Edit Modal -->
-<div class="modal fade" id="editPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="editPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -528,7 +528,7 @@
 
     
 <!-- View Publication Modal -->
-<div class="modal fade" id="viewPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewPublicationModal{{ $userpub->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $userpub->p_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf

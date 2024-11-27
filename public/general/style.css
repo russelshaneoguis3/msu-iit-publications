@@ -114,6 +114,19 @@ table td {
 }
 
 
+@media (max-width: 1920px) {
+  .view-modal  {
+    margin-left: 22%;
+    max-width: 78%;
+  }
+  .edit-modal {
+    margin-left: 5%;
+  }
+  .add-modal {
+    margin-left: 5%;
+  }
+}
+
 .btn {
   border-radius: 15px;
 }
@@ -260,6 +273,7 @@ color: var(--black-color)
   position: relative;
 }
 
+
 /* Button responsiveness for smaller screens */
 @media (max-width: 768px) {
 
@@ -268,6 +282,20 @@ color: var(--black-color)
     overflow: hidden; 
   }
 }
+
+@media (max-width: 1600px) {
+
+  .dashboard-user {
+    height: 170vh;
+    overflow: auto; 
+  }
+}
+
+.activity-label {
+  font-size: 12px;
+  color: #a41d21;
+}
+
 
 /* This is the container that holds both elements side by side */
 .greeting-container {
@@ -556,127 +584,39 @@ table.centers-table tbody td {
 
 /* Team Users design --------------------------------------------------------------------------------------------------------*/
 
+
 #personal-info-team {
 background: #f9f5fc ;
 }
 
-.card-img-overlay {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 25px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+#user-team-table tr th:nth-child(3) {
+  background-color: #ceb66f;
 }
 
-.card-img-overlay .card-title{
-font-size: 20px;
+#user-team-table tr td:nth-child(3) {
+  background-color: #faf8f0;
+  font-size: 18px;
 }
 
-.card-img-overlay .center-assigned{
-  font-size: 14px;
-  text-align: center;
+#user-team-table tr th:nth-child(4) {
+  background-color: #bb8082;
 }
 
-.card-img-top {
-  border-radius: 25px;
+#user-team-table tr td:nth-child(4) {
+  background-color: #fff7f7;
+  font-size: 18px;
 }
 
-#team-card-research {
-  background-color: #ceb66f ;
-  max-width: 150px;
-  border-color: #ceb66f ;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  color: var(--black-color)
+#user-team-table tr th:nth-child(5) {
+  background-color: #608BC1;
 }
 
-#team-card-publication {
-  background-color: #bb8082  ;
-  max-width: 150px;
-  border-color: #bb8082  ;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  color: var(--black-color)
+#user-team-table tr td:nth-child(5) {
+  background-color: #ebf4ff;
+  font-size: 18px;
 }
 
-
-#team-card-presentation {
-  background-color: #608BC1 ;
-  max-width: 150px;
-  border-color: #608BC1 ;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  color: var(--black-color)
-}
-
-#team-card-documentation {
-  background-color: #95bea2 ;
-  max-width: 150px;
-  border-color: #95bea2 ;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  color: var(--black-color)
-}
-
-#team-card-research:hover,
-#team-card-publication:hover,
-#team-card-presentation:hover,
-#team-card-documentation:hover 
-{
-  box-shadow: 1px 2px 2px var(--focus-color);
-}
-
-
-/* Button responsiveness for smaller screens */
-@media (max-width: 1600px) {
-  #team-card-research,
-  #team-card-publication,
-  #team-card-presentation,
-  #team-card-documentation {
-    max-width: 100px;
-    font-size: 12px; /* Smaller font size for smaller screens */
-    padding: 2px 5px; /* Adjust padding */
-  }
-
-  .card-title {
-    font-size: 18px;
-  }
-
-  .card-img-overlay .card-title{
-    font-size: 16px;
-    }
-    
-    .card-img-overlay .center-assigned{
-      font-size: 10px;
-      text-align: center;
-    }
-    
-    .team-card-personal {
-      max-height: 800px;
-    }
-
-}
-
-/* Button responsiveness for smaller screens */
-@media (max-width: 768px) {
-  #team-card-research,
-  #team-card-publication,
-  #team-card-presentation,
-  #team-card-documentation {
-    font-size: 10px; /* Smaller font size for smaller screens */
-    padding: 3px 8px; /* Adjust padding */
-  }
-
-  .card-title {
-    font-size: 18px;
-  }
-
-  .card-img-overlay .card-title{
-    font-size: 14px;
-    }
-    
-    .card-img-overlay .center-assigned{
-      font-size: 10px;
-      text-align: center;
-    }
-  
-    .team-card-personal {
-      max-height: 1000px;
-    }
-
-    
+#user-team-table tr td i {
+  font-size: 12px;
+  color: var(--black-color);
 }

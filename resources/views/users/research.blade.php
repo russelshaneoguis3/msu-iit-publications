@@ -108,7 +108,7 @@
 
 
 <!-- Modal for Adding research -->
-<div class="modal fade" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addResearchModal" tabindex="-1" aria-labelledby="addResearchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -255,7 +255,7 @@ Add Research
 
 	<br><br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-research">
                 <thead>
                   <tr>
@@ -309,7 +309,7 @@ Add Research
                 </tr>
                 
 <!-- Edit Modal -->
-<div class="modal fade" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="editResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -443,7 +443,7 @@ Add Research
 	</div>
 
 <!-- View Research Modal -->
-<div class="modal fade" id="viewResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="viewResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewResearchModal{{ $userres->r_id }}" tabindex="-1" aria-labelledby="viewResearchModalLabel{{ $userres->r_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf

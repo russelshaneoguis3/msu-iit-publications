@@ -76,11 +76,72 @@
 
         <main id="main">
 
+<!-- Edit Personal Details Modal -->
+<div class="modal fade edit-modal" id="editPersonalModal{{ $user->uid }}" tabindex="-1" aria-labelledby="editPersonalModalLabel{{ $user->uid }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPersonalModalLabel{{ $user->uid }}" style="color: #ffffff">Edit Personal Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('users.updatePersonal', $user->uid) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="first_name">Email Address</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                    </div><br>
+
+                    <!-- First Name Input -->
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user->first_name }}" required>
+                    </div><br>
+
+                    <!-- Last Name Input -->
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user->last_name }}" required>
+                    </div><br>
+
+                    <!-- Center Assigned Dropdown -->
+                    <div class="form-group">
+                        <label for="centerlab">Center Assigned</label>
+                        <select class="form-select" id="centerlab" name="centerlab" required>
+                        <option value="">- - No Center/Lab/Office/Department yet - -</option>
+                            @foreach($centers as $center)
+                                <option value="{{ $center->cid }}" 
+                                    @if($center->cid == $user->centerlab) selected @endif>
+                                    {{ $center->c_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div><br>
+                </div>
+                <div class="modal-footer" style="background-color: #f9f5fc">
+                    <button type="button" id="updatebtn-close" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id ="public-modal-botton-save" class="btn btn-outline">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
     <!-- DataTable -->
 	<div class="card">
         <div class="card-body">
             <h4 class="card-title">Research Team  (Verified) </h4><br>
-			<div class="table-responsive-md">
+
+            <!-- Edit Button -->
+            <button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPersonalModal{{ $user->uid }}">
+                Edit Admin Info
+            </button>
+            <br><br>
+
+			<div class="table-responsive">
             <table class="table table-team">
                 <thead>
                   <tr>
@@ -119,7 +180,7 @@
 	<div class="card">
         <div class="card-body">
          <h4 class="card-title">Research Team Applicants (Email not verified) </h4><br>
-			<div class="table-responsive-md">
+			<div class="table-responsive">
             <table class="table table-team">
                 <thead>
                   <tr>
@@ -257,6 +318,22 @@
         });
     }
 </script>
+
+<!-- SweetAlert for success messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Okay',
+        customClass: {
+            confirmButton: 'btn-outline-custom' 
+        },
+        buttonsStyling: false // Disable default button styling
+    });
+</script>
+@endif
 
 </body>
 </html>

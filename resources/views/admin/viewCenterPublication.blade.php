@@ -127,7 +127,7 @@
 
     <br>
 
-		<div class="table-responsive-md">
+		<div class="table-responsive">
             <table class="table table-publications">
                 <thead>
                 <tr>
@@ -180,7 +180,7 @@
                 </tr>
     
 <!-- View Publication Modal -->
-<div class="modal fade" id="viewPublicationModal{{ $publication->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $publication->p_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewPublicationModal{{ $publication->p_id }}" tabindex="-1" aria-labelledby="viewPublicationModalLabel{{ $publication->p_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf

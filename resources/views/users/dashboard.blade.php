@@ -200,14 +200,14 @@
 				<div class="activity">
 					@foreach ($announcements as $announcement)
 						<div class="activity-item d-flex">
-							<div class="activity-label" style="color: #a41d21">{{ $announcement->relative_time }} </div>
+							<div class="activity-label">{{ $announcement->relative_time }} </div>
 							<i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
 							<div class="activity-content">
 								<!-- Tooltip displaying full description on hover -->
 								<span data-bs-toggle="tooltip" 
 									title="{{ $announcement->description }}">
-									<strong style="color: #000000">&nbsp {{ $announcement->title }}</strong> 
-									<p style="color: #3170AB">- {{ $announcement->short_description }} </p>
+									<strong style="color: #000000"> &nbsp {{ $announcement->title }}</strong> 
+									<p style="color: #3170AB"> {{ $announcement->short_description }} </p>
 								</span>
 							</div>
 						</div>
@@ -237,7 +237,7 @@
 						<div class="activity">
 							@foreach ($activityLogs as $log)
 								<div class="activity-item d-flex">
-									<div class="activity-label" style="color: #a41d21">{{ $log->log_time_calc }} </div>
+									<div class="activity-label">{{ $log->log_time_calc }} </div>
 									<i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
 									<div class="activity-content">
 									<p style="color: #000000;">&nbsp {{ $log->activity == 'UPDATE' ? 'Updated a document' 

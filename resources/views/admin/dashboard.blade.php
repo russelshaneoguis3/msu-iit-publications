@@ -274,7 +274,7 @@
 
                     <br><br>
 
-                  <div class="table-responsive-md">
+                  <div class="table-responsive">
                   <table class="table table-announcement">
                   <thead>
                       <tr>
@@ -305,7 +305,7 @@
                       </tr>
 
   <!-- Edit Modal -->
-<div class="modal fade" id="editAnnouncementModal{{ $announcement->a_id }}" tabindex="-1" aria-labelledby="editAnnouncementModalLabel{{ $announcement->a_id }}" aria-hidden="true">
+<div class="modal fade edit-modal" id="editAnnouncementModal{{ $announcement->a_id }}" tabindex="-1" aria-labelledby="editAnnouncementModalLabel{{ $announcement->a_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -340,7 +340,7 @@
 
 
 <!-- Modal for Adding Announcement -->
-<div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel" aria-hidden="true">
+<div class="modal fade add-modal" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -374,7 +374,7 @@
 
 
 <!-- View Announcement Modal -->
-<div class="modal fade" id="viewAnnouncementModal{{ $announcement->a_id }}" tabindex="-1" aria-labelledby="viewAnnouncementModalLabel{{ $announcement->a_id }}" aria-hidden="true">
+<div class="modal fade view-modal" id="viewAnnouncementModal{{ $announcement->a_id }}" tabindex="-1" aria-labelledby="viewAnnouncementModalLabel{{ $announcement->a_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             @csrf
@@ -389,11 +389,11 @@
                     <div class="row" style="border-bottom: 2px solid #fff;"></div>
                     
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Announcement Title</div><br><br>
+                        <div class="col-3">Announcement Title</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $announcement->title }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3" style="font-size: 20px">Announcement Description</div><br><br>
+                        <div class="col-3">Announcement Description</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $announcement->description }}</div>
                     </div>
                 <!-- End of Announcement Details -->
@@ -434,7 +434,7 @@
 			  <br>
 
 			  <div class="activity">
-			  <div class="table-responsive-md">
+			  <div class="table-responsive">
 			  <table class="table table-activity-logs">
 						<thead>
 							<tr>

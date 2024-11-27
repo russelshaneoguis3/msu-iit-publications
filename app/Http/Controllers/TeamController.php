@@ -53,8 +53,11 @@ class TeamController extends Controller
             ->select('users.*', 'center.c_name as center_name')  // Select user columns and the center name
             ->get();
 
+        // Fetch all centers
+        $centers = DB::table('center')->select('cid', 'c_name')->get();
+
         // Pass the user_id to the admin dashboard view
-        return view('admin.team', compact('users_data_no','users_data_yes','user'));
+        return view('admin.team', compact('users_data_no','users_data_yes','user', 'centers'));
     }
     
 
@@ -185,7 +188,7 @@ public function updatePersonal(Request $request, $uid)
     $user->save();
 
     // Redirect back with a success message
-    return redirect()->route('users.team')->with('success', 'Personal details updated successfully.');
+    return redirect()->back()->with('success', 'Information Updated Successfully!');
 }
 
 }
