@@ -132,6 +132,32 @@ class ResearchController extends Controller
         return view('admin.viewCenterResearch', compact('user', 'userinfo', 'researches'));
     }
 
+    public function printSpecificResearch($r_id)
+    {
+
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the research data for the specific r_id
+        $adresearch = DB::table('research')
+            ->where('r_id', $r_id)
+            ->first();
+
+        if (!$adresearch) {
+            // Handle case if no record is found
+            return redirect()->route('admin.research')->with('error', 'Research not found.');
+        }
+
+        // Pass the data to the print view
+        return view('admin.print.research', compact('user', 'adresearch'));
+    }
+
+
 //----------------------------------------------------------------------------------------------------------
 
 // Users View -----------------------------------------------------------------------------------------------

@@ -1,0 +1,71 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 15px;
+}
+
+#header-container {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    justify-content: flex-start; /* Aligns items horizontally */
+}
+
+#header-container h6,
+#header-container h5,
+#header-container p {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes padding */
+}
+
+.nav-logo {
+    margin-right: 10px; /* Adds space between the image and text */
+    width: 60px;
+}
+
+#text-container {
+    display: flex;
+    justify-content: space-between; /* Space between left and right items */
+    align-items: center; /* Vertically center the items */
+    width: 100%; /* Ensure the container takes up full width */
+}
+
+#link {
+    text-align: left; /* Align the link to the left */
+    font-size: 0.8rem; /* Adjust font size as needed */
+    margin: 0;
+}
+
+#influencing-text {
+    font-size: 0.8rem; /* Make the text smaller */
+    text-align: right; /* Align text to the right */
+    margin: 0; /* Remove any default margin */
+}
+
+hr {
+    margin-top: 5px; /* Optional: adjust margin for the hr */
+    margin-bottom: 0; /* Remove space below the <hr> */
+    border-top: 1px solid black; /* Optional: style the <hr> */
+}
+
+
+
+.table-bordered {
+    border: 1px solid black;
+}
+
+.table-bordered th {
+        width: 30%; /* Set width for the first column */
+    }
+
+.table-bordered td {
+        width: 70%; /* Set width for the second column */
+    }
+
+#matrix {
+    font-weight: bold;
+    text-align: center;
+}
+
+h6 {
+    font-weight: bold;
+}
+

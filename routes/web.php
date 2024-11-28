@@ -66,7 +66,8 @@ Route::put('/admin/research/{id}', [ResearchController::class, 'updateResearch']
 Route::get('/admin/research/{id}', [ResearchController::class, 'viewUserResearch'])->name('admin.viewResearch');
 //view from center
 Route::get('/admin/viewResearch/{id}', [ResearchController::class, 'viewCenterResearch'])->name('admin.viewCenterResearch');
-
+//print research
+Route::get('/admin/research/print/{r_id}', [ResearchController::class, 'printSpecificResearch'])->name('admin.print.research');
 
 //Admin publication
 Route::get('/admin/publication', [PublicationController::class, 'adminPublication'])->name('admin.publication');
@@ -86,6 +87,8 @@ Route::put('/admin/presentation/{id}', [PresentationController::class, 'updatePr
 Route::get('/admin/presentation/{id}', [PresentationController::class, 'viewUserPresentation'])->name('admin.viewPresentation');
 //view fron center 
 Route::get('/admin/viewPresentation/{id}', [PresentationController::class, 'viewCenterPresentation'])->name('admin.viewCenterPresentation');
+//print presentation
+Route::get('/admin/presentation/print/{pr_id}', [PresentationController::class, 'printSpecificPresentation'])->name('admin.print.presentation');
 
 
 //Admin documentation

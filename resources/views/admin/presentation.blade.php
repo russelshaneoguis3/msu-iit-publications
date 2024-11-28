@@ -394,11 +394,17 @@ Add Presentation
 					<button id="view-btn"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#viewPresentationModal{{ $adminpresent->pr_id }}">
 						View
 					</button>
-
 				<!-- Edit Button -->
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPresentationModal{{ $adminpresent->pr_id }}">
 						Edit
 					</button>
+                <!-- Print Button -->
+                <a href="{{ route('admin.print.presentation', ['pr_id' => $adminpresent->pr_id]) }}" 
+                class="btn btn-outline-primary" id="print-btn"
+                target="_blank">
+                    Print
+                </a>
+
 				</td>
                 </tr>
                 

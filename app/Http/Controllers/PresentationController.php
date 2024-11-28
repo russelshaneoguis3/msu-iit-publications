@@ -125,6 +125,32 @@ class PresentationController extends Controller
         return view('admin.viewCenterPresentation', compact('user', 'userinfo', 'presentations'));
     }
 
+
+    public function printSpecificPresentation($pr_id)
+    {
+
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the research data for the specific pr_id
+        $adpresentation = DB::table('presentation')
+            ->where('pr_id', $pr_id)
+            ->first();
+
+        if (!$adpresentation) {
+            // Handle case if no record is found
+            return redirect()->route('admin.presentation')->with('error', 'Presentation not found.');
+        }
+
+        // Pass the data to the print view
+        return view('admin.print.presentation', compact('user', 'adpresentation'));
+    }
+
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 

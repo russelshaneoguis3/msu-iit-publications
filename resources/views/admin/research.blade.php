@@ -306,6 +306,13 @@
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editResearchModal{{ $adminres->r_id }}">
 						Edit
 					</button>
+                <!-- Print Button -->
+                <a href="{{ route('admin.print.research', ['r_id' => $adminres->r_id]) }}" 
+                class="btn btn-outline-primary" id="print-btn"
+                target="_blank">
+                    Print
+                </a>
+
 				</td>
 
                 </tr>
@@ -669,7 +676,7 @@
 </script>
 @endif
 
- 
+
 </body>
 
 </html>
