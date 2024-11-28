@@ -142,7 +142,7 @@
                       <i class="bx bx-globe"></i>
                     <div class="ps-3">
 					<h6><b style="color: #bb8082">{{ $totalPublicationCount }}</b> <span>Overall Count</span></h6>
-					<h6><b style="color: #bb8082">{{ $adminPublicationCount }} </b><span>Admin's Publication</span></h6> 
+					<h6><b style="color: #bb8082">{{ $adminPublicationCount }} </b><span>Admin Publication</span></h6> 
 
                     </div>
                   </div>
@@ -164,7 +164,7 @@
                       <i class="bx bx-file-find"></i>
                     <div class="ps-3">
 					<h6><b style="color: #ceb66f">{{ $totalResearchCount }}</b> <span>Overall Count</span></h6>
-					<h6><b style="color: #ceb66f">{{ $adminResearchCount }} </b><span>Admin's Research</span></h6> 
+					<h6><b style="color: #ceb66f">{{ $adminResearchCount }} </b><span>Admin Research</span></h6> 
 
                     </div>
                   </div>
@@ -187,7 +187,7 @@
                       <i class="bx bx-spreadsheet"></i>
                     <div class="ps-3">
                       <h6><b style="color: #608BC1">{{ $totalPresentationCount }}</b> <span>Overall Count</span></h6>
-                      <h6><b style="color: #608BC1">{{ $adminPresentationCount }}</b> <span>Admin's Presentation</span></h6> 
+                      <h6><b style="color: #608BC1">{{ $adminPresentationCount }}</b> <span>Admin Presentation</span></h6> 
 
                     </div>
                   </div>

@@ -103,20 +103,36 @@ table td {
 }
 
 @media (max-width: 576px) {
+
+  #main {
+    margin-top: 60px;
+    padding: 5px 10px;
+  }
+
   .modal-dialog {
       max-width: 75%; /* Modal width on small screens */
-      margin-left: 20%; /* Margin around modal */
+      margin-left: 15%; /* Margin around modal */
   }
 
   .modal-content {
       font-size: 14px; /* Adjust font size for readability on small screens */
   }
+
+  .view-modal .modal-content {
+    font-size: 10px;
+  }
+
+  .view-modal .modal-dialog {
+    max-width: 98%; /* Modal width on small screens */
+    margin-left: 0%;
+  }
+
 }
 
 
 @media (max-width: 1920px) {
   .view-modal  {
-    margin-left: 22%;
+    margin-left: 23%;
     max-width: 78%;
   }
   .edit-modal {
@@ -126,6 +142,7 @@ table td {
     margin-left: 5%;
   }
 }
+
 
 .btn {
   border-radius: 15px;
