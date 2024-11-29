@@ -12,7 +12,7 @@
     <br>
     <br>
 
-    <img style="max-width: 500px" src="{{ $message->embed(public_path() . '/assets/img/web-logo.png') }}" />
+    <img src="{{ $message->embed(public_path() . '/assets/img/web-logo.png') }}" style="max-width: 150px;">
 
     <br>
 
