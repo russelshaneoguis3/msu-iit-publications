@@ -77,6 +77,8 @@ Route::put('/admin/publication/{id}', [PublicationController::class, 'updatePubl
 Route::get('/admin/publication/{id}', [PublicationController::class, 'viewUserPublication'])->name('admin.viewPublication');
 //View from center 
 Route::get('/admin/viewPublication/{id}', [PublicationController::class, 'viewCenterPublication'])->name('admin.viewCenterPublication');
+//print publication
+Route::get('/admin/publication/print/{p_id}', [PublicationController::class, 'printSpecificPublication'])->name('admin.print.publication');
 
 
 //Admin presentation
@@ -122,17 +124,22 @@ Route::get('/dashboard/yearly-report', [DashboardController::class, 'getYearlyRe
 Route::get('/users/research', [ResearchController::class, 'usersResearch'])->name('users.research');
 Route::post('/users/research/add', [ResearchController::class, 'addResearch'])->name('users.addResearch');
 Route::put('/users/research/{id}', [ResearchController::class, 'updateResearch'])->name('users.updateResearch');
+//print research
+Route::get('/users/research/print/{r_id}', [ResearchController::class, 'printUserResearch'])->name('users.print.research');
 
 //user publication
 Route::get('/users/publication', [PublicationController::class, 'usersPublication'])->name('users.publication');
 Route::post('/users/publication/add', [PublicationController::class, 'addPublication'])->name('users.addPublication');
 Route::put('/users/publication/{id}', [PublicationController::class, 'updatePublication'])->name('users.updatePublication');
-
+//print publication
+Route::get('/users/publication/print/{p_id}', [PublicationController::class, 'printUserPublication'])->name('users.print.publication');
 
 //user presentation
 Route::get('/users/presentation', [PresentationController::class, 'usersPresentation'])->name('users.presentation');
 Route::post('/users/presentation/add', [PresentationController::class, 'addPresentation'])->name('users.addPresentation');
 Route::put('/users/presentation/{id}', [PresentationController::class, 'updatePresentation'])->name('users.updatePresentation');
+//print presentation
+Route::get('/users/presentation/print/{pr_id}', [PresentationController::class, 'printUserPresentation'])->name('users.print.presentation');
 
 //user documentation
 Route::get('/users/documentation', [DocumentationController::class, 'usersDocumentation'])->name('users.documentation');

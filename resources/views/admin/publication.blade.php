@@ -126,10 +126,10 @@
                         <input type="text" class="form-control" id="research_title" name="research_title" required>
                     </div><br>
 
-                    <!-- Description Input -->
+                    <!-- keywords Input -->
                     <div class="form-group">
-                        <label for="description">Publication Description <span>(Optional. You can include Keywords, Beneficiaries, Objectives, and Press Release) </span></label>
-                        <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                        <label for="keywords">Keywords</span></label>
+                        <textarea class="form-control" id="keywords" name="keywords" rows="6"></textarea>
                     </div><br>
 
                     <!-- Research Type Input -->
@@ -138,7 +138,7 @@
                         <select class="form-select" id="research_type" name="research_type">
                             <option value="">-- Select Here --</option>
                             <option value="Study">Study</option>
-                            <option value="Sroject">Project</option>
+                            <option value="Project">Project</option>
                             <option value="Article">Article</option>
                         </select>
                     </div><br>
@@ -155,6 +155,18 @@
                     <div class="form-group">
                         <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors">
+                    </div><br>
+
+                    <!-- objectives Input -->
+                    <div class="form-group">
+                        <label for="objectives">Objective/s</span></label>
+                        <textarea class="form-control" id="objectives" name="objectives" rows="6"></textarea>
+                    </div><br>
+
+                    <!-- benificiares Input -->
+                    <div class="form-group">
+                        <label for="beneficiaries">Beneficiares</span></label>
+                        <input type="text" class="form-control" id="beneficiaries" name="beneficiaries">
                     </div><br>
 
                     <!-- Time Duration Input -->
@@ -262,6 +274,12 @@
                         <input type="text" class="form-control" id="issn_isbn" name="issn_isbn">
                     </div><br>
 
+                    <!-- objectives Input -->
+                    <div class="form-group">
+                        <label for="press_release">Press Release</span></label>
+                        <textarea class="form-control" id="press_release" name="press_release" rows="10"></textarea>
+                    </div><br>
+
                     <!-- File Path Input -->
                     <div class="form-group">
                         <label for="file_path">Upload Publication File <span>(optional) .pdf files only</span></label>
@@ -345,6 +363,13 @@
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $adminpub->p_id }}">
 						Edit
 					</button>
+                <!-- Print Button -->
+                <a href="{{ route('admin.print.publication', ['p_id' => $adminpub->p_id]) }}" 
+                class="btn btn-outline-primary" id="print-btn"
+                target="_blank">
+                    Print
+                </a>
+                
 				</td>
 
                 </tr>
@@ -367,10 +392,10 @@
                             <input type="text" class="form-control" id="research_title" name="research_title" value="{{ $adminpub->research_title }}" required>
                         </div><br>
 
-                        <!-- Description Input -->
+                        <!-- keywords Input -->
                         <div class="form-group">
-                            <label for="description">Publication Description <span>(Optional. You can include Keywords, Beneficiaries, Objectives, and Press Release) </span></label>
-                            <textarea class="form-control" id="description" name="description" rows="10">{{ $adminpub->description }}</textarea>
+                            <label for="keywords">Keywords </span></label>
+                            <textarea class="form-control" id="keywords" name="keywords" rows="6">{{ $adminpub->keywords }}</textarea>
                         </div><br>
 
                     <!-- Research Type Input -->
@@ -396,6 +421,18 @@
                     <div class="form-group">
                         <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors" value="{{ $adminpub->coauthors }}">
+                    </div><br>
+
+                    <!-- objectives Input -->
+                    <div class="form-group">
+                    <label for="objectives">Objectives </span></label>
+                        <textarea class="form-control" id="objectives" name="objectives" rows="6">{{ $adminpub->objectives }}</textarea>
+                    </div><br>
+
+                    <!-- benificiares Input -->
+                    <div class="form-group">
+                        <label for="beneficiaries">Beneficiaries</span></label>
+                        <input type="text" class="form-control" id="beneficiaries" name="beneficiaries" value="{{ $adminpub->beneficiaries }}">
                     </div><br>
 
                     <!-- Time Duration Input -->
@@ -503,6 +540,13 @@
                         <input type="text" class="form-control" id="issn_isbn" name="issn_isbn" value="{{ $adminpub->issn_isbn }}">
                     </div><br>
 
+                    <!-- press_release Input -->
+                    <div class="form-group">
+                    <label for="press_release">Press Release </span></label>
+                        <textarea class="form-control" id="press_release" name="press_release" rows="6">{{ $adminpub->press_release }}</textarea>
+                    </div><br>
+
+
                         <!-- File Path Input -->
                         <div class="form-group">
                             <label for="file_path">Publication File <span>(optional) .pdf files only</span></label>
@@ -545,8 +589,8 @@
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->research_title }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3">Research Description</div><br><br>
-                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->description }}</div>
+                        <div class="col-3">Keywords</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->keywords }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Research Type</div><br><br>
@@ -555,6 +599,18 @@
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Author/s</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->authors }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Co-Author/s</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->coauthors }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Objectives</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->objectives }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Beneficiaries</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->beneficiaries }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Co-Author/s</div><br><br>
@@ -611,6 +667,10 @@
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">ISSN/ISBN</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->issn_isbn }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Press Release</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $adminpub->press_release }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Publication File</div><br><br>

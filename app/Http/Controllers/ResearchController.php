@@ -135,6 +135,10 @@ class ResearchController extends Controller
     public function printSpecificResearch($r_id)
     {
 
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
         
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
@@ -188,6 +192,35 @@ class ResearchController extends Controller
 
         // Pass the user_id to the user dashboard view
         return view('users.research', compact('user', 'usersResearch'));
+    }
+
+    public function printUserResearch($r_id)
+    {
+
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the research data for the specific r_id
+        $uresearch = DB::table('research')
+            ->where('r_id', $r_id)
+            ->first();
+
+        if (!$uresearch) {
+            // Handle case if no record is found
+            return redirect()->route('users.research')->with('error', 'Research not found.');
+        }
+
+        // Pass the data to the print view
+        return view('users.print.research', compact('user', 'uresearch'));
     }
 
 //----------------------------------------------------------------------------------------------------------

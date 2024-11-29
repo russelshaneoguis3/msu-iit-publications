@@ -123,10 +123,10 @@
                         <input type="text" class="form-control" id="research_title" name="research_title" required>
                     </div><br>
 
-                    <!-- Description Input -->
+                    <!-- keywords Input -->
                     <div class="form-group">
-                        <label for="description">Publication Description <span>(Optional. You can include Keywords, Beneficiaries, Objectives, and Press Release) </span></label>
-                        <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                        <label for="keywords">Keywords</span></label>
+                        <textarea class="form-control" id="keywords" name="keywords" rows="6"></textarea>
                     </div><br>
 
                     <!-- Research Type Input -->
@@ -152,6 +152,18 @@
                     <div class="form-group">
                         <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors">
+                    </div><br>
+
+                    <!-- objectives Input -->
+                    <div class="form-group">
+                        <label for="objectives">Objective/s</span></label>
+                        <textarea class="form-control" id="objectives" name="objectives" rows="6"></textarea>
+                    </div><br>
+
+                    <!-- benificiares Input -->
+                    <div class="form-group">
+                        <label for="beneficiaries">Beneficiares</span></label>
+                        <input type="text" class="form-control" id="beneficiaries" name="beneficiaries">
                     </div><br>
 
                     <!-- Time Duration Input -->
@@ -259,6 +271,12 @@
                         <input type="text" class="form-control" id="issn_isbn" name="issn_isbn">
                     </div><br>
 
+                    <!-- objectives Input -->
+                    <div class="form-group">
+                        <label for="press_release">Press Release</span></label>
+                        <textarea class="form-control" id="press_release" name="press_release" rows="10"></textarea>
+                    </div><br>
+
                     <!-- File Path Input -->
                     <div class="form-group">
                         <label for="file_path">Upload Publication File <span>(optional) .pdf files only</span></label>
@@ -347,6 +365,13 @@
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editPublicationModal{{ $userpub->p_id }}">
 						Edit
 					</button>
+                <!-- Print Button -->
+                <a href="{{ route('users.print.publication', ['p_id' => $userpub->p_id]) }}" 
+                class="btn btn-outline-primary" id="print-btn"
+                target="_blank">
+                    Print
+                </a>
+
 				</td>
 
                 </tr>
@@ -369,10 +394,10 @@
                             <input type="text" class="form-control" id="research_title" name="research_title" value="{{ $userpub->research_title }}" required>
                         </div><br>
 
-                        <!-- Description Input -->
+                        <!-- keywords Input -->
                         <div class="form-group">
-                            <label for="description">Publication Description <span>(Optional. You can include Keywords, Beneficiaries, Objectives, and Press Release) </span></label>
-                            <textarea class="form-control" id="description" name="description" rows="10">{{ $userpub->description }}</textarea>
+                            <label for="keywords">Keywords </span></label>
+                            <textarea class="form-control" id="keywords" name="keywords" rows="6">{{ $userpub->keywords }}</textarea>
                         </div><br>
 
                     <!-- Research Type Input -->
@@ -398,6 +423,18 @@
                     <div class="form-group">
                         <label for="coauthors">Co-author/s <span>(Separate with semicolon/s ';' for multiple inputs)</span></label>
                         <input type="text" class="form-control" id="coauthors" name="coauthors" value="{{ $userpub->coauthors }}">
+                    </div><br>
+
+                     <!-- objectives Input -->
+                    <div class="form-group">
+                    <label for="objectives">Objectives </span></label>
+                        <textarea class="form-control" id="objectives" name="objectives" rows="6">{{ $userpub->objectives }}</textarea>
+                    </div><br>
+
+                    <!-- benificiares Input -->
+                    <div class="form-group">
+                        <label for="beneficiaries">Beneficiaries</span></label>
+                        <input type="text" class="form-control" id="beneficiaries" name="beneficiaries" value="{{ $userpub->beneficiaries }}">
                     </div><br>
 
                     <!-- Time Duration Input -->
@@ -505,6 +542,12 @@
                         <input type="text" class="form-control" id="issn_isbn" name="issn_isbn" value="{{ $userpub->issn_isbn }}">
                     </div><br>
 
+                    <!-- press_release Input -->
+                    <div class="form-group">
+                    <label for="press_release">Press Release </span></label>
+                        <textarea class="form-control" id="press_release" name="press_release" rows="6">{{ $userpub->press_release }}</textarea>
+                    </div><br>
+
                         <!-- File Path Input -->
                         <div class="form-group">
                             <label for="file_path">Publication File <span>(optional) .pdf files only</span></label>
@@ -547,8 +590,8 @@
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->research_title }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
-                        <div class="col-3">Research Description</div><br><br>
-                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->description }}</div>
+                        <div class="col-3">Keywords</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->keywords }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Research Type</div><br><br>
@@ -561,6 +604,14 @@
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Co-Author/s</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->coauthors }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Objectives</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->objectives }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Beneficiaries</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->beneficiaries }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Date Duration</div><br><br>
@@ -613,6 +664,10 @@
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">ISSN/ISBN</div><br><br>
                         <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->issn_isbn }}</div>
+                    </div>
+                    <div class="row" style="border-bottom: 2px solid #fff;">
+                        <div class="col-3">Press Release</div><br><br>
+                        <div class="col-9" style="border-left: 2px solid #fff;">{{ $userpub->press_release }}</div>
                     </div>
                     <div class="row" style="border-bottom: 2px solid #fff;">
                         <div class="col-3">Publication File</div><br><br>

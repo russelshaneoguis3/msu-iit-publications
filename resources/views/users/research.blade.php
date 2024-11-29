@@ -305,6 +305,13 @@ Add Research
 					<button id="edit-btn"class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#editResearchModal{{ $userres->r_id }}">
 						Edit
 					</button>
+                <!-- Print Button -->
+                <a href="{{ route('users.print.research', ['r_id' => $userres->r_id]) }}" 
+                class="btn btn-outline-primary" id="print-btn"
+                target="_blank">
+                    Print
+                </a>
+
 				</td>
                 </tr>
                 

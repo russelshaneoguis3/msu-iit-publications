@@ -518,6 +518,14 @@ table tr:last-child td:last-child {
   border-bottom-right-radius: 20px;
 }
 
+.table-activity-logs th:nth-child(2) {
+  border-top-left-radius: 20px;
+}
+.table-activity-logs tr:last-child td:nth-child(2) {
+
+  border-bottom-left-radius: 20px;
+}
+
 table.table-announcement thead th {
   background-color: #cebfc2; /* Replace with your desired color */
 }

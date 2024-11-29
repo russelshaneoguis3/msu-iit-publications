@@ -64,33 +64,33 @@
         <tbody>
             <tr>
                 <th>Research Title</th>
-                <td>{{ $adresearch->research_title }}</td>
+                <td>{{ $uresearch->research_title }}</td>
             </tr>
             <tr>
                 <th>Research Description</th>
-                <td>{{ $adresearch->description }}</td>
+                <td>{{ $uresearch->description }}</td>
             </tr>
             <tr>
                 <th>Research Project Leader/s</th>
-                <td>{{ $adresearch->leaders }}</td>
+                <td>{{ $uresearch->leaders }}</td>
             </tr>
             <tr>
                 <th>Research Project Member/s</th>
-                <td>{{ $adresearch->members }}</td>
+                <td>{{ $uresearch->members }}</td>
             </tr>
             <tr>
                 <th>Research Project Type</th>
-                <td>{{ $adresearch->research_type }}</td>
+                <td>{{ $uresearch->research_type }}</td>
             </tr>
             <tr>
                 <th>Special Order No.</th>
-                <td>{{ $adresearch->so_no }}</td>
+                <td>{{ $uresearch->so_no }}</td>
             </tr>
             <tr>
                 <th>Special Order Link</th>
                 <td>
                 @php
-                $specialOrderLink = $adresearch->r_link;
+                $specialOrderLink = $uresearch->r_link;
                 $chunks = str_split($specialOrderLink, 40); // Split the string into chunks of 40 characters
                 @endphp
                 @foreach ($chunks as $chunk)
@@ -100,23 +100,23 @@
             </tr>
             <tr>
                 <th>Date Duration</th>
-                <td>{{ $adresearch->date_duration }}</td>
+                <td>{{ $uresearch->date_duration }}</td>
             </tr>
             <tr>
                 <th>Date Started</th>
-                <td>{{ $adresearch->date_started }}</td>
+                <td>{{ $uresearch->date_started }}</td>
             </tr>
             <tr>
                 <th>Completion Date</th>
-                <td>{{ $adresearch->date_completed }}</td>
+                <td>{{ $uresearch->date_completed }}</td>
             </tr>
             <tr>
                 <th>Approved Cost (Direct Cost)</th>
-                <td>₱ {{ $adresearch->cost }}</td>
+                <td>₱ {{ $uresearch->cost }}</td>
             </tr>
             <tr>
                 <th>Funding Source</th>
-                <td>{{ $adresearch->funding_source }}</td>
+                <td>{{ $uresearch->funding_source }}</td>
             </tr>
 
         </tbody>

@@ -129,6 +129,10 @@ class PresentationController extends Controller
     public function printSpecificPresentation($pr_id)
     {
 
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
         
         // Retrieve the user_id from the session
         $userId = session()->get('user_id');
@@ -183,6 +187,35 @@ class PresentationController extends Controller
 
         // Pass the user_id to the user dashboard view
         return view('users.presentation',  compact('user', 'usersPresentation'));
+    }
+
+    public function printUserPresentation($pr_id)
+    {
+
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the research data for the specific pr_id
+        $upresentation = DB::table('presentation')
+            ->where('pr_id', $pr_id)
+            ->first();
+
+        if (!$upresentation) {
+            // Handle case if no record is found
+            return redirect()->route('users.presentation')->with('error', 'Presentation not found.');
+        }
+
+        // Pass the data to the print view
+        return view('users.print.presentation', compact('user', 'upresentation'));
     }
 
     

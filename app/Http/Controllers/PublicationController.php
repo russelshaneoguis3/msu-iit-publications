@@ -128,7 +128,36 @@ public function viewUserPublication($id)
         // Return view with user and publications data
         return view('admin.viewCenterPublication', compact('user', 'userinfo', 'publications'));
     }
+
     
+    public function printSpecificPublication($p_id)
+    {
+
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the publication data for the specific p_id
+        $adpublication = DB::table('publications')
+            ->where('p_id', $p_id)
+            ->first();
+
+        if (!$adpublication) {
+            // Handle case if no record is found
+            return redirect()->route('admin.publication')->with('error', 'Publication not found.');
+        }
+
+        // Pass the data to the print view
+        return view('admin.print.publication', compact('user', 'adpublication'));
+    }
 
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,6 +192,36 @@ public function viewUserPublication($id)
         return view('users.publication', compact('user', 'usersPublications'));
     }
 
+    
+    public function printUserPublication($p_id)
+    {
+
+        // Check if the user is logged in
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page.');
+        }
+        
+        // Retrieve the user_id from the session
+        $userId = session()->get('user_id');
+
+        // Fetch the user information from the database
+        $user = DB::table('users')->where('uid', $userId)->first();
+
+
+        // Fetch the publication data for the specific p_id
+        $upublication = DB::table('publications')
+            ->where('p_id', $p_id)
+            ->first();
+
+        if (!$upublication) {
+            // Handle case if no record is found
+            return redirect()->route('users.publication')->with('error', 'Publication not found.');
+        }
+
+        // Pass the data to the print view
+        return view('users.print.publication', compact('user', 'upublication'));
+    }
+
 
 // Functions ---------------------------------------------------------------------------------------------------------------------
 
@@ -170,12 +229,13 @@ public function viewUserPublication($id)
     {
         $request->validate([
             'research_title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'keywords' => 'nullable|string',
 
             'research_type' => 'nullable|string|max:100',
             'authors' => 'nullable|string',
             'coauthors' => 'nullable|string',
-            'adviser' => 'nullable|string',
+            'objectives' => 'nullable|string',
+            'beneficiaries' => 'nullable|string',
             'date_duration' => 'nullable|string|max:50',
             'date_started' => 'nullable|date',
             'date_completed' => 'nullable|date',
@@ -189,6 +249,7 @@ public function viewUserPublication($id)
             'no_pages' => 'nullable|integer',
             'publication_type' => 'nullable|string|max:100',
             'issn_isbn' => 'nullable|string|max:150',
+            'press_release' => 'nullable|string',
 
             'file_path' => 'nullable|file|mimes:pdf|max:2048', // Allow only PDF files
             'link' => 'nullable|url',
@@ -201,10 +262,12 @@ public function viewUserPublication($id)
     
         $publication = new Publication();
         $publication->research_title = $request->research_title;
-        $publication->description = $request->description;
+        $publication->keywords = $request->keywords;
         $publication->research_type = $request->research_type;
         $publication->authors = $request->authors;
         $publication->coauthors = $request->coauthors;
+        $publication->objectives = $request->objectives;
+        $publication->beneficiaries = $request->beneficiaries;
         $publication->date_duration = $request->date_duration;
         $publication->date_started = $request->date_started;
         $publication->date_completed = $request->date_completed;
@@ -218,6 +281,7 @@ public function viewUserPublication($id)
         $publication->no_pages = $request->no_pages;
         $publication->publication_type = $request->publication_type;
         $publication->issn_isbn = $request->issn_isbn;
+        $publication->press_release = $request->press_release;
 
     
         // Retrieve user ID from the session and save it in p_user_id
@@ -261,12 +325,11 @@ public function updatePublication(Request $request, $id)
 {
     $request->validate([
         'research_title' => 'required|string|max:255',
-        'description' => 'nullable|string',
+        'keywords' => 'nullable|string',
 
         'research_type' => 'nullable|string|max:100',
         'authors' => 'nullable|string',
         'coauthors' => 'nullable|string',
-        'adviser' => 'nullable|string',
         'date_duration' => 'nullable|string|max:50',
         'date_started' => 'nullable|date',
         'date_completed' => 'nullable|date',
@@ -288,10 +351,12 @@ public function updatePublication(Request $request, $id)
     // Find the publication by ID
     $publication = Publication::findOrFail($id);
     $publication->research_title = $request->research_title;
-    $publication->description = $request->description;
+    $publication->keywords = $request->keywords;
     $publication->research_type = $request->research_type;
     $publication->authors = $request->authors;
     $publication->coauthors = $request->coauthors;
+    $publication->objectives = $request->objectives;
+    $publication->beneficiaries = $request->beneficiaries;
     $publication->date_duration = $request->date_duration;
     $publication->date_started = $request->date_started;
     $publication->date_completed = $request->date_completed;
@@ -305,6 +370,7 @@ public function updatePublication(Request $request, $id)
     $publication->no_pages = $request->no_pages;
     $publication->publication_type = $request->publication_type;
     $publication->issn_isbn = $request->issn_isbn;
+    $publication->press_release = $request->press_release;
 
     // Handle file upload
     if ($request->hasFile('file_path')) {

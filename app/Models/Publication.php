@@ -16,11 +16,13 @@ class Publication extends Model
     protected $fillable = [
         'p_user_id', 
         'research_title',
-        'description',
+        'keywords',
 
         'research_type',
         'authors',
         'coauthors',
+        'objectives',
+        'beneficiaries',
         'date_duration',
         'date_started',
         'date_completed',
@@ -34,6 +36,7 @@ class Publication extends Model
         'no_pages',
         'publication_type',
         'issn_isbn',
+        'press_release',
         
         'p_file_path',
         'p_link',
