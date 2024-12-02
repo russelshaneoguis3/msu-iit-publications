@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2024 at 08:59 AM
+-- Generation Time: Nov 29, 2024 at 08:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,9 @@ INSERT INTO `announcements` (`a_id`, `title`, `description`, `created_at`, `upda
 (2, 'General Cleaning-CCSd', 'This is a sample description, which means wala ni pulos HEHE', '2024-11-12 07:46:52', '2024-11-15 09:15:10'),
 (3, 'General Cleanings-COEsa', 'This is a sample description, which means wala ni pulos HEHEs', '2024-11-12 07:46:52', '2024-11-15 09:15:37'),
 (4, 'Ali mo magluto tag biko', 'Ali mo karung nobemeber 32 kay magluto tag biko. Dala lang mo lubi or camay, ako na bahala sa sugnod natosd', '2024-11-15 09:32:53', '2024-11-15 09:33:12'),
-(5, 'assdasd', 'asdasdasdadasd', '2024-11-18 07:54:44', '2024-11-18 07:54:51');
+(5, 'assdasd', 'asdasdasdadasdsdadasdsad HAHA', '2024-11-18 07:54:44', '2024-11-21 00:22:23'),
+(6, 'Add', 'Testings', '2024-11-21 00:22:41', '2024-11-21 02:22:32'),
+(7, 'Annual Meeting', 'Magmeeting ta ugma', '2024-11-26 08:29:00', '2024-11-26 08:29:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +99,8 @@ INSERT INTO `center` (`cid`, `c_name`, `created_at`, `updated_at`) VALUES
 (130, 'Electroanalytical and Thermal Researches Laboratory', '2024-11-06 01:10:45', NULL),
 (131, 'Center for Computational Analytics and Modelling', '2024-11-06 01:10:45', NULL),
 (132, 'Center for Graph Theory, Algera and Analysis', '2024-11-06 01:10:45', NULL),
-(133, 'Laboratory of Theoritical and Computational Chemistry', '2024-11-06 01:10:45', NULL);
+(133, 'Laboratory of Theoritical and Computational Chemistry', '2024-11-06 01:10:45', NULL),
+(139, 'Center for cats', '2024-11-26 08:23:12', '2024-11-26 08:23:12');
 
 -- --------------------------------------------------------
 
@@ -121,9 +124,15 @@ CREATE TABLE `documentation` (
 --
 
 INSERT INTO `documentation` (`d_id`, `d_user_id`, `title`, `description`, `d_file_path`, `d_link`, `created_at`, `updated_at`) VALUES
-(4, 41, 'Test docs', 'Test docsss', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-12 02:13:58', '2024-11-12 02:15:48'),
 (5, 1, 'adasd', 'asdasd', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-11-14 08:26:13', '2024-11-14 08:26:13'),
-(6, 1, 'Data set nako', 'pa ra ni sadaijmdquh3123asd', 'files/variables_oGh5ueqCd9.xlsx', 'https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/', '2024-11-14 08:29:54', '2024-11-15 01:19:49');
+(6, 1, 'Data set nako', 'pa ra ni sadaijmdquh3123asd', 'files/variables_oGh5ueqCd9.xlsx', 'https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/', '2024-11-14 08:29:54', '2024-11-15 01:19:49'),
+(7, 1, 'adasdsssssssssssssss', 'asdasdasdssssss', 'files/ICNS2024_Presentation-Matrix_1KIEf9XDFu.pdf', NULL, '2024-11-21 00:28:41', '2024-11-21 00:32:35'),
+(8, 1, 'asdasd', 'asdasdasd', 'files/7_oTY1NHo2Ta.png', NULL, '2024-11-21 00:30:52', '2024-11-21 00:31:31'),
+(9, 1, 'sdsad', 'sadasdasd', 'files/ICNS2024_Presentation-Matrix_SvexzhBSZl.pdf', NULL, '2024-11-21 00:33:01', '2024-11-21 00:33:01'),
+(10, 1, 'Test Add', NULL, 'files/Diagram_d9YxTq8LhV.jpg', 'https://www.facebook.com', '2024-11-21 00:34:00', '2024-11-21 00:35:26'),
+(11, 1, 'asdsadsas', NULL, NULL, 'https://www.facebook.com', '2024-11-21 00:35:41', '2024-11-21 00:35:41'),
+(12, 1, 'test gyapon ni', NULL, 'files/ICNS2024_Presentation-Matrix_zcZTlgeAJF.pdf', NULL, '2024-11-21 00:36:26', '2024-11-21 00:36:26'),
+(14, 42, 'sadasdawe', NULL, NULL, 'https://www.google.com/search?q=nba+score&oq=nba+score&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MhQIARBFGDsYQxiDARixAxiABBiKBTINCAIQABiDARixAxiABDINCAMQABiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDIHCAYQABiABDINCAcQABiDARixAxiABDINCAgQABiDARixAxiABDINCAkQABiDARixAxiABNIBBzgzOWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8#sie=lg;/g/11y43tsvgm;3;/m/05jvx;mt;fp;1;;;', '2024-11-21 02:19:22', '2024-11-21 02:19:22');
 
 --
 -- Triggers `documentation`
@@ -194,16 +203,6 @@ INSERT INTO `doc_logs` (`log_id`, `l_user_id`, `affected_doc`, `activity`, `tabl
 (119, 51, 9, 'INSERT', 'publications', '2024-11-11 03:18:14'),
 (120, 51, 3, 'INSERT', 'research', '2024-11-11 03:20:37'),
 (121, 51, 3, 'UPDATE', 'research', '2024-11-11 03:21:01'),
-(122, 41, 1, 'INSERT', 'presentation', '2024-11-11 07:06:58'),
-(123, 41, 1, 'UPDATE', 'presentation', '2024-11-11 08:33:11'),
-(124, 41, 2, 'INSERT', 'presentation', '2024-11-11 08:39:56'),
-(125, 41, 3, 'INSERT', 'presentation', '2024-11-11 09:56:49'),
-(126, 41, 1, 'UPDATE', 'presentation', '2024-11-11 09:57:28'),
-(127, 41, 1, 'UPDATE', 'presentation', '2024-11-11 09:57:37'),
-(128, 41, 4, 'INSERT', 'documentation', '2024-11-12 02:13:58'),
-(129, 41, 4, 'UPDATE', 'documentation', '2024-11-12 02:15:48'),
-(130, 41, 2, 'UPDATE', 'presentation', '2024-11-12 07:16:33'),
-(131, 41, 1, 'UPDATE', 'presentation', '2024-11-12 07:17:06'),
 (132, 42, 1, 'UPDATE', 'publications', '2024-11-12 07:17:49'),
 (133, 42, 2, 'UPDATE', 'publications', '2024-11-12 07:18:01'),
 (134, 42, 6, 'UPDATE', 'publications', '2024-11-12 07:18:13'),
@@ -228,19 +227,6 @@ INSERT INTO `doc_logs` (`log_id`, `l_user_id`, `affected_doc`, `activity`, `tabl
 (153, 1, 13, 'UPDATE', 'publications', '2024-11-14 02:27:05'),
 (154, 1, 6, 'INSERT', 'research', '2024-11-14 02:28:31'),
 (155, 1, 7, 'INSERT', 'research', '2024-11-14 02:29:31'),
-(156, 41, 8, 'INSERT', 'research', '2024-11-14 02:31:11'),
-(157, 41, 8, 'UPDATE', 'research', '2024-11-14 02:31:21'),
-(158, 41, 8, 'UPDATE', 'research', '2024-11-14 02:31:31'),
-(159, 41, 14, 'INSERT', 'publications', '2024-11-14 02:32:27'),
-(160, 41, 9, 'INSERT', 'research', '2024-11-14 02:40:34'),
-(161, 41, 10, 'INSERT', 'research', '2024-11-14 02:52:06'),
-(162, 41, 10, 'UPDATE', 'research', '2024-11-14 02:52:23'),
-(163, 41, 15, 'INSERT', 'publications', '2024-11-14 02:55:02'),
-(164, 41, 15, 'UPDATE', 'publications', '2024-11-14 02:57:36'),
-(165, 41, 11, 'INSERT', 'research', '2024-11-14 03:08:15'),
-(166, 41, 11, 'UPDATE', 'research', '2024-11-14 03:08:27'),
-(167, 41, 16, 'INSERT', 'publications', '2024-11-14 03:08:39'),
-(168, 41, 16, 'UPDATE', 'publications', '2024-11-14 03:08:54'),
 (169, 1, 12, 'INSERT', 'research', '2024-11-14 03:10:36'),
 (170, 49, 13, 'INSERT', 'research', '2024-11-14 03:13:42'),
 (171, 49, 13, 'UPDATE', 'research', '2024-11-14 03:13:56'),
@@ -266,11 +252,6 @@ INSERT INTO `doc_logs` (`log_id`, `l_user_id`, `affected_doc`, `activity`, `tabl
 (191, 1, 18, 'UPDATE', 'publications', '2024-11-15 01:33:25'),
 (192, 1, 14, 'UPDATE', 'research', '2024-11-15 01:35:20'),
 (193, 1, 12, 'UPDATE', 'research', '2024-11-15 01:37:21'),
-(194, 41, 8, 'UPDATE', 'research', '2024-11-15 01:53:52'),
-(195, 41, 14, 'UPDATE', 'publications', '2024-11-15 01:57:33'),
-(196, 41, 14, 'UPDATE', 'publications', '2024-11-15 01:57:50'),
-(197, 41, 14, 'UPDATE', 'publications', '2024-11-15 01:58:05'),
-(198, 41, 1, 'UPDATE', 'presentation', '2024-11-15 02:01:59'),
 (199, 42, 3, 'UPDATE', 'publications', '2024-11-15 02:05:37'),
 (200, 42, 4, 'UPDATE', 'publications', '2024-11-15 02:05:41'),
 (201, 42, 5, 'UPDATE', 'publications', '2024-11-15 02:05:50'),
@@ -278,18 +259,106 @@ INSERT INTO `doc_logs` (`log_id`, `l_user_id`, `affected_doc`, `activity`, `tabl
 (203, 51, 9, 'UPDATE', 'publications', '2024-11-15 02:05:57'),
 (204, 1, 10, 'UPDATE', 'publications', '2024-11-15 02:05:59'),
 (205, 1, 11, 'UPDATE', 'publications', '2024-11-15 02:06:03'),
-(206, 41, 14, 'UPDATE', 'publications', '2024-11-15 02:06:06'),
-(207, 41, 15, 'UPDATE', 'publications', '2024-11-15 02:06:09'),
-(208, 41, 16, 'UPDATE', 'publications', '2024-11-15 02:06:12'),
 (209, 49, 17, 'UPDATE', 'publications', '2024-11-15 02:06:15'),
 (210, 1, 18, 'UPDATE', 'publications', '2024-11-15 02:06:18'),
 (211, 1, 12, 'UPDATE', 'publications', '2024-11-15 02:07:10'),
-(212, 41, 16, 'UPDATE', 'publications', '2024-11-15 09:19:01'),
-(213, 41, 19, 'INSERT', 'publications', '2024-11-15 09:19:09'),
 (214, 1, 15, 'INSERT', 'research', '2024-11-18 07:55:11'),
 (215, 1, 15, 'UPDATE', 'research', '2024-11-18 07:55:19'),
 (216, 1, 20, 'INSERT', 'publications', '2024-11-18 07:55:43'),
-(217, 1, 20, 'UPDATE', 'publications', '2024-11-18 07:55:51');
+(217, 1, 20, 'UPDATE', 'publications', '2024-11-18 07:55:51'),
+(219, 1, 7, 'INSERT', 'presentation', '2024-11-21 00:13:43'),
+(220, 1, 7, 'UPDATE', 'presentation', '2024-11-21 00:13:56'),
+(221, 1, 8, 'INSERT', 'presentation', '2024-11-21 00:14:09'),
+(222, 1, 8, 'UPDATE', 'presentation', '2024-11-21 00:14:29'),
+(223, 1, 7, 'UPDATE', 'presentation', '2024-11-21 00:15:18'),
+(224, 1, 11, 'UPDATE', 'publications', '2024-11-21 00:19:28'),
+(225, 1, 21, 'INSERT', 'publications', '2024-11-21 00:24:48'),
+(226, 1, 21, 'UPDATE', 'publications', '2024-11-21 00:25:09'),
+(227, 1, 16, 'INSERT', 'research', '2024-11-21 00:27:56'),
+(228, 1, 7, 'INSERT', 'documentation', '2024-11-21 00:28:41'),
+(229, 1, 7, 'UPDATE', 'documentation', '2024-11-21 00:28:52'),
+(230, 1, 8, 'INSERT', 'documentation', '2024-11-21 00:30:52'),
+(231, 1, 8, 'UPDATE', 'documentation', '2024-11-21 00:31:31'),
+(232, 1, 7, 'UPDATE', 'documentation', '2024-11-21 00:32:35'),
+(233, 1, 9, 'INSERT', 'documentation', '2024-11-21 00:33:01'),
+(234, 1, 10, 'INSERT', 'documentation', '2024-11-21 00:34:00'),
+(235, 1, 10, 'UPDATE', 'documentation', '2024-11-21 00:35:26'),
+(236, 1, 11, 'INSERT', 'documentation', '2024-11-21 00:35:41'),
+(237, 1, 12, 'INSERT', 'documentation', '2024-11-21 00:36:26'),
+(238, 1, 21, 'UPDATE', 'publications', '2024-11-21 00:56:21'),
+(239, 1, 15, 'UPDATE', 'research', '2024-11-21 00:56:42'),
+(240, 49, 17, 'UPDATE', 'publications', '2024-11-21 01:18:54'),
+(241, 49, 13, 'UPDATE', 'research', '2024-11-21 01:22:55'),
+(242, 49, 9, 'INSERT', 'presentation', '2024-11-21 01:26:18'),
+(243, 49, 9, 'UPDATE', 'presentation', '2024-11-21 01:28:35'),
+(245, 49, 10, 'INSERT', 'presentation', '2024-11-21 01:41:50'),
+(246, 49, 17, 'INSERT', 'research', '2024-11-21 01:48:43'),
+(247, 49, 17, 'UPDATE', 'research', '2024-11-21 01:49:30'),
+(248, 49, 22, 'INSERT', 'publications', '2024-11-21 01:50:13'),
+(249, 49, 22, 'UPDATE', 'publications', '2024-11-21 01:50:45'),
+(250, 42, 23, 'INSERT', 'publications', '2024-11-21 01:53:23'),
+(251, 42, 23, 'UPDATE', 'publications', '2024-11-21 01:53:49'),
+(252, 42, 11, 'INSERT', 'presentation', '2024-11-21 01:55:33'),
+(253, 42, 11, 'UPDATE', 'presentation', '2024-11-21 01:55:49'),
+(254, 42, 18, 'INSERT', 'research', '2024-11-21 01:56:17'),
+(255, 42, 18, 'UPDATE', 'research', '2024-11-21 01:56:32'),
+(256, 42, 19, 'INSERT', 'research', '2024-11-21 02:02:35'),
+(257, 42, 20, 'INSERT', 'research', '2024-11-21 02:07:52'),
+(258, 42, 20, 'UPDATE', 'research', '2024-11-21 02:08:09'),
+(259, 42, 24, 'INSERT', 'publications', '2024-11-21 02:09:40'),
+(260, 42, 24, 'UPDATE', 'publications', '2024-11-21 02:09:53'),
+(261, 42, 12, 'INSERT', 'presentation', '2024-11-21 02:10:51'),
+(262, 42, 12, 'UPDATE', 'presentation', '2024-11-21 02:11:16'),
+(263, 42, 21, 'INSERT', 'research', '2024-11-21 02:13:01'),
+(264, 42, 21, 'UPDATE', 'research', '2024-11-21 02:13:22'),
+(265, 42, 13, 'INSERT', 'presentation', '2024-11-21 02:15:21'),
+(266, 42, 13, 'UPDATE', 'presentation', '2024-11-21 02:15:49'),
+(267, 42, 25, 'INSERT', 'publications', '2024-11-21 02:16:18'),
+(268, 42, 21, 'UPDATE', 'research', '2024-11-21 02:18:47'),
+(269, 42, 25, 'UPDATE', 'publications', '2024-11-21 02:18:55'),
+(270, 42, 14, 'INSERT', 'documentation', '2024-11-21 02:19:22'),
+(271, 1, 16, 'UPDATE', 'research', '2024-11-21 02:22:39'),
+(272, 54, 22, 'INSERT', 'research', '2024-11-21 03:47:45'),
+(273, 54, 22, 'UPDATE', 'research', '2024-11-21 03:47:55'),
+(274, 54, 26, 'INSERT', 'publications', '2024-11-21 03:49:10'),
+(275, 54, 26, 'UPDATE', 'publications', '2024-11-21 03:49:37'),
+(276, 54, 14, 'INSERT', 'presentation', '2024-11-21 03:50:17'),
+(277, 54, 14, 'UPDATE', 'presentation', '2024-11-21 03:50:42'),
+(280, 49, 23, 'INSERT', 'research', '2024-11-22 00:13:52'),
+(281, 49, 23, 'UPDATE', 'research', '2024-11-22 00:14:57'),
+(282, 49, 24, 'INSERT', 'research', '2024-11-22 00:16:08'),
+(283, 49, 24, 'UPDATE', 'research', '2024-11-22 00:17:06'),
+(286, 1, 10, 'DELETE', 'publications', '2024-11-22 07:21:52'),
+(287, 1, 11, 'DELETE', 'publications', '2024-11-22 07:21:54'),
+(288, 1, 12, 'DELETE', 'publications', '2024-11-22 07:21:57'),
+(289, 1, 13, 'DELETE', 'publications', '2024-11-22 07:22:00'),
+(290, 1, 18, 'DELETE', 'publications', '2024-11-22 07:22:07'),
+(291, 1, 20, 'DELETE', 'publications', '2024-11-22 07:22:10'),
+(292, 1, 21, 'DELETE', 'publications', '2024-11-22 07:22:13'),
+(293, 1, 28, 'INSERT', 'publications', '2024-11-22 07:29:48'),
+(294, 1, 4, 'DELETE', 'presentation', '2024-11-22 07:31:36'),
+(295, 1, 5, 'DELETE', 'presentation', '2024-11-22 07:31:39'),
+(296, 1, 6, 'DELETE', 'presentation', '2024-11-22 07:31:41'),
+(297, 1, 7, 'DELETE', 'presentation', '2024-11-22 07:31:43'),
+(298, 1, 8, 'DELETE', 'presentation', '2024-11-22 07:31:46'),
+(299, 1, 16, 'INSERT', 'presentation', '2024-11-22 07:40:22'),
+(300, 1, 16, 'UPDATE', 'presentation', '2024-11-22 07:41:57'),
+(301, 1, 16, 'UPDATE', 'presentation', '2024-11-22 07:42:09'),
+(304, 42, 29, 'INSERT', 'publications', '2024-11-26 08:33:20'),
+(305, 1, 16, 'UPDATE', 'research', '2024-11-27 03:29:41'),
+(307, 1, 16, 'UPDATE', 'presentation', '2024-11-28 05:44:04'),
+(308, 1, 16, 'UPDATE', 'presentation', '2024-11-28 05:44:09'),
+(309, 1, 4, 'UPDATE', 'research', '2024-11-28 07:04:30'),
+(310, 1, 16, 'UPDATE', 'research', '2024-11-28 08:09:37'),
+(311, 1, 25, 'INSERT', 'research', '2024-11-28 08:09:55'),
+(312, 1, 16, 'UPDATE', 'presentation', '2024-11-28 08:16:53'),
+(313, 1, 16, 'UPDATE', 'presentation', '2024-11-28 08:16:57'),
+(314, 1, 16, 'UPDATE', 'presentation', '2024-11-29 01:43:54'),
+(315, 1, 30, 'INSERT', 'publications', '2024-11-29 03:14:17'),
+(316, 1, 30, 'UPDATE', 'publications', '2024-11-29 03:15:30'),
+(317, 1, 30, 'UPDATE', 'publications', '2024-11-29 03:17:12'),
+(318, 1, 28, 'UPDATE', 'publications', '2024-11-29 03:20:54'),
+(325, 1, 30, 'UPDATE', 'publications', '2024-11-29 06:56:50');
 
 -- --------------------------------------------------------
 
@@ -338,12 +407,13 @@ CREATE TABLE `presentation` (
 --
 
 INSERT INTO `presentation` (`pr_id`, `pr_user_id`, `research_title`, `research_project_title`, `fund`, `research_type`, `so_no`, `researcher_name`, `presenter_name`, `date_duration`, `date_started`, `date_completed`, `cost`, `funding_source`, `presentation_type`, `conference_type`, `conference_title`, `venue`, `conference_date`, `organizer`, `article_title`, `publication_date`, `journal_title`, `editor`, `publisher`, `vol_issue_no`, `page_no`, `publication_type`, `indexing`, `pr_file_path`, `pr_link`, `created_at`, `updated_at`) VALUES
-(1, 41, 'tests', 'testssd', 'Internally funded', 'Project', 'tests', 'tests', 'tests', 'tests', '2023-02-07', '2023-11-08', '10000', 'test', 'Poster', 'Local', 'tests', 'tests', '2024-11-03', 'test', 'tests', '2023-12-26', 'tests', 'tests', 'test', 'test', 'test', 'International', 'test', 'files/Print Grade Form_qG5W28g2sZ.pdf', NULL, '2024-11-11 07:06:58', '2024-11-15 02:01:59'),
-(2, 41, 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-11 08:39:56', '2024-11-12 07:16:33'),
-(3, 41, 'adasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-11 09:56:49', '2024-11-11 09:56:49'),
-(4, 1, 'Test Title', 'Test', 'Externally funded', 'Study', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Oral', 'International', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-14 07:34:42', '2024-11-14 07:34:42'),
-(5, 1, 'asdasd', 'asdasdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'files/Print Grade FormGTODMCMoKx.pdf', 'https://www.facebook.com', '2024-11-14 07:35:11', '2024-11-14 07:35:48'),
-(6, 1, 'asdasdsad  dsd', 'asdasdasd', 'Internally funded', 'Study', 'SO No. 00133-2022', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-14 08:07:30', '2024-11-15 01:31:38');
+(9, 49, 'asdsadd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-21 01:26:18', '2024-11-21 01:28:35'),
+(10, 49, 'asdasdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-21 01:41:50', '2024-11-21 01:41:50'),
+(11, 42, 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-21 01:55:33', '2024-11-21 01:55:49'),
+(12, 42, 'adasdasdsa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-21 02:10:51', '2024-11-21 02:11:16'),
+(13, 42, 'asdasdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-21 02:15:21', '2024-11-21 02:15:49'),
+(14, 54, 'Test Titles', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-21 03:50:17', '2024-11-21 03:50:42'),
+(16, 1, 'Advancing Modeling Techniques for Count Time Series and  Lifetime Data', 'Development of an Ingarchx Model for Dengue Cases', 'Internally funded', 'Project', 'SO No. 00133-2022', 'Daisy Lou L. Polestico; Michael L. Ayala', 'Daisy Lou L. Polestico (faculty)', '6 months', '2022-01-22', '2022-06-30', '60800.00', 'OPF-Research/DR', 'Oral', 'International', 'The 5th International Congress on Natural Sciences with Sisterhood  Universities', 'Niigata University, Japan', '2024-09-26', 'ICNS International Organizing Committee (ICNS iOC) headed by  Prof. Norikazu Ohtori, Niigata University, Japan (Congress & IOC  Chairman)', 'Modeling COVID-19 cases using NB-INGARCH and ARIMA  models: A case study in Iligan City, Philippines', '2024-04-29', 'PROCEDIA COMPUTER SCIENCE', 'Farahwahida Mohd; Xiaojun Zeng', 'Elsevier Publications', '234', 'pp. 262-269', 'International', 'Scopus', NULL, 'https://doi.org/10.1016/j.procs.2024.03.012', '2024-11-22 07:40:22', '2024-11-29 01:43:54');
 
 --
 -- Triggers `presentation`
@@ -380,10 +450,12 @@ CREATE TABLE `publications` (
   `p_id` int(11) NOT NULL,
   `p_user_id` int(10) UNSIGNED DEFAULT NULL,
   `research_title` text NOT NULL,
-  `description` text DEFAULT NULL,
+  `keywords` text DEFAULT NULL,
   `research_type` varchar(100) DEFAULT NULL,
   `authors` text DEFAULT NULL,
   `coauthors` text DEFAULT NULL,
+  `objectives` text DEFAULT NULL,
+  `beneficiaries` text DEFAULT NULL,
   `date_duration` varchar(50) DEFAULT NULL,
   `date_started` date DEFAULT NULL,
   `date_completed` date DEFAULT NULL,
@@ -397,6 +469,7 @@ CREATE TABLE `publications` (
   `no_pages` int(11) DEFAULT NULL,
   `publication_type` varchar(100) DEFAULT NULL,
   `issn_isbn` varchar(150) DEFAULT NULL,
+  `press_release` text DEFAULT NULL,
   `p_file_path` text DEFAULT NULL,
   `p_link` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -407,27 +480,25 @@ CREATE TABLE `publications` (
 -- Dumping data for table `publications`
 --
 
-INSERT INTO `publications` (`p_id`, `p_user_id`, `research_title`, `description`, `research_type`, `authors`, `coauthors`, `date_duration`, `date_started`, `date_completed`, `cost`, `funding_source`, `publication_date`, `publication_title`, `editors`, `publisher`, `vol_issue_no`, `no_pages`, `publication_type`, `issn_isbn`, `p_file_path`, `p_link`, `created_at`, `updated_at`) VALUES
-(1, 42, 'Test Titles', 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 05:44:20', '2024-11-07 05:54:19'),
-(2, 42, 'Test Title', 'asdasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-12-05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 05:54:11', '2024-11-07 05:54:11'),
-(3, 42, 'Test Title 1', 'asdasd', 'Article', 'adam', 'adam; russel', NULL, '2024-08-07', '2024-11-22', '10000', 'DOST-ASTHRDP', '2024-11-06', 'Test Pub title', 'shane', 'New York Business Global', 'e.g. Vol No. 17, No. 2, pp. 790-809', 22, 'International – SCOPUS indexed', '1307-5543', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:02:34', '2024-11-07 06:02:34'),
-(4, 42, 'Test Title 2s', 'I.e. stands for the Latin id est, or \'that is,\' and is used to introduce a word or phrase that restates what has been said previously. What follows the i.e. is meant to clarify the earlier statement:\r\n\r\nResearch at three British zoos suggests that meerkats \"showed increased positive interactions\" (i.e. they were happier) when human visitors returned than they were during the visitorless lockdown.\r\n— Peter Rhodes, Shropshire Star (Telford, England), 5 Mar. 2021\r\n\r\nI.e. is similarly useful for defining or explaining a term or concept whose meaning readers might not know:\r\n\r\nTake butterflied — i.e. deboned — whole fish, sprinkle it with lime and orange juices, and sumac, and then bake for about 10 minutes.\r\n— Emily Weinstein, The New York Times, 10 June 2022\r\n\r\nIf your home has “hard water” (i.e., a high mineral content), your sinks, showers, and tubs no doubt bear white or yellow buildup as a result. — Melissa Reddigari, BobVila.com, 22 Aug. 2019\r\n\r\nWhile i.e. is often set off by brackets or parentheses, it can also sometimes follow a comma or e', 'Article', 'russels', 'adam', '10 months', '2024-11-04', '2024-11-06', '₱ 10000', 'DOST-ASTHRDP', '2024-11-06', 'Test Pub title', 'shane', 'New York Business Global', 'e.g. Vol No. 17, No. 2, pp. 790-809', 23, 'International – SCOPUS indexed', '1307-5543', 'files/Revised-TAS-Justification-1-2.docxcmQE4pkZwQ.pdf', NULL, '2024-11-07 06:04:26', '2024-11-08 03:48:01'),
-(5, 42, 'b', 'b', 'Study', 'b', 'b', 'b', '2024-10-03', '2024-10-05', '2', 'b', '2024-01-01', 'b', 'b', 'b', 'b', 2, 'b', 'b', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:10:39', '2024-11-07 06:21:55'),
-(6, 42, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-05-04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:22:29', '2024-11-07 06:22:29'),
-(7, 42, 'Last test', 'last testss', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 08:29:36', '2024-11-07 08:29:44'),
-(8, 49, 'Test ni maam dinah', 'Basically, the key to writing a great \"good morning\" text is to let it come from the heart. Don’t put too much pressure on yourself and let the words flow. Though, if you’re still struggling to find exactly where to start, we’ve rounded up some of the best lines and phrases that range from deep and touching to cute and inspirational.\r\n\r\nThere’s truly nothing like a morning pick me up. So what are you waiting for? Type in one of these messages and hit send.', 'Article', 'asdasdasd; adass', NULL, '10 months', '2024-07-01', '2024-11-06', '10000', 'DOST-ASTHRDP', '2024-11-05', 'Test Pub title ni maam Dinah', 'asd', 'New York Business Global', 'e.g. Vol No. 12, No. 2, pp. 790-809', 23, 'International – SCOPUS indexed', '1307-5543', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-08 00:39:26', '2024-11-08 00:39:26'),
-(9, 51, 'Test Title', 'asdasdasdqwe', 'Project', 'adam', 'russel', '10 months', '2024-08-06', '2024-11-04', '10000', 'DOST-ASTHRDP', '2024-11-06', 'a', 'shane', 'b', NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-11 03:18:14', '2024-11-11 03:18:14'),
-(10, 1, 'Test admin Pub', 'Test admin Pub', 'Study', 'Test admin Pub', 'Test admin Pub', 'Test admin Pub', '2024-04-09', '2024-11-12', '100000000', 'Test admin Pub', '2024-11-12', 'Test admin Pub', 'Test admin Pub', 'Test admin Pub', 'Test admin Pub', 5, 'Test admin Pub', 'Test admin Pub', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-13 05:55:21', '2024-11-13 05:55:21'),
-(11, 1, 'Test Pub 2s', 'Test Pub 2 hehes', 'Project', 'Test Pub 2', 'Test Pub 2', NULL, '2023-03-07', '2023-08-15', '20000', 'Test Pub 2', '2023-10-17', 'Test Pub 2', 'Test Pub 2', 'Test Pub 2', 'Test Pub 2', 23, 'Test Pub 2', 'Test Pub 2', 'files/ICNS2024_Presentation-Matrix_oKxEh82Yn0.pdf', 'https://www.facebook.com', '2024-11-13 06:01:41', '2024-11-14 07:47:24'),
-(12, 1, 'Test Pubs 3', 'Testtt', 'Project', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-13 06:03:40', '2024-11-15 02:07:10'),
-(13, 1, 'testds', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-14 02:24:01', '2024-11-14 02:27:05'),
-(14, 41, 'Adam\'s rtest', 'asdsadsadasdsadads', 'Study', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-14 02:32:27', '2024-11-15 01:58:05'),
-(15, 41, 'asdasdasdasd', NULL, 'Article', NULL, NULL, '3 months', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-11-14 02:55:02', '2024-11-14 02:57:36'),
-(16, 41, 'asdasdasd', 'asdsad', 'Article', NULL, NULL, '24+ months', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-14 03:08:39', '2024-11-15 09:19:01'),
-(17, 49, 'Dinah pub', NULL, 'Article', NULL, NULL, '24 months', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-14 03:14:22', '2024-11-14 03:14:36'),
-(18, 1, 'asdasdsd', NULL, 'Study', NULL, NULL, '7 months', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 23, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-14 03:17:30', '2024-11-15 01:33:25'),
-(19, 41, 'dasdsad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-11-15 09:19:09', '2024-11-15 09:19:09'),
-(20, 1, 'asdsadsadsssssssss', 'asdasdsad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.google.com/search?q=nba+score&oq=nba+score&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MhQIARBFGDsYQxiDARixAxiABBiKBTINCAIQABiDARixAxiABDINCAMQABiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDIHCAYQABiABDINCAcQABiDARixAxiABDINCAgQABiDARixAxiABDINCAkQABiDARixAxiABNIBBzgzOWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8#sie=lg;/g/11y43tsvgm;3;/m/05jvx;mt;fp;1;;;', '2024-11-18 07:55:43', '2024-11-18 07:55:51');
+INSERT INTO `publications` (`p_id`, `p_user_id`, `research_title`, `keywords`, `research_type`, `authors`, `coauthors`, `objectives`, `beneficiaries`, `date_duration`, `date_started`, `date_completed`, `cost`, `funding_source`, `publication_date`, `publication_title`, `editors`, `publisher`, `vol_issue_no`, `no_pages`, `publication_type`, `issn_isbn`, `press_release`, `p_file_path`, `p_link`, `created_at`, `updated_at`) VALUES
+(1, 42, 'Test Titles', 'asdasd', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2023-11-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 05:44:20', '2024-11-07 05:54:19'),
+(2, 42, 'Test Title', 'asdasd', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2022-12-05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 05:54:11', '2024-11-07 05:54:11'),
+(3, 42, 'Test Title 1', 'asdasd', 'Article', 'adam', 'adam; russel', NULL, '', NULL, '2024-08-07', '2024-11-22', '10000', 'DOST-ASTHRDP', '2024-11-06', 'Test Pub title', 'shane', 'New York Business Global', 'e.g. Vol No. 17, No. 2, pp. 790-809', 22, 'International – SCOPUS indexed', '1307-5543', NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:02:34', '2024-11-07 06:02:34'),
+(4, 42, 'Test Title 2s', 'I.e. stands for the Latin id est, or \'that is,\' and is used to introduce a word or phrase that restates what has been said previously. What follows the i.e. is meant to clarify the earlier statement:\r\n\r\nResearch at three British zoos suggests that meerkats \"showed increased positive interactions\" (i.e. they were happier) when human visitors returned than they were during the visitorless lockdown.\r\n— Peter Rhodes, Shropshire Star (Telford, England), 5 Mar. 2021\r\n\r\nI.e. is similarly useful for defining or explaining a term or concept whose meaning readers might not know:\r\n\r\nTake butterflied — i.e. deboned — whole fish, sprinkle it with lime and orange juices, and sumac, and then bake for about 10 minutes.\r\n— Emily Weinstein, The New York Times, 10 June 2022\r\n\r\nIf your home has “hard water” (i.e., a high mineral content), your sinks, showers, and tubs no doubt bear white or yellow buildup as a result. — Melissa Reddigari, BobVila.com, 22 Aug. 2019\r\n\r\nWhile i.e. is often set off by brackets or parentheses, it can also sometimes follow a comma or e', 'Article', 'russels', 'adam', NULL, '', '10 months', '2024-11-04', '2024-11-06', '₱ 10000', 'DOST-ASTHRDP', '2024-11-06', 'Test Pub title', 'shane', 'New York Business Global', 'e.g. Vol No. 17, No. 2, pp. 790-809', 23, 'International – SCOPUS indexed', '1307-5543', NULL, 'files/Revised-TAS-Justification-1-2.docxcmQE4pkZwQ.pdf', NULL, '2024-11-07 06:04:26', '2024-11-08 03:48:01'),
+(5, 42, 'b', 'b', 'Study', 'b', 'b', NULL, '', 'b', '2024-10-03', '2024-10-05', '2', 'b', '2024-01-01', 'b', 'b', 'b', 'b', 2, 'b', 'b', NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:10:39', '2024-11-07 06:21:55'),
+(6, 42, 'c', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2021-05-04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 06:22:29', '2024-11-07 06:22:29'),
+(7, 42, 'Last test', 'last testss', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2020-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-07 08:29:36', '2024-11-07 08:29:44'),
+(8, 49, 'Test ni maam dinah', 'Basically, the key to writing a great \"good morning\" text is to let it come from the heart. Don’t put too much pressure on yourself and let the words flow. Though, if you’re still struggling to find exactly where to start, we’ve rounded up some of the best lines and phrases that range from deep and touching to cute and inspirational.\r\n\r\nThere’s truly nothing like a morning pick me up. So what are you waiting for? Type in one of these messages and hit send.', 'Article', 'asdasdasd; adass', NULL, NULL, '', '10 months', '2024-07-01', '2024-11-06', '10000', 'DOST-ASTHRDP', '2024-11-05', 'Test Pub title ni maam Dinah', 'asd', 'New York Business Global', 'e.g. Vol No. 12, No. 2, pp. 790-809', 23, 'International – SCOPUS indexed', '1307-5543', NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-08 00:39:26', '2024-11-08 00:39:26'),
+(9, 51, 'Test Title', 'asdasdasdqwe', 'Project', 'adam', 'russel', NULL, '', '10 months', '2024-08-06', '2024-11-04', '10000', 'DOST-ASTHRDP', '2024-11-06', 'a', 'shane', 'b', NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-11 03:18:14', '2024-11-11 03:18:14'),
+(17, 49, 'Dinah pub', NULL, 'Article', NULL, NULL, NULL, '', '24 months', NULL, NULL, NULL, NULL, '2024-11-13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-14 03:14:22', '2024-11-21 01:18:54'),
+(22, 49, 'asdsad', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2024-11-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '2024-11-21 01:50:13', '2024-11-21 01:50:45'),
+(23, 42, 'asdasd', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2024-11-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', '2024-11-21 01:53:23', '2024-11-21 01:53:49'),
+(24, 42, 'adasdsad', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2024-11-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-21 02:09:40', '2024-11-21 02:09:53'),
+(25, 42, 'Test walay publi date', 'sadasdasdasd', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-21 02:16:18', '2024-11-21 02:18:55'),
+(26, 54, 'test ni nakels', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '2024-11-05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', '2024-11-21 03:49:10', '2024-11-21 03:49:37'),
+(28, 1, 'On the Bivariate Extension of the extended Standard U-quadratic Distribution', 'Standard U-quadratic distribution, Kumaraswamy distribution, \r\nbivariate distribution, bivariate pseudo family, bathtub shape \r\ndistribution', 'Article', 'Idzhar A. lakibul; Daisy Lou L. Polestico; Arnulfo P. Supe', NULL, 'To develop a bivariate version of the extended standard Uquadratic (eSU) distribution and compare with the Bivariate \r\nCubic Transmuted Uniform distribution.', 'Researchers, academe, modelers', '10 months', '2023-08-01', '2024-06-01', 'none', 'DOST-ASTHRDP', '2024-04-30', 'European Journal of Pure and Applied Mathematic', 'Eyüp Çetin; Baris Kiremitc', 'New York Business Global', 'Vol No. 17, No. 2, pp. 790-809', 20, 'International – SCOPUS indexed', '1307-5543', 'Researchers have introduced the bivariate extended standard Uquadratic (eSU) distribution, a significant advancement in \r\nstatistical distribution that employs the compounding method. \r\nThis new distribution can generate bivariate shape distributions \r\nwith unique properties, including both X and Y variables \r\nexhibiting bathtub shapes, and features comprehensive \r\nproperties such as marginal and conditional distributions, \r\nvarious moments, Pearson correlation coefficient, and the stressstrength parameter. Utilizing maximum likelihood estimation \r\nand a simulation study for parameter estimation, the Bivariate \r\neSU distribution has shown a superior fit compared to the \r\nBivariate Cubic Transmuted Uniform (CTU) distribution. This \r\ndevelopment holds substantial implications for sectors reliant on \r\nadvanced data analysis, such as healthcare, finance, engineering, \r\nand environmental science, offering enhanced accuracy in \r\nmodeling complex bivariate relationships and ultimately \r\nbenefiting the broader community through improved decisionmaking and analysis capabilities.', NULL, 'https://doi.org/10.29020/nybg.ejpam.v17i2.5136', '2024-11-22 07:29:48', '2024-11-29 03:20:54'),
+(29, 42, 'asdasd', 'asdasdasd', 'Project', 'Andrei', 'Adam', NULL, '', '2 months', '2023-10-02', '2024-11-26', '100000', 'DOST-ASTHRDP', '2024-11-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://www.nimh.nih.gov/health/topics/autism-spectrum-disorders-asd', '2024-11-26 08:33:20', '2024-11-26 08:33:20'),
+(30, 1, 'Test Title', 'test keywords', 'Project', 'asdasdasd; adass', 'adam; russel', 'assdasdasdasdasdasdadasd', 'test bene', '15 months', NULL, NULL, '10000', 'DOST-ASTHRDP', NULL, 'Test admin Pub', 'shane', 'test publisher', 'e.g. Vol No. 12, No. 2, pp. 790-809', 23, 'International – SCOPUS indexed', '1307-5543', 'press release', NULL, 'https://www.w3schools.com/w3css/w3css_modal.asdasdads.assdasdasdsad.asdasdasdasp', '2024-11-29 03:14:17', '2024-11-29 06:56:50');
 
 --
 -- Triggers `publications`
@@ -488,18 +559,24 @@ INSERT INTO `research` (`r_id`, `r_user_id`, `research_title`, `description`, `l
 (1, 42, 'Test Research', 'Research is defined as the creation of new knowledge and/or the use of existing knowledge in a new and creative way so as to generate new concepts, methodologies and understandings. This could include synthesis and analysis of previous research to the extent that it leads to new and creative outcomes.', 'Daisy Lou Polestico; Johniel Babiera', 'Adam Oguis; Andrei Adlawan', 'Basic', 'SO No. 00001-2024', NULL, '10 months', '2024-08-06', '2024-11-05', '10000', 'DOST-OPF', 'files/Publication-Matrix_Lakibul_Polestico_Supe_IdjMNujyHj.pdf', '2024-11-08 03:41:04', '2024-11-08 06:09:01'),
 (2, 42, 'Test Research 2', 'Research is a process of systematic inquiry that entails collection of data; documentation of critical information; and analysis and interpretation of that data/information, in accordance with suitable methodologies set by specific professional fields and academic disciplinesx.', 'Daisy Lou Polestico; Johniel Babiera', 'Adam Oguis; Andrei Adlawan', 'Applied', 'SO No. 00001-2024', 'https://www.w3schools.com/w3css/w3css_modal.asp', '10 months', '2024-05-07', '2024-11-04', '10000', 'DOST-OPF', 'files/5136Znnad3lucR.pdf', '2024-11-08 03:42:49', '2024-11-08 06:06:10'),
 (3, 51, 'asdasda', 'asdasdasd ssss', NULL, NULL, NULL, NULL, NULL, NULL, '2023-04-01', NULL, NULL, NULL, 'files/Print Grade Form_9gi90QVj7v.pdf', '2024-11-11 03:20:37', '2024-11-11 03:21:01'),
-(4, 1, 'Test Res Admin', 'Test Res Admin', 'Test Res Admin', 'Test Res Admin', 'Test Res Admin', 'Test Res Admin', 'https://www.facebook.com', '10 months', '2022-02-16', '2022-12-07', '10000', 'Test Res Admin', NULL, '2024-11-14 01:58:26', '2024-11-14 01:58:26'),
+(4, 1, 'Test Res Admin', 'Beauty is no quality in things themselves: It exists merely in the mind which contemplates them; and each mind perceives a different beauty. One person may even perceive deformity, where another is sensible of beauty; and every individual ought to acquiesce in his own sentiment, without pretending to regulate those of others. (Hume 1757, 136)', 'Test Res Admin', 'Test Res Admin', NULL, 'Test Res Admin', 'https://www.facebook.com', '10 months', '2022-02-16', '2022-12-07', '10000', 'Test Res Admin', NULL, '2024-11-14 01:58:26', '2024-11-28 07:04:30'),
 (5, 1, 'asdasddd', 'asdasd sd ssd sd', 'adad', 'asdasd', 'asdasd', NULL, 'https://www.facebook.com', 'asdasd', NULL, NULL, NULL, NULL, NULL, '2024-11-14 02:04:08', '2024-11-14 02:25:15'),
 (6, 1, 'Test Titles', 'adasd', NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-14 02:28:31', '2024-11-14 02:28:31'),
 (7, 1, 'Tesadasd', NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-14 02:29:31', '2024-11-14 02:29:31'),
-(8, 41, 'Adam\'s Researchs', 'adasdsad', 'Daisy Lou Polestico; Johniel Babiera', 'Adam Oguis; Andrei Adlawan', 'Applied', 'SO No. 00001-2024', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '10 months', '2024-11-05', NULL, '10000', 'DOST-OPF', NULL, '2024-11-14 02:31:11', '2024-11-15 01:53:52'),
-(9, 41, 'asdas', NULL, NULL, NULL, 'Basic', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '24+ months', NULL, NULL, NULL, NULL, NULL, '2024-11-14 02:40:34', '2024-11-14 02:40:34'),
-(10, 41, 'asdasd', 'asdasdasd', NULL, NULL, 'Others', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '9 months', NULL, NULL, NULL, NULL, NULL, '2024-11-14 02:52:06', '2024-11-14 02:52:23'),
-(11, 41, 'asdsad', 'asdasd', NULL, 'asdasd', 'Others', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '6 months', NULL, NULL, NULL, NULL, NULL, '2024-11-14 03:08:15', '2024-11-14 03:08:27'),
 (12, 1, 'asdasdasdasdasd', 'sd', NULL, NULL, 'Others', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-14 03:10:36', '2024-11-15 01:37:21'),
-(13, 49, 'Dinah Reseachs', NULL, NULL, NULL, 'Applied', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '5 months', NULL, NULL, '100000', NULL, NULL, '2024-11-14 03:13:42', '2024-11-14 08:32:29'),
+(13, 49, 'Dinah Reseachs', NULL, NULL, NULL, 'Applied', NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', '5 months', '2024-11-13', NULL, '100000', NULL, NULL, '2024-11-14 03:13:42', '2024-11-21 01:22:55'),
 (14, 1, 'adasds', 'asdasd', NULL, NULL, 'Basic', NULL, 'https://www.facebook.com', '14 months', NULL, NULL, NULL, NULL, NULL, '2024-11-14 03:16:56', '2024-11-15 01:35:20'),
-(15, 1, 'test', 'asdasdasd sasass', NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-18 07:55:11', '2024-11-18 07:55:19');
+(15, 1, 'test', 'asdasdasd sasass', NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2024-11-05', NULL, NULL, NULL, NULL, '2024-11-18 07:55:11', '2024-11-21 00:56:42'),
+(16, 1, 'Test Adds', 'asdasd d sdad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'files/Print Grade Form_luCyj6Q0Og.pdf', '2024-11-21 00:27:56', '2024-11-28 08:09:37'),
+(17, 49, 'asdsadsad', NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', NULL, '2024-11-11', NULL, NULL, NULL, NULL, '2024-11-21 01:48:43', '2024-11-21 01:49:30'),
+(18, 42, 'asdasd', NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2024-11-06', NULL, NULL, NULL, NULL, '2024-11-21 01:56:17', '2024-11-21 01:56:32'),
+(19, 42, 'asdasd', NULL, NULL, NULL, NULL, NULL, 'https://www.w3schools.com/w3css/w3css_modal.asp', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-21 02:02:35', '2024-11-21 02:02:35'),
+(20, 42, 'asdasdasdasdd', NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2024-11-13', NULL, NULL, NULL, NULL, '2024-11-21 02:07:52', '2024-11-21 02:08:09'),
+(21, 42, 'asdasd', 'asdasdasdasd', NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2024-11-03', NULL, NULL, NULL, NULL, '2024-11-21 02:13:01', '2024-11-21 02:18:47'),
+(22, 54, 'test ni angkol', NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2024-11-06', NULL, NULL, NULL, NULL, '2024-11-21 03:47:45', '2024-11-21 03:47:55'),
+(23, 49, 'test', NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2021-06-15', NULL, NULL, NULL, NULL, '2024-11-22 00:13:52', '2024-11-22 00:14:57'),
+(24, 49, 'tes', NULL, NULL, NULL, NULL, NULL, 'https://www.facebook.com', NULL, '2021-06-15', NULL, NULL, NULL, NULL, '2024-11-22 00:16:08', '2024-11-22 00:17:06'),
+(25, 1, 'asdasds', 'asdasdsadasdsdasadasdsad', NULL, NULL, NULL, NULL, 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-28 08:09:55', '2024-11-28 08:09:55');
 
 --
 -- Triggers `research`
@@ -569,18 +646,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `email`, `password`, `first_name`, `last_name`, `centerlab`, `created_at`, `updated_at`, `token`, `email_status`) VALUES
-(1, 'daisylou.polestico@g.msuiit.edu.ph', '$2y$10$s9F/RkME5JQXa2rOSFNVLejJfo.HXC6dcvcLzQvvnmKRB7TBNU2N2', 'Daisy Lou', 'Polestico', 131, '2024-10-13 20:57:17', NULL, NULL, 'yes'),
-(41, 'adamrusselshane.oguis@g.msuiit.edu.ph', '$2y$12$OjxO5FPpWiQLqIdl6eIQoeCUIwTXoJs5JjHO8E5wkoy8UJjvoWjtO', 'Adam Russel Shane', 'Oguis', 131, '2024-11-05 04:44:37', '2024-11-18 04:01:20', NULL, 'yes'),
-(42, 'andreigabrielle.adlawan@g.msuiit.edu.ph', '$2y$12$ucot5EXqQeEmThNtnN4rReb1pSepOgbFXPzxfG/0Q47ULLb7FSPGS', 'Andrei Gabrielle', 'Adlawan', 131, '2024-11-05 04:50:44', '2024-11-13 03:37:41', NULL, 'yes'),
+(1, 'daisylou.polestico@g.msuiit.edu.ph', '$2y$10$s9F/RkME5JQXa2rOSFNVLejJfo.HXC6dcvcLzQvvnmKRB7TBNU2N2', 'Daisy Lou', 'Polestico', 131, '2024-10-13 20:57:17', '2024-11-27 06:42:44', NULL, 'yes'),
+(42, 'andreigabrielle.adlawan@g.msuiit.edu.ph', '$2y$12$ucot5EXqQeEmThNtnN4rReb1pSepOgbFXPzxfG/0Q47ULLb7FSPGS', 'Andrei Gabrielle', 'Adlawan', 131, '2024-11-05 04:50:44', '2024-11-21 02:20:12', NULL, 'yes'),
 (43, 'Inday@g.msuiit.edu.ph', '$2y$12$MHvefd/2lzAOMvvxrstNf.RTisEovyjhbHVfdmCHIGEFAElGdxf9W', 'Inday', 'Ligaya', 131, '2024-11-05 05:24:23', NULL, NULL, 'yes'),
 (44, 'Dodong@g.msuiit.edu.ph', '$2y$12$k0z7mhwVinWPZI6QJeMHa.l9iQPJAzdIoZjCm2enHeGp9878V1.9G', 'Dodong', 'Pogi', 133, '2024-11-05 05:24:55', NULL, NULL, 'yes'),
 (45, 'Jan@g.msuiit.edu.ph', '$2y$12$MfAZZ/I.5V4poAp3QgN5SeyVaav5sDiQti5p7WjKuipnnbnhovYM.', 'Jan', 'Paran', 130, '2024-11-05 05:26:53', NULL, NULL, 'yes'),
-(47, 'ss@g.msuiit.edu.ph', '$2y$12$LibMo3qg.SpDxQLqs61ReeupFcHGlivC6Wn6PISpNp41dPB7rFDt2', 'ss', 'ss', 130, '2024-11-06 01:49:21', NULL, 'UCp11x40FDBaJ4AxOx28IiQNwQPUCKf9Gj9skByUrg98HFNsm1svU1s9oNDQ', 'no'),
-(48, 'aa@g.msuiit.edu.ph', '$2y$12$AIamcMeIT1O8dOVYQH9gO.pdNL2PmOB5.N7EPO2aH5BXCx1Zpf8AK', 'Aa', 'Aa', NULL, '2024-11-06 01:49:51', NULL, 'ObqKmFPZneWAK0749BiOxb5RRTMn3Hbv8NX7uhwOoM2WwzDgwnkZ9LNjs3Me', 'no'),
-(49, 'dinah.dumaguing@g.msuiit.edu.ph', '$2y$12$diIBBAmRsTRFR0o1zA99cuGirIcCgAHWk6BXUaKsdLl7vR3tPYNf.', 'Dinah', 'Dumaguing', 131, '2024-11-06 03:12:27', '2024-11-06 03:41:19', NULL, 'yes'),
-(50, 'sss@g.msuiit.edu.ph', '$2y$12$DtjNkNMkL6rYs9uWPaVwr.Rw4mQKAb8r4rBVcBt/imVa/c0TW8tmK', 'ss', 'sss', NULL, '2024-11-06 03:13:37', NULL, '4eZIQbtmX5hv3VQLYurkdnEJevVDtjfqGPWikHKiO6vAjoCbKtrkDU3cUWTy', 'no'),
+(47, 'ss@g.msuiit.edu.ph', '$2y$12$LibMo3qg.SpDxQLqs61ReeupFcHGlivC6Wn6PISpNp41dPB7rFDt2', 'ss', 'ss', 130, '2024-11-06 01:49:21', NULL, NULL, 'yes'),
+(48, 'aa@g.msuiit.edu.ph', '$2y$12$AIamcMeIT1O8dOVYQH9gO.pdNL2PmOB5.N7EPO2aH5BXCx1Zpf8AK', 'Aa', 'Aa', NULL, '2024-11-06 01:49:51', NULL, NULL, 'yes'),
+(49, 'dinah.dumaguing@g.msuiit.edu.ph', '$2y$12$diIBBAmRsTRFR0o1zA99cuGirIcCgAHWk6BXUaKsdLl7vR3tPYNf.', 'Dinah', 'Dumaguing', 131, '2024-11-06 03:12:27', '2024-11-21 02:26:12', NULL, 'yes'),
+(50, 'sss@g.msuiit.edu.ph', '$2y$12$DtjNkNMkL6rYs9uWPaVwr.Rw4mQKAb8r4rBVcBt/imVa/c0TW8tmK', 'ss', 'sss', NULL, '2024-11-06 03:13:37', NULL, NULL, 'yes'),
 (51, 'test@g.msuiit.edu.ph', '$2y$12$ZmaohdafRx/e3V9K4XHNbuX89N560n9RBDlJseTwAOFe0OlrSkewO', 'Test', 'Test', NULL, '2024-11-11 03:15:37', NULL, NULL, 'yes'),
-(52, 'adasd@g.msuiit.edu.ph', '$2y$12$4b9H9CLfKxrRoJC0kCiSIODf3MrQqhGzketpjsWX03sqEInzMdtHO', 'asasd', 'asdasdasd', NULL, '2024-11-18 03:28:08', NULL, 'wGYwqUW4AVkV9xdIGi6YEUmGyVKDZW092472fvA83DRy3HKEZjirLVFO4lXA', 'no');
+(52, 'adasd@g.msuiit.edu.ph', '$2y$12$4b9H9CLfKxrRoJC0kCiSIODf3MrQqhGzketpjsWX03sqEInzMdtHO', 'asasd', 'asdasdasd', NULL, '2024-11-18 03:28:08', NULL, NULL, 'yes'),
+(54, 'angkol@g.msuiit.edu.ph', '$2y$12$4Y4ARXTTmOgot7JBnGelbemz99d4AVDJbFbbPq01r2ajnILEteL5C', 'Angkol', 'Nako', 129, '2024-11-21 03:18:54', NULL, NULL, 'yes'),
+(55, 'qwerty@g.msuiit.edu.ph', '$2y$12$Qy1IAfbyN0CAkFRB3O6ZqeM0zvrehx9xtNHB1lwk07uHQY3pREiaa', 'qwertry', 'qwerty', 115, '2024-11-26 06:36:05', NULL, NULL, 'yes'),
+(56, 'qwertyy@g.msuiit.edu.ph', '$2y$12$1IFXaXJL7Jvj/EHyGvSI8u7VeTZEiSX2UAMzbA7Ox7t4/gsBrOxcy', 'qwertyyy', 'qwertyyy', 131, '2024-11-26 08:19:57', NULL, NULL, 'yes'),
+(68, 'adamrusselshane.oguis@g.msuiit.edu.ph', '$2y$12$RVLVyzlLQ5dJ0991JGqSceM6ZoXKOaSnXLDYguXqXVMriOV/u2uk.', 'Adam', 'Oguis', 113, '2024-11-29 07:25:26', NULL, '1V9ZHE1oTbqNwXLmw3nMmpQlXsCJkGI6o44vHVtzrk7X3meQdEQy7Tr5y4ec', 'no');
 
 --
 -- Triggers `users`
@@ -629,7 +709,6 @@ CREATE TABLE `user_logs` (
 INSERT INTO `user_logs` (`log_id`, `l_user_id`, `affected_user_id`, `activity`, `table_name`, `log_time`) VALUES
 (60, 49, 49, 'UPDATE', 'users', '2024-11-06 03:40:54'),
 (61, 49, 49, 'UPDATE', 'users', '2024-11-06 03:41:19'),
-(62, 41, 41, 'UPDATE', 'users', '2024-11-06 05:53:45'),
 (63, 42, 42, 'UPDATE', 'users', '2024-11-07 04:00:11'),
 (64, 42, 42, 'UPDATE', 'users', '2024-11-08 06:23:31'),
 (65, 51, 51, 'INSERT', 'users', '2024-11-11 03:15:37'),
@@ -643,13 +722,30 @@ INSERT INTO `user_logs` (`log_id`, `l_user_id`, `affected_user_id`, `activity`, 
 (73, 42, 42, 'UPDATE', 'users', '2024-11-13 03:18:05'),
 (74, 42, 42, 'UPDATE', 'users', '2024-11-13 03:37:26'),
 (75, 42, 42, 'UPDATE', 'users', '2024-11-13 03:37:41'),
-(76, 41, 41, 'UPDATE', 'users', '2024-11-13 03:57:22'),
-(77, 41, 41, 'UPDATE', 'users', '2024-11-13 03:57:26'),
 (79, 47, 47, 'UPDATE', 'users', '2024-11-18 03:20:30'),
 (80, 51, 51, 'UPDATE', 'users', '2024-11-18 03:27:12'),
 (81, 52, 52, 'INSERT', 'users', '2024-11-18 03:28:08'),
-(82, 41, 41, 'UPDATE', 'users', '2024-11-18 04:01:09'),
-(83, 41, 41, 'UPDATE', 'users', '2024-11-18 04:01:20');
+(84, 42, 42, 'UPDATE', 'users', '2024-11-21 02:20:08'),
+(85, 42, 42, 'UPDATE', 'users', '2024-11-21 02:20:12'),
+(86, 49, 49, 'UPDATE', 'users', '2024-11-21 02:26:09'),
+(87, 49, 49, 'UPDATE', 'users', '2024-11-21 02:26:12'),
+(88, 47, 47, 'UPDATE', 'users', '2024-11-21 02:45:24'),
+(89, 52, 52, 'UPDATE', 'users', '2024-11-21 02:46:14'),
+(90, 48, 48, 'UPDATE', 'users', '2024-11-21 02:49:00'),
+(92, 54, 54, 'INSERT', 'users', '2024-11-21 03:18:54'),
+(93, 54, 54, 'UPDATE', 'users', '2024-11-21 03:42:34'),
+(96, 55, 55, 'INSERT', 'users', '2024-11-26 06:36:05'),
+(97, 55, 55, 'UPDATE', 'users', '2024-11-26 06:43:02'),
+(98, 56, 56, 'INSERT', 'users', '2024-11-26 08:19:57'),
+(99, 56, 56, 'UPDATE', 'users', '2024-11-26 08:46:45'),
+(100, 1, 1, 'UPDATE', 'users', '2024-11-27 06:37:13'),
+(101, 1, 1, 'UPDATE', 'users', '2024-11-27 06:38:04'),
+(102, 1, 1, 'UPDATE', 'users', '2024-11-27 06:38:45'),
+(103, 1, 1, 'UPDATE', 'users', '2024-11-27 06:41:08'),
+(104, 50, 50, 'UPDATE', 'users', '2024-11-27 06:41:21'),
+(109, 1, 1, 'UPDATE', 'users', '2024-11-27 06:42:36'),
+(110, 1, 1, 'UPDATE', 'users', '2024-11-27 06:42:44'),
+(127, 68, 68, 'INSERT', 'users', '2024-11-29 07:25:26');
 
 -- --------------------------------------------------------
 
@@ -668,7 +764,6 @@ CREATE TABLE `user_roles` (
 
 INSERT INTO `user_roles` (`u_role_id`, `user_id`) VALUES
 (1, 1),
-(2, 41),
 (2, 42),
 (2, 43),
 (2, 44),
@@ -678,7 +773,11 @@ INSERT INTO `user_roles` (`u_role_id`, `user_id`) VALUES
 (2, 49),
 (2, 50),
 (2, 51),
-(2, 52);
+(2, 52),
+(2, 54),
+(2, 55),
+(2, 56),
+(2, 68);
 
 --
 -- Indexes for dumped tables
@@ -768,43 +867,43 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `center`
 --
 ALTER TABLE `center`
-  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `documentation`
 --
 ALTER TABLE `documentation`
-  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `doc_logs`
 --
 ALTER TABLE `doc_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
 
 --
 -- AUTO_INCREMENT for table `presentation`
 --
 ALTER TABLE `presentation`
-  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `publications`
 --
 ALTER TABLE `publications`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `research`
 --
 ALTER TABLE `research`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -816,13 +915,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `user_logs`
 --
 ALTER TABLE `user_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- Constraints for dumped tables

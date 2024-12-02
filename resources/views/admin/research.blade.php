@@ -118,6 +118,7 @@
                 <h5 class="modal-title" id="addResearchModalLabel" style="color: #ffffff">Add New Research</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <p style="color: #a41d21; padding: 20px; text-align: justify">Please fill out all the input fields, particularly the Research Start Date, as it is required for calculating the research count and yearly analytics. You can also either provide the SO link from IIT documents or upload the Research Project Proposal File in .pdf format. </p>
             <form action="{{ route('users.addResearch') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                 @csrf
                 <div class="modal-body">

@@ -178,43 +178,66 @@ public function updateAnnouncement(Request $request, $id)
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-public function getYearlyReportData()
+
+public function getCenters()
 {
-    // Define the last 5 years
-    $lastFiveYears = range(date('Y') - 4, date('Y'));
+    $centers = DB::table('center')->select('cid', 'c_name')->get();
+    return response()->json($centers);
+}
+    
+public function getYearlyReportData(Request $request)
+{
+    try {
+        $lastFiveYears = range(date('Y') - 4, date('Y'));
+        $center = $request->query('center', 'all');
 
-    // Query to get counts for publications, research, and presentations by year
-    $publicationsData = DB::table('publications')
-        ->select(DB::raw('YEAR(publication_date) as year'), DB::raw('COUNT(*) as count'))
-        ->whereIn(DB::raw('YEAR(publication_date)'), $lastFiveYears)
-        ->groupBy('year')
-        ->pluck('count', 'year');
+        \Log::info("Filtering data for center: " . $center);
 
-    $researchData = DB::table('research')
-        ->select(DB::raw('YEAR(date_started) as year'), DB::raw('COUNT(*) as count'))
-        ->whereIn(DB::raw('YEAR(date_started)'), $lastFiveYears)
-        ->groupBy('year')
-        ->pluck('count', 'year');
+        // Base queries for publications, research, and presentations
+        $publicationsQuery = DB::table('publications')
+            ->select(DB::raw('YEAR(publication_date) as year'), DB::raw('COUNT(*) as count'))
+            ->whereIn(DB::raw('YEAR(publication_date)'), $lastFiveYears);
 
-    $presentationsData = DB::table('presentation')
-        ->select(DB::raw('YEAR(conference_date) as year'), DB::raw('COUNT(*) as count'))
-        ->whereIn(DB::raw('YEAR(conference_date)'), $lastFiveYears)
-        ->groupBy('year')
-        ->pluck('count', 'year');
+        $researchQuery = DB::table('research')
+            ->select(DB::raw('YEAR(date_started) as year'), DB::raw('COUNT(*) as count'))
+            ->whereIn(DB::raw('YEAR(date_started)'), $lastFiveYears);
 
-    // Prepare data in a format suitable for the chart
-    $yearlyData = [];
-    foreach ($lastFiveYears as $year) {
-        $yearlyData[] = [
-            'year' => $year,
-            'publications' => $publicationsData[$year] ?? 0,
-            'research' => $researchData[$year] ?? 0,
-            'presentations' => $presentationsData[$year] ?? 0,
-        ];
+        $presentationsQuery = DB::table('presentation')
+            ->select(DB::raw('YEAR(conference_date) as year'), DB::raw('COUNT(*) as count'))
+            ->whereIn(DB::raw('YEAR(conference_date)'), $lastFiveYears);
+
+        if ($center !== 'all') {
+            // Get all users belonging to the selected center
+            $userIds = DB::table('users')->where('centerlab', $center)->pluck('uid');
+            
+            // Filter the queries by the selected center's users
+            $publicationsQuery->whereIn('p_user_id', $userIds);
+            $researchQuery->whereIn('r_user_id', $userIds);
+            $presentationsQuery->whereIn('pr_user_id', $userIds);
+        }
+
+        // Execute the queries and group by year
+        $publicationsData = $publicationsQuery->groupBy('year')->pluck('count', 'year');
+        $researchData = $researchQuery->groupBy('year')->pluck('count', 'year');
+        $presentationsData = $presentationsQuery->groupBy('year')->pluck('count', 'year');
+
+        // Prepare the final data to return
+        $yearlyData = [];
+        foreach ($lastFiveYears as $year) {
+            $yearlyData[] = [
+                'year' => $year,
+                'publications' => $publicationsData[$year] ?? 0,
+                'research' => $researchData[$year] ?? 0,
+                'presentations' => $presentationsData[$year] ?? 0,
+            ];
+        }
+
+        return response()->json($yearlyData);
+
+    } catch (\Exception $e) {
+        \Log::error('Error fetching yearly report data: ' . $e->getMessage());
+        return response()->json(['error' => 'An error occurred while fetching data.'], 500);
     }
-
-    return response()->json($yearlyData);
 }
 
 

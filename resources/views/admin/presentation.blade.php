@@ -119,6 +119,7 @@
                 <h5 class="modal-title" id="addPresentationModalLabel" style="color: #ffffff">Add New Presentation</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <p style="color: #a41d21; padding: 20px; text-align: justify">Please fill out all the input fields, particularly the Conference Date, as it is required for calculating the presentation count and yearly analytics. You can also either provide the Presentation Link/Conference Link or upload the Presentation in .pdf format. </p>
             <form action="{{ route('users.addPresentation') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                 @csrf
                 <div class="modal-body">

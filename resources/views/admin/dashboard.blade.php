@@ -200,63 +200,117 @@
 <hr id = "linechart-report">
 
 <!-- Reports -->
-    <div class="col-12">
-        <div class="card reports" id="dashboard-cards-admin">
+<div class="col-12">
+    <div class="card reports" id="dashboard-cards-admin">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class='bx bxs-report'></i> Reports | Total Publications/Research/Presentations
+            </h5>
 
-                <div class="card-body">
-				<h5 class="card-title"><i class='bx bxs-report'></i> Reports | Total Publications/Research/Presentations</h5>
+            <br>
 
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
+            <!-- Dropdown for Center Selection -->
+            <select id="centerFilter" class="form-select form-select-sm">
+                <option value="all">All Centers (Select Center here)</option>
+                <!-- Dynamic options will be inserted here -->
+            </select>
 
-				  <script>
-			document.addEventListener("DOMContentLoaded", () => {
-				fetch('/dashboard/yearly-report')
-				.then(response => response.json())
-				.then(data => {
-					const years = data.map(item => item.year);
-					const publications = data.map(item => item.publications);
-					const research = data.map(item => item.research);
-					const presentations = data.map(item => item.presentations);
+            <br>
 
-					new ApexCharts(document.querySelector("#reportsChart"), {
-					series: [
-						{ name: 'Publications', data: publications },
-						{ name: 'Research', data: research },
-						{ name: 'Presentations', data: presentations },
-					],
-					chart: {
-						height: 350,
-						type: 'area',
-						toolbar: { show: false },
-					},
-					markers: { size: 4 },
-					colors: ['#bb8082', '#ceb66f', '#608BC1'],
-					fill: {
-						type: "gradient",
-						gradient: {
-						shadeIntensity: 1,
-						opacityFrom: 0.9,
-						opacityTo: 0.1,
-						stops: [0, 90, 100],
-						}
-					},
-					dataLabels: { enabled: false },
-					stroke: { curve: 'smooth', width: 2 },
-					xaxis: {
-						categories: years,
-					},
-					tooltip: { x: { format: 'yyyy' } },
-					}).render();
-				});
-			});
-		</script>
-	<!-- End Line Chart -->
+            <!-- Line Chart -->
+            <div id="reportsChart"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    let chartInstance = null; // To hold the chart instance
+
+                    // Fetch Centers and Populate the Dropdown
+                    fetch('/dashboard/centers')
+                        .then(response => response.json())
+                        .then(data => {
+                            const dropdown = document.querySelector('#centerFilter');
+                            data.forEach(center => {
+                                const option = document.createElement('option');
+                                option.value = center.cid; // Assuming `cid` is the center ID
+                                option.textContent = center.c_name; // Assuming `c_name` is the center name
+                                dropdown.appendChild(option);
+                            });
+                        });
+
+                    // Fetch and Render Chart Data
+                    const fetchAndRenderData = (centerId = 'all') => {
+                        fetch(`/dashboard/yearly-report?center=${centerId}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("Fetched Data:", data);
+                                const years = data.map(item => item.year);
+                                const publications = data.map(item => item.publications);
+                                const research = data.map(item => item.research);
+                                const presentations = data.map(item => item.presentations);
+
+                                // Check if chartInstance exists and destroy the previous chart
+                                if (chartInstance && typeof chartInstance.destroy === 'function') {
+                                    chartInstance.destroy(); // Safely destroy previous chart
+                                }
+
+                                // Clear the chart container to avoid stacking charts
+                                const chartContainer = document.querySelector("#reportsChart");
+                                chartContainer.innerHTML = '';
+
+                                // Add a small delay before rendering the new chart
+                                setTimeout(() => {
+                                    // Render the new chart after DOM has cleared
+                                    chartInstance = new ApexCharts(chartContainer, {
+                                        series: [
+                                            { name: 'Publications', data: publications },
+                                            { name: 'Research', data: research },
+                                            { name: 'Presentations', data: presentations },
+                                        ],
+                                        chart: {
+                                            height: 350,
+                                            type: 'area',
+                                            toolbar: { show: false },
+                                        },
+                                        markers: { size: 4 },
+                                        colors: ['#bb8082', '#ceb66f', '#608BC1'],
+                                        fill: {
+                                            type: "gradient",
+                                            gradient: {
+                                                shadeIntensity: 1,
+                                                opacityFrom: 0.9,
+                                                opacityTo: 0.1,
+                                                stops: [0, 90, 100],
+                                            }
+                                        },
+                                        dataLabels: { enabled: false },
+                                        stroke: { curve: 'smooth', width: 2 },
+                                        xaxis: {
+                                            categories: years,
+                                        },
+                                        tooltip: { x: { format: 'yyyy' } },
+                                    }).render();
+                                }, 200); // Wait for 200ms before rendering
+                            })
+                            .catch(err => console.error("Error fetching data:", err));
+                    };
+
+                    // Initial Render
+                    fetchAndRenderData();
+
+                    // Update chart when center is selected
+                    document.querySelector('#centerFilter').addEventListener('change', (event) => {
+                        const centerId = event.target.value;
+                        console.log("Selected Center ID:", centerId); // Debug: Log selected center ID
+                        fetchAndRenderData(centerId);
+                    });
+                });
+              </script>
+
 
         </div>
-
     </div>
-</div><!-- End Reports -->
+</div>
+
 
 <hr id="announcement-report-spacing">
 

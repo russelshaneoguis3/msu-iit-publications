@@ -117,6 +117,7 @@
                 <h5 class="modal-title" id="addPublicationModalLabel" style="color: #ffffff">Add New Publication</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <p style="color: #a41d21; padding: 20px; text-align: justify">Please fill out all the input fields, particularly the Date of Publication, as it is required for calculating the publication count and yearly analytics. You can also either provide the DOI link or upload the Publication in .pdf format. </p>
             <form action="{{ route('admin.addPublication') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                 @csrf
                 <div class="modal-body">

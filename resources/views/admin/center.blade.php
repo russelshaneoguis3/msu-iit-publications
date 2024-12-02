@@ -93,8 +93,8 @@
             <h2 class="accordion-header" id="flush-heading-{{ $cid }}">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{ $cid }}" aria-expanded="false" aria-controls="flush-collapse-{{ $cid }}" style="background: #f8f0e8">
                     <p>
-                        <b style="font-size: 18px">{{ substr($centerGroup->first()->c_name, 0, 1) }}</b>{{ substr($centerGroup->first()->c_name, 1) }} 
-                        <span style="font-size: 12px; color: #a41d21; font-family: 'Times New Roman', Times, serif;">
+                        <b style="font-size: 18px; color: #a41d21;">{{ substr($centerGroup->first()->c_name, 0, 1) }}</b>{{ substr($centerGroup->first()->c_name, 1) }} 
+                        <span style="font-size: 12px; color: #054fb3; font-family: 'Times New Roman', Times, serif;">
                             @if($latestUploads[$cid]->latest_upload) 
                                 (Last Upload {{ \Carbon\Carbon::parse($latestUploads[$cid]->latest_upload)->diffForHumans() }})
                             @else 

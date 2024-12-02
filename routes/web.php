@@ -51,6 +51,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 //-----------------------------------------------------------------------------------------------------------------------------
 
 
+// General ---------------------------------------------------------------------------------------------------------------------
+Route::get('/dashboard/yearly-report', [DashboardController::class, 'getYearlyReportData']);
+Route::get('/dashboard/centers', [DashboardController::class, 'getCenters']);
+
+
 // Admin Routes ---------------------------------------------------------------------------------------------------------------
 
 // Admin Dashboard
@@ -117,8 +122,6 @@ Route::post('/admin/center/add', [CenterController::class, 'addCenter'])->name('
 
 // User Dashboard
 Route::get('/users/dashboard', [DashboardController::class, 'usersDashboard'])->name('users.dashboard');
-Route::get('/dashboard/yearly-report', [DashboardController::class, 'getYearlyReportData']);
-
 
 //user research
 Route::get('/users/research', [ResearchController::class, 'usersResearch'])->name('users.research');
