@@ -240,6 +240,77 @@ public function getYearlyReportData(Request $request)
     }
 }
 
+public function getFilteredReportData(Request $request)
+{
+    try {
+        // Get filter values
+        $year = $request->query('year', 'all'); // Default to 'all'
+        $center = $request->query('center', 'all');
+        $quarter = $request->query('quarter', 'all');
+
+        \Log::info("Filtering data for center: $center, year: $year, quarter: $quarter");
+
+        // Define quarters
+        $quarters = [
+            1 => [1, 2, 3], // Q1: Jan, Feb, Mar
+            2 => [4, 5, 6], // Q2: Apr, May, Jun
+            3 => [7, 8, 9], // Q3: Jul, Aug, Sep
+            4 => [10, 11, 12], // Q4: Oct, Nov, Dec
+        ];
+
+        // Base queries for publications, research, and presentations
+        $publicationsQuery = DB::table('publications')
+            ->select(DB::raw('COUNT(*) as count'))
+            ->whereNotNull('publication_date');
+
+        $researchQuery = DB::table('research')
+            ->select(DB::raw('COUNT(*) as count'))
+            ->whereNotNull('date_started');
+
+        $presentationsQuery = DB::table('presentation')
+            ->select(DB::raw('COUNT(*) as count'))
+            ->whereNotNull('conference_date');
+
+        // Apply year filter only if it's not 'all'
+        if ($year !== 'all') {
+            $publicationsQuery->whereYear('publication_date', $year);
+            $researchQuery->whereYear('date_started', $year);
+            $presentationsQuery->whereYear('conference_date', $year);
+        }
+
+        // Apply quarter filter if not 'all'
+        if ($quarter !== 'all' && array_key_exists($quarter, $quarters)) {
+            $months = $quarters[$quarter];
+            $publicationsQuery->whereIn(DB::raw('MONTH(publication_date)'), $months);
+            $researchQuery->whereIn(DB::raw('MONTH(date_started)'), $months);
+            $presentationsQuery->whereIn(DB::raw('MONTH(conference_date)'), $months);
+        }
+
+        // Apply center filter if not 'all'
+        if ($center !== 'all') {
+            $userIds = DB::table('users')->where('centerlab', $center)->pluck('uid');
+            $publicationsQuery->whereIn('p_user_id', $userIds);
+            $researchQuery->whereIn('r_user_id', $userIds);
+            $presentationsQuery->whereIn('pr_user_id', $userIds);
+        }
+
+        // Get the counts
+        $publications = $publicationsQuery->value('count') ?? 0;
+        $research = $researchQuery->value('count') ?? 0;
+        $presentations = $presentationsQuery->value('count') ?? 0;
+
+        return response()->json([
+            'publications' => $publications,
+            'research' => $research,
+            'presentations' => $presentations,
+        ]);
+
+    } catch (\Exception $e) {
+        \Log::error('Error fetching report data: ' . $e->getMessage());
+        return response()->json(['error' => 'An error occurred while fetching data.'], 500);
+    }
+}
+
 
 }
 

@@ -204,7 +204,7 @@
     <div class="card reports" id="dashboard-cards-admin">
         <div class="card-body">
             <h5 class="card-title">
-                <i class='bx bxs-report'></i> Reports | Total Publications/Research/Presentations
+                <i class='bx bxs-report'></i> Reports | Performance Distribution (Last 5 Years)
             </h5>
 
             <br>
@@ -314,7 +314,7 @@
 
 <hr id="announcement-report-spacing">
 
-            <!-- Announcements Sales -->
+            <!-- Announcements  -->
             <div class="col-12">
               <div class="card announcement overflow-auto">
 
@@ -473,15 +473,169 @@
           </div>
         </div><!-- End Left side columns -->
 
-<hr id="activity-logs-report-spacing">
+<hr id="filtered-table-report-spacing">
 
         <!-- Right side columns -->
         <div class="col-lg-4">
 
+        <!-- Recent Activity -->
+            <div class="card filtered-reports">
+
+            <div class="card-body">
+              <h5 class="card-title">Filtered Reports</h5>
+			  <br>
+			  <div class="activity">
+
+            <!-- Filters -->
+             
+            <div class="col-md">
+                    <!-- Center Filter -->
+                    <label for="centerFiltered" class="form-label">Select Center</label>
+                    <select id="centerFiltered" class="form-select form-select-sm">
+                        <option value="all">All Centers</option>
+                        <!-- Dynamic options will be inserted here -->
+                    </select>
+                </div>
+
+            <div class="row">
+                
+            <div class="col-md-6">
+                    <!-- Quarter Filter -->
+                    <label for="quarterFilter" class="form-label">Select Quarter</label>
+                    <select id="quarterFilter" class="form-select form-select-sm">
+                        <option value="all">All Quarters</option>
+                        <option value="1">Q1: Jan - Mar</option>
+                        <option value="2">Q2: Apr - Jun</option>
+                        <option value="3">Q3: Jul - Sep</option>
+                        <option value="4">Q4: Oct - Dec</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <!-- Year Filter -->
+                    <label for="yearFilter" class="form-label">Select Year</label>
+                    <select id="yearFilter" class="form-select form-select-sm">
+                        <!-- Dynamic year options will be inserted here -->
+                    </select>
+                </div>
+            </div>
+			  
+                <!-- Table for displaying report details -->
+                <div class="mt-4">
+                    <h5>Report Details:</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="background: #bb8082; border-top-left-radius: 20px;"><b>Publications</b></td>
+                                <td style="background: #c29698; border-top-right-radius: 20px;"><b id="publicationsCount">0</b></td>
+                            </tr>
+                            <tr>
+                                <td style="background: #ceb66f"><b>Research</b></td>
+                                <td style="background: #d1c08c"><strong id="researchCount">0</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="background: #608BC1"><b>Presentations</b></td>
+                                <td style="background: #87a6cc"><strong id="presentationsCount">0</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    // Fetch Centers and Populate the Dropdown
+                    fetch('/dashboard/centers')
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Fetched Centers:", data); // Debug: Log fetched data
+                            const dropdown = document.querySelector('#centerFiltered');
+                            data.forEach(center => {
+                                const option = document.createElement('option');
+                                option.value = center.cid; // Center ID
+                                option.textContent = center.c_name; // Center Name
+                                dropdown.appendChild(option);
+                            });
+                        })
+                        .catch(err => console.error("Error fetching centers:", err));
+
+                    // Populate Year Dropdown
+                    const populateYearDropdown = () => {
+                        const yearDropdown = document.querySelector('#yearFilter');
+                        const currentYear = new Date().getFullYear();
+
+                        // Add "All Years" option
+                        const allYearsOption = document.createElement('option');
+                        allYearsOption.value = 'all';
+                        allYearsOption.textContent = 'All Years';
+                        yearDropdown.appendChild(allYearsOption);
+
+                        // Add years from 2000 to the current year
+                        for (let i = currentYear; i >= 2000; i--) {
+                            const option = document.createElement('option');
+                            option.value = i;
+                            option.textContent = i;
+                            yearDropdown.appendChild(option);
+                        }
+                    };
+
+                    populateYearDropdown();
+
+                    // Fetch and Update Report Details
+                    const fetchAndUpdateReportDetails = (centerId = 'all', year = 'all', quarter = 'all') => {
+                        fetch(`/dashboard/filtered-report?center=${centerId}&year=${year}&quarter=${quarter}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("Fetched Data:", data);
+
+                                // Update text content dynamically
+                                document.getElementById('publicationsCount').textContent = data.publications || 0;
+                                document.getElementById('researchCount').textContent = data.research || 0;
+                                document.getElementById('presentationsCount').textContent = data.presentations || 0;
+                            })
+                            .catch(err => console.error("Error fetching data:", err));
+                    };
+
+                    // Initial Render for default values
+                    fetchAndUpdateReportDetails('all', 'all', 'all');
+
+                    // Update when filters change
+                    document.querySelector('#centerFiltered').addEventListener('change', (event) => {
+                        const selectedCenter = event.target.value;
+                        const selectedYear = document.querySelector('#yearFilter').value;
+                        fetchAndUpdateReportDetails(selectedCenter, selectedYear);
+                    });
+
+                    document.querySelector('#yearFilter').addEventListener('change', (event) => {
+                        const selectedYear = event.target.value;
+                        const selectedCenter = document.querySelector('#centerFiltered').value;
+                        fetchAndUpdateReportDetails(selectedCenter, selectedYear);
+                    });
+
+                    document.querySelector('#quarterFilter').addEventListener('change', (event) => {
+                        const selectedQuarter = event.target.value;
+                        const selectedCenter = document.querySelector('#centerFiltered').value;
+                        const selectedYear = document.querySelector('#yearFilter').value;
+                        fetchAndUpdateReportDetails(selectedCenter, selectedYear, selectedQuarter);
+                    });
+                });
+
+            </script>
+
+			
+			</div>
+
+            </div>
+          </div><!-- End Filtered table -->
+
+<hr id="activity-logs-report-spacing">
+
           <!-- Recent Activity -->
           <div class="card activity-logs">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
 
             <div class="card-body">
               <h5 class="card-title">Activity Logs</h5>
@@ -520,8 +674,6 @@
 				</div>
 
 					</div>
-
-              </div>
 
             </div>
           </div><!-- End Recent Activity Logs -->

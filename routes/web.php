@@ -52,8 +52,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // General ---------------------------------------------------------------------------------------------------------------------
-Route::get('/dashboard/yearly-report', [DashboardController::class, 'getYearlyReportData']);
 Route::get('/dashboard/centers', [DashboardController::class, 'getCenters']);
+Route::get('/dashboard/yearly-report', [DashboardController::class, 'getYearlyReportData']);
+Route::get('/dashboard/filtered-report', [DashboardController::class, 'getFilteredReportData']);
 
 
 // Admin Routes ---------------------------------------------------------------------------------------------------------------

@@ -225,6 +225,7 @@ color: var(--black-color)
 .publications-card .card-title,
 .presentations-card .card-title,
 .activity-logs .card-title,
+.filtered-reports .card-title,
 .announcement .card-title{
   color: #3170AB;
 }
@@ -235,19 +236,21 @@ color: var(--black-color)
 
 #publication-card-spacing,
 #research-report-spacing,
-#activity-logs-report-spacing {
+#filtered-table-report-spacing {
   display: none;
 }
 
-#announcement-report-spacing {
+#announcement-report-spacing,
+#activity-logs-report-spacing {
   opacity: 0;
+
 }
 
 @media (max-width: 768px) {
 
   #publication-card-spacing,
   #research-report-spacing,
-  #activity-logs-report-spacing  {
+  #filtered-table-report-spacing  {
     display: block;
     opacity: 0;
   }
