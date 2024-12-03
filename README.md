@@ -13,7 +13,7 @@ This web application, developed using the Laravel Framework and MySQL DBMS, is d
 
 
 ## How to setup the web application
-
+-
     1. Download and setup your MySQL DBMS.
     2. Import the sql file **research.sql** (see project folder) and name the database as `research`.
     3. You can also manually setup the database by creating a database and name it `research`, then using console you can manually code the tables, triggers, etc. Just follow the **SQL guide.txt** file. 
