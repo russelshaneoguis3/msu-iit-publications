@@ -9,7 +9,7 @@ This web application, developed using the Laravel Framework and MySQL DBMS, is d
 - [Assoc. Prof. Johniel Babiera (Project Member)](https://ph.linkedin.com/in/johniel-babiera).
 - [Adam Russel Shane Oguis (Web Developer)](https://www.linkedin.com/in/ars-oguis/).
 - [Andrei Gabrielle Adlawan (Team)](https://www.linkedin.com/in/andrei-gabrielle-adlawan-237b55299/).
-- [Dinah Dumaguing (Team)](https://www.youtube.com/watch?v=e_04ZrNroTo).
+- [Dinah Dumaguing (Team)]().
 
 
 ## How to setup the web application
