@@ -7,25 +7,25 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
-	<!-- Favicons -->
-	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
-  	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
+	 <!-- Favicons -->
+	 <link href="{{ asset('assets/img/web-logo.png') }}" rel="icon">
+  	<link href="{{ asset('assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
 	<!-- bootstrap css -->
-	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Boxicons -->
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
 
     <!-- Include the DataTables library -->
-    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/datatables.bootstrap4.css') }}">
 
 	<!-- Include SweetAlert -->
-	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}" rel="stylesheet">
 
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../side-nav/side-nav.css">
-	<link rel="stylesheet" href="../general/style.css">
+	<link rel="stylesheet" href="{{ asset('side-nav/side-nav.css') }}">
+	<link rel="stylesheet" href="{{ asset('general/style.css') }}">
 
 </head>
 <body>
@@ -35,7 +35,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="{{ route('admin.dashboard') }}" class="brand">
-		<img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+		<img src="{{ asset('assets/img/msuiit-logo.png') }}" alt="logo" class="nav-logo">
 			<span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">
@@ -776,27 +776,25 @@
 </script>
 
 
-</body>
-
 <!-- side-nav JS -->
-<script src="../side-nav/script.js"></script>
+<script src="{{ asset('side-nav/script.js') }}"></script>
 
 <!-- Include jQuery -->
-<script src="../assets/vendor/jquery/jquery.js"></script>
+<script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
 
 <!-- Bootstrap JS and Popper.js -->
-<script src="../assets/vendor/popperjs/popperjs.js"></script>
-<script src="../assets/vendor/popperjs/popperjsbootstrap.js"></script>
+<script src="{{ asset('assets/vendor/popperjs/popperjs.js') }}"></script>
+<script src="{{ asset('assets/vendor/popperjs/popperjsbootstrap.js') }}"></script>
 
 <!-- data tables js -->
-<script src="../assets/vendor/datatables/jquery.datatables.js"></script>
-<script src="../assets/vendor/datatables/datatables.bootstrap4.js"></script>
+<script src="{{ asset('assets/vendor/datatables/jquery.datatables.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/datatables.bootstrap4.js') }}"></script>
 
 <!-- apexcharts -->
-<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
 
 <!-- sweet alert JS -->
-<script src="../assets/vendor/sweetalert/sweetalert.js"></script>
+<script src="{{ asset('assets/vendor/sweetalert/sweetalert.js') }}"></script>
 
 <script>
         $(document).ready(function() {
@@ -836,5 +834,7 @@
     });
 </script>
 @endif
+
+</body>
 
 </html>

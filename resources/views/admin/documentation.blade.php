@@ -8,24 +8,24 @@
 	<meta name="keywords" content="">
 
 	 <!-- Favicons -->
-	 <link href="{{ asset('../assets/img/web-logo.png') }}" rel="icon">
-  	<link href="{{ asset('../assets/img/web-logo.png') }}" rel="apple-touch-icon">
+	 <link href="{{ asset('assets/img/web-logo.png') }}" rel="icon">
+  	<link href="{{ asset('assets/img/web-logo.png') }}" rel="apple-touch-icon">
 
 	<!-- bootstrap css -->
-	<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Boxicons -->
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
 
     <!-- Include the DataTables library -->
-    <link rel="stylesheet" href="../assets/vendor/datatables/datatables.bootstrap4.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/datatables.bootstrap4.css') }}">
 
 	<!-- Include SweetAlert -->
-	<link href="../assets/vendor/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}" rel="stylesheet">
 
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../side-nav/side-nav.css">
-	<link rel="stylesheet" href="../general/style.css">
+	<link rel="stylesheet" href="{{ asset('side-nav/side-nav.css') }}">
+	<link rel="stylesheet" href="{{ asset('general/style.css') }}">
 
 </head>
 <body>
@@ -34,7 +34,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="{{ route('admin.dashboard') }}" class="brand">
-		<img src="../assets/img/msuiit-logo.png" alt="logo" class="nav-logo">
+		<img src="{{ asset('assets/img/msuiit-logo.png') }}" alt="logo" class="nav-logo">
 			<span id="logo-text" class="text">MSU-IIT Researchers' Repo</span>
 		</a>
 		<ul class="side-menu top">

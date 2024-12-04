@@ -17,8 +17,8 @@
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/register.css" rel="stylesheet">
+  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
 
 </head>
 
@@ -31,7 +31,7 @@
   <div class="container position-relative d-flex align-items-center justify-content-between">
     <a href="{{ url('/') }}" class="logo d-flex align-items-center">
 
-      <img src="assets/img/web-logo.png" alt=""> 
+      <img src="{{ asset('assets/img/web-logo.png') }}" alt=""> 
       <h1 class="sitename">MSU-IIT Researchers' Repo</h1>
     </a>
 
@@ -60,7 +60,7 @@
 
       <br>
 
-        <img src="assets/img/web-logo.png" alt="logo" class="logo"/></img>
+        <img src="{{ asset('assets/img/web-logo.png') }}" alt="logo" class="logo"/></img>
         <h5>Activate MSU-IIT Researchers' Repo account</h5>
         <p class="registration-description">This registration feature is exclusively available to MSU-IIT researchers. Please use your My.IIT Gmail account to register.</p>
 
@@ -148,8 +148,8 @@
   <script src="{{ asset('assets/js/authentication.js') }}"></script>
 
 <!-- Bootstrap JS and Popper.js -->
-<script src="assets/vendor/popperjs/popperjs.js"></script>
-<script src="assets/vendor/popperjs/popperjsbootstrap.js"></script>
+<script src="{{ asset('assets/vendor/popperjs/popperjs.js') }}"></script>
+<script src="{{ asset('assets/vendor/popperjs/popperjsbootstrap.js') }}"></script>
 
 
 </body>

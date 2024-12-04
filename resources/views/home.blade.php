@@ -17,7 +17,7 @@
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
 </head>
 
@@ -30,7 +30,7 @@
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
 
-          <img src="assets/img/msuiit-logo.png" alt=""> 
+          <img src="{{ asset('assets/img/msuiit-logo.png') }}" alt=""> 
           <h1 class="sitename">MSU-IIT Researchers' Repo</h1>
         </a>
 
@@ -71,23 +71,23 @@
       <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
 
         <div class="carousel-item active">
-          <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
+          <img src="{{ asset('assets/img/hero-carousel/hero-carousel-1.jpg') }}" alt="">
         </div>
 
         <div class="carousel-item">
-          <img src="assets/img/hero-carousel/hero-carousel-2.jpeg" alt="">
+          <img src="{{ asset('assets/img/hero-carousel/hero-carousel-2.jpeg') }}" alt="">
         </div>
 
         <div class="carousel-item">
-          <img src="assets/img/hero-carousel/hero-carousel-3.png" alt="">
+          <img src="{{ asset('assets/img/hero-carousel/hero-carousel-3.png') }}" alt="">
         </div>
 
         <div class="carousel-item">
-          <img src="assets/img/hero-carousel/hero-carousel-4.jpg" alt="">
+          <img src="{{ asset('assets/img/hero-carousel/hero-carousel-4.jpg') }}" alt="">
         </div>
 
         <div class="carousel-item">
-          <img src="assets/img/hero-carousel/hero-carousel-5.jpg" alt="">
+          <img src="{{ asset('assets/img/hero-carousel/hero-carousel-5.jpg') }}" alt="">
         </div>
 
         <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
@@ -109,7 +109,7 @@
 
         <div class="row gy-4">
           <div class="col-lg-6 2">
-            <img src="assets/img/about-iit.png" class="img-fluid" alt="iit">
+            <img src="{{ asset('assets/img/about-iit.png') }}" class="img-fluid" alt="iit">
           </div>
           <div class="col-lg-6 content">
             <h3>What is MSU-IIT Researchers' Repo?</h3>
