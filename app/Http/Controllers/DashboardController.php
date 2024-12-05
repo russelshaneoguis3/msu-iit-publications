@@ -181,7 +181,9 @@ public function updateAnnouncement(Request $request, $id)
 
 public function getCenters()
 {
-    $centers = DB::table('center')->select('cid', 'c_name')->get();
+    $centers = DB::table('center')->select('cid', 'c_name')
+    ->orderBy('center.c_name')
+    ->get();
     return response()->json($centers);
 }
     
