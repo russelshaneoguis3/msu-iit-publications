@@ -28,20 +28,6 @@ c_name VARCHAR(255),
 created_at timestamp default current_timestamp
 )ENGINE=InnoDB;
 
-INSERT INTO center (cid, c_name)
-VALUES (100, 'Marine Biodiversity Laboratory');
-
-INSERT INTO center (c_name)
-values ('Terrestrial and Freshwater Biodiversity Laboratory'), ('Center for Advanced Functional Materials and Nanotechnology'), ('Oceanography Laboratory'), 
-('Flora Biodiversity laboratory'), ('Mindanao Center for High Performance Computing'), ('Climate Change Laboratory'),
-('Animal Ecology Laboratory'), ('Microbial Culture Collection (Room 1)'), ('Microbial Culture Collection (Room 2)'), ('Decontamination Room'),
-('Genomics and Proteomics Laboratory'), ('Molecular Ecology and Physiology Laboratory'), ('Mindanao Radiation Physics Center'), ('PV Cells Testing Laboratory'),
-('Thermal Spray and Condensed Matter Laboratory'), ('Materials Characterization Laboratory'), ('Microscopy Biological Room'), ('Soft Matter Synthesis and Testing Laboratory'),
-('Biological Physics Laboratory'), ('Product Testing and Instrumentation Laboratory'), ('Organic Nanomaterials Processing Laboratory'), ('Inorganic Nanomaterials Processing Laboratory'),
-('Spectroscopy Laboratory 1'), ('Spectroscopy Laboratory 2'), ('Chromatography Laboratory'), ('Cell Culture and Cell-Based Assay Laboratory'), ('Natural Products and Related Researches Laboratory'),
-('Drug Design and Development Related Researches Laboratory'), ('Bio-inorganic and Related Researches Laboratory'), ('Electroanalytical and Thermal Researches Laboratory'),
-('Center for Computational Analytics and Modelling'), ('Center for Graph Theory, Algera and Analysis'), ('Laboratory of Theoritical and Computational Chemistry');
-
 
 CREATE TABLE user_roles (
   u_role_id INT UNSIGNED,  -- Use UNSIGNED to match the role_id in the roles table
