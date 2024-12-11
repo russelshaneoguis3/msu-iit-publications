@@ -319,7 +319,7 @@
               <div class="card announcement overflow-auto">
 
                 <div class="card-body">
-                  <h5 class="card-title">Announcements</span></h5>
+                  <h5 class="card-title"><i class='bx bxs-bell-ring'></i> Announcements</span></h5>
                   <br>
                   <!-- Add Documentation Button -->
                     <button id="add-btn" type="button" class="btn btn-outline" data-bs-toggle="modal" data-bs-target="#addAnnouncementModal">
@@ -482,7 +482,7 @@
             <div class="card filtered-reports">
 
             <div class="card-body">
-              <h5 class="card-title">Filtered Reports</h5>
+              <h5 class="card-title"><i class='bx bxs-report'></i> Filtered Reports</h5>
 			  <br>
 			  <div class="activity">
 
@@ -638,7 +638,7 @@
           <div class="card activity-logs">
 
             <div class="card-body">
-              <h5 class="card-title">Activity Logs</h5>
+              <h5 class="card-title"><i class='bx bxs-calendar-edit'></i> Activity Logs</h5>
 			  <br>
 
 			  <div class="activity">
